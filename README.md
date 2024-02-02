@@ -1,6 +1,6 @@
 # nova-networks
 
-Team 2 Kaggle: https://www.kaggle.com/c/hpa-single-cell-image-classification/discussion/238645
+Base code: Team 2 Kaggle https://www.kaggle.com/c/hpa-single-cell-image-classification/discussion/238645
 
 To run basic training workflow, please run the following command. Input argument ```-i``` specifies directory that will store the contents of this command, in ```/results/```. Input argument ```-i``` specifies configuration file (YAML file)
 ```
