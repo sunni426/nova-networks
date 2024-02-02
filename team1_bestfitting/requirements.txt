@@ -1,0 +1,23 @@
+imageio==2.9.0
+argparse==1.1 #conda install -c bioconda argparse
+pandas==0.25.3
+tqdm==4.48.0
+requests==2.24.0
+numpy==1.22.0
+Pillow==10.0.1
+scipy==1.5.0
+#iterative-stratification==0.1.6
+torch==1.6.0 #conda install -c pytorch pytorch==1.6.0
+torchvision==0.7.0 #conda install -c pytorch torchvision==0.7.0
+opencv-python==4.5.1
+mlcrate==0.2.0 #pip install mlcrate==0.2.0
+multiprocess==0.70.10
+scikit-image==0.16.2
+scikit-learn==0.23.1
+imagehash==4.2.0
+einops==0.3.0
+sklearn==0.23.1
+#iterstrat==0.1.6
+skimage==0.16.2
+zlib==1.0
+pycocotools==2.0

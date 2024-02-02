@@ -1,0 +1,128 @@
+--- /atlas/home/hzhou/.local/lib/python3.6/site-packages/torch/nn/modules/upsampling.py
++++ /atlas/home/hzhou/.local/lib/python3.6/site-packages/torch/nn/modules/upsampling.py
+@@ -5,64 +5,48 @@
+     `minibatch x channels x [optional depth] x [optional height] x width`.
+     Hence, for spatial inputs, we expect a 4D Tensor and for volumetric inputs, we expect a 5D Tensor.
+ 
+-    The algorithms available for upsampling are nearest neighbor and linear,
+-    bilinear, bicubic and trilinear for 3D, 4D and 5D input Tensor,
+-    respectively.
++    The algorithms available for upsampling are nearest neighbor and linear, bilinear and trilinear
++    for 3D, 4D and 5D input Tensor, respectively.
+ 
+     One can either give a :attr:`scale_factor` or the target output :attr:`size` to
+     calculate the output size. (You cannot give both, as it is ambiguous)
+ 
+     Args:
+-        size (int or Tuple[int] or Tuple[int, int] or Tuple[int, int, int], optional):
+-            output spatial sizes
+-        scale_factor (float or Tuple[float] or Tuple[float, float] or Tuple[float, float, float], optional):
+-            multiplier for spatial size. Has to match input size if it is a tuple.
+-        mode (str, optional): the upsampling algorithm: one of ``'nearest'``,
+-            ``'linear'``, ``'bilinear'``, ``'bicubic'`` and ``'trilinear'``.
+-            Default: ``'nearest'``
+-        align_corners (bool, optional): if ``True``, the corner pixels of the input
++        size (tuple, optional): a tuple of ints `([optional D_out], [optional H_out], W_out)` output sizes
++        scale_factor (int / tuple of ints, optional): the multiplier for the image height / width / depth
++        mode (string, optional): the upsampling algorithm: one of `nearest`, `linear`, `bilinear` and `trilinear`.
++                                    Default: `nearest`
++        align_corners (bool, optional): if True, the corner pixels of the input
+             and output tensors are aligned, and thus preserving the values at
+-            those pixels. This only has effect when :attr:`mode` is
+-            ``'linear'``, ``'bilinear'``, ``'bicubic'``, or ``'trilinear'``.
+-            Default: ``False``
+-        recompute_scale_factor (bool, optional): recompute the scale_factor for use in the
+-            interpolation calculation. If `recompute_scale_factor` is ``True``, then
+-            `scale_factor` must be passed in and `scale_factor` is used to compute the
+-            output `size`. The computed output `size` will be used to infer new scales for
+-            the interpolation. Note that when `scale_factor` is floating-point, it may differ
+-            from the recomputed `scale_factor` due to rounding and precision issues.
+-            If `recompute_scale_factor` is ``False``, then `size` or `scale_factor` will
+-            be used directly for interpolation.
++            those pixels. This only has effect when :attr:`mode` is `linear`,
++            `bilinear`, or `trilinear`. Default: False
+ 
+     Shape:
+         - Input: :math:`(N, C, W_{in})`, :math:`(N, C, H_{in}, W_{in})` or :math:`(N, C, D_{in}, H_{in}, W_{in})`
+         - Output: :math:`(N, C, W_{out})`, :math:`(N, C, H_{out}, W_{out})`
+           or :math:`(N, C, D_{out}, H_{out}, W_{out})`, where
+ 
+-    .. math::
+-        D_{out} = \left\lfloor D_{in} \times \text{scale\_factor} \right\rfloor
++          .. math::
++              D_{out} = \left\lfloor D_{in} \times \text{scale_factor} \right\rfloor \text{ or size}[-3]
+ 
+-    .. math::
+-        H_{out} = \left\lfloor H_{in} \times \text{scale\_factor} \right\rfloor
++              H_{out} = \left\lfloor H_{in} \times \text{scale_factor} \right\rfloor \text{ or size}[-2]
+ 
+-    .. math::
+-        W_{out} = \left\lfloor W_{in} \times \text{scale\_factor} \right\rfloor
++              W_{out} = \left\lfloor W_{in} \times \text{scale_factor} \right\rfloor \text{ or size}[-1]
+ 
+     .. warning::
+         With ``align_corners = True``, the linearly interpolating modes
+-        (`linear`, `bilinear`, `bicubic`, and `trilinear`) don't proportionally
+-        align the output and input pixels, and thus the output values can depend
+-        on the input size. This was the default behavior for these modes up to
+-        version 0.3.1. Since then, the default behavior is
+-        ``align_corners = False``. See below for concrete examples on how this
+-        affects the outputs.
++        (`linear`, `bilinear`, and `trilinear`) don't proportionally align the
++        output and input pixels, and thus the output values can depend on the
++        input size. This was the default behavior for these modes up to version
++        0.3.1. Since then, the default behavior is ``align_corners = False``.
++        See below for concrete examples on how this affects the outputs.
+ 
+-    .. note::
+-        If you want downsampling/general resizing, you should use :func:`~nn.functional.interpolate`.
++    .. warning::
++        This class is deprecated in favor of :func:`~nn.functional.interpolate`.
+ 
+     Examples::
+ 
+-        >>> input = torch.arange(1, 5, dtype=torch.float32).view(1, 1, 2, 2)
++        >>> input = torch.arange(1, 5).view(1, 1, 2, 2).float()
+         >>> input
+         tensor([[[[ 1.,  2.],
+                   [ 3.,  4.]]]])
+@@ -119,33 +103,19 @@
+                   [ 1.2000,  1.3600,  1.5200,  1.2800,  0.6400,  0.0000],
+                   [ 0.0000,  0.0000,  0.0000,  0.0000,  0.0000,  0.0000]]]])
+     """
+-    __constants__ = ['size', 'scale_factor', 'mode', 'align_corners', 'name', 'recompute_scale_factor']
+-    name: str
+-    size: Optional[_size_any_t]
+-    scale_factor: Optional[_ratio_any_t]
+-    mode: str
+-    align_corners: Optional[bool]
+-    recompute_scale_factor: Optional[bool]
+ 
+-    def __init__(self, size: Optional[_size_any_t] = None, scale_factor: Optional[_ratio_any_t] = None,
+-                 mode: str = 'nearest', align_corners: Optional[bool] = None,
+-                 recompute_scale_factor: Optional[bool] = None) -> None:
++    def __init__(self, size=None, scale_factor=None, mode='nearest', align_corners=None):
+         super(Upsample, self).__init__()
+-        self.name = type(self).__name__
+         self.size = size
+-        if isinstance(scale_factor, tuple):
+-            self.scale_factor = tuple(float(factor) for factor in scale_factor)
+-        else:
+-            self.scale_factor = float(scale_factor) if scale_factor else None
++        self.scale_factor = scale_factor
+         self.mode = mode
+         self.align_corners = align_corners
+-        self.recompute_scale_factor = recompute_scale_factor
+ 
+-    def forward(self, input: Tensor) -> Tensor:
+-        return F.interpolate(input, self.size, self.scale_factor, self.mode, self.align_corners,
+-                             recompute_scale_factor=self.recompute_scale_factor)
++    def forward(self, input):
++        warnings.warn("nn.Upsampling is deprecated. Use nn.functional.interpolate instead.")
++        return F.interpolate(input, self.size, self.scale_factor, self.mode, self.align_corners)
+ 
+-    def extra_repr(self) -> str:
++    def extra_repr(self):
+         if self.scale_factor is not None:
+             info = 'scale_factor=' + str(self.scale_factor)
+         else:
