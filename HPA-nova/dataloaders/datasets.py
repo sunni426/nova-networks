@@ -20,6 +20,8 @@ import tifffile
 import torch
 import math
 import glob
+from PIL import Image
+import imageio
 
 
 def a_ordinary_collect_method(batch):
@@ -251,18 +253,19 @@ class RANZERDataset(Dataset):
         self.df = df.reset_index(drop=True)
         self.mode = mode
         self.transform = tfms
+        # print(f'tfms 1: {tfms}')
         # target_cols = self.df.iloc[:, 1:12].columns.tolist()
         # self.labels = self.df[target_cols].values
         self.cfg = cfg
         self.tensor_tfms = Compose([
-            ToTensor(),
+            # ToTensor(),
             Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
         ])
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
         if cfg.data.cell == 'none':
-            self.cell_path = 'notebooks/pad_resized_cell_four'
+            self.cell_path = 'kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
         else:
             self.cell_path = cfg.data.cell
 
@@ -272,55 +275,99 @@ class RANZERDataset(Dataset):
     def __getitem__(self, index):
         if self.mode == 'train':
             row = self.df.loc[index]
-            cnt = self.cfg.experiment.count
-            if row['idx'] > cnt:
-                selected = random.sample([i for i in range(row['idx'])], cnt)
-            else:
-                selected = [i for i in range(row['idx'])]
-            batch = torch.zeros((cnt, 4, self.cfg.transform.size, self.cfg.transform.size))
+            cnt = self.cfg.train.batch_size
+            cells = self.cfg.experiment.num_cells
+            selected = random.sample([i for i in range(row['idx'])], cnt)
+            print(f'selected: {selected}')
+            batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
             mask = np.zeros((cnt))
             label = np.zeros((cnt, 19))
+            
+            color_dict = {1: 'blue', 2: 'green', 3: 'red', 4: 'yellow'}
             for idx, s in enumerate(selected):
-                path = self.path / f'../../{self.cell_path}/{row["ID"]}_{s+1}.png'
-                img = imread(path)
+
+                img = np.zeros((1, cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+                
+                for i in range(cells):
+                    path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_{i+1}.png'
+                    img_cell = imread(path_channel)
+                    img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                    # print(f'img_cell shape: {img_cell.shape}')
+                    img[0, i, :, :, :] = img_cell
+                    # img = torch.tensor(img) 
+                    # print(f'img_temp shape: {img.shape}')
+                    # print(f'yes, path is {path_channel}')
+                    # # Save the PIL Image to a local file
+                    # img_pil = Image.fromarray(img_large)
+                    # img_pil.save(self.path / f'../results/check/{i}.png')\
+                # break
+                
                 if self.transform is not None:
                     res = self.transform(image=img)
                     img = res['image']
-                if not img.shape[0] == self.cfg.transform.size:
-                    img = cv2.resize(img, (self.cfg.transform.size, self.cfg.transform.size))
+                # if not img.shape[0] == self.cfg.transform.size:
+                #     img = cv2.resize(img, (self.cfg.transform.size, self.cfg.transform.size))
+                img = torch.tensor(img.copy())
                 img = self.tensor_tfms(img)
-                batch[idx, :, :, :] = img
+                start = idx*10
+                end = start + 10
+                batch[idx, start:end, :, :, :] = img # #img x 10 x 4 x 256 x 256
                 mask[idx] = 1
-                label[idx] = row[self.cols].values.astype(np.float)
+                label[idx] = row[self.cols].values.astype(np.float64)
+                # print(f'batch size: {batch.shape}')
             # img = self.tensor_tfms(img)
             if self.cfg.experiment.smoothing == 0:
-                return batch, mask, label, row[self.cols].values.astype(np.float)
+                # print(f'batch: {batch}, mask: {mask}, label: {label}')
+                return batch, mask, label, row[self.cols].values.astype(np.float64)
             else:
-                return batch, mask, 0.9*label + 0.1/19, 0.9 * row[self.cols].values.astype(np.float) + 0.1/19
+                return batch, mask, 0.9*label + 0.1/19, 0.9 * row[self.cols].values.astype(np.float64) + 0.1/19
 
-            # return batch, mask, label, row[self.cols].values.astype(np.float)
-        
+class ValidationDataset(Dataset):
+    def __init__(self, df, tfms=None, cfg=None, mode='valid', file_dict=None):
+
+        self.df = df.reset_index(drop=True)
+        self.mode = mode
+        self.transform = tfms
+        self.cfg = cfg
+        self.tensor_tfms = Compose([
+            # ToTensor(),
+            Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
+        ])
+        self.path = Path(os.path.dirname(os.path.realpath(__file__)))
+        self.file_dict = file_dict
+        self.cols = ['class{}'.format(i) for i in range(19)]
+        self.cell_path = 'kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/valid/'
+
+    def __len__(self):
+        return len(self.df)
+
+    def __getitem__(self, index):
         if self.mode == 'valid':
-            row = self.df.loc[index]
-            selected = [i for i in range(row['idx'])]
-            cnt = row['idx']
-            batch = torch.zeros((cnt, 4, self.cfg.transform.size, self.cfg.transform.size))
+            row = self.df.loc[index] # EDIT LATER, hardcoded rn 1/21
+            cnt = self.cfg.experiment.valid_count # EDIT, not working rn
             mask = np.zeros((cnt))
             label = np.zeros((cnt, 19))
-            for idx, s in enumerate(selected):
-                path = self.path / f'../../{self.cell_path}/{row["ID"]}_{s+1}.png'
-                img = imread(path)
-                if self.transform is not None:
-                    res = self.transform(image=img)
-                    img = res['image']
-                if not img.shape[0] == self.cfg.transform.size:
-                    img = cv2.resize(img, (self.cfg.transform.size, self.cfg.transform.size))
+            cells = self.cfg.experiment.num_cells
+            batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+
+            # color_dict = {1: 'blue', 2: 'green', 3: 'red', 4: 'yellow'}
+            for idx in range(cnt):
+                img = np.zeros((1, cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+                
+                for i in range(cells):
+                    path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_{i+1}.png'
+                    img_cell = imread(path_channel)
+                    img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                    # print(f'img_cell shape: {img_cell.shape}')
+                    img[0, i, :, :, :] = img_cell
+                
+                img = torch.tensor(img.copy())
                 img = self.tensor_tfms(img)
-                batch[idx, :, :, :] = img
+                start = idx*10
+                end = start + 10
+                batch[idx, start:end, :, :, :] = img # #img x 10*img x 4 x 256 x 256
                 mask[idx] = 1
-                label[idx] = row[self.cols].values.astype(np.float)
-            # img = self.tensor_tfms(img)
-            # print(cnt)
-            # print(row[self.cols].values.astype(np.float))
-            # print(cnt)
-            return batch, mask, label, row[self.cols].values.astype(np.float), cnt
+                label[idx] = row[self.cols].values.astype(np.float64)
+                
+            return batch, mask, label[0], row[self.cols].values.astype(np.float64), cnt
+            
