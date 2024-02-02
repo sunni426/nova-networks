@@ -10,7 +10,7 @@ To run basic training workflow, please run the following command. Input argument
 !python main.py train -i t259 -j jakiro/sin_exp5_b3_rare.yaml # -i: results dir name
 ```
 For custom configurations:
-> configs/jakiro/sin_exp5_b3_rare.yaml (For specific configurations. Take care of paths)
+> configs/jakiro/sin_exp5_b3_rare.yaml (For specific configurations, including ground truth and input paths, training configs)
 > 
 > configs/__init__.py (For all other default configurations)
 
