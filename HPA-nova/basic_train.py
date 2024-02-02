@@ -232,9 +232,6 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
                 'step': i,
                 'loss': loss.item(),
             })
-        # print(f'truth: {truth}')
-        # print(f'results: {results}')
-        # print(f'predicted: {predicted}')
         predicted = np.concatenate(predicted)
         truth = np.concatenate(truth)
         print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
@@ -252,57 +249,8 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
         # Save with truncated values
         np.savetxt(pred_path, predicted, fmt='%.4f', delimiter=',', header=header)
         np.savetxt(truth_path, truth, fmt='%.4f', delimiter=',', header=header)
-
-
-        
-        # header = ','.join([f'class{i}' for i in range(truth.shape[1])])
-        # pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred.csv')
-        # truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth.csv')
-        # np.savetxt(pred_path, predicted, delimiter=',', header=header)
-        # np.savetxt(truth_path, truth, delimiter=',', header=header)
-        
-        # for i in range(truth.shape[0]):
-        #     auc_list.append(roc_auc_score(truth[i], predicted[i]))
-        #     pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred{i}.csv')
-        #     truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth{i}.csv')
-        #     header = ','.join([f'class{i}' for i in range(truth.shape[1])])
-        #     # transposed_array = my_array[:, np.newaxis]  # or my_array.reshape(-1, 1)
-        #     print(f'predicted[i]: {predicted[i][:, np.newaxis].T.shape}')#, predicted[i].T: {predicted[i].T.shape}')
-        #     pred_save = [format(v, ".4f") for v in predicted[i]].T
-        #     # print(f'pred_save: {pred_save}, pred_save {pred_save.shape}')
-        #     truth_save = [format(v, ".4f") for v in truth[i]].T
-        #     # pred_save = pred_save[:, np.newaxis].T
-        #     # truth_save = truth_save[:, np.newaxis].T
-        #     print(f'pred_save: {pred_save}, pred_save {pred_save.shape}')
-            
-            # truth_save = truth[i][:, np.newaxis].T
-            # truth_save = [format(v, ".4f") for v in truth_save]
-            # np.savetxt(pred_path, pred_save, delimiter=',', header=header)
-            # np.savetxt(truth_path, truth_save, delimiter=',', header=header)
-
-            # Saving Results (as PNG)
-            # p_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'predicted{i}.png'
-            # # t_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth{i}.png'
- 
-            # # Scale the values to the range [0, 255] (assuming it's an image tensor)
-            # output = output_list[i].np()
-            # output = ((output - output.min()) / (output.max() - output.min())) * 255
-            # # truth = ((truth - truth.min()) / (truth.max() - truth.min())) * 255
-            
-            # # Convert the NumPy array to an unsigned 8-bit integer array
-            # predicted_img = output.astype(np.uint8)
-            # # truth_img = truth.astype(np.uint8)
-            
-            # # Create an image from the uint8 array using Pillow
-            # predicted_img = Image.fromarray(predicted_img)
-            # # truth_img = Image.fromarray(truth_img)
-            
-            # # Save the image as a PNG file
-            # predicted_img.save(p_path)
-            # # truth_img.save(t_path)
             
         auc = np.mean(auc_list)
-        
         return val_loss, accuracy, auc
 
 
