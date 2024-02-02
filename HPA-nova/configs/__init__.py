@@ -42,6 +42,9 @@ class Experiment(Element):
         self.method = dict.get('method', 'none')
         self.tile = dict.get('tile', 12)
         self.count = dict.get('count', 16)
+        self.num_cells = dict.get('num_cells', 10)
+        self.n_channels = dict.get('n_channels', 10)
+        self.valid_count = dict.get('valid_count', 2)
         self.regression = dict.get('regression', False)
         self.scale = dict.get('scale', 1)
         self.level = int(dict.get('level', 1))
@@ -63,6 +66,7 @@ class Experiment(Element):
         self.outlier = dict.get('outlier', 'train')
         self.outlier_method = dict.get('outlier_method', 'drop')
         self.file = dict.get('csv_file', 'none')
+        self.csv_valid = dict.get('csv_valid', 'none')
         self.smoothing = dict.get('smoothing', 0)
 
 
@@ -109,6 +113,7 @@ class Train(Element):
             raise Exception('Training dir must assigned')
         self.batch_size = dict.get('batch_size', 8)
         self.num_epochs = dict.get('num_epochs', 100)
+        self.validate_every = dict.get('validate_every', 10)
         self.cutmix = dict.get('cutmix', False)
         self.mixup = dict.get('mixup', False)
         self.beta = dict.get('beta', 1)
@@ -214,7 +219,7 @@ class Config:
     @staticmethod
     def load(file_path):
         with open(file_path) as fp:
-            data = yaml.load(fp)
+            data = yaml.full_load(fp) # og: load. https://stackoverflow.com/questions/69564817/typeerror-load-missing-1-required-positional-argument-loader-in-google-col 
         return Config(data)
 
 
