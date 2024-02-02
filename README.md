@@ -4,6 +4,7 @@ Team 2 Kaggle https://www.kaggle.com/c/hpa-single-cell-image-classification/disc
 
 Team 2 Base code: https://github.com/iseekwonderful/HPA-singlecell-2nd-dual-head-pipeline
 
+# Code specifics
 To run basic training workflow, please run the following command. Input argument ```-i``` specifies directory that will store the contents of this command, in ```/results/```. Input argument ```-i``` specifies configuration file (YAML file)
 ```
 !python main.py train -i t259 -j jakiro/sin_exp5_b3_rare.yaml # -i: results dir name
