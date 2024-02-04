@@ -104,6 +104,13 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                             loss_cell, loss_exp, loss_tot = 0, 0, 0
                             for cell_idx in range(cfg.experiment.num_cells):
                                 loss_cell = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight.cuda(), reduction='none')(cell[cell_idx].cuda(), lbl[i].cuda())
+                                
+                                # Weighted BCE loss, will look into weight
+                                # Compute class weights based on class frequencies
+                                #class_weights = [compute_weight_for_class(class_label) for class_label in range(num_classes)]
+                                # weights = torch.FloatTensor(class_weights)
+                                # criterion = torch.nn.BCEWithLogitsLoss(weight=weights)
+                                
                                 loss_exp = loss_func(exp[cell_idx], exp_label[i])
                                 if not len(loss_cell.shape) == 0:
                                     loss_cell = loss_cell.mean()
@@ -309,10 +316,6 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
             row_ids = [row[0] for row in csv_reader]
         row_ids = row_ids[1:]        
         print(f'row_ids: {row_ids}')
-# row_ids = np.array(['ID1', 'ID2', 'ID3', 'ID4', 'ID5','ID1', 'ID2', 'ID3', 'ID4', 'ID5'])
-
-# broadcasted_array = np.array(scalar_list)  # Convert the list to a NumPy array
-# broadcasted_array = np.broadcast_to(broadcasted_array, (10, 1))
 
         # Add a new column with string IDs at index 0
         predicted_with_ids = np.column_stack((np.broadcast_to(np.array(row_ids), (10, 1)).tolist() , predicted))
@@ -330,37 +333,6 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
         np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
 
-        # predicted = np.round(predicted, decimals=4)
-        # truth = np.round(truth, decimals=4)
-        # header = ','.join([f'class{i}' for i in range(truth.shape[1])])
-        # pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred.csv')
-        # truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth.csv')
-        
-        # # Save with truncated values
-        # np.savetxt(pred_path, predicted, fmt='%.4f', delimiter=',', header=header)
-        # np.savetxt(truth_path, truth, fmt='%.4f', delimiter=',', header=header)
-
-            # Saving Results (as PNG)
-            # p_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'predicted{i}.png'
-            # # t_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth{i}.png'
- 
-            # # Scale the values to the range [0, 255] (assuming it's an image tensor)
-            # output = output_list[i].np()
-            # output = ((output - output.min()) / (output.max() - output.min())) * 255
-            # # truth = ((truth - truth.min()) / (truth.max() - truth.min())) * 255
-            
-            # # Convert the NumPy array to an unsigned 8-bit integer array
-            # predicted_img = output.astype(np.uint8)
-            # # truth_img = truth.astype(np.uint8)
-            
-            # # Create an image from the uint8 array using Pillow
-            # predicted_img = Image.fromarray(predicted_img)
-            # # truth_img = Image.fromarray(truth_img)
-            
-            # # Save the image as a PNG file
-            # predicted_img.save(p_path)
-            # # truth_img.save(t_path)
-            
         auc = np.mean(auc_list)
         val_loss = [val_loss_img, val_loss_cell]
         return val_loss, accuracy, roc_values
