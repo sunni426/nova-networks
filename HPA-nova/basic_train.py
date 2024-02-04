@@ -1,3 +1,4 @@
+# nova-networks/HPA-nova
 from utils import *
 import tqdm
 import pandas as pd
@@ -160,18 +161,21 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
             # Validate
             if(epoch % cfg.train.validate_every == 0):
                 validate_loss, accuracy, auc = basic_validate(model, valid_dl, output_list, loss_func, cfg, epoch, tune)
+                print(f'type: {type(auc)}, auc:{auc}') #list
+                
+                
                 print(('[ √ ] epochs: {}, train loss: {:.4f}, valid loss: {:.4f}, ' +
                        'accuracy: {:.4f}, auc: {:.4f}').format(
-                    epoch, np.array(losses).mean(), validate_loss, accuracy, auc))
+                    epoch, np.array(losses).mean(), validate_loss, accuracy, auc[0]))
                 writer.add_scalar('train_f{}/loss'.format(cfg.experiment.run_fold), np.mean(losses), epoch)
                 writer.add_scalar('train_f{}/lr'.format(cfg.experiment.run_fold), optimizer.param_groups[0]['lr'], epoch)
                 writer.add_scalar('valid_f{}/loss'.format(cfg.experiment.run_fold), validate_loss, epoch)
                 writer.add_scalar('valid_f{}/accuracy'.format(cfg.experiment.run_fold), accuracy, epoch)
-                writer.add_scalar('valid_f{}/auc'.format(cfg.experiment.run_fold), auc, epoch)
+                writer.add_scalar('valid_f{}/auc'.format(cfg.experiment.run_fold), auc[0], epoch)
     
                 with open(save_path / 'train.log', 'a') as fp:
                     fp.write('{}\t{:.8f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\n'.format(
-                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss, accuracy, auc))
+                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss, accuracy, auc[0]))
             # Continue Training
             else:
                 print(('[ √ ] epochs: {}, train loss: {:.4f}').format(epoch, np.array(losses).mean()))
@@ -232,12 +236,21 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
                 'step': i,
                 'loss': loss.item(),
             })
+        # print(f'truth: {truth}')
+        # print(f'results: {results}')
+        # print(f'predicted: {predicted}')
         predicted = np.concatenate(predicted)
         truth = np.concatenate(truth)
         print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
         val_loss = np.array(losses).mean()
         accuracy = ((predicted > 0.5) == truth).sum().astype(np.float64) / truth.shape[0] / truth.shape[1]
-        # auc = macro_multilabel_auc(truth, predicted, gpu=0)
+        
+        predicted_auc = predicted.flatten()
+        truth_auc = truth.flatten()
+        roc_values = []
+        roc_values.append(roc_auc_score(truth_auc, np.round(predicted_auc)))
+        
+        # auc = macro_multilabel_auc(truth, predicted, gpu=0) #OG
         auc_list = []
 
         predicted = np.round(predicted, decimals=4)
@@ -249,9 +262,58 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
         # Save with truncated values
         np.savetxt(pred_path, predicted, fmt='%.4f', delimiter=',', header=header)
         np.savetxt(truth_path, truth, fmt='%.4f', delimiter=',', header=header)
+
+
+        
+        # header = ','.join([f'class{i}' for i in range(truth.shape[1])])
+        # pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred.csv')
+        # truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth.csv')
+        # np.savetxt(pred_path, predicted, delimiter=',', header=header)
+        # np.savetxt(truth_path, truth, delimiter=',', header=header)
+        
+        # for i in range(truth.shape[0]):
+        #     auc_list.append(roc_auc_score(truth[i], predicted[i]))
+        #     pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred{i}.csv')
+        #     truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth{i}.csv')
+        #     header = ','.join([f'class{i}' for i in range(truth.shape[1])])
+        #     # transposed_array = my_array[:, np.newaxis]  # or my_array.reshape(-1, 1)
+        #     print(f'predicted[i]: {predicted[i][:, np.newaxis].T.shape}')#, predicted[i].T: {predicted[i].T.shape}')
+        #     pred_save = [format(v, ".4f") for v in predicted[i]].T
+        #     # print(f'pred_save: {pred_save}, pred_save {pred_save.shape}')
+        #     truth_save = [format(v, ".4f") for v in truth[i]].T
+        #     # pred_save = pred_save[:, np.newaxis].T
+        #     # truth_save = truth_save[:, np.newaxis].T
+        #     print(f'pred_save: {pred_save}, pred_save {pred_save.shape}')
+            
+            # truth_save = truth[i][:, np.newaxis].T
+            # truth_save = [format(v, ".4f") for v in truth_save]
+            # np.savetxt(pred_path, pred_save, delimiter=',', header=header)
+            # np.savetxt(truth_path, truth_save, delimiter=',', header=header)
+
+            # Saving Results (as PNG)
+            # p_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'predicted{i}.png'
+            # # t_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth{i}.png'
+ 
+            # # Scale the values to the range [0, 255] (assuming it's an image tensor)
+            # output = output_list[i].np()
+            # output = ((output - output.min()) / (output.max() - output.min())) * 255
+            # # truth = ((truth - truth.min()) / (truth.max() - truth.min())) * 255
+            
+            # # Convert the NumPy array to an unsigned 8-bit integer array
+            # predicted_img = output.astype(np.uint8)
+            # # truth_img = truth.astype(np.uint8)
+            
+            # # Create an image from the uint8 array using Pillow
+            # predicted_img = Image.fromarray(predicted_img)
+            # # truth_img = Image.fromarray(truth_img)
+            
+            # # Save the image as a PNG file
+            # predicted_img.save(p_path)
+            # # truth_img.save(t_path)
             
         auc = np.mean(auc_list)
-        return val_loss, accuracy, auc
+        
+        return val_loss, accuracy, roc_values
 
 
 def tta_validate(mdl, dl, loss_func, tta):

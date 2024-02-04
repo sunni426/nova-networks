@@ -1,3 +1,4 @@
+# nova-networks/HPA-nova
 import numpy as np
 import os
 import pandas as pd
@@ -265,7 +266,7 @@ class RANZERDataset(Dataset):
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
         if cfg.data.cell == 'none':
-            self.cell_path = 'kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
+            self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
         else:
             self.cell_path = cfg.data.cell
 
@@ -336,7 +337,7 @@ class ValidationDataset(Dataset):
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
-        self.cell_path = 'kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/valid/'
+        self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/valid/'
 
     def __len__(self):
         return len(self.df)

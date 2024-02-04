@@ -1,3 +1,4 @@
+# nova-networks/HPA-nova
 from utils import parse_args, prepare_for_result
 from dataloaders import get_dataloader
 from models import get_model
@@ -31,6 +32,8 @@ if __name__ == '__main__':
     print('[ √ ] Landmark!')
     args, cfg = parse_args()
     if args.mode == 'validate':
+        print(f'validating!!!!!!!')
+        
         df = pd.read_csv(
             Path(os.path.dirname(os.path.realpath(__file__))) / '..' / 'results' / cfg.basic.id / 'train.log', sep='\t'
         )
@@ -71,7 +74,7 @@ if __name__ == '__main__':
         model = model.cpu()
         if len(cfg.basic.GPU) == 1:
             print('[ W ] single gpu prediction the gpus is {}'.format(cfg.basic.GPU))
-            # torch.cuda.set_device(cfg.basic.GPU)
+            torch.cuda.set_device(cfg.basic.GPU)
             model = model.cuda()
         else:
             print('[ W ] dp prediction the gpus is {}'.format(cfg.basic.GPU))
@@ -138,8 +141,10 @@ if __name__ == '__main__':
             torch.cuda.empty_cache()
             print('[ ! ] Full fold coverage training! for fold: {}'.format(i))
             cfg.experiment.run_fold = i
+            # print(f'config: {cfg}')
             train_dl, valid_dl, test_dl = get_dataloader(cfg)(cfg).get_dataloader()
             print('[ i ] The length of train_dl is {}, valid dl is {}'.format(len(train_dl), len(valid_dl)))
+            # device='cuda'
             model = get_model(cfg).cuda()
             if not cfg.model.from_checkpoint == 'none':
                 print('[ ! ] loading model from checkpoint: {}'.format(cfg.model.from_checkpoint))

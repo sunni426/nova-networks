@@ -1,10 +1,11 @@
+# nova-networks/HPA-nova
 from utils import Config
 import pandas as pd
-from path import Path
+from pathlib import Path
 from torch.utils.data import DataLoader, WeightedRandomSampler
 from sklearn.model_selection import KFold, StratifiedKFold
 from sklearn.preprocessing import LabelEncoder
-from dataloaders.datasets import STRDataset, LandmarkDataset, RANZERDataset
+from dataloaders.datasets import STRDataset, LandmarkDataset, RANZERDataset, ValidationDataset
 # from dataloaders.transform import get_tfms
 from dataloaders.transform_loader import get_tfms
 from collections import Counter, defaultdict
@@ -32,11 +33,15 @@ class RandomKTrainTestSplit:
         else:
             csv_file = cfg.experiment.file
         train = pd.read_csv(path / 'split' / csv_file)
-        # load configs
-        # files = os.listdir(path / '../../notebooks/pad_resized_cell_four/')
+        valid = pd.read_csv(path / 'split' / cfg.experiment.csv_valid)
+        # # start
+        # # load configs
+        # files = '/projectnb/btec-design3/novanetworks/kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
+        # # files = os.listdir(path / '../../notebooks/pad_resized_cell_four/')
         # self.file_list = []
         # self.file_dict = {}
         # for f in files:
+        #     print(f)
         #     if not f.split('_')[0] in self.file_dict:
         #         self.file_dict[f.split('_')[0]] = []
         #     self.file_dict[f.split('_')[0]].append(f.split('_')[1].split('.')[0])
@@ -50,8 +55,9 @@ class RandomKTrainTestSplit:
         #     for e in cfg.experiment.externals:
         #         df = pd.read_csv(path / 'split' / e)
         #         train = pd.concat([train, df])
+        # #end
         self.train_meta, self.valid_meta = (train[train.fold != cfg.experiment.run_fold],
-                                            train[train.fold == cfg.experiment.run_fold])
+                                            valid[valid.fold != cfg.experiment.run_fold])
         # print(train.head())
         if cfg.basic.debug:
             print('[ W ] Debug Mode!, down sample')
@@ -61,15 +67,17 @@ class RandomKTrainTestSplit:
     def get_dataloader(self, test_only=False, train_shuffle=True, infer=False, tta=-1, tta_tfms=None):
         if test_only:
             raise NotImplementedError()
-            # if tta == -1:
-            #     tta = 1
-            # path = Path(os.path.dirname(os.path.realpath(__file__)))
-            # test = pd.read_csv(path / '../../input/kaggle/sample_submission.csv')
-            # test['prefix'] = 'kaggle'
-            # test_ds = SIIMDataset(test, tta_tfms, size=self.cfg.transform.size, tta=tta, test=True)
-            # test_dl = DataLoader(dataset=test_ds, batch_size=self.cfg.eval.batch_size,
-            #                       num_workers=self.cfg.transform.num_preprocessor, pin_memory=True)
-            # return test_dl
+        #     # start
+        #     if tta == -1:
+        #         tta = 1
+        #     path = Path(os.path.dirname(os.path.realpath(__file__)))
+        #     test = pd.read_csv(path / '../../input/kaggle/sample_submission.csv')
+        #     test['prefix'] = 'kaggle'
+        #     test_ds = SIIMDataset(test, tta_tfms, size=self.cfg.transform.size, tta=tta, test=True)
+        #     test_dl = DataLoader(dataset=test_ds, batch_size=self.cfg.eval.batch_size,
+        #                           num_workers=self.cfg.transform.num_preprocessor, pin_memory=True)
+        #     return test_dl
+        # # end
         print('[ √ ] Using transformation: {} & {}, image size: {}'.format(
             self.cfg.transform.name, self.cfg.transform.val_name, self.cfg.transform.size
         ))
@@ -100,9 +108,9 @@ class RandomKTrainTestSplit:
             }
             if self.cfg.experiment.method in method_dict:
                 print('[ √ ] Use weighted sampler, method: {}'.format(self.cfg.experiment.method))
-                cw = (1 / method_dict[self.cfg.experiment.method](train.iloc[:, :19].sum(0))).values
+                cw = (1 / method_dict[self.cfg.experiment.method](train.iloc[:, 1:19].sum(0))).values
                 print(train.head(2))
-                weight = (train.iloc[:, :19] * cw).max(1).values
+                weight = (train.iloc[:, 1:19] * cw).max(1).values
                 print(weight)
                 # weight = 1 / method(train.groupby('label').transform('count').image_id.values)
             elif 'pow' in self.cfg.experiment.method:
@@ -134,9 +142,11 @@ class RandomKTrainTestSplit:
         # def __init__(self, df, tfms=None, cfg=None, mode='train'):
 
 
-        valid_ds = RANZERDataset(df=self.valid_meta, tfms=val_tfms, cfg=self.cfg,
-                                 mode='valid')
+        # valid_ds = RANZERDataset(df=self.valid_meta, tfms=val_tfms, cfg=self.cfg,
+                                 # mode='valid') # consider rewriting to manually load
+        valid_ds = ValidationDataset(df=self.valid_meta, tfms=val_tfms, cfg=self.cfg, mode='valid')
         valid_dl = DataLoader(dataset=valid_ds, batch_size=self.cfg.eval.batch_size,
                               collate_fn=a_ordinary_collect_method, drop_last=True,
                               num_workers=self.cfg.transform.num_preprocessor, pin_memory=True)
+        
         return train_dl, valid_dl, None
