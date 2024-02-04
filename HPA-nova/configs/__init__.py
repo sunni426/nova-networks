@@ -51,6 +51,7 @@ class Experiment(Element):
         self.public = dict.get('public', True)
         self.merge = dict.get('merge', True)
         self.n = dict.get('N', True)
+        self.img_weight = dict.get('img_weight',0.7)
         self.batch_sampler = dict.get('batch_sampler', False)
         # batch sampler
         #   initial_miu: 6

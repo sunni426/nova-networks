@@ -12,6 +12,7 @@ from sklearn.metrics import roc_auc_score, roc_curve
 import pickle as pk
 from path import Path
 from PIL import Image
+import csv
 import os
 try:
     from apex import amp
@@ -161,21 +162,22 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
             # Validate
             if(epoch % cfg.train.validate_every == 0):
                 validate_loss, accuracy, auc = basic_validate(model, valid_dl, output_list, loss_func, cfg, epoch, tune)
-                print(f'type: {type(auc)}, auc:{auc}') #list
+                # print(f'type: {type(auc)}, auc:{auc}') #list
                 
                 
-                print(('[ √ ] epochs: {}, train loss: {:.4f}, valid loss: {:.4f}, ' +
-                       'accuracy: {:.4f}, auc: {:.4f}').format(
-                    epoch, np.array(losses).mean(), validate_loss, accuracy, auc[0]))
+                print(('[ √ ] epochs: {}, train loss: {:.4f}, valid img loss: {:.4f}, ' +
+                       'valid cell loss: {:.4f}, accuracy: {:.4f}, auc: {:.4f}').format(
+                    epoch, np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc[0]))
                 writer.add_scalar('train_f{}/loss'.format(cfg.experiment.run_fold), np.mean(losses), epoch)
                 writer.add_scalar('train_f{}/lr'.format(cfg.experiment.run_fold), optimizer.param_groups[0]['lr'], epoch)
-                writer.add_scalar('valid_f{}/loss'.format(cfg.experiment.run_fold), validate_loss, epoch)
+                writer.add_scalar('valid_f{}/loss_img'.format(cfg.experiment.run_fold), validate_loss[0], epoch)
+                writer.add_scalar('valid_f{}/loss_cell'.format(cfg.experiment.run_fold), validate_loss[1], epoch)
                 writer.add_scalar('valid_f{}/accuracy'.format(cfg.experiment.run_fold), accuracy, epoch)
                 writer.add_scalar('valid_f{}/auc'.format(cfg.experiment.run_fold), auc[0], epoch)
     
                 with open(save_path / 'train.log', 'a') as fp:
-                    fp.write('{}\t{:.8f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\n'.format(
-                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss, accuracy, auc[0]))
+                    fp.write('{}\t{:.8f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\n'.format(
+                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc[0]))
             # Continue Training
             else:
                 print(('[ √ ] epochs: {}, train loss: {:.4f}').format(epoch, np.array(losses).mean()))
@@ -199,21 +201,23 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
     print("Validating...")
     mdl.eval()
     with torch.no_grad():
-        results = []
-        losses, predicted, predicted_p, truth = [], [], [], []
+        results_img, results_cell = [], []
+        losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
+        losses_cell, predicted_cell, predicted_p_cell = [], [], []
+        
         for i, (ipt, mask, lbl, cnt, n_img) in enumerate(dl):
             ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
             lbl = lbl.view(-1, lbl.shape[-1])
             exp_label = cnt.cuda().view(-1, 19)
             ipt, lbl = ipt.cuda(), lbl.cuda()
-            # for cell_idx in range(cfg.experiment.num_cells):
+            # Image_level
             if cfg.basic.amp == 'Native':
                     with torch.cuda.amp.autocast():
                         if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                             output = mdl(ipt, lbl)
                         else:
                             _, output = mdl(ipt, cfg.experiment.num_cells)
-                            print(f'output: {output.shape}')
+                            print(f'output img level: {output.shape}')
                         loss = loss_func(output, exp_label)
                         # print(f'output is {output} with loss {loss}')
                         if not len(loss.shape) == 0:
@@ -228,67 +232,113 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
                 print('Loss:',loss)
                 if not len(loss.shape) == 0:
                     loss = loss.mean()
-            print(f'ipt: {ipt.shape}, output: {output.shape}')
-            losses.append(loss.item())
-            predicted.append(torch.sigmoid(output.cpu()).numpy())
-            truth.append(lbl.cpu().numpy())
-            results.append({
+
+            # print(f'ipt: {ipt.shape}, output: {output.shape}')
+            losses_img.append(loss.item())
+            predicted_img.append(torch.sigmoid(output.cpu()).numpy())
+            truth_img.append(lbl.cpu().numpy())
+            results_img.append({
                 'step': i,
                 'loss': loss.item(),
             })
-        # print(f'truth: {truth}')
-        # print(f'results: {results}')
-        # print(f'predicted: {predicted}')
-        predicted = np.concatenate(predicted)
-        truth = np.concatenate(truth)
-        print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
-        val_loss = np.array(losses).mean()
-        accuracy = ((predicted > 0.5) == truth).sum().astype(np.float64) / truth.shape[0] / truth.shape[1]
+            
+            # Cell_level
+            for cell_idx in range(cfg.experiment.num_cells):
+                if cfg.basic.amp == 'Native':
+                        with torch.cuda.amp.autocast():
+                            if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
+                                output = mdl(ipt, lbl)
+                            else:
+                                _, output = mdl(ipt[cell_idx].unsqueeze(0), 1)
+                            loss = loss_func(output, exp_label)
+                            # print(f'output is {output} with loss {loss}')
+                            if not len(loss.shape) == 0:
+                                loss = loss.mean()
+                            output = output.float()
+                else:
+                    if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
+                        output = mdl(ipt, lbl)
+                    else:
+                        output = mdl(ipt)
+                    loss = loss_func(output, exp_label)
+                    print('Loss:',loss)
+                    if not len(loss.shape) == 0:
+                        loss = loss.mean()
+                    
+                # print(f'ipt: {ipt.shape}, output: {output.shape}')
+                losses_cell.append(loss.item())
+                predicted_cell.append(torch.sigmoid(output.cpu()).numpy())
+                results_cell.append({
+                    'step': i,
+                    'loss': loss.item(),
+                })
+        # print(f'predicted_img: {predicted_img.shape}') # 1x19
+        # print(f'predicted_cell: {predicted_cell.shape}') # 10x19
+
+        predicted = np.zeros((10,19))
+        # print(f'predicted: {predicted.shape}')
+        # print(f'predicted_img: {predicted_img.shape}, {predicted_img}')
+        for j in range(cfg.experiment.num_cells):
+            predicted[j] = cfg.experiment.img_weight*np.array(predicted_img) + (1-cfg.experiment.img_weight)*predicted_cell[j]
+        # predicted = np.concatenate(predicted)
+        truth = np.concatenate(truth_img)
+        # print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
+        val_loss_img = np.array(losses_img).mean()
+        val_loss_cell = np.array(losses_cell).mean()
         
-        predicted_auc = predicted.flatten()
+        accuracy = ((predicted > 0.5) == truth).sum().astype(np.float64) / truth.shape[0] / truth.shape[1]
+        accuracy /= 10
+        
+        predicted_auc = np.mean(predicted, axis=0).flatten()
         truth_auc = truth.flatten()
+        print(f'predicted_auc: {predicted_auc.shape}')
         roc_values = []
-        roc_values.append(roc_auc_score(truth_auc, np.round(predicted_auc)))
+        roc_values.append(roc_auc_score(truth_auc, predicted_auc))
         
         # auc = macro_multilabel_auc(truth, predicted, gpu=0) #OG
         auc_list = []
 
         predicted = np.round(predicted, decimals=4)
         truth = np.round(truth, decimals=4)
-        header = ','.join([f'class{i}' for i in range(truth.shape[1])])
-        pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred.csv')
-        truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth.csv')
         
-        # Save with truncated values
-        np.savetxt(pred_path, predicted, fmt='%.4f', delimiter=',', header=header)
-        np.savetxt(truth_path, truth, fmt='%.4f', delimiter=',', header=header)
+        # Image IDs
+        csv_file_path = '/projectnb/btec-design3/novanetworks/nova-networks/HPA-nova/dataloaders/split/valid_sunni.csv'
+        # Open the CSV file and read the first column into a list
+        with open(csv_file_path, 'r') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            row_ids = [row[0] for row in csv_reader]
+        row_ids = row_ids[1:]        
+        print(f'row_ids: {row_ids}')
+# row_ids = np.array(['ID1', 'ID2', 'ID3', 'ID4', 'ID5','ID1', 'ID2', 'ID3', 'ID4', 'ID5'])
 
+# broadcasted_array = np.array(scalar_list)  # Convert the list to a NumPy array
+# broadcasted_array = np.broadcast_to(broadcasted_array, (10, 1))
 
+        # Add a new column with string IDs at index 0
+        predicted_with_ids = np.column_stack((np.broadcast_to(np.array(row_ids), (10, 1)).tolist() , predicted))
+        truth_with_ids = np.column_stack((row_ids[0], truth))
         
+        # Create header with 'ID' added at the beginning
+        header = ','.join(['ID'] + [f'class{i}' for i in range(truth.shape[1])])
+        
+        # Get the directory and file paths
+        base_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id
+        pred_path = base_path / 'pred.csv'
+        truth_path = base_path / 'truth.csv'
+        
+        # Save with truncated values and the new ID column
+        np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
+        np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
+
+        # predicted = np.round(predicted, decimals=4)
+        # truth = np.round(truth, decimals=4)
         # header = ','.join([f'class{i}' for i in range(truth.shape[1])])
         # pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred.csv')
         # truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth.csv')
-        # np.savetxt(pred_path, predicted, delimiter=',', header=header)
-        # np.savetxt(truth_path, truth, delimiter=',', header=header)
         
-        # for i in range(truth.shape[0]):
-        #     auc_list.append(roc_auc_score(truth[i], predicted[i]))
-        #     pred_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'pred{i}.csv')
-        #     truth_path = (Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'truth{i}.csv')
-        #     header = ','.join([f'class{i}' for i in range(truth.shape[1])])
-        #     # transposed_array = my_array[:, np.newaxis]  # or my_array.reshape(-1, 1)
-        #     print(f'predicted[i]: {predicted[i][:, np.newaxis].T.shape}')#, predicted[i].T: {predicted[i].T.shape}')
-        #     pred_save = [format(v, ".4f") for v in predicted[i]].T
-        #     # print(f'pred_save: {pred_save}, pred_save {pred_save.shape}')
-        #     truth_save = [format(v, ".4f") for v in truth[i]].T
-        #     # pred_save = pred_save[:, np.newaxis].T
-        #     # truth_save = truth_save[:, np.newaxis].T
-        #     print(f'pred_save: {pred_save}, pred_save {pred_save.shape}')
-            
-            # truth_save = truth[i][:, np.newaxis].T
-            # truth_save = [format(v, ".4f") for v in truth_save]
-            # np.savetxt(pred_path, pred_save, delimiter=',', header=header)
-            # np.savetxt(truth_path, truth_save, delimiter=',', header=header)
+        # # Save with truncated values
+        # np.savetxt(pred_path, predicted, fmt='%.4f', delimiter=',', header=header)
+        # np.savetxt(truth_path, truth, fmt='%.4f', delimiter=',', header=header)
 
             # Saving Results (as PNG)
             # p_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / f'predicted{i}.png'
@@ -312,7 +362,7 @@ def basic_validate(mdl, dl, output, loss_func, cfg, epoch, tune=None):
             # # truth_img.save(t_path)
             
         auc = np.mean(auc_list)
-        
+        val_loss = [val_loss_img, val_loss_cell]
         return val_loss, accuracy, roc_values
 
 

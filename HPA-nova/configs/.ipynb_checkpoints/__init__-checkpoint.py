@@ -42,6 +42,8 @@ class Experiment(Element):
         self.method = dict.get('method', 'none')
         self.tile = dict.get('tile', 12)
         self.count = dict.get('count', 16)
+        self.num_cells = dict.get('num_cells', 10)
+        self.n_channels = dict.get('n_channels', 10)
         self.valid_count = dict.get('valid_count', 2)
         self.regression = dict.get('regression', False)
         self.scale = dict.get('scale', 1)
@@ -49,6 +51,7 @@ class Experiment(Element):
         self.public = dict.get('public', True)
         self.merge = dict.get('merge', True)
         self.n = dict.get('N', True)
+        self.img_weight = dict.get('img_weight',0.7)
         self.batch_sampler = dict.get('batch_sampler', False)
         # batch sampler
         #   initial_miu: 6
@@ -72,7 +75,6 @@ class Data(Element):
     def __init__(self, dict):
         self.cell = dict.get('cell', 'none')
         self.name = dict.get('name', 'CouldDataset')
-        self.dir_valid = dict.get('dir_valid', '/')
         if os.name == 'nt':
             self.data_root = dict.get('dir_nt', '/')
         else:
@@ -112,7 +114,6 @@ class Train(Element):
             raise Exception('Training dir must assigned')
         self.batch_size = dict.get('batch_size', 8)
         self.num_epochs = dict.get('num_epochs', 100)
-        self.num_cells = dict.get('num_cells', 10)
         self.validate_every = dict.get('validate_every', 10)
         self.cutmix = dict.get('cutmix', False)
         self.mixup = dict.get('mixup', False)
