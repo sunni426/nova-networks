@@ -50,7 +50,7 @@ class EfficinetNet(nn.Module):
         super().__init__()
         self.model = torch.hub.load('rwightman/gen-efficientnet-pytorch', name,
                                     pretrained=(pretrained == 'imagenet'))
-        self.model.conv_stem = Conv2dSame(4, self.model.conv_stem.out_channels, kernel_size=(3, 3), stride=(2, 2), bias=False)
+        self.model.conv_stem = Conv2dSame(3, self.model.conv_stem.out_channels, kernel_size=(3, 3), stride=(2, 2), bias=False) # changed from 4 channels to 3, Feb 11, for HPA. Change back to 4 for BBBC (or try to import config)
         print(name)
         # self.feature_linear = nn.Linear(in_features=self.model.classifier.in_features, out_features=feature_dim)
         self.last_linear = nn.Linear(in_features=self.model.classifier.in_features, out_features=out_features)

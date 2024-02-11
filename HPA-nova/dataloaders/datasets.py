@@ -258,15 +258,22 @@ class RANZERDataset(Dataset):
         # target_cols = self.df.iloc[:, 1:12].columns.tolist()
         # self.labels = self.df[target_cols].values
         self.cfg = cfg
+        # # REVERT THIS FOUR CHANNEL FOR BBBC
+        # self.tensor_tfms = Compose([
+        #     # ToTensor(),
+        #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
+        # ])
+        # For HPA
         self.tensor_tfms = Compose([
             # ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
+            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ])
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
         if cfg.data.cell == 'none':
-            self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
+            # self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
+            self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB/'
         else:
             self.cell_path = cfg.data.cell
 
@@ -276,47 +283,32 @@ class RANZERDataset(Dataset):
     def __getitem__(self, index):
         if self.mode == 'train':
             row = self.df.loc[index]
-            cnt = self.cfg.train.batch_size
+            cnt = self.cfg.experiment.count
             cells = self.cfg.experiment.num_cells
-            selected = random.sample([i for i in range(row['idx'])], cnt)
-            print(f'selected: {selected}')
-            batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
-            mask = np.zeros((cnt))
-            label = np.zeros((cnt, 19))
+            batch = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            mask = np.zeros((cells))
+            label = np.zeros((cells, 19)) 
             
-            color_dict = {1: 'blue', 2: 'green', 3: 'red', 4: 'yellow'}
-            for idx, s in enumerate(selected):
-
-                img = np.zeros((1, cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
-                
-                for i in range(cells):
-                    path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_{i+1}.png'
-                    img_cell = imread(path_channel)
-                    img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
-                    # print(f'img_cell shape: {img_cell.shape}')
-                    img[0, i, :, :, :] = img_cell
-                    # img = torch.tensor(img) 
-                    # print(f'img_temp shape: {img.shape}')
-                    # print(f'yes, path is {path_channel}')
-                    # # Save the PIL Image to a local file
-                    # img_pil = Image.fromarray(img_large)
-                    # img_pil.save(self.path / f'../results/check/{i}.png')\
-                # break
-                
+            # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
+            img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            for i in range(cells):
+                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
+                img_cell = imread(path_channel)
+                # print(f'img_cell: {img_cell.shape}')
+                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
                 if self.transform is not None:
-                    res = self.transform(image=img)
-                    img = res['image']
-                # if not img.shape[0] == self.cfg.transform.size:
-                #     img = cv2.resize(img, (self.cfg.transform.size, self.cfg.transform.size))
-                img = torch.tensor(img.copy())
-                img = self.tensor_tfms(img)
-                start = idx*10
-                end = start + 10
-                batch[idx, start:end, :, :, :] = img # #img x 10 x 4 x 256 x 256
-                mask[idx] = 1
-                label[idx] = row[self.cols].values.astype(np.float64)
+                    res = self.transform(image=img_cell)
+                    img_cell = res['image']
+
+                img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
+                
+                img[i, :, :, :] = img_cell
+    
+                batch = img # #10 x 4 x 256 x 256
+                mask[i] = 1
+                label[i] = row[self.cols].values.astype(np.float64)
                 # print(f'batch size: {batch.shape}')
-            # img = self.tensor_tfms(img)
+                # img = self.tensor_tfms(img)
             if self.cfg.experiment.smoothing == 0:
                 # print(f'batch: {batch}, mask: {mask}, label: {label}')
                 return batch, mask, label, row[self.cols].values.astype(np.float64)
@@ -330,45 +322,47 @@ class ValidationDataset(Dataset):
         self.mode = mode
         self.transform = tfms
         self.cfg = cfg
+        # self.tensor_tfms = Compose([
+        #     # ToTensor(),
+        #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
+        # ]) # 4 channels
         self.tensor_tfms = Compose([
             # ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
-        ])
+            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]) # 3 channels
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
-        self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/valid/'
+        # self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/valid/'
+        self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB/'
 
     def __len__(self):
         return len(self.df)
 
     def __getitem__(self, index):
         if self.mode == 'valid':
-            row = self.df.loc[index] # EDIT LATER, hardcoded rn 1/21
-            cnt = self.cfg.experiment.valid_count # EDIT, not working rn
-            mask = np.zeros((cnt))
-            label = np.zeros((cnt, 19))
+            row = self.df.loc[index]
+            # cnt = self.cfg.experiment.valid_count
+            cnt = self.cfg.experiment.num_cells
             cells = self.cfg.experiment.num_cells
             batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
-
-            # color_dict = {1: 'blue', 2: 'green', 3: 'red', 4: 'yellow'}
-            for idx in range(cnt):
-                img = np.zeros((1, cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
-                
-                for i in range(cells):
-                    path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_{i+1}.png'
-                    img_cell = imread(path_channel)
-                    img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
-                    # print(f'img_cell shape: {img_cell.shape}')
-                    img[0, i, :, :, :] = img_cell
-                
-                img = torch.tensor(img.copy())
-                img = self.tensor_tfms(img)
-                start = idx*10
-                end = start + 10
-                batch[idx, start:end, :, :, :] = img # #img x 10*img x 4 x 256 x 256
-                mask[idx] = 1
-                label[idx] = row[self.cols].values.astype(np.float64)
-                
-            return batch, mask, label[0], row[self.cols].values.astype(np.float64), cnt
+            mask = np.zeros((cnt))
+            label = np.zeros((cnt, 19)) 
             
+            # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
+            img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            for i in range(cells):
+                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
+                img_cell = imread(path_channel)
+                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                if self.transform is not None:
+                    res = self.transform(image=img_cell)
+                    img_cell = res['image']
+
+                img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
+                img[i, :, :, :] = img_cell
+                batch = img # #10 x 4 x 256 x 256
+                mask[i] = 1
+                label[i] = row[self.cols].values.astype(np.float64)
+            return batch, mask, label, row[self.cols].values.astype(np.float64), cnt
+           

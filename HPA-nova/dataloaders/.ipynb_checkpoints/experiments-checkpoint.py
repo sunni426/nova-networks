@@ -56,8 +56,14 @@ class RandomKTrainTestSplit:
         #         df = pd.read_csv(path / 'split' / e)
         #         train = pd.concat([train, df])
         # #end
-        self.train_meta, self.valid_meta = (train[train.fold != cfg.experiment.run_fold],
-                                            valid[valid.fold != cfg.experiment.run_fold])
+
+        # FOR RUNNING FOLD, commented out 2/11
+        # self.train_meta, self.valid_meta = (train[train.fold != cfg.experiment.run_fold],
+        #                                     valid[valid.fold != cfg.experiment.run_fold])
+
+        self.train_meta, self.valid_meta = (train[:],
+                                            valid[:])
+
         # print(train.head())
         if cfg.basic.debug:
             print('[ W ] Debug Mode!, down sample')
@@ -135,6 +141,7 @@ class RandomKTrainTestSplit:
             train_dl = DataLoader(dataset=train_ds, batch_size=self.cfg.train.batch_size,
                                   num_workers=self.cfg.transform.num_preprocessor,
                                   shuffle=train_shuffle, drop_last=True, pin_memory=True)
+            print(f'dl:{train_dl}')
         if tta == -1:
             tta = 1
         # valid_ds = STRDataset(self.valid_meta, val_tfms, size=self.cfg.transform.size, tta=tta,

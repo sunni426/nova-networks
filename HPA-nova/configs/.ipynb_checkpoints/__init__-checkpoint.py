@@ -44,6 +44,7 @@ class Experiment(Element):
         self.count = dict.get('count', 16)
         self.num_cells = dict.get('num_cells', 10)
         self.n_channels = dict.get('n_channels', 10)
+        self.num_train = dict.get('num_train', 10)
         self.valid_count = dict.get('valid_count', 2)
         self.regression = dict.get('regression', False)
         self.scale = dict.get('scale', 1)

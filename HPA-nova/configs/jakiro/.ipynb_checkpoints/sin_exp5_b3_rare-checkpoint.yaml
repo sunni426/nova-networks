@@ -1,3 +1,4 @@
+# nova-networks/HPA-nova
 dpp:
   mode: 'train'
   
@@ -22,18 +23,20 @@ experiment:
   image_only: True
   skip_outlier: True
   outlier: train
-  count: 2
-  valid_count: 1
+  count: 10
+  valid_count: 8
   num_cells: 10
-  n_channels: 4
+  n_channels: 3
+  num_train: 20 # Total number of training images
   img_weight: 0.7
   file: train_sunni.csv
-  csv_file: train_sunni.csv # 256_train+ext+rare.csv. in /dataloaders/split/
-  csv_valid: valid_sunni.csv
+  csv_file: train_sunni_toy.csv # 256_train+ext+rare.csv. in /dataloaders/split/
+  csv_valid: valid_sunni_toy.csv
   smoothing: 0
 
 data:
-  dir_sv: '/projectnb/btec-design3/novanetworks/kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
+  dir_sv: '/projectnb/btec-design3/novanetworks/kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB/'
+  # '/projectnb/btec-design3/novanetworks/kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
   # cell: 'input/train_sunni'
 
 model:
@@ -46,7 +49,7 @@ model:
 
 train:
   dir: './results'
-  batch_size: 2
+  batch_size: 4
   num_epochs: 3
   validate_every: 1
   cutmix: False
