@@ -303,11 +303,10 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
             start = img*10
             end = start + 10
             predicted_with_ids.append(np.column_stack((np.broadcast_to(np.array(row_ids[img]), (10, 1)).tolist(), predicted[start:end, :])))
-            truth_with_ids.append(np.column_stack((row_ids[0], np.expand_dims(truth[img],0))))
+            truth_with_ids.append(np.column_stack((row_ids[img], np.expand_dims(truth[img],0))))
 
         predicted_with_ids = np.array(predicted_with_ids).reshape((len(dl)*n_cell, 20)) # 20, because 19 labels + ID
         truth_with_ids = np.array(truth_with_ids).reshape((len(dl), 20)) # 20, because 19 labels + ID
-        print(f'predicted_with_ids: {predicted_with_ids.shape}, truth_with_ids: {truth_with_ids.shape}')
         
         # Create header with 'ID' added at the beginning
         header = ','.join(['ID'] + [f'class{i}' for i in range(truth.shape[1])])
@@ -322,141 +321,6 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
 
         # roc = np.mean(roc_values)
-        val_loss = [val_loss_img, val_loss_cell]
-        return val_loss, accuracy, roc_values
-
-
-def basic_validate_old(mdl, dl, loss_func, cfg, epoch, tune=None):
-    print("Validating...")
-    mdl.eval()
-    with torch.no_grad():
-        results_img, results_cell = [], []
-        losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
-        losses_cell, predicted_cell, predicted_p_cell = [], [], []
-        
-        for i, (ipt, mask, lbl, cnt, n_img) in enumerate(dl):
-            ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
-            lbl = lbl.view(-1, lbl.shape[-1])
-            exp_label = cnt.cuda().view(-1, 19)
-            ipt, lbl = ipt.cuda(), lbl.cuda()
-            # Image_level
-            if cfg.basic.amp == 'Native':
-                    with torch.cuda.amp.autocast():
-                        if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                            output = mdl(ipt, lbl)
-                        else:
-                            _, output = mdl(ipt, cfg.experiment.num_cells)
-                            
-                        loss = loss_func(output, exp_label)
-                        # print(f'output is {output} with loss {loss}')
-                        if not len(loss.shape) == 0:
-                            loss = loss.mean()
-                        output = output.float()
-            else:
-                if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                    output = mdl(ipt, lbl)
-                else:
-                    output = mdl(ipt)
-                loss = loss_func(output, exp_label)
-                print('Loss:',loss)
-                if not len(loss.shape) == 0:
-                    loss = loss.mean()
-
-            # print(f'ipt: {ipt.shape}, output: {output.shape}')
-            losses_img.append(loss.item())
-            predicted_img.append(torch.sigmoid(output.cpu()).numpy())
-            truth_img.append(lbl.cpu().numpy())
-            results_img.append({
-                'step': i,
-                'loss': loss.item(),
-            })
-            
-            # Cell_level
-            for cell_idx in range(cfg.experiment.num_cells):
-                if cfg.basic.amp == 'Native':
-                        with torch.cuda.amp.autocast():
-                            if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                                output = mdl(ipt, lbl)
-                            else:
-                                _, output = mdl(ipt[cell_idx].unsqueeze(0), 1)
-                            loss = loss_func(output, exp_label)
-                            # print(f'output is {output} with loss {loss}')
-                            if not len(loss.shape) == 0:
-                                loss = loss.mean()
-                            output = output.float()
-                else:
-                    if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                        output = mdl(ipt, lbl)
-                    else:
-                        output = mdl(ipt)
-                    loss = loss_func(output, exp_label)
-                    print('Loss:',loss)
-                    if not len(loss.shape) == 0:
-                        loss = loss.mean()
-                    
-                # print(f'ipt: {ipt.shape}, output: {output.shape}')
-                losses_cell.append(loss.item())
-                predicted_cell.append(torch.sigmoid(output.cpu()).numpy())
-                results_cell.append({
-                    'step': i,
-                    'loss': loss.item(),
-                })
-        # print(f'predicted_img: {predicted_img.shape}') # 1x19
-        # print(f'predicted_cell: {predicted_cell.shape}') # 10x19
-
-        predicted = np.zeros((10,19))
-        # print(f'predicted: {predicted.shape}')
-        # print(f'predicted_img: {predicted_img.shape}, {predicted_img}')
-        for j in range(cfg.experiment.num_cells):
-            predicted[j] = cfg.experiment.img_weight*np.array(predicted_img) + (1-cfg.experiment.img_weight)*predicted_cell[j]
-        # predicted = np.concatenate(predicted)
-        # print(f'predicted_img:{predicted_img}, predicted_cell: {predicted_cell[0]}') # Model can take 1 and num_cells
-        truth = np.concatenate(truth_img)
-        # print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
-        val_loss_img = np.array(losses_img).mean()
-        val_loss_cell = np.array(losses_cell).mean()
-        
-        accuracy = ((predicted > 0.5) == truth).sum().astype(np.float64) / truth.shape[0] / truth.shape[1]
-        accuracy /= 10
-        
-        predicted_auc = np.mean(predicted, axis=0).flatten()
-        truth_auc = truth.flatten()
-        print(f'predicted_auc: {predicted_auc.shape}')
-        roc_values = []
-        roc_values.append(roc_auc_score(truth_auc, predicted_auc))
-        
-        # auc = macro_multilabel_auc(truth, predicted, gpu=0) #OG
-        auc_list = []
-
-        predicted = np.round(predicted, decimals=4)
-        truth = np.round(truth, decimals=4)
-        
-        # Image IDs
-        csv_file_path = '/projectnb/btec-design3/novanetworks/nova-networks/HPA-nova/dataloaders/split/valid_sunni.csv'
-        # Open the CSV file and read the first column into a list
-        with open(csv_file_path, 'r') as csvfile:
-            csv_reader = csv.reader(csvfile)
-            row_ids = [row[0] for row in csv_reader]
-        row_ids = row_ids[1:]        
-        print(f'row_ids: {row_ids}')
-
-        # Add a new column with string IDs at index 0
-        predicted_with_ids = np.column_stack((np.broadcast_to(np.array(row_ids), (10, 1)).tolist() , predicted))
-        truth_with_ids = np.column_stack((row_ids[0], truth))
-        
-        # Create header with 'ID' added at the beginning
-        header = ','.join(['ID'] + [f'class{i}' for i in range(truth.shape[1])])
-        
-        # Get the directory and file paths
-        base_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id
-        pred_path = base_path / 'pred.csv'
-        truth_path = base_path / 'truth.csv'
-        
-        # Save with truncated values and the new ID column
-        np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
-        np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
-
-        auc = np.mean(auc_list)
         val_loss = [val_loss_img, val_loss_cell]
         return val_loss, accuracy, roc_values
 
