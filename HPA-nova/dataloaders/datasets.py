@@ -273,7 +273,7 @@ class RANZERDataset(Dataset):
         self.cols = ['class{}'.format(i) for i in range(19)]
         if cfg.data.cell == 'none':
             # self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
-            self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB/'
+            self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB2/'
         else:
             self.cell_path = cfg.data.cell
 
@@ -334,7 +334,7 @@ class ValidationDataset(Dataset):
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
         # self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/valid/'
-        self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB/'
+        self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB2/'
 
     def __len__(self):
         return len(self.df)

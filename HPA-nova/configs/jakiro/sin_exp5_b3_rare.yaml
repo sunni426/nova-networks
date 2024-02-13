@@ -50,7 +50,7 @@ model:
 train:
   dir: './results'
   batch_size: 4
-  num_epochs: 3
+  num_epochs: 500
   validate_every: 1
   cutmix: False
   beta: 1
@@ -87,8 +87,8 @@ scheduler:
   name: 'CosineAnnealingLR'
   warm_up: True
   params:
-    factor: 0.1
-    patience: 10
+    factor: 0.001 # OG 0.1
+    patience: 50
 
 transform:
   name: 's_0220/sin_256_final' # in configs/augmentation
