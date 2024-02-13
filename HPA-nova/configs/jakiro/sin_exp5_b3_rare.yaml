@@ -50,7 +50,7 @@ model:
 train:
   dir: './results'
   batch_size: 4
-  num_epochs: 500
+  num_epochs: 3
   validate_every: 1
   cutmix: False
   beta: 1

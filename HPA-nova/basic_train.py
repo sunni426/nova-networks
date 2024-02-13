@@ -280,7 +280,8 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
             # print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
             val_loss_img = np.array(losses_img).mean()
             val_loss_cell = np.array(losses_cell).mean()
-            truth_acc = np.tile(truth[j], (10, 1))
+            truth_acc = np.tile(truth[j], (10, 1)) # 10x19
+            # print(f'truth_acc:{truth_acc},truth_acc.shape[0]:{truth_acc.shape[0]},truth_acc.shape[1]:{truth_acc.shape[1]}, predicted[j]:{predicted[j]}')
             accuracy += ((predicted[j] > 0.5) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
             
             predicted_auc = np.mean(predicted[j], axis=0).flatten()
@@ -290,7 +291,7 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
             # print(f'roc_values: {roc_values}')
 
         auc = sum(roc_values)/len(roc_values)
-        accuracy /= len(dl)*n_cell
+        accuracy /= len(dl)
         predicted = np.round(predicted, decimals=4)
         truth = np.round(truth, decimals=4)
         
