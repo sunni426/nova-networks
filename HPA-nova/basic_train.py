@@ -18,6 +18,7 @@ except:
     pass
 from sklearn.metrics import cohen_kappa_score, mean_squared_error
 from sklearn.metrics import roc_auc_score
+from gradcam import *
 
 
 def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, save_path, scheduler, writer, tune=None):
@@ -236,7 +237,7 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
                                 output = mdl(ipt, lbl)
                             else:
                                 loss_cell, output = mdl(ipt[cell_idx].unsqueeze(0), 1)
-                            loss_cell_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(loss_img, lbl)
+                            loss_cell_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(loss_cell.squeeze(0), lbl[0])
                             loss_cell_exp = loss_func(output, exp_label)
                             loss = loss_cell_exp + cfg.loss.cellweight*loss_cell_bce
                             
@@ -329,6 +330,16 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
 
         val_loss = [val_loss_img, val_loss_cell]
+
+        # GradCAM: 
+        # grad_img = '002679c2-bbb6-11e8-b2ba-ac1f6b6435d0_cell10.png'
+        # gradcam_instance = GradCAM(mdl, grad_img, 256)
+        # img1_array, X = gradcam_instance.load()
+        # cam = gradcam_instance.make_gradcam(X)
+        # gradcam_instance.visualize(img1_array, cam)
+
+        
+        
         return val_loss, accuracy, auc
 
 

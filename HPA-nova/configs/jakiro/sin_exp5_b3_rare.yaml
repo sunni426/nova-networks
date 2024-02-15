@@ -28,7 +28,7 @@ experiment:
   num_cells: 10
   n_channels: 3
   num_train: 20 # Total number of training images
-  img_weight: 0.7
+  img_weight: 0
   file: train_sunni.csv
   csv_file: train_sunni_toy.csv # 256_train+ext+rare.csv. in /dataloaders/split/
   csv_valid: valid_sunni_toy.csv
@@ -50,7 +50,7 @@ model:
 train:
   dir: './results'
   batch_size: 4
-  num_epochs: 3
+  num_epochs: 300
   validate_every: 1
   cutmix: False
   beta: 1
