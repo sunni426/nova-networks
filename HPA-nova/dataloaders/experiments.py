@@ -28,35 +28,13 @@ class RandomKTrainTestSplit:
     def __init__(self, cfg: Config):
         self.cfg = cfg
         path = Path(os.path.dirname(os.path.realpath(__file__)))
-        if cfg.experiment.file == 'none':
-            csv_file = 'exp_with_idx_max.csv'
-        else:
-            csv_file = cfg.experiment.file
+        # if cfg.experiment.file == 'none':
+        #     csv_file = 'exp_with_idx_max.csv'
+        # else:
+        csv_file = cfg.experiment.file
         train = pd.read_csv(path / 'split' / csv_file)
         valid = pd.read_csv(path / 'split' / cfg.experiment.csv_valid)
         # # start
-        # # load configs
-        # files = '/projectnb/btec-design3/novanetworks/kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
-        # # files = os.listdir(path / '../../notebooks/pad_resized_cell_four/')
-        # self.file_list = []
-        # self.file_dict = {}
-        # for f in files:
-        #     print(f)
-        #     if not f.split('_')[0] in self.file_dict:
-        #         self.file_dict[f.split('_')[0]] = []
-        #     self.file_dict[f.split('_')[0]].append(f.split('_')[1].split('.')[0])
-        #     self.file_list.append({
-        #         'ID': f.split('_')[0],
-        #         'idx': f.split('_')[1].split('.')[0]
-        #     })
-        # self.file_df = pd.DataFrame(self.file_list)
-        # train = train.merge(self.file_df, on='ID', how='left')
-        # if cfg.experiment.externals:
-        #     for e in cfg.experiment.externals:
-        #         df = pd.read_csv(path / 'split' / e)
-        #         train = pd.concat([train, df])
-        # #end
-
         # FOR RUNNING FOLD, commented out 2/11
         # self.train_meta, self.valid_meta = (train[train.fold != cfg.experiment.run_fold],
         #                                     valid[valid.fold != cfg.experiment.run_fold])

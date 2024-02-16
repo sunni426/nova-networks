@@ -67,7 +67,7 @@ class Experiment(Element):
         self.skip_outlier = dict.get('skip_outlier', False)
         self.outlier = dict.get('outlier', 'train')
         self.outlier_method = dict.get('outlier_method', 'drop')
-        self.file = dict.get('csv_file', 'none')
+        self.file = dict.get('file', 'none')
         self.csv_valid = dict.get('csv_valid', 'none')
         self.smoothing = dict.get('smoothing', 0)
 
@@ -76,6 +76,7 @@ class Data(Element):
     def __init__(self, dict):
         self.cell = dict.get('cell', 'none')
         self.name = dict.get('name', 'CouldDataset')
+        self.dir = dict.get('dir', '/')
         if os.name == 'nt':
             self.data_root = dict.get('dir_nt', '/')
         else:

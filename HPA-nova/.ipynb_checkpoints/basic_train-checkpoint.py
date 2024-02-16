@@ -18,7 +18,7 @@ except:
     pass
 from sklearn.metrics import cohen_kappa_score, mean_squared_error
 from sklearn.metrics import roc_auc_score
-from gradcam import *
+#from gradcam import *
 
 
 def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, save_path, scheduler, writer, tune=None):
@@ -278,11 +278,9 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
                 cell_ind = int(j*10+k) # should range from 0-59
                 predicted[j][k] = cfg.experiment.img_weight*np.array(predicted_img[j]) + (1-cfg.experiment.img_weight)*predicted_cell[cell_ind]
             
-            # print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
             val_loss_img = np.array(losses_img).mean()
             val_loss_cell = np.array(losses_cell).mean()
             truth_acc = np.tile(truth[j], (10, 1)) # 10x19
-            # print(f'truth_acc:{truth_acc},truth_acc.shape[0]:{truth_acc.shape[0]},truth_acc.shape[1]:{truth_acc.shape[1]}, predicted[j]:{predicted[j]}')
             accuracy += ((predicted[j] > 0.5) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
             
             predicted_auc = np.mean(predicted[j], axis=0).flatten()
@@ -297,7 +295,8 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         truth = np.round(truth, decimals=4)
         
         # Image IDs
-        csv_file_path = '/projectnb/btec-design3/novanetworks/nova-networks/HPA-nova/dataloaders/split/valid_sunni_toy.csv'
+        path = Path(os.path.dirname(os.path.realpath(__file__)))
+        csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
         # Open the CSV file and read the first column into a list
         with open(csv_file_path, 'r') as csvfile:
             csv_reader = csv.reader(csvfile)
