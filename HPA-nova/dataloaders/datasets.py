@@ -199,64 +199,12 @@ class STRDataset(Dataset):
             )
 
 
-# class RANZERDataset(Dataset):
-#     def __init__(self, df, tfms=None, cfg=None, mode='train', file_dict=None):
-
-#         self.df = df.reset_index(drop=True)
-#         self.mode = mode
-#         self.transform = tfms
-#         # target_cols = self.df.iloc[:, 1:12].columns.tolist()
-#         # self.labels = self.df[target_cols].values
-#         self.cfg = cfg
-#         self.tensor_tfms = Compose([
-#             ToTensor(),
-#             Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
-#         ])
-#         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
-#         self.file_dict = file_dict
-#         self.cols = ['class{}'.format(i) for i in range(19)]
-#         if cfg.data.cell == 'none':
-#             self.cell_path = 'notebooks/pad_resized_cell_four'
-#         else:
-#             self.cell_path = cfg.data.cell
-
-#     def __len__(self):
-#         return len(self.df)
-
-#     def __getitem__(self, index):
-#         row = self.df.loc[index]
-#         cnt = self.cfg.experiment.count
-#         if row['idx'] > cnt:
-#             selected = random.sample([i for i in range(row['idx'])], cnt)
-#         else:
-#             selected = [i for i in range(row['idx'])]
-#         batch = torch.zeros((cnt, 4, self.cfg.transform.size, self.cfg.transform.size))
-#         mask = np.zeros((cnt))
-#         label = np.zeros((cnt, 19))
-#         for idx, s in enumerate(selected):
-#             path = self.path / f'../../{self.cell_path}/{row["ID"]}_{s+1}.png'
-#             img = imread(path)
-#             if self.transform is not None:
-#                 res = self.transform(image=img)
-#                 img = res['image']
-#             if not img.shape[0] == self.cfg.transform.size:
-#                 img = cv2.resize(img, (self.cfg.transform.size, self.cfg.transform.size))
-#             img = self.tensor_tfms(img)
-#             batch[idx, :, :, :] = img
-#             mask[idx] = 1
-#             label[idx] = row[self.cols].values.astype(np.float)
-#         # img = self.tensor_tfms(img)
-#         return batch, mask, label, row[self.cols].values.astype(np.float)
-
 class RANZERDataset(Dataset):
     def __init__(self, df, tfms=None, cfg=None, mode='train', file_dict=None):
 
         self.df = df.reset_index(drop=True)
         self.mode = mode
         self.transform = tfms
-        # print(f'tfms 1: {tfms}')
-        # target_cols = self.df.iloc[:, 1:12].columns.tolist()
-        # self.labels = self.df[target_cols].values
         self.cfg = cfg
         # # REVERT THIS FOUR CHANNEL FOR BBBC
         # self.tensor_tfms = Compose([
@@ -271,11 +219,7 @@ class RANZERDataset(Dataset):
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
-        if cfg.data.cell == 'none':
-            # self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/train/'
-            self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB/'
-        else:
-            self.cell_path = cfg.data.cell
+        self.cell_path = self.cfg.data.dir
 
     def __len__(self):
         return len(self.df)
@@ -333,8 +277,7 @@ class ValidationDataset(Dataset):
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
-        # self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/valid/'
-        self.cell_path = '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB/'
+        self.cell_path = self.cfg.data.dir
 
     def __len__(self):
         return len(self.df)
@@ -342,7 +285,6 @@ class ValidationDataset(Dataset):
     def __getitem__(self, index):
         if self.mode == 'valid':
             row = self.df.loc[index]
-            # cnt = self.cfg.experiment.valid_count
             cnt = self.cfg.experiment.num_cells
             cells = self.cfg.experiment.num_cells
             batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))

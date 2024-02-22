@@ -18,6 +18,7 @@ except:
     pass
 from sklearn.metrics import cohen_kappa_score, mean_squared_error
 from sklearn.metrics import roc_auc_score
+#from gradcam import *
 
 
 def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, save_path, scheduler, writer, tune=None):
@@ -154,17 +155,17 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                 
                 print(('[ √ ] epochs: {}, train loss: {:.4f}, valid img loss: {:.4f}, ' +
                        'valid cell loss: {:.4f}, accuracy: {:.4f}, auc: {:.4f}').format(
-                    epoch, np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc[0]))
+                    epoch, np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc))
                 writer.add_scalar('train_f{}/loss'.format(cfg.experiment.run_fold), np.mean(losses), epoch)
                 writer.add_scalar('train_f{}/lr'.format(cfg.experiment.run_fold), optimizer.param_groups[0]['lr'], epoch)
                 writer.add_scalar('valid_f{}/loss_img'.format(cfg.experiment.run_fold), validate_loss[0], epoch)
                 writer.add_scalar('valid_f{}/loss_cell'.format(cfg.experiment.run_fold), validate_loss[1], epoch)
                 writer.add_scalar('valid_f{}/accuracy'.format(cfg.experiment.run_fold), accuracy, epoch)
-                writer.add_scalar('valid_f{}/auc'.format(cfg.experiment.run_fold), auc[0], epoch)
+                writer.add_scalar('valid_f{}/auc'.format(cfg.experiment.run_fold), auc, epoch)
     
                 with open(save_path / 'train.log', 'a') as fp:
                     fp.write('{}\t{:.8f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\n'.format(
-                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc[0]))
+                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc))
             # Continue Training
             else:
                 print(('[ √ ] epochs: {}, train loss: {:.4f}').format(epoch, np.array(losses).mean()))
@@ -192,6 +193,7 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
         losses_cell, predicted_cell, predicted_p_cell = [], [], []
         accuracy = 0
+        pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
         
         for i, (ipt, mask, lbl, cnt, n_cell) in enumerate(dl):
             ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
@@ -204,8 +206,10 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
                     if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                         output = mdl(ipt, lbl)
                     else:
-                        _, output = mdl(ipt, n_cell)
-                    loss = loss_func(output, exp_label)
+                        loss_img, output = mdl(ipt, n_cell)
+                    loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(loss_img, lbl)
+                    loss_img_exp = loss_func(output, exp_label)
+                    loss = loss_img_exp + cfg.loss.cellweight*loss_img_bce
                     if not len(loss.shape) == 0:
                         loss = loss.mean()
                     output = output.float()
@@ -232,8 +236,11 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
                             if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                                 output = mdl(ipt, lbl)
                             else:
-                                _, output = mdl(ipt[cell_idx].unsqueeze(0), 1)
-                            loss = loss_func(output, exp_label)
+                                loss_cell, output = mdl(ipt[cell_idx].unsqueeze(0), 1)
+                            loss_cell_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(loss_cell.squeeze(0), lbl[0])
+                            loss_cell_exp = loss_func(output, exp_label)
+                            loss = loss_cell_exp + cfg.loss.cellweight*loss_cell_bce
+                            
                             # print(f'output is {output} with loss {loss}')
                             if not len(loss.shape) == 0:
                                 loss = loss.mean()
@@ -265,37 +272,38 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         # print(f'truth_img: {len(truth_img)}, {len(truth_img[0])}') # 6,19
         truth = np.array(truth_img)
         print(f'predicted: {predicted.shape}, truth: {truth.shape}')
+        roc_values = []
         for j in range(len(dl)):
             for k in range(cfg.experiment.num_cells):
                 cell_ind = int(j*10+k) # should range from 0-59
                 predicted[j][k] = cfg.experiment.img_weight*np.array(predicted_img[j]) + (1-cfg.experiment.img_weight)*predicted_cell[cell_ind]
             
-            # print(f'predicted {predicted.shape}, truth: {truth.shape}, loss: {len(losses)}')
             val_loss_img = np.array(losses_img).mean()
             val_loss_cell = np.array(losses_cell).mean()
-            truth_acc = np.tile(truth[j], (10, 1))
+            truth_acc = np.tile(truth[j], (10, 1)) # 10x19
             accuracy += ((predicted[j] > 0.5) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
             
             predicted_auc = np.mean(predicted[j], axis=0).flatten()
             truth_auc = truth[j].flatten()
             # print(f'predicted_auc: {predicted_auc.shape}, {predicted_auc}') # 6x19
-            roc_values = []
-            roc_values.append(0)
             roc_values.append(roc_auc_score(truth_auc, predicted_auc))
-            
-        accuracy /= len(dl)*n_cell
+            # print(f'roc_values: {roc_values}')
+
+        auc = sum(roc_values)/len(roc_values)
+        accuracy /= len(dl)
         predicted = np.round(predicted, decimals=4)
         truth = np.round(truth, decimals=4)
         
         # Image IDs
-        csv_file_path = '/projectnb/btec-design3/novanetworks/nova-networks/HPA-nova/dataloaders/split/valid_sunni_toy.csv'
+        path = Path(os.path.dirname(os.path.realpath(__file__)))
+        csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
         # Open the CSV file and read the first column into a list
         with open(csv_file_path, 'r') as csvfile:
             csv_reader = csv.reader(csvfile)
             row_ids = [row[0] for row in csv_reader]
         row_ids = row_ids[1:]        
-        print(f'row_ids: {row_ids}')
-        predicted = predicted.reshape((len(dl)*n_cell, 19)) # now, num_val*num_cellsx19 
+        # print(f'row_ids: {row_ids}')
+        predicted = predicted.reshape((len(dl)*n_cell, 19)) # now, num_valid*num_cellsx19 
 
         # Add a new column with string IDs at index 0
         predicted_with_ids, truth_with_ids = [], []
@@ -320,9 +328,18 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
 
-        # roc = np.mean(roc_values)
         val_loss = [val_loss_img, val_loss_cell]
-        return val_loss, accuracy, roc_values
+
+        # GradCAM: 
+        # grad_img = '002679c2-bbb6-11e8-b2ba-ac1f6b6435d0_cell10.png'
+        # gradcam_instance = GradCAM(mdl, grad_img, 256)
+        # img1_array, X = gradcam_instance.load()
+        # cam = gradcam_instance.make_gradcam(X)
+        # gradcam_instance.visualize(img1_array, cam)
+
+        
+        
+        return val_loss, accuracy, auc
 
 
 def tta_validate(mdl, dl, loss_func, tta):
