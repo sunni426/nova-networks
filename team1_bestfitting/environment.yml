@@ -1,0 +1,24 @@
+channels:
+  - defaults
+  - conda-forge
+  - pytorch
+  - bioconda
+dependencies:
+  - imageio=2.9.0 
+  - pandas=0.25.3
+  - tqdm=4.48.0
+  - numpy=1.22.0
+  - Pillow=10.0.1
+  - scipy=1.5.0
+  - pytorch=2.1.2
+  - torchvision=0.16.2
+  - pytorch-cuda=12.1
+  - opencv=4.5.1
+  - scikit-image=0.16.2
+  - scikit-learn=0.23.1
+  - imagehash=4.2.0
+  - einops=0.3.0
+  - pycocotools=2.0
+  - pip:
+    - mlcrate=0.2.0
+    - zlib=1.0
