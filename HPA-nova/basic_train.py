@@ -158,9 +158,9 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                 # print(f'type: {type(auc)}, auc:{auc}') #list
                 
                 
-                print(('[ √ ] epochs: {}, train loss: {:.4f}, valid img loss: {:.4f}, ' +
-                       'valid cell loss: {:.4f}, accuracy: {:.4f}, auc: {:.4f}, mAP: {:.4f}').format(
-                    epoch, np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc, mAP))
+                print(('[ √ ] epochs: {}, train loss: {:.4f}, valid loss: {:.4f}, ' +
+                       'accuracy: {:.4f}, auc: {:.4f}, mAP: {:.4f}').format(
+                    epoch, np.array(losses).mean(), validate_loss, accuracy, auc, mAP))
                 writer.add_scalar('train_f{}/loss'.format(cfg.experiment.run_fold), np.mean(losses), epoch)
                 writer.add_scalar('train_f{}/lr'.format(cfg.experiment.run_fold), optimizer.param_groups[0]['lr'], epoch)
                 writer.add_scalar('valid_f{}/loss_'.format(cfg.experiment.run_fold), validate_loss, epoch)
@@ -253,7 +253,7 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
             val_loss_img = np.array(losses_img).mean()
             val_loss_cell = np.array(losses_cell).mean()
             truth_acc = np.tile(truth[j], (10, 1)) # 10x19
-            accuracy += ((predicted[j] > 0.7) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
+            accuracy += ((predicted[j] > 0.8) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
             
             predicted_auc = np.mean(predicted[j], axis=0).flatten()
             truth_auc = truth[j].flatten() # 10x19
@@ -306,22 +306,23 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
 
         # GradCAM
-        
-        # extract first image, first cell from validation set
-        csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
-        # Open the CSV file and read the first column into a list
-        with open(csv_file_path, 'r') as csvfile:
-            csv_reader = csv.reader(csvfile)
-            for idx, row in enumerate(csv_reader):
-                row_id = row[0]
-                if(idx==2):
-                    break
-        print(f'row_id: {row_id}')
-        grad_img = f'../{cfg.data.dir}/{row_id}_cell1.png'
-        gradcam_instance = novaGradCAM(mdl, grad_img, 256)
-        image, image_prep = gradcam_instance.load()
-        gradcam_instance.make_gradcam(image, image_prep, cfg.basic.id)
-        # gradcam_instance.visualize(image, heatmap)
+        if(epoch % cfg.train.gradcam_every == 0):
+            print('[!] Computing Grad-CAM...')
+            # extract first image, first cell from validation set
+            csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
+            # Open the CSV file and read the first column into a list
+            with open(csv_file_path, 'r') as csvfile:
+                csv_reader = csv.reader(csvfile)
+                for idx, row in enumerate(csv_reader):
+                    row_id = row[0]
+                    if(idx==2):
+                        break
+            print(f'row_id: {row_id}')
+            grad_img = f'../{cfg.data.dir}/{row_id}_cell3.png'
+            gradcam_instance = novaGradCAM(mdl, grad_img, 256)
+            image, image_prep = gradcam_instance.load()
+            gradcam_instance.make_gradcam(image, image_prep, cfg.basic.id)
+            # gradcam_instance.visualize(image, heatmap)
 
         return val_loss_img, accuracy, auc, mAP
 

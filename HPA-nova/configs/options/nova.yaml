@@ -29,9 +29,9 @@ experiment:
   n_channels: 3
   num_train: 18 # Total number of training images
   img_weight: 0
-  file: '0_train_500.csv' # training csv, put in /dataloaders/split/
-  csv_valid: 'valid_500_70.csv' # validation csv, put in /dataloaders/split/
-  csv_test: 'test_500_30.csv' # test csv, put in /dataloaders/split/ --> change in init
+  file: 'train_465_400.csv' # training csv, put in /dataloaders/split/
+  csv_valid: 'valid_465_40.csv' # validation csv, put in /dataloaders/split/
+  csv_test: 'test_465_25.csv' # test csv, put in /dataloaders/split/ --> change in init
   smoothing: 0
 
 data:
@@ -49,8 +49,9 @@ model:
 train:
   dir: './results'
   batch_size: 4
-  num_epochs: 5
+  num_epochs: 11
   validate_every: 1
+  gradcam_every: 5
   cutmix: False
   beta: 1
   cutmix_prob: 1
@@ -86,7 +87,7 @@ scheduler:
   name: 'CosineAnnealingLR'
   warm_up: True
   params:
-    factor: 0.001 # OG 0.1
+    factor: 0.0001 # OG 0.1
     patience: 50
 
 transform:

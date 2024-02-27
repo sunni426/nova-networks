@@ -118,6 +118,7 @@ class Train(Element):
         self.batch_size = dict.get('batch_size', 8)
         self.num_epochs = dict.get('num_epochs', 100)
         self.validate_every = dict.get('validate_every', 10)
+        self.gradcam_every = dict.get('gradcam_every', 50)
         self.cutmix = dict.get('cutmix', False)
         self.mixup = dict.get('mixup', False)
         self.beta = dict.get('beta', 1)
