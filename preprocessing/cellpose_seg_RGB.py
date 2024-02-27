@@ -36,12 +36,12 @@ def cellpose_seg(args):
 
     model = models.Cellpose(gpu=True, model_type='cyto2', device=torch.device(f'cuda:{args.gpu_device}'))
 
-    # Process images in batches
+    # Process images in batchess
     for image_id in tqdm(image_ids):
         merged_image = merge_channels(base_dir, image_id)
         masks, flows, styles, diams = model.eval([merged_image], 
                                                  diameter=150, 
-                                                 channels=[2, 3], 
+                                                 channels=[3, 2], 
                                                  flow_threshold=0.8,
                                                  cellprob_threshold=0.0,
                                                  batch_size=args.batch_size)
