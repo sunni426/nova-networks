@@ -307,4 +307,55 @@ class ValidationDataset(Dataset):
                 mask[i] = 1
                 label[i] = row[self.cols].values.astype(np.float64)
             return batch, mask, label, row[self.cols].values.astype(np.float64), cnt
-           
+
+
+class TestDataset(Dataset):
+    def __init__(self, df, tfms=None, tta=1, cfg=None, mode='test', file_dict=None):
+
+        self.df = df.reset_index(drop=True)
+        self.mode = mode
+        self.transform = tfms
+        self.cfg = cfg
+        self.tta = tta
+        # self.tensor_tfms = Compose([
+        #     # ToTensor(),
+        #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
+        # ]) # 4 channels
+        self.tensor_tfms = Compose([
+            # ToTensor(),
+            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]) # 3 channels
+        self.path = Path(os.path.dirname(os.path.realpath(__file__)))
+        self.file_dict = file_dict
+        self.cols = ['class{}'.format(i) for i in range(19)]
+        self.cell_path = self.cfg.data.dir
+
+    def __len__(self):
+        return len(self.df)
+
+    def __getitem__(self, index):
+        if self.mode == 'test':
+            # print(f'row: {self.df.loc[index]}')
+            row = self.df.loc[index]
+            cnt = self.cfg.experiment.num_cells
+            cells = self.cfg.experiment.num_cells
+            batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            mask = np.zeros((cnt))
+            label = np.zeros((cnt, 19)) 
+            
+            # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
+            img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            for i in range(cells):
+                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
+                img_cell = imread(path_channel)
+                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                if self.transform is not None:
+                    res = self.transform(image=img_cell)
+                    img_cell = res['image']
+
+                img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
+                img[i, :, :, :] = img_cell
+                batch = img # #10 x 4 x 256 x 256
+                mask[i] = 1
+                label[i] = row[self.cols].values.astype(np.float64)
+            return batch, mask, label, row[self.cols].values.astype(np.float64), cnt

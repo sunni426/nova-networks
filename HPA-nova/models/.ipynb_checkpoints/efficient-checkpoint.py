@@ -58,7 +58,7 @@ class EfficinetNet(nn.Module):
         self.pool = GeM()
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self, x, cnt=16):
+    def forward(self, x, cnt=10):
         x = self.model.features(x)
         pooled = nn.Flatten()(self.pool(x))
         viewed_pooled = pooled.view(-1, cnt, pooled.shape[-1])

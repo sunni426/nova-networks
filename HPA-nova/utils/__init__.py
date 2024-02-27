@@ -71,23 +71,28 @@ def rand_bbox(size, lam):
 
 def prepare_for_result(cfg: Config):
     # print(cfg.train.dir)
-    if not os.path.exists(cfg.train.dir):
-        raise Exception('Result dir not found')
-    if os.path.exists(cfg.train.dir + '/' + cfg.basic.id):
-        if cfg.basic.debug:
-            print('[ X ] The output dir already exist!')
-            output_path = Path(cfg.train.dir) / cfg.basic.id
-            return output_path
-        else:
-            raise Exception('The output dir already exist')
-    output_path = Path(cfg.train.dir) / cfg.basic.id
-    os.mkdir(output_path)
-    os.mkdir(output_path / 'checkpoints')
-    os.mkdir(output_path / 'logs')
-    with open(output_path / 'train.log', 'w') as fp:
-        fp.write(
-            'Epochs\tlr\ttrain_loss\tvalid_loss\tvalid_accuracy\tauc\n'
-        )
+    if(cfg.dpp.mode=='test'):
+        output_path = Path(cfg.train.dir) / cfg.basic.id
+        with open(output_path / 'test.log', 'w') as fp:
+            fp.write('Best_Epoch\tTest_mAP\tTest_Loss\n')
+    else:
+        if not os.path.exists(cfg.train.dir):
+            raise Exception('Result dir not found')
+        if os.path.exists(cfg.train.dir + '/' + cfg.basic.id):
+            if cfg.basic.debug:
+                print('[ X ] The output dir already exist!')
+                output_path = Path(cfg.train.dir) / cfg.basic.id
+                return output_path
+            else:
+                raise Exception('The output dir already exist')
+        output_path = Path(cfg.train.dir) / cfg.basic.id
+        os.mkdir(output_path)
+        os.mkdir(output_path / 'checkpoints')
+        os.mkdir(output_path / 'logs')
+        with open(output_path / 'train.log', 'w') as fp:
+            fp.write(
+                'Epochs\tlr\ttrain_loss\tvalid_loss\tvalid_accuracy\tauc\tmap\n'
+            )
     return output_path
 
 
@@ -99,13 +104,14 @@ def parse_args(mode='sp'):
 
     :return:
     '''
+    gpunum = os.getenv("CUDA_VISIBLE_DEVICES")
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
-    arg('mode', choices=['train', 'validate', 'predict_valid', 'predict_test', 'valid'])
+    arg('mode', choices=['train', 'test', 'predict_valid', 'predict_test', 'valid'])
     arg('--workers', type=int, default=2 if ON_KAGGLE else 4)
     arg('--debug', type=bool, default=False)
     arg('--search', type=bool, default=False)
-    arg('--gpu', type=str, default='0')
+    arg('--gpu', type=str, default=gpunum) 
     arg('-i', type=str, default='')
     arg('-j', type=str, default='')
     arg('--seed', type=int, default=-1)
@@ -118,7 +124,7 @@ def parse_args(mode='sp'):
     # temp argument, runfold
     arg('--run_fold', type=int, default=0)
     arg('-b', type=int, default=1)
-    arg('--select', type=str, default='valid_loss')
+    arg('--select', type=str, default='valid_loss') # change for other ways to extract best epoch
     arg('--epoch', type=int, default=-1)
     arg('--tag', type=str, default='')
 
@@ -128,7 +134,7 @@ def parse_args(mode='sp'):
     if 'http' in args.j:
         raise Exception('Not implemented Yet')
     elif args.mode == 'validate':
-        path = Path(os.path.dirname(os.path.realpath(__file__))) / '..' / '../results/' / args.i / 'config.json'
+        path = Path(os.path.dirname(os.path.realpath(__file__))) / '../results/' / args.i / 'config.json'
         cfg = Config.load(path)
     else:
         cfg = get_config(args.j)

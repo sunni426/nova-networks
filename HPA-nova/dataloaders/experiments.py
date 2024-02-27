@@ -5,7 +5,7 @@ from pathlib import Path
 from torch.utils.data import DataLoader, WeightedRandomSampler
 from sklearn.model_selection import KFold, StratifiedKFold
 from sklearn.preprocessing import LabelEncoder
-from dataloaders.datasets import STRDataset, LandmarkDataset, RANZERDataset, ValidationDataset
+from dataloaders.datasets import STRDataset, LandmarkDataset, RANZERDataset, ValidationDataset, TestDataset
 # from dataloaders.transform import get_tfms
 from dataloaders.transform_loader import get_tfms
 from collections import Counter, defaultdict
@@ -28,40 +28,54 @@ class RandomKTrainTestSplit:
     def __init__(self, cfg: Config):
         self.cfg = cfg
         path = Path(os.path.dirname(os.path.realpath(__file__)))
-        # if cfg.experiment.file == 'none':
-        #     csv_file = 'exp_with_idx_max.csv'
-        # else:
         csv_file = cfg.experiment.file
         train = pd.read_csv(path / 'split' / csv_file)
         valid = pd.read_csv(path / 'split' / cfg.experiment.csv_valid)
+        test = pd.read_csv(path / 'split' / cfg.experiment.csv_test)
         # # start
         # FOR RUNNING FOLD, commented out 2/11
         # self.train_meta, self.valid_meta = (train[train.fold != cfg.experiment.run_fold],
         #                                     valid[valid.fold != cfg.experiment.run_fold])
 
-        self.train_meta, self.valid_meta = (train[:],
-                                            valid[:])
+        self.train_meta, self.valid_meta, self.test_meta = (train[:], valid[:], test[:])
 
         # print(train.head())
         if cfg.basic.debug:
             print('[ W ] Debug Mode!, down sample')
             self.train_meta = self.train_meta.sample(frac=0.05)
             self.valid_meta = self.valid_meta.sample(frac=0.05)
+            self.test_meta = self.test_meta.sample(frac=0.05)
 
     def get_dataloader(self, test_only=False, train_shuffle=True, infer=False, tta=-1, tta_tfms=None):
         if test_only:
-            raise NotImplementedError()
-        #     # start
-        #     if tta == -1:
-        #         tta = 1
-        #     path = Path(os.path.dirname(os.path.realpath(__file__)))
-        #     test = pd.read_csv(path / '../../input/kaggle/sample_submission.csv')
-        #     test['prefix'] = 'kaggle'
-        #     test_ds = SIIMDataset(test, tta_tfms, size=self.cfg.transform.size, tta=tta, test=True)
-        #     test_dl = DataLoader(dataset=test_ds, batch_size=self.cfg.eval.batch_size,
-        #                           num_workers=self.cfg.transform.num_preprocessor, pin_memory=True)
-        #     return test_dl
-        # # end
+            # raise NotImplementedError()
+            # start
+            if tta == -1:
+                tta = 1
+            # path = Path(os.path.dirname(os.path.realpath(__file__)))
+            # test = pd.read_csv(path / '../../ {cfg.csv_valid}') # Change to new test dataset later
+            # print(f'self.test_meta: {self.test_meta}')
+            test_tfms = get_tfms(self.cfg.transform.test_name)
+            test_ds = TestDataset(df=self.test_meta, tfms=test_tfms, tta=tta, cfg=self.cfg, mode='test')
+            test_dl = DataLoader(dataset=test_ds, batch_size=1,
+                              collate_fn=a_ordinary_collect_method, drop_last=True,
+                              num_workers=self.cfg.transform.num_preprocessor, pin_memory=True)
+
+            # print(f'self.valid_meta: {self.test_meta}, self.valid_meta: {self.test_meta}')
+
+            
+            # test_ds = ValidationDataset(df=self.test_meta, tfms=test_tfms, cfg=self.cfg, mode='valid')
+            # test_dl = DataLoader(dataset=test_ds, batch_size=1,
+            #                   collate_fn=a_ordinary_collect_method, drop_last=True,
+            #                   num_workers=self.cfg.transform.num_preprocessor, pin_memory=True)
+
+        
+            # test['prefix'] = 'kaggle'
+            # test_ds = SIIMDataset(test, tta_tfms, size=self.cfg.transform.size, tta=tta, test=True)
+            # test_dl = DataLoader(dataset=test_ds, batch_size=self.cfg.eval.batch_size,
+            #                       num_workers=self.cfg.transform.num_preprocessor, pin_memory=True)
+            return test_dl
+        # end
         print('[ √ ] Using transformation: {} & {}, image size: {}'.format(
             self.cfg.transform.name, self.cfg.transform.val_name, self.cfg.transform.size
         ))
@@ -119,7 +133,7 @@ class RandomKTrainTestSplit:
             train_dl = DataLoader(dataset=train_ds, batch_size=self.cfg.train.batch_size,
                                   num_workers=self.cfg.transform.num_preprocessor,
                                   shuffle=train_shuffle, drop_last=True, pin_memory=True)
-            print(f'dl:{train_dl}')
+            # print(f'dl:{train_dl}')
         if tta == -1:
             tta = 1
         # valid_ds = STRDataset(self.valid_meta, val_tfms, size=self.cfg.transform.size, tta=tta,

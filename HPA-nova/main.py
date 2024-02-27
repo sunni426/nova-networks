@@ -5,7 +5,7 @@ from models import get_model
 from losses import get_loss, get_class_balanced_weighted
 from losses.regular import class_balanced_ce
 from optimizers import get_optimizer
-from basic_train import basic_train
+from basic_train import basic_train, basic_test, mean_average_precision
 from scheduler import get_scheduler
 from utils import load_matched_state
 from torch.utils.tensorboard import SummaryWriter
@@ -31,12 +31,12 @@ warnings.filterwarnings('ignore')
 if __name__ == '__main__':
     print('[ √ ] Landmark!')
     args, cfg = parse_args()
-    if args.mode == 'validate':
-        print(f'validating!!!!!!!')
+    result_path = prepare_for_result(cfg)
+    writer = SummaryWriter(log_dir=result_path)
+    if args.mode == 'test':
         
         df = pd.read_csv(
-            Path(os.path.dirname(os.path.realpath(__file__))) / '..' / 'results' / cfg.basic.id / 'train.log', sep='\t'
-        )
+            'results/' + cfg.basic.id + '/train.log', sep='\t')
         if args.epoch > 0:
             best_epoch = args.epoch
         else:
@@ -68,71 +68,54 @@ if __name__ == '__main__':
         else:
             loss_func = get_loss(cfg)
         model.load_state_dict(torch.load(
-            Path(os.path.dirname(os.path.realpath(__file__))) / '..' / 'results' / cfg.basic.id / 'checkpoints' / 'f{}_epoch-{}.pth'.format(cfg.experiment.run_fold, best_epoch),
+            Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch{}.pth'.format(cfg.experiment.run_fold, best_epoch),
             map_location={'cuda:0': 'cpu', 'cuda:1': 'cpu', 'cuda:2': 'cpu', 'cuda:3': 'cpu'}
         ))
         model = model.cpu()
         if len(cfg.basic.GPU) == 1:
             print('[ W ] single gpu prediction the gpus is {}'.format(cfg.basic.GPU))
-            torch.cuda.set_device(cfg.basic.GPU)
+            device = 'cuda' if torch.cuda.is_available() else 'cpu'
+            # torch.cuda.set_device(int(cfg.basic.GPU))
+            if device == 'cuda':
+                torch.cuda.set_device(0)
             model = model.cuda()
         else:
             print('[ W ] dp prediction the gpus is {}'.format(cfg.basic.GPU))
             model = model.cuda()
             model = torch.nn.DataParallel(model, device_ids=[int(x) for x in cfg.basic.GPU])
-        # predict valid
-        model.eval()
+            
         with torch.no_grad():
-            tq = tqdm(valid_dl)
-            outputs = []
-            for i, (ipt, lbl) in enumerate(tq):
-                ipt = ipt.cuda()
-                output = model(ipt)
-                outputs.append(output.cpu().sigmoid().numpy())
-        pred = np.concatenate(outputs).reshape(-1)
-        length = valid_dl.dataset.df.shape[0]
-        res = np.zeros_like(pred[:length])
-        for i in range(valid_dl.dataset.tta):
-            res += pred[i * length: (i + 1) * length]
-        res = res / valid_dl.dataset.tta
-        valid_df = valid_dl.dataset.df.copy()
-        valid_df['predict'] = res
-        # predict test
-        with torch.no_grad():
-            tq = tqdm(test_dl)
-            outputs = []
-            for i, (ipt, lbl) in enumerate(tq):
-                ipt = ipt.cuda()
-                output = model(ipt)
-                outputs.append(output.cpu().sigmoid().numpy())
-        pred = np.concatenate(outputs).reshape(-1)
-        length = test_dl.dataset.df.shape[0]
-        res = np.zeros_like(pred[:length])
-        for i in range(test_dl.dataset.tta):
-            res += pred[i * length: (i + 1) * length]
-        res = res / test_dl.dataset.tta
-        test_df = test_dl.dataset.df[['image_name']].copy()
-        test_df['predict'] = res
 
-        print('[ √ ] Validate {}, AUC: {:.4f} loss: {:.6f}'.format(
-            'f{}_epoch-{}.pth'.format(cfg.experiment.run_fold, best_epoch),
-            roc_auc_score(valid_df.target, valid_df.predict),
-            loss_func(torch.tensor(valid_df.target.values).float(), torch.tensor(valid_df.predict.values).float())
-        ))
-        valid_df.to_csv(Path(os.path.dirname(os.path.realpath(__file__))) / '..' / 'results' / cfg.basic.id / 'oof.csv')
-        test_df.to_csv(Path(os.path.dirname(os.path.realpath(__file__))) / '..' / 'results' / cfg.basic.id / 'test.csv')
-        rocs = []
-        for i in range(1000):
-            s = valid_df.sample(frac=0.8).copy()
-            rocs.append(roc_auc_score(s.target, s.predict))
-        print('SubSample 0.8, mean: {:.4f}, min: {:.4f}, max: {:.4f}, std: {:.4f}'.format(
-            np.array(rocs).mean(), np.array(rocs).min(), np.array(rocs).max(), np.array(rocs).std())
-        )
+            if cfg.loss.name == 'weighted_ce_loss':
+                # if we use weighted ce loss, we load the loss here.
+                weights = torch.Tensor(cfg.loss.param['weight']).cuda()
+                loss_func = torch.nn.CrossEntropyLoss(weight=weights, reduction='none')
+            else:
+                loss_func = get_loss(cfg)
+        
+            test_mAP, test_loss = basic_test(model, test_dl, loss_func, cfg, best_epoch)
+            
+
+            # best_epoch_str = 'f{}_epoch-{}.pth'.format(cfg.experiment.run_fold, best_epoch)
+            # print(f'best_epoch_str {best_epoch_str}')
+            print('[ √ ] Best Epoch: {}, MAP: {:.4f}, loss: {:.6f}'.format(best_epoch, test_mAP, test_loss))
+
+            with open(result_path / 'test.log', 'a') as fp:
+                    fp.write('{}\t{:.8f}\t{:.4f}\n'.format(best_epoch, test_mAP, test_loss))
+
+        # valid_df.to_csv(Path(os.path.dirname(os.path.realpath(__file__))) / '..' / 'results' / cfg.basic.id / 'oof.csv')
+        # test_df.to_csv(Path(os.path.dirname(os.path.realpath(__file__))) / '..' / 'results' / cfg.basic.id / 'test.csv')
+        # rocs = []
+        # for i in range(1000):
+        #     s = valid_df.sample(frac=0.8).copy()
+        #     rocs.append(roc_auc_score(s.target, s.predict))
+        # print('SubSample 0.8, mean: {:.4f}, min: {:.4f}, max: {:.4f}, std: {:.4f}'.format(
+        #     np.array(rocs).mean(), np.array(rocs).min(), np.array(rocs).max(), np.array(rocs).std())
+        # )
 
         exit(0)
     # print(cfg)
-    result_path = prepare_for_result(cfg)
-    writer = SummaryWriter(log_dir=result_path)
+    
     cfg.dump_json(result_path / 'config.json')
 
     # modify for training multiple fold
@@ -168,6 +151,9 @@ if __name__ == '__main__':
                 scheduler = None
             if len(cfg.basic.GPU) > 1:
                 model = torch.nn.DataParallel(model)
+            #writer.add_graph(model, input_to_model=next(iter(train_dl))[0]) # tensorboard graph visualization
+            #inputs, _ = next(iter(train_dl))
+            #writer.add_graph(model, inputs.to('cuda')
             basic_train(cfg, model, train_dl, valid_dl, loss_func, optimizer, result_path, scheduler, writer)
     else:
         train_dl, valid_dl, test_dl = get_dataloader(cfg)(cfg).get_dataloader()
@@ -199,4 +185,7 @@ if __name__ == '__main__':
         # elif cfg.train.mixup:
         #     mixup_train(cfg, model, train_dl, valid_dl, loss_func, optimizer, result_path, scheduler, writer)
         # else:
+        #writer.add_graph(model, input_to_model=next(iter(train_dl))[0]) # tensorboard graph visualization
+        #inputs, _ = next(iter(train_dl))
+        #writer.add_graph(model, inputs.to('cuda'))
         basic_train(cfg, model, train_dl, valid_dl, loss_func, optimizer, result_path, scheduler, writer)

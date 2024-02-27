@@ -69,6 +69,7 @@ class Experiment(Element):
         self.outlier_method = dict.get('outlier_method', 'drop')
         self.file = dict.get('file', 'none')
         self.csv_valid = dict.get('csv_valid', 'none')
+        self.csv_test = dict.get('csv_test', 'valid_sunni_toy_crop6.csv') # change here
         self.smoothing = dict.get('smoothing', 0)
 
 
@@ -167,6 +168,7 @@ class Transform(Element):
     def __init__(self, dict):
         self.name = dict.get('name')
         self.val_name = dict.get('val_name', 'None')
+        self.test_name = dict.get('test_name', 's_0220/test')
         self.param = dict.get('params', {})
         self.num_preprocessor = dict.get('num_preprocessor', 0)
         self.size = dict.get('size', (137, 236))

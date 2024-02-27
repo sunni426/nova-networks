@@ -2,6 +2,9 @@
 from utils import *
 import tqdm
 import pandas as pd
+import numpy as np
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from configs import Config
 import torch
@@ -18,7 +21,7 @@ except:
     pass
 from sklearn.metrics import cohen_kappa_score, mean_squared_error
 from sklearn.metrics import roc_auc_score
-#from gradcam import *
+from gradcam import *
 
 
 def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, save_path, scheduler, writer, tune=None):
@@ -68,7 +71,7 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                 r = np.random.rand(1)
                 if cfg.train.cutmix and cfg.train.beta > 0 and r < cfg.train.cutmix_prob:
                     input, target_a, target_b, lam_a, lam_b = cutmix(ipt, lbl, img_size, cfg.train.beta, model)
-                    cell, exp = model(ipt, cfg.experiment.count)
+                    cell, exp = model(ipt, cfg.experiment.count, gradcam=False)
                     # print(cell.shape, lam_a.shape)
                     cell_loss = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')
                     # print(cell.shape, lam_a.shape, cell_loss(cell, target_a).shape)
@@ -91,23 +94,25 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                     if cfg.basic.amp == 'Native':
                         with torch.cuda.amp.autocast():
                             if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                                output = model(ipt, lbl)
+                                output = model(ipt, lbl, gradcam=False)
                             else:
-                                cell, exp = model(ipt, cfg.experiment.count)
+                                cell, exp = model(ipt, cfg.experiment.count, gradcam=False)
+                                # print(f'cell:{cell.shape}') # batch_size*num_cells x 19
                             # loss = loss_func(output, lbl)
                             loss_cell = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell, lbl)
+                            # print(f'loss_cell:{loss_cell.shape}') # batch_size*num_cells x 19, 40x19
                             loss_exp = loss_func(exp, exp_label)
                             if not len(loss_cell.shape) == 0:
                                 loss_cell = loss_cell.mean()
                             if not len(loss_exp.shape) == 0:
                                 loss_exp = loss_exp.mean()
-                            loss = cfg.loss.cellweight * loss_cell + loss_exp
+                            loss = cfg.loss.cellweight * loss_cell + (1-cfg.loss.cellweight)*loss_exp
                             losses.append(loss.item())
                     else:
                         if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                            output = model(ipt, lbl)
+                            output = model(ipt, lbl, gradcam=False)
                         else:
-                            output = model(ipt)
+                            output = model(ipt, gradcam=False)
                         # loss = loss_func(output, lbl)
                         loss = loss_func(output, lbl)
                         if not len(loss.shape) == 0:
@@ -149,23 +154,23 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                     tq.set_postfix(loss=np.array(losses).mean(), lr=optimizer.param_groups[0]['lr'])
             # Validate
             if(epoch % cfg.train.validate_every == 0):
-                validate_loss, accuracy, auc = basic_validate(model, valid_dl, loss_func, cfg, epoch, tune)
+                validate_loss, accuracy, auc, mAP = basic_validate(model, valid_dl, loss_func, cfg, epoch, tune)
                 # print(f'type: {type(auc)}, auc:{auc}') #list
                 
                 
                 print(('[ √ ] epochs: {}, train loss: {:.4f}, valid img loss: {:.4f}, ' +
-                       'valid cell loss: {:.4f}, accuracy: {:.4f}, auc: {:.4f}').format(
-                    epoch, np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc))
+                       'valid cell loss: {:.4f}, accuracy: {:.4f}, auc: {:.4f}, mAP: {:.4f}').format(
+                    epoch, np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc, mAP))
                 writer.add_scalar('train_f{}/loss'.format(cfg.experiment.run_fold), np.mean(losses), epoch)
                 writer.add_scalar('train_f{}/lr'.format(cfg.experiment.run_fold), optimizer.param_groups[0]['lr'], epoch)
-                writer.add_scalar('valid_f{}/loss_img'.format(cfg.experiment.run_fold), validate_loss[0], epoch)
-                writer.add_scalar('valid_f{}/loss_cell'.format(cfg.experiment.run_fold), validate_loss[1], epoch)
+                writer.add_scalar('valid_f{}/loss_'.format(cfg.experiment.run_fold), validate_loss, epoch)
+                writer.add_scalar('valid_f{}/mAP'.format(cfg.experiment.run_fold), mAP, epoch)
                 writer.add_scalar('valid_f{}/accuracy'.format(cfg.experiment.run_fold), accuracy, epoch)
                 writer.add_scalar('valid_f{}/auc'.format(cfg.experiment.run_fold), auc, epoch)
     
                 with open(save_path / 'train.log', 'a') as fp:
                     fp.write('{}\t{:.8f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\n'.format(
-                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss[0], validate_loss[1], accuracy, auc))
+                        epoch, optimizer.param_groups[0]['lr'], np.array(losses).mean(), validate_loss, accuracy, auc, mAP))
             # Continue Training
             else:
                 print(('[ √ ] epochs: {}, train loss: {:.4f}').format(epoch, np.array(losses).mean()))
@@ -200,99 +205,71 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
             lbl = lbl.view(-1, lbl.shape[-1])
             exp_label = cnt.cuda().view(-1, 19)
             ipt, lbl = ipt.cuda(), lbl.cuda()
-            # Image Level
             if cfg.basic.amp == 'Native':
                 with torch.cuda.amp.autocast():
                     if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                        output = mdl(ipt, lbl)
+                        output = mdl(ipt, lbl, gradcam=False)
                     else:
-                        loss_img, output = mdl(ipt, n_cell)
-                    loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(loss_img, lbl)
-                    loss_img_exp = loss_func(output, exp_label)
-                    loss = loss_img_exp + cfg.loss.cellweight*loss_img_bce
+                        cell_output, img_output = mdl(ipt, n_cell, gradcam=False)
+                    loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell_output, lbl)
+                    loss_img_exp = loss_func(img_output, exp_label)
+                    loss = (1-cfg.loss.cellweight)*loss_img_exp + cfg.loss.cellweight*loss_img_bce # shape: 10x19
                     if not len(loss.shape) == 0:
                         loss = loss.mean()
-                    output = output.float()
+                    img_output = img_output.float() # 1x19
+                    cell_output = cell_output.float() # 10x19
             else:
                 if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                    output = mdl(ipt, lbl)
+                    output = mdl(ipt, lbl, gradcam=False)
                 else:
-                    output = mdl(ipt)
+                    output = mdl(ipt, gradcam=False)
                 loss = loss_func(output, exp_label)
                 if not len(loss.shape) == 0:
                     loss = loss.mean()
             losses_img.append(loss.item())
-            predicted_img.append(torch.sigmoid(output.cpu()).numpy())
+            predicted_img.append(torch.sigmoid(img_output.cpu()).numpy()) # should be 6x19
+            predicted_cell.append(torch.sigmoid(cell_output.cpu()).numpy()) # should be 60x19
             truth_img.append(lbl[0].cpu().numpy())
             results_img.append({
                 'step': i,
                 'loss': loss.item(),
             })
-
-            # Cell Level
-            for cell_idx in range(cfg.experiment.num_cells):
-                if cfg.basic.amp == 'Native':
-                        with torch.cuda.amp.autocast():
-                            if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                                output = mdl(ipt, lbl)
-                            else:
-                                loss_cell, output = mdl(ipt[cell_idx].unsqueeze(0), 1)
-                            loss_cell_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(loss_cell.squeeze(0), lbl[0])
-                            loss_cell_exp = loss_func(output, exp_label)
-                            loss = loss_cell_exp + cfg.loss.cellweight*loss_cell_bce
-                            
-                            # print(f'output is {output} with loss {loss}')
-                            if not len(loss.shape) == 0:
-                                loss = loss.mean()
-                            output = output.float()
-                else:
-                    if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
-                        output = mdl(ipt, lbl)
-                    else:
-                        output = mdl(ipt)
-                    loss = loss_func(output, exp_label)
-                    print('Loss:',loss)
-                    if not len(loss.shape) == 0:
-                        loss = loss.mean()
-                    
-                # print(f'ipt: {ipt.shape}, output: {output.shape}')
-                losses_cell.append(loss.item())
-                predicted_cell.append(torch.sigmoid(output.cpu()).numpy())
-                results_cell.append({
-                    'step': i,
-                    'loss': loss.item(),
-                })
-
-        predicted_img = np.array(predicted_img).squeeze(1)
-        predicted_cell = np.array(predicted_cell).squeeze(1)
-        print(f'predicted_img: {predicted_img.shape}') # 6x19
-        print(f'predicted_cell: {predicted_cell.shape}') # 60x19
+        print(f'predicted_img: {np.array(predicted_img).shape},predicted_cell {np.array(predicted_cell).shape}') 
+        predicted_img = np.array(predicted_img)
+        predicted_cell = np.array(predicted_cell)
+        print(f'predicted_img: {predicted_img.shape}') # 12x1x19
+        print(f'predicted_cell: {predicted_cell.shape}') # 12x10x19
 
         predicted = np.zeros((len(dl),10,19))
         # print(f'truth_img: {len(truth_img)}, {len(truth_img[0])}') # 6,19
         truth = np.array(truth_img)
         print(f'predicted: {predicted.shape}, truth: {truth.shape}')
         roc_values = []
+        mAP = []
         for j in range(len(dl)):
             for k in range(cfg.experiment.num_cells):
-                cell_ind = int(j*10+k) # should range from 0-59
-                predicted[j][k] = cfg.experiment.img_weight*np.array(predicted_img[j]) + (1-cfg.experiment.img_weight)*predicted_cell[cell_ind]
+                predicted[j][k] = cfg.experiment.img_weight*np.array(predicted_img[j]) + (1-cfg.experiment.img_weight)*predicted_cell[j][k]
             
             val_loss_img = np.array(losses_img).mean()
             val_loss_cell = np.array(losses_cell).mean()
             truth_acc = np.tile(truth[j], (10, 1)) # 10x19
-            accuracy += ((predicted[j] > 0.5) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
+            accuracy += ((predicted[j] > 0.7) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
             
             predicted_auc = np.mean(predicted[j], axis=0).flatten()
-            truth_auc = truth[j].flatten()
+            truth_auc = truth[j].flatten() # 10x19
             # print(f'predicted_auc: {predicted_auc.shape}, {predicted_auc}') # 6x19
             roc_values.append(roc_auc_score(truth_auc, predicted_auc))
             # print(f'roc_values: {roc_values}')
+
+            # mAP
+            mAP_img = mean_average_precision(truth_acc, predicted[j])
+            mAP.append(mAP_img)
 
         auc = sum(roc_values)/len(roc_values)
         accuracy /= len(dl)
         predicted = np.round(predicted, decimals=4)
         truth = np.round(truth, decimals=4)
+        mAP = sum(mAP)/len(dl)
         
         # Image IDs
         path = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -328,19 +305,102 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
 
-        val_loss = [val_loss_img, val_loss_cell]
-
-        # GradCAM: 
-        # grad_img = '002679c2-bbb6-11e8-b2ba-ac1f6b6435d0_cell10.png'
-        # gradcam_instance = GradCAM(mdl, grad_img, 256)
-        # img1_array, X = gradcam_instance.load()
-        # cam = gradcam_instance.make_gradcam(X)
-        # gradcam_instance.visualize(img1_array, cam)
-
+        # GradCAM
         
-        
-        return val_loss, accuracy, auc
+        # extract first image, first cell from validation set
+        csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
+        # Open the CSV file and read the first column into a list
+        with open(csv_file_path, 'r') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            for idx, row in enumerate(csv_reader):
+                row_id = row[0]
+                if(idx==2):
+                    break
+        print(f'row_id: {row_id}')
+        grad_img = f'../{cfg.data.dir}/{row_id}_cell1.png'
+        gradcam_instance = novaGradCAM(mdl, grad_img, 256)
+        image, image_prep = gradcam_instance.load()
+        gradcam_instance.make_gradcam(image, image_prep, cfg.basic.id)
+        # gradcam_instance.visualize(image, heatmap)
 
+        return val_loss_img, accuracy, auc, mAP
+
+
+def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
+    print("Testing...")
+    mdl.eval()
+    with torch.no_grad():
+        results_img, results_cell = [], []
+        losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
+        losses_cell, predicted_cell, predicted_p_cell = [], [], []
+        accuracy = 0
+        pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
+        
+        for i, (ipt, mask, lbl, cnt, n_cell) in enumerate(dl):
+            ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
+            lbl = lbl.view(-1, lbl.shape[-1])
+            exp_label = cnt.cuda().view(-1, 19)
+            ipt, lbl = ipt.cuda(), lbl.cuda()
+            if cfg.basic.amp == 'Native':
+                with torch.cuda.amp.autocast():
+                    if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
+                        output = mdl(ipt, lbl, gradcam=False)
+                    else:
+                        cell_output, img_output = mdl(ipt, n_cell, gradcam=False)
+                    loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell_output, lbl)
+                    loss_img_exp = loss_func(img_output, exp_label)
+                    loss = loss_img_exp + cfg.loss.cellweight*loss_img_bce # shape: 10x19
+                    if not len(loss.shape) == 0:
+                        loss = loss.mean()
+                    img_output = img_output.float() # 1x19
+                    cell_output = cell_output.float() # 10x19
+            else:
+                if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
+                    output = mdl(ipt, lbl, gradcam=False)
+                else:
+                    output = mdl(ipt, gradcam=False)
+                loss = loss_func(output, exp_label)
+                if not len(loss.shape) == 0:
+                    loss = loss.mean()
+            losses_img.append(loss.item())
+            predicted_img.append(torch.sigmoid(img_output.cpu()).numpy()) # should be 6x19
+            predicted_cell.append(torch.sigmoid(cell_output.cpu()).numpy()) # should be 60x19
+            truth_img.append(lbl[0].cpu().numpy())
+            results_img.append({
+                'step': i,
+                'loss': loss.item(),
+            })
+        predicted_img = np.array(predicted_img)
+        predicted_cell = np.array(predicted_cell)
+
+        predicted = np.zeros((len(dl),10,19))
+        truth = np.array(truth_img)
+        roc_values = []
+        mAP = []
+        for j in range(len(dl)):
+            for k in range(cfg.experiment.num_cells):
+                predicted[j][k] = cfg.experiment.img_weight*np.array(predicted_img[j]) + (1-cfg.experiment.img_weight)*predicted_cell[j][k]
+            
+            val_loss_img = np.array(losses_img).mean()
+            # val_loss_cell = np.array(losses_cell).mean()
+            truth_acc = np.tile(truth[j], (10, 1)) # 10x19
+            accuracy += ((predicted[j] > 0.7) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
+            
+            predicted_auc = np.mean(predicted[j], axis=0).flatten()
+            truth_auc = truth[j].flatten() # 10x19
+            roc_values.append(roc_auc_score(truth_auc, predicted_auc))
+
+            # mAP
+            mAP_img = mean_average_precision(truth_acc, predicted[j])
+            mAP.append(mAP_img)
+
+        auc = sum(roc_values)/len(roc_values)
+        accuracy /= len(dl)
+        predicted = np.round(predicted, decimals=4)
+        truth = np.round(truth, decimals=4)
+        mAP = sum(mAP)/len(dl)
+
+        return mAP, val_loss_img
 
 def tta_validate(mdl, dl, loss_func, tta):
     mdl.eval()
@@ -378,3 +438,65 @@ def tta_validate(mdl, dl, loss_func, tta):
         df['prediction'] = pred
         df['truth'] = tru
         return val_loss, val_kappa, df
+
+
+def average_precision(y_true, y_pred):
+    """
+    Calculate average precision for a single sample.
+
+    Parameters:
+        y_true (1D array): True labels.
+        y_pred (1D array): Predicted labels.
+
+    Returns:
+        float: Average Precision (AP) for the sample.
+    """
+    num_true = np.sum(y_true)
+    if num_true == 0:
+        return 0.0
+
+    sorted_indices = np.argsort(y_pred)[::-1]
+    precision = 0.0
+    num_correct = 0.0
+
+    for i, idx in enumerate(sorted_indices):
+        if y_true[idx] == 1:
+            num_correct += 1
+            precision += num_correct / (i + 1)
+
+    return precision / num_true
+
+def mean_average_precision(y_true, y_pred):
+    """
+    Calculate Mean Average Precision (mAP) for a multilabel setting.
+
+    Parameters:
+        y_true (2D array): True labels.
+        y_pred (2D array): Predicted labels.
+
+    Returns:
+        float: Mean Average Precision (mAP) across all samples.
+    """
+    num_samples, num_labels = y_true.shape
+    total_ap = 0.0
+
+    for i in range(num_samples):
+        total_ap += average_precision(y_true[i], y_pred[i])
+
+    return total_ap / num_samples
+
+
+def precision_recall_curve(y_true, pred_scores, thresholds):
+    precisions = []
+    recalls = []
+    
+    for threshold in thresholds:
+        y_pred = ["positive" if score >= threshold else "negative" for score in pred_scores]
+
+        precision = precision_score(y_true=y_true, y_pred=y_pred, pos_label="positive")
+        recall = recall_score(y_true=y_true, y_pred=y_pred, pos_label="positive")
+        
+        precisions.append(precision)
+        recalls.append(recall)
+
+    return precisions, recalls

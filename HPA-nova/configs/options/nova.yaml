@@ -23,21 +23,23 @@ experiment:
   image_only: True
   skip_outlier: True
   outlier: train
-  count: 10
+  count: 10 # same as num_cells
   valid_count: 8
   num_cells: 10
   n_channels: 3
-  num_train: 20 # Total number of training images
+  num_train: 18 # Total number of training images
   img_weight: 0
-  file: 'train_sunni_toy.csv' # training csv, put in /dataloaders/split/
-  csv_valid: 'valid_sunni_toy.csv' # validation csv, put in /dataloaders/split/
+  file: '0_train_500.csv' # training csv, put in /dataloaders/split/
+  csv_valid: 'valid_500_70.csv' # validation csv, put in /dataloaders/split/
+  csv_test: 'test_500_30.csv' # test csv, put in /dataloaders/split/ --> change in init
   smoothing: 0
 
 data:
-  dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB2/'
+  dir: 'preprocessing/data/cropped_cells'
+  # dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/6_train_240220_RGB/cropped_cells'
 
 model:
-  name: 'tf_efficientnet_b3'
+  name: 'resnet50' # OG: 'tf_efficientnet_b3'
   from_checkpoint: 'none'
   out_feature: 19
   params:
@@ -47,7 +49,7 @@ model:
 train:
   dir: './results'
   batch_size: 4
-  num_epochs: 500
+  num_epochs: 5
   validate_every: 1
   cutmix: False
   beta: 1
@@ -90,5 +92,6 @@ scheduler:
 transform:
   name: 's_0220/sin_256_final' # in configs/augmentation
   val_name: 's_0220/sin_256_final'
+  test_name: 's_0220/test'
   num_preprocessor: 10
   size: 256

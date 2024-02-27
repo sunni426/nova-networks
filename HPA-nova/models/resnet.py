@@ -27,7 +27,7 @@ class CustomResnetModel(nn.Module):
         super().__init__()
         if backbone in ['resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152']:
             self.net = pretrainedmodels.__dict__[backbone](pretrained=pretrained)
-        self.net.conv1 = nn.Conv2d(4, self.net.conv1.out_channels, kernel_size=self.net.conv1.kernel_size,
+        self.net.conv1 = nn.Conv2d(3, self.net.conv1.out_channels, kernel_size=self.net.conv1.kernel_size,
                                    stride=self.net.conv1.stride, padding=self.net.conv1.padding, bias=False)
 
         # self.net.last_linear = nn.Sequential(
@@ -39,14 +39,18 @@ class CustomResnetModel(nn.Module):
         self.pool = nn.AdaptiveAvgPool2d(1)
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self, x, cnt):
+    def forward(self, x, cnt=1, gradcam=True):
         x = self.net.features(x)
         pooled = nn.Flatten()(self.pool(x))
+        # print(f'pooled {pooled.shape}') # [40, 2048]
         viewed_pooled = pooled.view(-1, cnt, pooled.shape[-1])
-        # print(viewed_pooled.shape)
+        # print(viewed_pooled.shape) # [4, 10, 2048]
         viewed_pooled = viewed_pooled.max(1)[0]
-        # print(viewed_pooled.shape)
-        return self.last_linear(self.dropout(pooled)), self.last_linear2(self.dropout(viewed_pooled))
+        # print(f'viewed_pooled: {viewed_pooled.shape}') # [4, 2048] --> image level
+        if not gradcam:
+            return self.last_linear(self.dropout(pooled)), self.last_linear2(self.dropout(viewed_pooled))
+        else:
+            return self.last_linear(self.dropout(pooled))
 
 
 class DenseNet(nn.Module):
@@ -54,7 +58,7 @@ class DenseNet(nn.Module):
         super().__init__()
         if backbone in ['densenet121', 'densenet161', 'densenet169', 'densenet201']:
             self.net = pretrainedmodels.__dict__[backbone](pretrained=pretrained)
-        self.net.features.conv0 = nn.Conv2d(4, self.net.features.conv0.out_channels, kernel_size=self.net.features.conv0.kernel_size,
+        self.net.features.conv0 = nn.Conv2d(3, self.net.features.conv0.out_channels, kernel_size=self.net.features.conv0.kernel_size,
                                    stride=self.net.features.conv0.stride, padding=self.net.features.conv0.padding, bias=False)
 
         self.last_linear = nn.Linear(in_features=self.net.last_linear.in_features, out_features=out_features)
@@ -76,7 +80,7 @@ class CustomSenet(nn.Module):
     def __init__(self, name='se_resnext50_32x4d', pretrained='imagenet', out_features=19, dropout=0.5):
         super().__init__()
         self.net = pretrainedmodels.__dict__[name](pretrained=pretrained)
-        self.net.layer0.conv1 = nn.Conv2d(4, self.net.layer0.conv1.out_channels, kernel_size=self.net.layer0.conv1.kernel_size,
+        self.net.layer0.conv1 = nn.Conv2d(3, self.net.layer0.conv1.out_channels, kernel_size=self.net.layer0.conv1.kernel_size,
                                    stride=self.net.layer0.conv1.stride, padding=self.net.layer0.conv1.padding, bias=False)
         self.last_linear = nn.Linear(in_features=self.net.last_linear.in_features, out_features=out_features)
         self.last_linear2 = nn.Linear(in_features=self.net.last_linear.in_features, out_features=out_features)
