@@ -10,10 +10,10 @@ NCPU=10
 INPUTTYPE="train valid"
 for type in $INPUTTYPE; do
 
-    OPIMGDIR="${OPDATADIR}/${type}/img"
-    OPIMGRGBDIR="${OPDATADIR}/${type}/imgRGB"
-    OPSEGDIR="${OPDATADIR}/${type}/seg"
-    OPCELLDIR="${OPDATADIR}/${type}/cell"
+    OPIMGDIR="${OPDATADIR}/img"
+    OPIMGRGBDIR="${OPDATADIR}/imgRGB"
+    OPSEGDIR="${OPDATADIR}/seg"
+    OPCELLDIR="${OPDATADIR}/cell"
     CSVPATH="${REPODIR}/HPA-nova/dataloaders/split/${type}_sunni_toy.csv"
     FRAMESIZE=1024 # examples: "1024", "1024 1024", or "1024 512"
 
@@ -47,8 +47,8 @@ for type in $INPUTTYPE; do
         -ii "${OPIMGDIR}" \
         -is "${OPSEGDIR}" \
         -o "${OPCELLDIR}" \
-        -n $NCPU
-        # --max_cell_count 20 # <- default is 10 
+        -n $NCPU \
+        --max_cell_count all # <- default is 10 
 done
 
 # ========================================================================================
@@ -62,11 +62,11 @@ OPIMGDIR="${OPDATADIR}/${type}/img"
 OPSEGDIR="${OPDATADIR}/${type}/seg"
 OPCELLALLDIR="${OPDATADIR}/${type}/cell_all"
 OPCODEDIR="${OPDATADIR}/${type}/cell_all_code"
-python "${SCRIPTDIR}/crop_img.py" \
-    -ic "${CSVPATH}" \
-    -ii "${OPIMGDIR}" \
-    -is "${OPSEGDIR}" \
-    -o "${OPCELLALLDIR}" \
-    --opcodedir "${OPCODEDIR}" \
-    -n $NCPU \
-    --max_cell_count all
+# python "${SCRIPTDIR}/crop_img.py" \
+#     -ic "${CSVPATH}" \
+#     -ii "${OPIMGDIR}" \
+#     -is "${OPSEGDIR}" \
+#     -o "${OPCELLALLDIR}" \
+#     --opcodedir "${OPCODEDIR}" \
+#     -n $NCPU \
+#     --max_cell_count all

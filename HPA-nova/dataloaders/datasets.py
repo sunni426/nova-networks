@@ -10,9 +10,21 @@ from typing import Callable, List
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 from torchvision.transforms import (
-    ToTensor, Normalize, Compose, Resize, CenterCrop, RandomCrop,
-    RandomHorizontalFlip, RandomAffine, RandomVerticalFlip, RandomChoice, ColorJitter, RandomRotation)
+    ToTensor,
+    Normalize,
+    Compose,
+    Resize,
+    CenterCrop,
+    RandomCrop,
+    RandomHorizontalFlip,
+    RandomAffine,
+    RandomVerticalFlip,
+    RandomChoice,
+    ColorJitter,
+    RandomRotation,
+)
 import skimage
+
 # from utils.tile_fix import tile
 # from utils.ha import get_tiles
 import random
@@ -26,9 +38,9 @@ import imageio
 
 
 def a_ordinary_collect_method(batch):
-    '''
+    """
     I am a collect method for User Dataset
-    '''
+    """
     img, pe, exp, msk, cnt = [], [], [], [], []
     # debug
     study_id = []
@@ -41,8 +53,14 @@ def a_ordinary_collect_method(batch):
             exp.append(e)
             msk.append(m)
             cnt.append(l)
-        return (torch.cat(img), torch.tensor(np.concatenate(pe)).long(),
-                torch.tensor(np.concatenate(exp)).float(), torch.tensor(np.concatenate(msk)).float(), cnt[0])
+        return (
+            torch.cat(img),
+            torch.tensor(np.concatenate(pe)).long(),
+            torch.tensor(np.concatenate(exp)).float(),
+            torch.tensor(np.concatenate(msk)).float(),
+            cnt[0],
+        )
+
 
 def normwidth(size, margin=32):
     outsize = size // margin * margin
@@ -51,14 +69,16 @@ def normwidth(size, margin=32):
 
 
 def resize_short(img, target_size):
-    """ resize_short """
+    """resize_short"""
     percent = float(target_size) / min(img.shape[0], img.shape[1])
     resized_width = int(math.ceil(img.shape[1] * percent))
     resized_height = int(math.ceil(img.shape[0] * percent))
 
     # resized_width = normwidth(resized_width)
     # resized_height = normwidth(resized_height)
-    resized = cv2.resize(img, (resized_width, resized_height), interpolation=cv2.INTER_LANCZOS4)
+    resized = cv2.resize(
+        img, (resized_width, resized_height), interpolation=cv2.INTER_LANCZOS4
+    )
     return resized
 
 
@@ -66,9 +86,15 @@ class TrainDataset(Dataset):
     HEIGHT = 137
     WIDTH = 236
 
-    def __init__(self, df: pd.DataFrame, images: pd.DataFrame,
-                 image_transform: Callable, debug: bool = True, weighted_sample: bool = False,
-                 square: bool = False):
+    def __init__(
+        self,
+        df: pd.DataFrame,
+        images: pd.DataFrame,
+        image_transform: Callable,
+        debug: bool = True,
+        weighted_sample: bool = False,
+        square: bool = False,
+    ):
         super().__init__()
         self._df = df
         self._images = images
@@ -76,19 +102,24 @@ class TrainDataset(Dataset):
         self._debug = debug
         self._square = square
         # stats = ([0.0692], [0.2051])
-        self._tensor_transform = Compose([
-            ToTensor(),
-            Normalize(mean=[0.0692, 0.0692, 0.0692], std=[0.2051, 0.2051, 0.2051]),
-            # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
+        self._tensor_transform = Compose(
+            [
+                ToTensor(),
+                Normalize(mean=[0.0692, 0.0692, 0.0692], std=[0.2051, 0.2051, 0.2051]),
+                # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            ]
+        )
         if weighted_sample:
             # TODO: if weight sampler is necessary
             self.weight = self.get_weight()
 
     def get_weight(self):
-        path = os.path.dirname(os.path.realpath(__file__)) + '/../../metadata/train_onehot.pkl'
+        path = (
+            os.path.dirname(os.path.realpath(__file__))
+            + "/../../metadata/train_onehot.pkl"
+        )
         onehot = pd.read_pickle(path)
-        exist = onehot.loc[self._df['id']]
+        exist = onehot.loc[self._df["id"]]
         weight = []
         log = 1 / np.log2(exist.sum() + 32)
         for i in range(exist.shape[0]):
@@ -105,28 +136,40 @@ class TrainDataset(Dataset):
         image = np.repeat(image[:, :, np.newaxis], 3, axis=2)
         # image = Image.fromarray(image)
         if self._image_transform:
-            image = self._image_transform(image=image)['image']
+            image = self._image_transform(image=image)["image"]
         # else:
         image = self._tensor_transform(image)
         target = np.zeros(3)
-        target[0] = item['grapheme_root']
-        target[1] = item['vowel_diacritic']
-        target[2] = item['consonant_diacritic']
+        target[0] = item["grapheme_root"]
+        target[1] = item["vowel_diacritic"]
+        target[2] = item["consonant_diacritic"]
         return image, target
 
 
 class LandmarkDataset(Dataset):
-    def __init__(self, df, tfms=None, size=256, tta=1, cfg: Config=None, test=False, scale=None, full=False):
+    def __init__(
+        self,
+        df,
+        tfms=None,
+        size=256,
+        tta=1,
+        cfg: Config = None,
+        test=False,
+        scale=None,
+        full=False,
+    ):
         self.df = df
         self.tfms = tfms
         self.size = size
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.cfg = cfg
         self.scale = scale or []
-        self.tensor_tfms = Compose([
-            ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])
+        self.tensor_tfms = Compose(
+            [
+                ToTensor(),
+                Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            ]
+        )
         self.tta = tta
         self.test = test
         self.full = full
@@ -135,10 +178,10 @@ class LandmarkDataset(Dataset):
         return self.df.shape[0] * self.tta
 
     def __getitem__(self, idx: int):
-        image_id = self.df.iloc[idx % self.df.shape[0]]['id']
-        prefix = 'full' if self.full else 'clean_data'
-        path = self.path / '../../../landmark/{}/train/{}/{}/{}/{}.jpg'.format(prefix,
-            image_id[0], image_id[1], image_id[2], image_id
+        image_id = self.df.iloc[idx % self.df.shape[0]]["id"]
+        prefix = "full" if self.full else "clean_data"
+        path = self.path / "../../../landmark/{}/train/{}/{}/{}/{}.jpg".format(
+            prefix, image_id[0], image_id[1], image_id[2], image_id
         )
         img = imread(path)[:, :, :3]
         # img = cv2.imread(path)
@@ -148,23 +191,38 @@ class LandmarkDataset(Dataset):
         # img = resize_short(img, self.cfg.transform.size)
 
         if self.tfms:
-            return self.tensor_tfms(self.tfms(image=img)['image']), self.df.iloc[idx % self.df.shape[0]]['label']
+            return (
+                self.tensor_tfms(self.tfms(image=img)["image"]),
+                self.df.iloc[idx % self.df.shape[0]]["label"],
+            )
         else:
-            return self.tensor_tfms(img), self.df.iloc[idx % self.df.shape[0]]['label']
+            return self.tensor_tfms(img), self.df.iloc[idx % self.df.shape[0]]["label"]
 
 
 class STRDataset(Dataset):
-    def __init__(self, df, tfms=None, size=256, tta=1, cfg: Config=None, test=False, scale=None, prefix='train'):
+    def __init__(
+        self,
+        df,
+        tfms=None,
+        size=256,
+        tta=1,
+        cfg: Config = None,
+        test=False,
+        scale=None,
+        prefix="train",
+    ):
         self.df = df
         self.tfms = tfms
         self.size = size
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.cfg = cfg
         self.scale = scale or []
-        self.tensor_tfms = Compose([
-            ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])
+        self.tensor_tfms = Compose(
+            [
+                ToTensor(),
+                Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            ]
+        )
         self.tta = tta
         self.test = test
         # self.prefix = prefix
@@ -177,9 +235,7 @@ class STRDataset(Dataset):
 
     def __getitem__(self, idx: int):
         item = self.df.iloc[idx % self.df.shape[0]]
-        path = str(self.path / '../../input/train_images/{}'.format(
-            item['image_id']
-        ))
+        path = str(self.path / "../../input/train_images/{}".format(item["image_id"]))
         # print(path)
         img = cv2.imread(path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -188,19 +244,13 @@ class STRDataset(Dataset):
             # however, a error set default as 512
             img = cv2.resize(img, (self.cfg.transform.size, self.cfg.transform.size))
         if self.tfms:
-            return (
-                self.tensor_tfms(self.tfms(image=img)['image']),
-                item.label
-            )
+            return (self.tensor_tfms(self.tfms(image=img)["image"]), item.label)
         else:
-            return (
-                self.tensor_tfms(img),
-                item.label
-            )
+            return (self.tensor_tfms(img), item.label)
 
 
 class RANZERDataset(Dataset):
-    def __init__(self, df, tfms=None, cfg=None, mode='train', file_dict=None):
+    def __init__(self, df, tfms=None, cfg=None, mode="train", file_dict=None):
 
         self.df = df.reset_index(drop=True)
         self.mode = mode
@@ -212,43 +262,66 @@ class RANZERDataset(Dataset):
         #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
         # ])
         # For HPA
-        self.tensor_tfms = Compose([
-            # ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])
+        self.tensor_tfms = Compose(
+            [
+                # ToTensor(),
+                Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            ]
+        )
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
-        self.cols = ['class{}'.format(i) for i in range(19)]
+        self.cols = ["class{}".format(i) for i in range(19)]
         self.cell_path = self.cfg.data.dir
 
     def __len__(self):
         return len(self.df)
 
     def __getitem__(self, index):
-        if self.mode == 'train':
+        if self.mode == "train":
             row = self.df.loc[index]
             cnt = self.cfg.experiment.count
             cells = self.cfg.experiment.num_cells
-            batch = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            batch = torch.zeros(
+                (
+                    cells,
+                    self.cfg.experiment.n_channels,
+                    self.cfg.transform.size,
+                    self.cfg.transform.size,
+                )
+            )
             mask = np.zeros((cells))
-            label = np.zeros((cells, 19)) 
-            
+            label = np.zeros((cells, 19))
+
             # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
-            img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            img = torch.zeros(
+                (
+                    cells,
+                    self.cfg.experiment.n_channels,
+                    self.cfg.transform.size,
+                    self.cfg.transform.size,
+                )
+            )
             for i in range(cells):
-                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
+                # path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
+                id_tmp = row["ID"]
+                path_channel = Path(self.cell_path).joinpath(f"{id_tmp}_cell{i+1}.png")
                 img_cell = imread(path_channel)
                 # print(f'img_cell: {img_cell.shape}')
-                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                img_cell = np.transpose(
+                    cv2.resize(
+                        img_cell, (self.cfg.transform.size, self.cfg.transform.size)
+                    ),
+                    (2, 0, 1),
+                )
                 if self.transform is not None:
                     res = self.transform(image=img_cell)
-                    img_cell = res['image']
+                    img_cell = res["image"]
 
                 img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
-                
+
                 img[i, :, :, :] = img_cell
-    
-                batch = img # #10 x 4 x 256 x 256
+
+                batch = img  # #10 x 4 x 256 x 256
                 mask[i] = 1
                 label[i] = row[self.cols].values.astype(np.float64)
                 # print(f'batch size: {batch.shape}')
@@ -257,10 +330,16 @@ class RANZERDataset(Dataset):
                 # print(f'batch: {batch}, mask: {mask}, label: {label}')
                 return batch, mask, label, row[self.cols].values.astype(np.float64)
             else:
-                return batch, mask, 0.9*label + 0.1/19, 0.9 * row[self.cols].values.astype(np.float64) + 0.1/19
+                return (
+                    batch,
+                    mask,
+                    0.9 * label + 0.1 / 19,
+                    0.9 * row[self.cols].values.astype(np.float64) + 0.1 / 19,
+                )
+
 
 class ValidationDataset(Dataset):
-    def __init__(self, df, tfms=None, cfg=None, mode='valid', file_dict=None):
+    def __init__(self, df, tfms=None, cfg=None, mode="valid", file_dict=None):
 
         self.df = df.reset_index(drop=True)
         self.mode = mode
@@ -270,41 +349,66 @@ class ValidationDataset(Dataset):
         #     # ToTensor(),
         #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
         # ]) # 4 channels
-        self.tensor_tfms = Compose([
-            # ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ]) # 3 channels
+        self.tensor_tfms = Compose(
+            [
+                # ToTensor(),
+                Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            ]
+        )  # 3 channels
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
-        self.cols = ['class{}'.format(i) for i in range(19)]
+        self.cols = ["class{}".format(i) for i in range(19)]
         self.cell_path = self.cfg.data.dir
 
     def __len__(self):
         return len(self.df)
 
     def __getitem__(self, index):
-        if self.mode == 'valid':
+        if self.mode == "valid":
             row = self.df.loc[index]
             cnt = self.cfg.experiment.num_cells
             cells = self.cfg.experiment.num_cells
-            batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            batch = torch.zeros(
+                (
+                    cnt,
+                    cnt * cells,
+                    self.cfg.experiment.n_channels,
+                    self.cfg.transform.size,
+                    self.cfg.transform.size,
+                )
+            )
             mask = np.zeros((cnt))
-            label = np.zeros((cnt, 19)) 
-            
+            label = np.zeros((cnt, 19))
+
             # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
-            img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
+            img = torch.zeros(
+                (
+                    cells,
+                    self.cfg.experiment.n_channels,
+                    self.cfg.transform.size,
+                    self.cfg.transform.size,
+                )
+            )
             for i in range(cells):
-                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
+                # path_channel = (
+                #     self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
+                # )
+                id_tmp = row["ID"]
+                path_channel = Path(self.cell_path).joinpath(f"{id_tmp}_cell{i+1}.png")
                 img_cell = imread(path_channel)
-                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                img_cell = np.transpose(
+                    cv2.resize(
+                        img_cell, (self.cfg.transform.size, self.cfg.transform.size)
+                    ),
+                    (2, 0, 1),
+                )
                 if self.transform is not None:
                     res = self.transform(image=img_cell)
-                    img_cell = res['image']
+                    img_cell = res["image"]
 
                 img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
                 img[i, :, :, :] = img_cell
-                batch = img # #10 x 4 x 256 x 256
+                batch = img  # #10 x 4 x 256 x 256
                 mask[i] = 1
                 label[i] = row[self.cols].values.astype(np.float64)
             return batch, mask, label, row[self.cols].values.astype(np.float64), cnt
-           

@@ -50,8 +50,9 @@ def find_valid_crops(image, masks, save_encode_mask, min_size=(100, 100), max_sa
         x_min, x_max = np.min(where[1]), np.max(where[1])
 
         # Check if the crop size is at least 100x100
-        if (y_max - y_min + 1) < min_size[0] or (x_max - x_min + 1) < min_size[1]:
-            continue
+
+        # if (y_max - y_min + 1) < min_size[0] or (x_max - x_min + 1) < min_size[1]:
+        #     continue
 
         # Encode mask and store with file number
         if save_encode_mask:
@@ -81,23 +82,17 @@ def find_valid_crops(image, masks, save_encode_mask, min_size=(100, 100), max_sa
 
 
 def save_crops(valid_crops, save_dir, id):
-    file_c_digit = len(str(len(valid_crops)))
     for cropped_image, file_number in valid_crops:
-        image_save_path = save_dir.joinpath(
-            f"{id}_cell{str(file_number).zfill(file_c_digit)}.png"
-        )
-        imsave(image_save_path, cropped_image)
+        image_save_path = save_dir.joinpath(f"{id}_cell{str(file_number)}.png")
+        imsave(image_save_path, cropped_image, check_contrast=False)
     return
 
 
 def save_mask_data(mask_data, save_dir, id):
-    file_c_digit = len(str(len(mask_data)))
     mask_data_file = save_dir.joinpath(f"{id}_masks.txt")
     with open(mask_data_file, "w") as file:
         for file_number, encoded_mask in mask_data:
-            file.write(
-                f"{id}_cell{str(file_number).zfill(file_c_digit)}: {encoded_mask}\n"
-            )
+            file.write(f"{id}_cell{str(file_number)}: {encoded_mask}\n")
     return
 
 
@@ -137,13 +132,18 @@ def crop_img(args):
     else:
         opcodedir = None
 
+    if args.max_cell_count != "all":
+        max_cell_count = int(args.max_cell_count)
+    else:
+        max_cell_count = args.max_cell_count
+
     _crop_img = partial(
         _crop_image,
         ipimgdir=Path(args.ipimgdir),
         ipsegdir=Path(args.ipsegdir),
         opimgdir=opimgdir,
         opcodedir=opcodedir,
-        max_cellc=args.max_cell_count,
+        max_cellc=max_cell_count,
     )
 
     if n_CPU != 1:

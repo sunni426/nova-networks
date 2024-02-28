@@ -152,3 +152,10 @@ dependencies:
   - zstd=1.5.5
   - albumentations
   - pandas
+  - path
+  - pretrainedmodels
+  - timm
+  - tensorboard
+  - pip:
+    - efficientnet-pytorch
+    - geffnet

@@ -34,7 +34,7 @@ experiment:
   smoothing: 0
 
 data:
-  dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/toy_dataset/cropped_cells_padding_RGB2/'
+  dir: '/dlab/ldrive/CBT/USLJ-DSDE_DATA-I10008/shihch3/projects/HPA_single_data/code_test/cell'
 
 model:
   name: 'tf_efficientnet_b3'
@@ -45,7 +45,7 @@ model:
     pretrained: True
 
 train:
-  dir: './results'
+  dir: '/dlab/ldrive/CBT/USLJ-DSDE_DATA-I10008/shihch3/projects/HPA_single_data/code_test/results'
   batch_size: 4
   num_epochs: 500
   validate_every: 1
