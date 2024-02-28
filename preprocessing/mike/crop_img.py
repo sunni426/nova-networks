@@ -95,7 +95,9 @@ def save_mask_data(mask_data, save_dir, id):
     mask_data_file = save_dir.joinpath(f"{id}_masks.txt")
     with open(mask_data_file, "w") as file:
         for file_number, encoded_mask in mask_data:
-            file.write(f"{id}_cell{str(file_number.file_c_digit)}: {encoded_mask}\n")
+            file.write(
+                f"{id}_cell{str(file_number).zfill(file_c_digit)}: {encoded_mask}\n"
+            )
     return
 
 
@@ -130,7 +132,7 @@ def crop_img(args):
     opimgdir = Path(args.opimgdir)
     opimgdir.mkdir(exist_ok=True, parents=True)
     if args.opcodedir is not None:
-        opcodedir = Path(args.opcode)
+        opcodedir = Path(args.opcodedir)
         opcodedir.mkdir(exist_ok=True, parents=True)
     else:
         opcodedir = None

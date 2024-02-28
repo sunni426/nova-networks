@@ -54,12 +54,19 @@ done
 # ========================================================================================
 
 # use "all" for --max_cell_count can output all single cells. 
+# use --opcodedir to define the output encoded mask
 # Here is the example:  
-OPCELLALLDIR="${OPDATADIR}/val/cell_all"
+type=valid
+CSVPATH="${REPODIR}/HPA-nova/dataloaders/split/${type}_sunni_toy.csv"
+OPIMGDIR="${OPDATADIR}/${type}/img"
+OPSEGDIR="${OPDATADIR}/${type}/seg"
+OPCELLALLDIR="${OPDATADIR}/${type}/cell_all"
+OPCODEDIR="${OPDATADIR}/${type}/cell_all_code"
 python "${SCRIPTDIR}/crop_img.py" \
     -ic "${CSVPATH}" \
     -ii "${OPIMGDIR}" \
     -is "${OPSEGDIR}" \
     -o "${OPCELLALLDIR}" \
+    --opcodedir "${OPCODEDIR}" \
     -n $NCPU \
     --max_cell_count all
