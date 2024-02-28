@@ -25,8 +25,8 @@ experiment:
   outlier: train
   count: 10
   valid_count: 8
-  num_cells: 10
-  n_channels: 3
+  num_cells: 6 
+  n_channels: 4
   num_train: 20 # Total number of training images
   img_weight: 0
   file: 'train_sunni_toy.csv' # training csv, put in /dataloaders/split/

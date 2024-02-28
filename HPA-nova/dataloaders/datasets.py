@@ -301,9 +301,12 @@ class RANZERDataset(Dataset):
                     self.cfg.transform.size,
                 )
             )
+            id_tmp = row["ID"]
+            filelist = list(Path(self.cell_path).glob(f"{id_tmp}.png"))
+            if cells > len(filelist):
+                cells = len(filelist)
             for i in range(cells):
                 # path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
-                id_tmp = row["ID"]
                 path_channel = Path(self.cell_path).joinpath(f"{id_tmp}_cell{i+1}.png")
                 img_cell = imread(path_channel)
                 # print(f'img_cell: {img_cell.shape}')
@@ -389,11 +392,15 @@ class ValidationDataset(Dataset):
                     self.cfg.transform.size,
                 )
             )
+            id_tmp = row["ID"]
+            filelist = list(Path(self.cell_path).glob(f"{id_tmp}.png"))
+            if cells > len(filelist):
+                cells = len(filelist)
+
             for i in range(cells):
                 # path_channel = (
                 #     self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
                 # )
-                id_tmp = row["ID"]
                 path_channel = Path(self.cell_path).joinpath(f"{id_tmp}_cell{i+1}.png")
                 img_cell = imread(path_channel)
                 img_cell = np.transpose(
