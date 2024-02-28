@@ -51,42 +51,6 @@ for type in $INPUTTYPE; do
         # --max_cell_count 20 # <- default is 10 
 done
 
-# OPIMGDIR="${OPDATADIR}/val/img"
-# OPIMGRGBDIR="${OPDATADIR}/val/imgRGB"
-# OPSEGDIR="${OPDATADIR}/val/seg"
-# OPCELLDIR="${OPDATADIR}/val/cell"
-# CSVPATH="${REPODIR}/HPA-nova/dataloaders/split/valid_sunni_toy.csv"
-# FRAMESIZE=1024 # examples: "1024", "1024 1024", or "1024 512"
-# 
-# python "${SCRIPTDIR}/channel_merge.py" \
-#     -i "${IPDIR}" \
-#     -ic "${CSVPATH}" \
-#     -o "${OPIMGDIR}" \
-#     -n $NCPU \
-#     -s $FRAMESIZE
-# 
-# python "${SCRIPTDIR}/channel_merge.py" \
-#     -i "${IPDIR}" \
-#     -ic "${CSVPATH}" \
-#     -o "${OPIMGRGBDIR}" \
-#     -n $NCPU \
-#     -s $FRAMESIZE \
-#     -m
-# 
-# source activate ${CELLPOSE_CONDAENV} 
-# python "${SCRIPTDIR}/cellpose_seg.py" \
-#     -i "${OPIMGRGBDIR}" \
-#     -o "${OPSEGDIR}"
-# conda deactivate
-# 
-# python "${SCRIPTDIR}/crop_img.py" \
-#     -ic "${CSVPATH}" \
-#     -ii "${OPIMGDIR}" \
-#     -is "${OPSEGDIR}" \
-#     -o "${OPCELLDIR}" \
-#     -n $NCPU
-#     # --max_cell_count 20 # <- default is 10 
-
 # ========================================================================================
 
 # use "all" for --max_cell_count can output all single cells. 
