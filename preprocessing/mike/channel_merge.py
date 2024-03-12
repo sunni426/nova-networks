@@ -26,11 +26,13 @@ def _merge_ch(id, ipdir, opdir, chcolors, opframesize, merge03):
             img = img[:, :, :3]
 
     img = adjust_log(img, 1)
-    img = resize(img, (opframesize[0], opframesize[1], 3), anti_aliasing=True)
+    img = resize(
+        img, (opframesize[0], opframesize[1], len(chcolors)), anti_aliasing=True
+    )
     img = img * 255
     img = img.astype(np.uint8)
     opimgpath = opdir.joinpath(f"{id}.png")
-    imsave(opimgpath, img)
+    imsave(opimgpath, img, check_contrast=False)
 
     return
 
