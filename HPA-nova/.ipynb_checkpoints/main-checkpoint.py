@@ -153,7 +153,7 @@ if __name__ == '__main__':
                 model = torch.nn.DataParallel(model)
             #writer.add_graph(model, input_to_model=next(iter(train_dl))[0]) # tensorboard graph visualization
             #inputs, _ = next(iter(train_dl))
-            #writer.add_graph(model, inputs.to('cuda')
+            #writer.add_graph(model, inputs.to('cuda'))
             basic_train(cfg, model, train_dl, valid_dl, loss_func, optimizer, result_path, scheduler, writer)
     else:
         train_dl, valid_dl, test_dl = get_dataloader(cfg)(cfg).get_dataloader()

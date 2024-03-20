@@ -123,8 +123,8 @@ def train(gpu, cfg: Config):
         scheduler = None
     if cfg.dpp.sb:
         model = convert_syncbn_model(model)
-    model = nn.parallel.DistributedDataParallel(model,
-                                                device_ids=[gpu], find_unused_parameters=True)
+    # model = nn.parallel.DistributedDataParallel(model,
+    #                                             device_ids=[gpu], find_unused_parameters=True)
     if cfg.dpp.mode == 'train':
         basic_train(cfg, model, train_dl, valid_dl, loss_func, optimizer, result_path, scheduler, writer, gpu, loss_func)
     elif cfg.dpp.mode == 'valid':
@@ -141,6 +141,6 @@ if __name__ == '__main__':
         print('[ x ] DPP without SyncBN warning!')
     os.environ['MASTER_ADDR'] = '127.0.0.1'
     os.environ['MASTER_PORT'] = '8877'
-    mp.spawn(train, nprocs=cfg.dpp.gpus, args=(cfg,))
+    # mp.spawn(train, nprocs=cfg.dpp.gpus, args=(cfg,)) # Sunni commented out Mar 7, try to fix mp spawn error
 
 

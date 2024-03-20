@@ -149,6 +149,7 @@ class Loss(Element):
         self.weight_value = dict.get('weight_value', None)
         self.cellweight = dict.get('cellweight', 0.1)
         self.pos_weight = dict.get('pos_weight', 10)
+        self.class_weight = dict.get('class_weight', [])
 
 
 class Optimizer(Element):

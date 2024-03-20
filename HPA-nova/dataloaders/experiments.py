@@ -109,7 +109,7 @@ class RandomKTrainTestSplit:
                 cw = (1 / method_dict[self.cfg.experiment.method](train.iloc[:, 1:19].sum(0))).values
                 print(train.head(2))
                 weight = (train.iloc[:, 1:19] * cw).max(1).values
-                print(weight)
+                # print(weight)
                 # weight = 1 / method(train.groupby('label').transform('count').image_id.values)
             elif 'pow' in self.cfg.experiment.method:
                 p = float(self.cfg.experiment.method.replace('pow_', ''))

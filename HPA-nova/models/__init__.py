@@ -6,6 +6,9 @@ from models.distance import ArcModel, ArcModelTail
 from models.tile_model import TileModel, ConcatModel, SLModel
 from models.resnetd import JakiroResNet200D
 from models.efficient import EfficinetNet
+from models.efficient2 import *
+from models.vit import *
+from models.alexnet import AlexNet # Added Mar 5
 from configs import Config
 
 
@@ -42,3 +45,10 @@ def get_model(cfg: Config, pretrained='imagenet'):
         return ArcModelTail(pretrained=pretrained, model=cfg.model.name)
     elif cfg.model.name in ['CosineSe50']:
         return CosineSe50()
+    # Added Mar 5
+    elif cfg.model.name in ['alexnet']:
+        return AlexNet(num_classes=19, num_channels=cfg.experiment.n_channels)
+    elif cfg.model.name in ['efficientnet2']:
+        return EfficientNet2(model_name='b1', num_classes=19, num_channels=cfg.experiment.n_channels)
+    elif cfg.model.name in ['vit']:
+        return ViT(num_classes=19, num_channels=cfg.experiment.n_channels)

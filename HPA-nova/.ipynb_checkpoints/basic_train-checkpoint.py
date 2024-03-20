@@ -22,11 +22,16 @@ except:
 from sklearn.metrics import cohen_kappa_score, mean_squared_error
 from sklearn.metrics import roc_auc_score
 from gradcam import *
+from scipy import stats
 
 
 def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, save_path, scheduler, writer, tune=None):
     print(f'[ ! ] pos weight: {1 / cfg.loss.pos_weight}')
-    pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
+    # pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight # commented, Mar 18
+    class_weights = torch.tensor(cfg.loss.class_weight).cuda()
+    # pos_weight = torch.ones(19).cuda() / class_weights
+    pos_weight = torch.ones(19).cuda() * 100 * class_weights
+    print(f'[ ! ] class weight: {pos_weight}')
     print('[ √ ] Basic training')
     if cfg.transform.size == 512:
         img_size = (600, 800)
@@ -95,19 +100,33 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                         with torch.cuda.amp.autocast():
                             if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                                 output = model(ipt, lbl, gradcam=False)
+                            elif 'alexnet' in cfg.model.name or 'vit' in cfg.model.name: # for only cell level output
+                                # print(f'ipt: {ipt.shape}') # torch.Size([100, 4, 256, 256])
+                                output = model(ipt, cfg.experiment.count, gradcam=False)
+                                loss = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(output, lbl) # OG, try other loss
+                                # Instantiate the loss function
+                                criterion = nn.CrossEntropyLoss(weight=pos_weight, reduction='none')
+                                
+                                # Calculate the loss
+                                loss = criterion(output, lbl)
+
+                                loss = loss.mean()
+                                losses.append(loss.item())
                             else:
                                 cell, exp = model(ipt, cfg.experiment.count, gradcam=False)
-                                # print(f'cell:{cell.shape}') # batch_size*num_cells x 19
-                            # loss = loss_func(output, lbl)
-                            loss_cell = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell, lbl)
-                            # print(f'loss_cell:{loss_cell.shape}') # batch_size*num_cells x 19, 40x19
-                            loss_exp = loss_func(exp, exp_label)
-                            if not len(loss_cell.shape) == 0:
-                                loss_cell = loss_cell.mean()
-                            if not len(loss_exp.shape) == 0:
-                                loss_exp = loss_exp.mean()
-                            loss = cfg.loss.cellweight * loss_cell + (1-cfg.loss.cellweight)*loss_exp
-                            losses.append(loss.item())
+                                # cell, exp = model(ipt, cfg.experiment.count, gradcam=False) for our own model efficient2
+                                # print(f'cell:{cell.shape}') # cell level: batch_size*num_cells x 19
+                                # print(f'exp:{exp.shape}') # image level: batch_size x 19
+                                # loss = loss_func(output, lbl)
+                                loss_cell = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell, lbl)
+                                # print(f'loss_cell:{loss_cell.shape}') # batch_size*num_cells x 19, 40x19
+                                loss_exp = loss_func(exp, exp_label)
+                                if not len(loss_cell.shape) == 0:
+                                    loss_cell = loss_cell.mean()
+                                if not len(loss_exp.shape) == 0:
+                                    loss_exp = loss_exp.mean()
+                                loss = cfg.loss.cellweight * loss_cell + (1-cfg.loss.cellweight)*loss_exp
+                                losses.append(loss.item())
                     else:
                         if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                             output = model(ipt, lbl, gradcam=False)
@@ -198,7 +217,10 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
         losses_cell, predicted_cell, predicted_p_cell = [], [], []
         accuracy = 0
-        pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
+        class_weights = torch.tensor(cfg.loss.class_weight).cuda()
+        # pos_weight = torch.ones(19).cuda() / class_weights
+        pos_weight = torch.ones(19).cuda() * 100 * class_weights
+        # pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
         
         for i, (ipt, mask, lbl, cnt, n_cell) in enumerate(dl):
             ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
@@ -209,15 +231,24 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
                 with torch.cuda.amp.autocast():
                     if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                         output = mdl(ipt, lbl, gradcam=False)
-                    else:
-                        cell_output, img_output = mdl(ipt, n_cell, gradcam=False)
-                    loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell_output, lbl)
-                    loss_img_exp = loss_func(img_output, exp_label)
-                    loss = (1-cfg.loss.cellweight)*loss_img_exp + cfg.loss.cellweight*loss_img_bce # shape: 10x19
-                    if not len(loss.shape) == 0:
+                    elif 'alexnet' in cfg.model.name or 'vit' in cfg.model.name: # for only cell level output
+                        output = mdl(ipt, cfg.experiment.count, gradcam=False)
+                        # loss = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(output, lbl)
+                        criterion = nn.CrossEntropyLoss(weight=pos_weight, reduction='none')
+                        loss = criterion(output, lbl)
                         loss = loss.mean()
-                    img_output = img_output.float() # 1x19
-                    cell_output = cell_output.float() # 10x19
+                        img_output = torch.mean(output,dim=0).float()
+                        cell_output = output.float()
+                    else:
+                        cell_output, img_output = mdl(ipt, n_cell,gradcam=False)
+                        # cell_output, img_output = mdl(ipt, n_cell, gradcam=False)
+                        loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell_output, lbl)
+                        loss_img_exp = loss_func(img_output, exp_label)
+                        loss = (1-cfg.loss.cellweight)*loss_img_exp + cfg.loss.cellweight*loss_img_bce # shape: 10x19
+                        if not len(loss.shape) == 0:
+                            loss = loss.mean()
+                        img_output = img_output.float() # 1x19
+                        cell_output = cell_output.float() # 10x19
             else:
                 if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                     output = mdl(ipt, lbl, gradcam=False)
@@ -234,10 +265,10 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
                 'step': i,
                 'loss': loss.item(),
             })
-        print(f'predicted_img: {np.array(predicted_img).shape},predicted_cell {np.array(predicted_cell).shape}') 
+        # print(f'predicted_img: {np.array(predicted_img).shape},predicted_cell {np.array(predicted_cell).shape}') 
         predicted_img = np.array(predicted_img)
         predicted_cell = np.array(predicted_cell)
-        print(f'predicted_img: {predicted_img.shape}') # 12x1x19
+        # print(f'predicted_img: {predicted_img.shape}') # 12x1x19
         print(f'predicted_cell: {predicted_cell.shape}') # 12x10x19
 
         predicted = np.zeros((len(dl),10,19))
@@ -305,24 +336,24 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
 
-        # GradCAM
-        if(epoch % cfg.train.gradcam_every == 0):
-            print('Computing Grad-CAM...')
-            # extract first image, first cell from validation set
-            csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
-            # Open the CSV file and read the first column into a list
-            with open(csv_file_path, 'r') as csvfile:
-                csv_reader = csv.reader(csvfile)
-                for idx, row in enumerate(csv_reader):
-                    row_id = row[0]
-                    if(idx==2):
-                        break
-            print(f'row_id: {row_id}')
-            grad_img = f'../{cfg.data.dir}/{row_id}_cell3.png'
-            gradcam_instance = novaGradCAM(mdl, grad_img, 256)
-            image, image_prep = gradcam_instance.load()
-            gradcam_instance.make_gradcam(image, image_prep, cfg.basic.id)
-            # gradcam_instance.visualize(image, heatmap)
+        # # GradCAM
+        # if(epoch % cfg.train.gradcam_every == 0):
+        #     print('[!] Computing Grad-CAM...')
+        #     # extract first image, first cell from validation set
+        #     csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
+        #     # Open the CSV file and read the first column into a list
+        #     with open(csv_file_path, 'r') as csvfile:
+        #         csv_reader = csv.reader(csvfile)
+        #         for idx, row in enumerate(csv_reader):
+        #             row_id = row[0]
+        #             if(idx==4):
+        #                 break
+        #     print(f'row_id: {row_id}')
+        #     grad_img = f'../{cfg.data.dir}/{row_id}_cell2.png'
+        #     gradcam_instance = novaGradCAM(mdl, grad_img, 256)
+        #     image, image_prep = gradcam_instance.load()
+        #     gradcam_instance.make_gradcam(image, image_prep, cfg.basic.id)
+        #     # gradcam_instance.visualize(image, heatmap)
 
         return val_loss_img, accuracy, auc, mAP
 
@@ -335,7 +366,11 @@ def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
         losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
         losses_cell, predicted_cell, predicted_p_cell = [], [], []
         accuracy = 0
-        pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
+        class_weights = torch.tensor(cfg.loss.class_weight).cuda()
+        # pos_weight = torch.ones(19).cuda() / class_weights
+        pos_weight = torch.ones(19).cuda() * 100 * class_weights
+        # pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
+
         
         for i, (ipt, mask, lbl, cnt, n_cell) in enumerate(dl):
             ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
@@ -346,15 +381,21 @@ def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
                 with torch.cuda.amp.autocast():
                     if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                         output = mdl(ipt, lbl, gradcam=False)
+                    elif 'alexnet' in cfg.model.name or 'vit' in cfg.model.name: # for only cell level output
+                        output = mdl(ipt, cfg.experiment.count, gradcam=False)
+                        loss = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(output, lbl)
+                        loss = loss.mean()
+                        img_output = torch.mean(output,dim=0).float()
+                        cell_output = output.float()
                     else:
                         cell_output, img_output = mdl(ipt, n_cell, gradcam=False)
-                    loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell_output, lbl)
-                    loss_img_exp = loss_func(img_output, exp_label)
-                    loss = loss_img_exp + cfg.loss.cellweight*loss_img_bce # shape: 10x19
-                    if not len(loss.shape) == 0:
-                        loss = loss.mean()
-                    img_output = img_output.float() # 1x19
-                    cell_output = cell_output.float() # 10x19
+                        loss_img_bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none')(cell_output, lbl)
+                        loss_img_exp = loss_func(img_output, exp_label)
+                        loss = loss_img_exp + cfg.loss.cellweight*loss_img_bce # shape: 10x19
+                        if not len(loss.shape) == 0:
+                            loss = loss.mean()
+                        img_output = img_output.float() # 1x19
+                        cell_output = cell_output.float() # 10x19
             else:
                 if 'arc' in cfg.model.name or 'cos' in cfg.model.name:
                     output = mdl(ipt, lbl, gradcam=False)
@@ -378,6 +419,8 @@ def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
         truth = np.array(truth_img)
         roc_values = []
         mAP = []
+        p = 0
+        
         for j in range(len(dl)):
             for k in range(cfg.experiment.num_cells):
                 predicted[j][k] = cfg.experiment.img_weight*np.array(predicted_img[j]) + (1-cfg.experiment.img_weight)*predicted_cell[j][k]
@@ -390,17 +433,43 @@ def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
             predicted_auc = np.mean(predicted[j], axis=0).flatten()
             truth_auc = truth[j].flatten() # 10x19
             roc_values.append(roc_auc_score(truth_auc, predicted_auc))
+            # t_statistic, p_value = stats.ttest_rel(predicted[j], truth_acc)
+            # if p_value <= 0.05:
+            #     p=p+1
+            # print(f't_statistic:{t_statistic}, p_value:{p_value}')
 
             # mAP
             mAP_img = mean_average_precision(truth_acc, predicted[j])
             mAP.append(mAP_img)
-
+        
         auc = sum(roc_values)/len(roc_values)
         accuracy /= len(dl)
         predicted = np.round(predicted, decimals=4)
         truth = np.round(truth, decimals=4)
         mAP = sum(mAP)/len(dl)
+        p_acc = p/len(dl)/cfg.experiment.num_cells
 
+        # GradCAM
+        print('[!] Computing Grad-CAM in test mode...')
+        # extract first image, first cell from validation set
+        path = Path(os.path.dirname(os.path.realpath(__file__)))
+        csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_test}'
+        # Open the CSV file and read the first column into a list
+        with open(csv_file_path, 'r') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            for idx, row in enumerate(csv_reader):
+                row_id = row[0]
+                if(idx==10):
+                    break
+        # print(f'row_id: {row_id}')
+        grad_img = f'../{cfg.data.dir}/{row_id}_cell1.png' # this cell is good!
+        print(f'grad_img: {grad_img}')
+        gradcam_instance = novaGradCAM(mdl, grad_img, 256)
+        image, image_prep = gradcam_instance.load()
+        gradcam_instance.make_gradcam(image, image_prep, cfg.basic.id, 'vit' in cfg.model.name)
+        # gradcam_instance.visualize(image, heatmap)
+    
+        
         return mAP, val_loss_img
 
 def tta_validate(mdl, dl, loss_func, tta):

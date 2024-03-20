@@ -23,6 +23,9 @@ import math
 import glob
 from PIL import Image
 import imageio
+import matplotlib.pyplot as plt
+import numpy as np
+from torchvision import transforms
 
 
 def a_ordinary_collect_method(batch):
@@ -78,8 +81,9 @@ class TrainDataset(Dataset):
         # stats = ([0.0692], [0.2051])
         self._tensor_transform = Compose([
             ToTensor(),
-            Normalize(mean=[0.0692, 0.0692, 0.0692], std=[0.2051, 0.2051, 0.2051]),
-            # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            # Normalize(mean=[0.0692, 0.0692, 0.0692], std=[0.2051, 0.2051, 0.2051]),
+             # Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
+            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
         ])
         if weighted_sample:
             # TODO: if weight sampler is necessary
@@ -125,7 +129,8 @@ class LandmarkDataset(Dataset):
         self.scale = scale or []
         self.tensor_tfms = Compose([
             ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            #Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
+            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
         ])
         self.tta = tta
         self.test = test
@@ -163,7 +168,8 @@ class STRDataset(Dataset):
         self.scale = scale or []
         self.tensor_tfms = Compose([
             ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            # Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
+            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
         ])
         self.tta = tta
         self.test = test
@@ -206,16 +212,19 @@ class RANZERDataset(Dataset):
         self.mode = mode
         self.transform = tfms
         self.cfg = cfg
-        # # REVERT THIS FOUR CHANNEL FOR BBBC
-        # self.tensor_tfms = Compose([
-        #     # ToTensor(),
-        #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
-        # ])
-        # For HPA
+        # REVERT THIS FOUR CHANNEL FOR BBBC
         self.tensor_tfms = Compose([
             # ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            # Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225])
+            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
         ])
+        # # For HPA
+        # self.tensor_tfms = Compose([
+        #     # ToTensor(),
+        #     Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        # ])
+
+        
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
@@ -223,6 +232,22 @@ class RANZERDataset(Dataset):
 
     def __len__(self):
         return len(self.df)
+
+    # def tensor_tfms(self, img):
+    #     # convert PIL image to numpy array
+    #     img_np = np.array(img) #last dimension is channel 
+    #     output = (img_np - np.min(img_np)) / (np.max(img_np) - np.min(img_np))
+    #     mean = np.mean(img_np, axis=(0,1))
+    #     std = np.std(img_np, axis=(0,1))
+    #     transform_norm = transforms.Compose([
+    #         transforms.ToTensor(),])
+    #     # get normalized image
+    #     output = transform_norm(img_np)
+    #     mean = torch.mean(output)
+    #     std = torch.std(output)
+        
+    #     cv2.imwrite("pic.png", np.transpose(np.array(output),(0,2,1)))
+    #     return output # transform_norm(np.transpose(np.array(output),(1,0,2)))
 
     def __getitem__(self, index):
         if self.mode == 'train':
@@ -240,18 +265,22 @@ class RANZERDataset(Dataset):
                 img_cell = imread(path_channel)
                 # print(f'img_cell: {img_cell.shape}')
                 img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                
                 if self.transform is not None:
                     res = self.transform(image=img_cell)
                     img_cell = res['image']
-
+                    
+                # print(f'img_cell:{img_cell.shape}')
                 img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
-                
+                # img_cell = torch.transpose(img_cell, 1, 0)
+                img_cell = img_cell.unsqueeze(0)
+                # print(f'img_cell: {img_cell.shape}') # torch.Size([1, 4, 256, 256])
                 img[i, :, :, :] = img_cell
     
-                batch = img # #10 x 4 x 256 x 256
+                batch = img # 10 x 4 x 256 x 256
                 mask[i] = 1
                 label[i] = row[self.cols].values.astype(np.float64)
-                # print(f'batch size: {batch.shape}')
+                # print(f'batch size: {batch.shape}') # torch.Size([10, 4, 256, 256])
                 # img = self.tensor_tfms(img)
             if self.cfg.experiment.smoothing == 0:
                 # print(f'batch: {batch}, mask: {mask}, label: {label}')
@@ -266,14 +295,15 @@ class ValidationDataset(Dataset):
         self.mode = mode
         self.transform = tfms
         self.cfg = cfg
-        # self.tensor_tfms = Compose([
-        #     # ToTensor(),
-        #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
-        # ]) # 4 channels
         self.tensor_tfms = Compose([
             # ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ]) # 3 channels
+            # Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225])
+            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
+        ]) # 4 channels
+        # self.tensor_tfms = Compose([
+        #     # ToTensor(),
+        #     Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        # ]) # 3 channels
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
@@ -317,14 +347,15 @@ class TestDataset(Dataset):
         self.transform = tfms
         self.cfg = cfg
         self.tta = tta
-        # self.tensor_tfms = Compose([
-        #     # ToTensor(),
-        #     Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225]),
-        # ]) # 4 channels
         self.tensor_tfms = Compose([
             # ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ]) # 3 channels
+            # Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
+            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
+        ]) # 4 channels
+        # self.tensor_tfms = Compose([
+        #     # ToTensor(),
+        #     Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        # ]) # 3 channels
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
         self.cols = ['class{}'.format(i) for i in range(19)]
