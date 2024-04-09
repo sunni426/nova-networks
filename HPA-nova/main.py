@@ -45,7 +45,8 @@ if __name__ == '__main__':
             else:
                 asc = False
             best_epoch = int(df.sort_values(args.select, ascending=asc).iloc[0].Epochs)
-        print('Best check we use is: {}'.format('f{}_epoch-{}.pth'.format(cfg.experiment.run_fold, best_epoch)))
+            # print(f'{df.sort_values(args.select, ascending=asc)}') # Best mAP
+        print('Best check we use is: {}'.format('f{}_epoch-{}.pth'.format(0, best_epoch)))
         if args.tta_tfms == 'none':
             tfms = tta_transform = A.Compose([
                                         A.OneOf([
@@ -68,9 +69,17 @@ if __name__ == '__main__':
         else:
             loss_func = get_loss(cfg)
         model.load_state_dict(torch.load(
-            Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch{}.pth'.format(cfg.experiment.run_fold, best_epoch),
+            Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch-{}.pth'.format(best_epoch),
             map_location={'cuda:0': 'cpu', 'cuda:1': 'cpu', 'cuda:2': 'cpu', 'cuda:3': 'cpu'}
         ))
+
+        loaded_model = torch.load(
+            Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch-{}.pth'.format(best_epoch))
+        # print("State_dict keys:", loaded_model.keys())
+        # weight1 = loaded_model['net.conv1.weight'].cpu()
+        # print(Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch-{}.pth'.format( best_epoch))
+        # print(weight1[50:60])
+        
         model = model.cpu()
         if len(cfg.basic.GPU) == 1:
             print('[ W ] single gpu prediction the gpus is {}'.format(cfg.basic.GPU))
@@ -92,7 +101,10 @@ if __name__ == '__main__':
                 loss_func = torch.nn.CrossEntropyLoss(weight=weights, reduction='none')
             else:
                 loss_func = get_loss(cfg)
-        
+
+            
+            # print(model.net.layer4['0']['conv1'])
+            
             test_mAP, test_loss = basic_test(model, test_dl, loss_func, cfg, best_epoch)
             
 

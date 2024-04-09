@@ -28,11 +28,16 @@ class novaGradCAM:
         # print(self.model)
         # self.target_layers = [self.model.fc2] # for alexnet
         # self.target_layers = [self.model.net.layer4] # for resnet50
-        # self.target_layers = [self.model.model.blocks[-1]] # for tf_efficientnet_b3 (pretrained)
+        self.target_layers = [self.model.model.blocks[-1]] # for tf_efficientnet_b3 (pretrained)
+        # print(f'MODEL:{self.model}')
         # self.target_layers = [self.model.extractor[-1]] # for efficientnet2 (newly trained)
-        self.target_layers = [self.model.blocks[-1].norm1] # for vit (newly trained)
+        # self.target_layers = [self.model.blocks[-1].norm1] # for vit (newly trained)
         # self.target_layers = [self.model.mlp_cells]
-        print(f'self.target_layers {self.target_layers}')
+       
+        # print(self.model.model.blocks[-1][1].bn3)
+        # self.target_layers = [self.model.model.blocks[-1][1]] 
+            
+        # print(f'self.target_layers: {self.target_layers}')
 
     
     def load(self):
@@ -41,7 +46,7 @@ class novaGradCAM:
         img = img[:,:,::-1]
         img=np.ascontiguousarray(img)
         img = cv2.resize(img, (self.target_size, self.target_size))
-        image_prep = preprocess_image(img, mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])#.requires_grad_(True)
+        image_prep = preprocess_image(img, mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149])#.requires_grad_(True)
         img = np.transpose(img, (2,0,1))
         img = np.float32(img)/255
         
@@ -69,7 +74,7 @@ class novaGradCAM:
                 # visualization = show_cam_on_image(img, grayscale_cam) # in show_cam_on_image: 'cam = (1 - image_weight) * heatmap + image_weight * img'
                 # cv2.imwrite(f'results/{folder_path}/logs/class{i}.jpg', visualization)
 
-                image_weight = 0.5
+                image_weight = 0.6
                 heatmap = cv2.applyColorMap(np.uint8(255 * grayscale_cam), cv2.COLORMAP_JET)
                 heatmap = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
                 heatmap = np.float32(heatmap) / 255
