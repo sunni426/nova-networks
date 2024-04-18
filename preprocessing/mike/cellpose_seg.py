@@ -1,4 +1,5 @@
 # %%
+import re
 from pathlib import Path
 import argparse
 from skimage.io import imread, imsave
@@ -15,8 +16,20 @@ def cellpose_seg(args):
     # filepaths = [Path(x) for x in filepaths]
     opdir = Path(args.o)
     opdir.mkdir(parents=True, exist_ok=True)
+
+    oppaths = [
+        opdir.joinpath(f"{x.stem}_seg").with_suffix(".npy") for x in tqdm(filepaths)
+    ]
+    print(len(oppaths))
+    oppaths = [x for x in tqdm(oppaths) if not x.is_file()]
+    filepaths_proc = [
+        Path(args.i).joinpath(re.sub("_seg", "", x.stem)).with_suffix(".png")
+        for x in tqdm(oppaths)
+    ]
+    print(len(filepaths_proc))
+
     n = args.n_trunk
-    filepaths_split = [filepaths[i : i + n] for i in range(0, len(filepaths), n)]
+    filepaths_split = [filepaths[i : i + n] for i in range(0, len(filepaths_proc), n)]
 
     model = models.Cellpose(
         gpu=True, model_type="cyto2", device=torch.device(f"cuda:{args.gpu_device}")

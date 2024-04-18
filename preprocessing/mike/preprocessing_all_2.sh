@@ -21,12 +21,12 @@ for type in $INPUTTYPE; do
     OPCSVDIR="${OPDATADIR}/csv"
     # export 4ch tiff 
     
-    # python "${SCRIPTDIR}/channel_merge.py" \
-    #     -i "${IPDIR}" \
-    #     -ic "${CSVPATH}" \
-    #     -o "${OPIMGDIR}" \
-    #     -n $NCPU \
-    #     -s $FRAMESIZE
+    python "${SCRIPTDIR}/channel_merge.py" \
+        -i "${IPDIR}" \
+        -ic "${CSVPATH}" \
+        -o "${OPIMGDIR}" \
+        -n $NCPU \
+        -s $FRAMESIZE
 
     python "${SCRIPTDIR}/getstat.py" \
         -i "${OPDATADIR}/img" \
@@ -35,13 +35,13 @@ for type in $INPUTTYPE; do
         -n $NCPU 
 
     # # export 3ch RGB png
-    # python "${SCRIPTDIR}/channel_merge.py" \
-    #     -i "${IPDIR}" \
-    #     -ic "${CSVPATH}" \
-    #     -o "${OPIMGRGBDIR}" \
-    #     -n $NCPU \
-    #     -s $FRAMESIZE \
-    #     -m # merge the red and yellow
+    python "${SCRIPTDIR}/channel_merge.py" \
+        -i "${IPDIR}" \
+        -ic "${CSVPATH}" \
+        -o "${OPIMGRGBDIR}" \
+        -n $NCPU \
+        -s $FRAMESIZE \
+        -m # merge the red and yellow
 
     # # create segmentation using cellpose
     # # run with another conda env
