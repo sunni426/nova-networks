@@ -32,6 +32,7 @@ from pathlib import Path
 from tqdm import tqdm
 import numpy as np
 from skimage.io import imread
+    
 
 @torch.inference_mode()
 def get_best_model():
@@ -54,11 +55,31 @@ def get_best_model():
         _, valid_dl, _ = get_dataloader(cfg)(cfg).get_dataloader(tta=args.tta, tta_tfms=None)
         # loading model
         model = get_model(cfg)
+        
         model.load_state_dict(torch.load(
-            Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch{}.pth'.format(cfg.experiment.run_fold, best_epoch),
+            Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch-{}.pth'.format(best_epoch),
             map_location={'cuda:0': 'cpu', 'cuda:1': 'cpu', 'cuda:2': 'cpu', 'cuda:3': 'cpu'}
         ))
         model = model.cpu()
+
+
+        # FOR MAE
+        # import sys
+        # sys.path.append('./mae')
+        # import models_mae
+        # import models_vit
+        # chkpt_dir = 'mae/$../results/f11/checkpoint-7.pth'
+        # # arch='mae_vit_base_patch16'
+        # # model = getattr(models_mae, arch)()
+        # arch='vit_base_patch16'
+        # model = getattr(models_vit, arch)()
+        # # load model
+        # checkpoint = torch.load(chkpt_dir, map_location='cpu')
+        # msg = model.load_state_dict(checkpoint['model'], strict=False)
+        # print(msg)
+        # model = model.cpu()
+
+
         if len(cfg.basic.GPU) == 1:
             print('[ W ] single gpu prediction the gpus is {}'.format(cfg.basic.GPU))
             device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -73,7 +94,7 @@ def get_best_model():
 
     return model
     
-def predict(input_image, threshold=0.5, model=None, preprocess_fn=None, device="cuda", idx2labels=None, cfg=Config):
+def predict(input_image, threshold=0.4, model=None, preprocess_fn=None, device="cuda", idx2labels=None, cfg=Config):
     input = np.array(input_image)
     R = input[:, :, 0]
     G = input[:, :, 1]
@@ -119,7 +140,7 @@ if __name__ == "__main__":
         3: "Nucleoli fibrillar center",
         4: "Nuclear speckles",
         5: "Nuclear bodies",
-        6: "Endoplasmic reticulum Cytosol",
+        6: "Endoplasmic reticulum",
         7: "Golgi apparatus",
         8: "Intermediate filaments",
         9: "Actin filaments",
@@ -150,7 +171,7 @@ if __name__ == "__main__":
             ]
         )
         
-        images_dir = '../preprocessing/train_5000/cell_10'
+        images_dir = '../preprocessing/train/cell'
         file_names = os.listdir(images_dir)
         examples = [[os.path.join(images_dir, file_name), 0.4] for file_name in np.random.choice(file_names, size=10, replace=False)]
         print(examples)
@@ -161,7 +182,7 @@ if __name__ == "__main__":
             fn=partial(predict, model=model, preprocess_fn=preprocess, device=DEVICE, idx2labels=labels),
             inputs=[
                 gr.Image(type="pil", label="Image"),
-                gr.Slider(0.0, 1.0, value=0.5, label="Threshold", info="Select the cut-off threshold for a node to be considered as a valid output."),
+                gr.Slider(0.0, 1.0, value=0.4, label="Threshold", info="Select the cut-off threshold for a node to be considered as a valid output."),
             ],
             outputs=[
                 gr.Textbox(label="Labels Present"),

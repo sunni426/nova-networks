@@ -68,6 +68,7 @@ if __name__ == '__main__':
             loss_func = torch.nn.CrossEntropyLoss(weight=weights, reduction='none')
         else:
             loss_func = get_loss(cfg)
+            
         model.load_state_dict(torch.load(
             Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch-{}.pth'.format(best_epoch),
             map_location={'cuda:0': 'cpu', 'cuda:1': 'cpu', 'cuda:2': 'cpu', 'cuda:3': 'cpu'}
@@ -79,7 +80,8 @@ if __name__ == '__main__':
         # weight1 = loaded_model['net.conv1.weight'].cpu()
         # print(Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id / 'checkpoints' / 'f0_epoch-{}.pth'.format( best_epoch))
         # print(weight1[50:60])
-        
+
+        # model = loaded_model.cpu()
         model = model.cpu()
         if len(cfg.basic.GPU) == 1:
             print('[ W ] single gpu prediction the gpus is {}'.format(cfg.basic.GPU))

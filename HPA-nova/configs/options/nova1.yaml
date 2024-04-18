@@ -29,31 +29,41 @@ experiment:
   n_channels: 4
   num_train: 4280 # Total number of training images
   img_weight: 0
-  file: 'train_5000_cell10_4280.csv' # 'train_5000_5.csv' # training csv, put in /dataloaders/split/
-  csv_valid: 'valid_5000_cell10_480.csv' # 'valid_5000_3.csv' # validation csv, put in /dataloaders/split/
-  csv_test: 'test_5000_cell10_50.csv' # test csv, put in /dataloaders/split/ --> change in init
+  file: 'train_all_17717.csv' # training csv, put in /dataloaders/split/
+  csv_valid: 'test_all_1042.csv' # validation csv, put in /dataloaders/split/
+  csv_test: 'valid_all_2084.csv' # test csv, put in /dataloaders/split/ --> change in init
   smoothing: 0
 
 data:
-  dir: 'preprocessing/train_5000/cell_10'
+  dir: 'preprocessing/train/cell'
   # dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/6_train_240220_RGB/cropped_cells'
+
+#   file: 'train_5000_cell10_4280.csv' # 'train_5000_5.csv' # training csv, put in /dataloaders/split/
+#   csv_valid: 'valid_5000_cell10_480.csv' # 'valid_5000_3.csv' # validation csv, put in /dataloaders/split/
+#   csv_test: 'test_5000_cell10_50.csv' # test csv, put in /dataloaders/split/ --> change in init
+#   smoothing: 0
+
+# data:
+#   dir: 'preprocessing/train_5000/cell_10'
+#   # dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/6_train_240220_RGB/cropped_cells'
 
 model:
   name: 'vit' # 'resnet50' # OG: 'tf_efficientnet_b3', 4 channel 'efficientnet2'
   from_checkpoint: 'none'
   out_feature: 19
   params:
-    dropout: 0.5
-    pretrained: True
+    dropout: 0.1
+    pretrained: False
 
 train:
   dir: './results'
-  batch_size: 8 # 20
+  batch_size: 3 # 20
   num_epochs: 300
   validate_every: 1
   gradcam_every: 50
   cutmix: False
   beta: 1
+  clip: True # try gradient clipping, 3/24
   cutmix_prob: 1
   cutmix_prob_increase: 0
   validations_round: 1
@@ -85,19 +95,19 @@ optimizer:
   name: 'Adam'
   step: 1
   params:
-    lr: 0.0002
+    lr: 0.00001 # 0.0005
     weight_decay: 0.0001
 
 scheduler:
-  name: 'CosineAnnealingLR'
+  name: 'StepLR' # 'CosineAnnealingLR' # 'StepLR' # 'CosineAnnealingLR' # next, try 'StepLR'
   warm_up: True
   params:
     factor: 0.99 # OG 0.1
-    patience: 50
+    patience: 10 # previously, 50. try 10 for cosine
 
 transform:
   name: 's_0220/sin_256_final' # in configs/augmentation
   val_name: 's_0220/sin_256_final'
   test_name: 's_0220/test'
-  num_preprocessor: 10
+  num_preprocessor: 6
   size: 256

@@ -27,15 +27,15 @@ experiment:
   valid_count: 480
   num_cells: 10
   n_channels: 4
-  num_train: 4280 # Total number of training images
+  num_train: 17717 # Total number of training images
   img_weight: 0
-  file: 'train_5000_cell10_4280.csv' # training csv, put in /dataloaders/split/
-  csv_valid: 'valid_5000_cell10_480.csv' # validation csv, put in /dataloaders/split/
-  csv_test: 'test_5000_cell10_50.csv' # test csv, put in /dataloaders/split/ --> change in init
+  file: 'train_all_17717.csv' # training csv, put in /dataloaders/split/
+  csv_valid: 'test_all_1042.csv' # validation csv, put in /dataloaders/split/
+  csv_test: 'valid_all_2084.csv' # test csv, put in /dataloaders/split/ --> change in init
   smoothing: 0
 
 data:
-  dir: 'preprocessing/train_5000/cell_10'
+  dir: 'preprocessing/train/cell'
   # dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/6_train_240220_RGB/cropped_cells'
 
 model:
@@ -82,9 +82,9 @@ loss:
 
 optimizer:
   name: 'Adam'
-  step: 1
+  step: 10
   params:
-    lr: 0.0002
+    lr: 0.0001
     weight_decay: 0
 
 scheduler:

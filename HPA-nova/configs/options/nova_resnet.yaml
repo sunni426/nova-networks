@@ -24,24 +24,24 @@ experiment:
   skip_outlier: True
   outlier: train
   count: 10 # same as num_cells
-  valid_count: 480
+  valid_count: 1042
   num_cells: 10
   n_channels: 4
-  num_train: 4280 # Total number of training images
+  num_train: 17717 # Total number of training images
   img_weight: 0
-  file: 'train_5000_cell10_4280.csv' # training csv, put in /dataloaders/split/
-  csv_valid: 'valid_5000_cell10_480.csv' # validation csv, put in /dataloaders/split/
-  csv_test: 'test_5000_cell10_50.csv' # test csv, put in /dataloaders/split/ --> change in init
+  file: 'bbbc_train_new_s5.csv' # training csv, put in /dataloaders/split/
+  csv_valid: 'bbbc_train_new.csv' # validation csv, put in /dataloaders/split/
+  csv_test: 'bbbc_test.csv' # test csv, put in /dataloaders/split/ --> change in init
   smoothing: 0
 
 data:
-  dir: 'preprocessing/train_5000/cell_10'
+  dir: 'preprocessing/train_bbbc/cell'
   # dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/6_train_240220_RGB/cropped_cells'
 
 model:
   name: 'resnet50' # 'resnet50' # OG: 'tf_efficientnet_b3', 4 channel 'efficientnet2'
   from_checkpoint: 'none'
-  out_feature: 19
+  out_feature: 693
   params:
     dropout: 0.5
     pretrained: True
@@ -49,7 +49,7 @@ model:
 train:
   dir: './results'
   batch_size: 8
-  num_epochs: 300
+  num_epochs: 1000
   validate_every: 1
   gradcam_every: 50
   cutmix: False
@@ -73,10 +73,7 @@ loss:
        0.04914732, 0.30151134, 0.0418487 , 0.0347524 , 0.03067138,
        0.10425721, 0.03305898, 0.05933908, 0.15075567]
   params:
-   weight: [ 0.02531037, 0.06579517, 0.04364358, 0.04229549, 0.03539962,
-       0.03934447, 0.04536092, 0.03703704, 0.04307305, 0.05735393,
-       0.04914732, 0.30151134, 0.0418487 , 0.0347524 , 0.03067138,
-       0.10425721, 0.03305898, 0.05933908, 0.15075567]
+   weight: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
    eps: 0.1
     # reduction: 'none'
 
@@ -98,5 +95,5 @@ transform:
   name: 's_0220/sin_256_final' # in configs/augmentation
   val_name: 's_0220/sin_256_final'
   test_name: 's_0220/test'
-  num_preprocessor: 10
-  size: 256
+  num_preprocessor: 6
+  size: 128

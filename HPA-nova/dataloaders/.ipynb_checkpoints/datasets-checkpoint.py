@@ -1,4 +1,4 @@
-# nova-networks/HPA-nova
+# nova-networks/HPA-nova for BBBC!!
 import numpy as np
 import os
 import pandas as pd
@@ -11,7 +11,7 @@ from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 from torchvision.transforms import (
     ToTensor, Normalize, Compose, Resize, CenterCrop, RandomCrop,
-    RandomHorizontalFlip, RandomAffine, RandomVerticalFlip, RandomChoice, ColorJitter, RandomRotation)
+    RandomHorizontalFlip, RandomAffine, RandomVerticalFlip, RandomPerspective, ColorJitter, RandomRotation)
 import skimage
 # from utils.tile_fix import tile
 # from utils.ha import get_tiles
@@ -65,6 +65,15 @@ def resize_short(img, target_size):
     return resized
 
 
+class AddGaussianNoise(object):
+    def __init__(self, mean=0., std=1.):
+        self.mean = mean
+        self.std = std
+
+    def __call__(self, tensor):
+        return tensor + torch.randn(tensor.size()) * self.std + self.mean
+
+
 class TrainDataset(Dataset):
     HEIGHT = 137
     WIDTH = 236
@@ -80,10 +89,18 @@ class TrainDataset(Dataset):
         self._square = square
         # stats = ([0.0692], [0.2051])
         self._tensor_transform = Compose([
+            RandomRotation(degrees=(0, 180)),
+            RandomVerticalFlip(p=0.5),
+            RandomHorizontalFlip(p=0.5),
+            RandomAffine(degrees=30, translate=(0.1, 0.1), scale=(0.8, 1.2), shear=10),
+            # RandomPerspective(distortion_scale=0.5, p=0.5),
+            AddGaussianNoise(mean=0.0, std=0.1),
             ToTensor(),
             # Normalize(mean=[0.0692, 0.0692, 0.0692], std=[0.2051, 0.2051, 0.2051]),
-             # Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
-            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
+            Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225])
+            # Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
+            # Normalize(mean=[0.0804, 0.052147, 0.05377, 0.0807387], std=[0.132638, 0.089137, 0.14327, 0.12973])
+            # Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
         ])
         if weighted_sample:
             # TODO: if weight sampler is necessary
@@ -128,9 +145,17 @@ class LandmarkDataset(Dataset):
         self.cfg = cfg
         self.scale = scale or []
         self.tensor_tfms = Compose([
+            RandomRotation(degrees=(0, 180)),
+            RandomVerticalFlip(p=0.5),
+            RandomHorizontalFlip(p=0.5),
+            RandomAffine(degrees=30, translate=(0.1, 0.1), scale=(0.8, 1.2), shear=10),
+            # RandomPerspective(distortion_scale=0.5, p=0.5),
+            AddGaussianNoise(mean=0.0, std=0.1),
             ToTensor(),
-            #Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
-            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
+            # Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
+            # Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
+            # Normalize(mean=[0.0804, 0.052147, 0.05377, 0.0807387], std=[0.132638, 0.089137, 0.14327, 0.12973])
+            Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
         ])
         self.tta = tta
         self.test = test
@@ -167,9 +192,17 @@ class STRDataset(Dataset):
         self.cfg = cfg
         self.scale = scale or []
         self.tensor_tfms = Compose([
+            RandomRotation(degrees=(0, 180)),
+            RandomVerticalFlip(p=0.5),
+            RandomHorizontalFlip(p=0.5),
+            RandomAffine(degrees=30, translate=(0.1, 0.1), scale=(0.8, 1.2), shear=10),
+            # RandomPerspective(distortion_scale=0.5, p=0.5),
+            AddGaussianNoise(mean=0.0, std=0.1),
             ToTensor(),
             # Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
-            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
+            # Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
+            # Normalize(mean=[0.0804, 0.052147, 0.05377, 0.0807387], std=[0.132638, 0.089137, 0.14327, 0.12973]),
+            Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
         ])
         self.tta = tta
         self.test = test
@@ -214,9 +247,17 @@ class RANZERDataset(Dataset):
         self.cfg = cfg
         # REVERT THIS FOUR CHANNEL FOR BBBC
         self.tensor_tfms = Compose([
+            RandomRotation(degrees=(0, 180)),
+            RandomVerticalFlip(p=0.5),
+            RandomHorizontalFlip(p=0.5),
+            RandomAffine(degrees=30, translate=(0.1, 0.1), scale=(0.8, 1.2), shear=10),
+            # RandomPerspective(distortion_scale=0.5, p=0.5),
+            AddGaussianNoise(mean=0.0, std=0.1),
             # ToTensor(),
-            # Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225])
-            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
+            Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225])
+            # Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
+            # Normalize(mean=[0.0804, 0.052147, 0.05377, 0.0807387], std=[0.132638, 0.089137, 0.14327, 0.12973]),
+            # Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
         ])
         # # For HPA
         # self.tensor_tfms = Compose([
@@ -227,27 +268,11 @@ class RANZERDataset(Dataset):
         
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
-        self.cols = ['class{}'.format(i) for i in range(19)]
+        self.cols = ['{}'.format(i) for i in range(693)]
         self.cell_path = self.cfg.data.dir
 
     def __len__(self):
         return len(self.df)
-
-    # def tensor_tfms(self, img):
-    #     # convert PIL image to numpy array
-    #     img_np = np.array(img) #last dimension is channel 
-    #     output = (img_np - np.min(img_np)) / (np.max(img_np) - np.min(img_np))
-    #     mean = np.mean(img_np, axis=(0,1))
-    #     std = np.std(img_np, axis=(0,1))
-    #     transform_norm = transforms.Compose([
-    #         transforms.ToTensor(),])
-    #     # get normalized image
-    #     output = transform_norm(img_np)
-    #     mean = torch.mean(output)
-    #     std = torch.std(output)
-        
-    #     cv2.imwrite("pic.png", np.transpose(np.array(output),(0,2,1)))
-    #     return output # transform_norm(np.transpose(np.array(output),(1,0,2)))
 
     def __getitem__(self, index):
         if self.mode == 'train':
@@ -256,37 +281,40 @@ class RANZERDataset(Dataset):
             cells = self.cfg.experiment.num_cells
             batch = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
             mask = np.zeros((cells))
-            label = np.zeros((cells, 19)) 
+            label = np.zeros((cells, 693))
+            # label = np.zeros((cells, 19)) 
             
             # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
-            img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
-            for i in range(cells):
-                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
-                img_cell = imread(path_channel)
-                # print(f'img_cell: {img_cell.shape}')
-                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
-                
-                if self.transform is not None:
-                    res = self.transform(image=img_cell)
-                    img_cell = res['image']
+            img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size)) 
+            for k in range(6):
+                for i in range(cells):
+                    plate_value = str(int(float(row["Metadata_Plate"])))
+                    path_channel = self.path / f'../../{self.cell_path}/{plate_value}_{row["Metadata_Well"]}_s{k+1}_cell{i+1}.png'
+                    img_cell = imread(path_channel)
+                    # print(f'img_cell: {img_cell.shape}')
+                    img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
                     
-                # print(f'img_cell:{img_cell.shape}')
-                img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
-                # img_cell = torch.transpose(img_cell, 1, 0)
-                img_cell = img_cell.unsqueeze(0)
-                # print(f'img_cell: {img_cell.shape}') # torch.Size([1, 4, 256, 256])
-                img[i, :, :, :] = img_cell
-    
-                batch = img # 10 x 4 x 256 x 256
-                mask[i] = 1
-                label[i] = row[self.cols].values.astype(np.float64)
-                # print(f'batch size: {batch.shape}') # torch.Size([10, 4, 256, 256])
-                # img = self.tensor_tfms(img)
-            if self.cfg.experiment.smoothing == 0:
-                # print(f'batch: {batch}, mask: {mask}, label: {label}')
-                return batch, mask, label, row[self.cols].values.astype(np.float64)
-            else:
-                return batch, mask, 0.9*label + 0.1/19, 0.9 * row[self.cols].values.astype(np.float64) + 0.1/19
+                    if self.transform is not None:
+                        res = self.transform(image=img_cell)
+                        img_cell = res['image']
+                        
+                    # print(f'img_cell:{img_cell.shape}')
+                    img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
+                    # img_cell = torch.transpose(img_cell, 1, 0)
+                    img_cell = img_cell.unsqueeze(0)
+                    # print(f'img_cell: {img_cell.shape}') # torch.Size([1, 4, 256, 256])
+                    img[(k*10)+i, :, :, :] = img_cell
+        
+                    batch = img # 10 x 4 x 256 x 256
+                    mask[i] = 1
+                    label[(k*10)+i] = row[self.cols].values.astype(np.float64)
+                    # print(f'batch size: {batch.shape}') # torch.Size([10, 4, 256, 256])
+                    # img = self.tensor_tfms(img)
+                if self.cfg.experiment.smoothing == 0:
+                    # print(f'batch: {batch}, mask: {mask}, label: {label}')
+                    return batch, mask, label, row[self.cols].values.astype(np.float64)
+                else:
+                    return batch, mask, 0.9*label + 0.1/693, 0.9 * row[self.cols].values.astype(np.float64) + 0.1/693
 
 class ValidationDataset(Dataset):
     def __init__(self, df, tfms=None, cfg=None, mode='valid', file_dict=None):
@@ -298,7 +326,9 @@ class ValidationDataset(Dataset):
         self.tensor_tfms = Compose([
             # ToTensor(),
             # Normalize(mean=[0.485, 0.456, 0.406, 0.406], std=[0.229, 0.224, 0.225, 0.225])
-            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
+            # Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
+            # Normalize(mean=[0.0804, 0.052147, 0.05377, 0.0807387], std=[0.132638, 0.089137, 0.14327, 0.12973]),
+            # Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
         ]) # 4 channels
         # self.tensor_tfms = Compose([
         #     # ToTensor(),
@@ -306,7 +336,7 @@ class ValidationDataset(Dataset):
         # ]) # 3 channels
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
-        self.cols = ['class{}'.format(i) for i in range(19)]
+        self.cols = ['{}'.format(i) for i in range(693)]
         self.cell_path = self.cfg.data.dir
 
     def __len__(self):
@@ -319,24 +349,25 @@ class ValidationDataset(Dataset):
             cells = self.cfg.experiment.num_cells
             batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
             mask = np.zeros((cnt))
-            label = np.zeros((cnt, 19)) 
+            label = np.zeros((cnt, 693)) 
             
-            # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
             img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
-            for i in range(cells):
-                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
-                img_cell = imread(path_channel)
-                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
-                if self.transform is not None:
-                    res = self.transform(image=img_cell)
-                    img_cell = res['image']
-
-                img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
-                img[i, :, :, :] = img_cell
-                batch = img # #10 x 4 x 256 x 256
-                mask[i] = 1
-                label[i] = row[self.cols].values.astype(np.float64)
-            return batch, mask, label, row[self.cols].values.astype(np.float64), cnt
+            for k in range(6):
+                for i in range(cells):
+                    plate_value = str(int(float(row["Metadata_Plate"])))
+                    path_channel = self.path / f'../../{self.cell_path}/{plate_value}_{row["Metadata_Well"]}_s{k+1}_cell{i+1}.png'
+                    img_cell = imread(path_channel)
+                    img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                    if self.transform is not None:
+                        res = self.transform(image=img_cell)
+                        img_cell = res['image']
+    
+                    img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
+                    img[i, :, :, :] = img_cell
+                    batch = img # #10 x 4 x 256 x 256
+                    mask[i] = 1
+                    label[i] = row[self.cols].values.astype(np.float64)
+                return batch, mask, label, row[self.cols].values.astype(np.float64), cnt
 
 
 class TestDataset(Dataset):
@@ -350,7 +381,9 @@ class TestDataset(Dataset):
         self.tensor_tfms = Compose([
             # ToTensor(),
             # Normalize(mean=[0.485, 0.456, 0.406,0.406], std=[0.229, 0.224, 0.225,0.225])
-            Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332]),
+            # Normalize(mean=[0.08323, 0.05766, 0.0554, 0.08365], std=[0.13553, 0.09504, 0.14648, 0.1332])
+            # Normalize(mean=[0.0804, 0.052147, 0.05377, 0.0807387], std=[0.132638, 0.089137, 0.14327, 0.12973]),
+            # Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
         ]) # 4 channels
         # self.tensor_tfms = Compose([
         #     # ToTensor(),
@@ -358,7 +391,7 @@ class TestDataset(Dataset):
         # ]) # 3 channels
         self.path = Path(os.path.dirname(os.path.realpath(__file__)))
         self.file_dict = file_dict
-        self.cols = ['class{}'.format(i) for i in range(19)]
+        self.cols = ['{}'.format(i) for i in range(693)]
         self.cell_path = self.cfg.data.dir
 
     def __len__(self):
@@ -372,21 +405,23 @@ class TestDataset(Dataset):
             cells = self.cfg.experiment.num_cells
             batch = torch.zeros((cnt, cnt*cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
             mask = np.zeros((cnt))
-            label = np.zeros((cnt, 19)) 
+            label = np.zeros((cnt, 693)) 
             
             # color_dict = {1: 'blue', 2: 'green', 3: 'red_merged'} #, 4: 'yellow'}
             img = torch.zeros((cells, self.cfg.experiment.n_channels, self.cfg.transform.size, self.cfg.transform.size))
-            for i in range(cells):
-                path_channel = self.path / f'../../{self.cell_path}/{row["ID"]}_cell{i+1}.png'
-                img_cell = imread(path_channel)
-                img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
-                if self.transform is not None:
-                    res = self.transform(image=img_cell)
-                    img_cell = res['image']
-
-                img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
-                img[i, :, :, :] = img_cell
-                batch = img # #10 x 4 x 256 x 256
-                mask[i] = 1
-                label[i] = row[self.cols].values.astype(np.float64)
-            return batch, mask, label, row[self.cols].values.astype(np.float64), cnt
+            for k in range(6):
+                for i in range(cells):
+                    plate_value = str(int(float(row["Metadata_Plate"])))
+                    path_channel = self.path / f'../../{self.cell_path}/{plate_value}_{row["Metadata_Well"]}_s{k+1}_cell{i+1}.png'
+                    img_cell = imread(path_channel)
+                    img_cell = np.transpose(cv2.resize(img_cell, (self.cfg.transform.size, self.cfg.transform.size)),(2,0,1))
+                    if self.transform is not None:
+                        res = self.transform(image=img_cell)
+                        img_cell = res['image']
+    
+                    img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
+                    img[i, :, :, :] = img_cell
+                    batch = img # #10 x 4 x 256 x 256
+                    mask[i] = 1
+                    label[i] = row[self.cols].values.astype(np.float64)
+                return batch, mask, label, row[self.cols].values.astype(np.float64), cnt

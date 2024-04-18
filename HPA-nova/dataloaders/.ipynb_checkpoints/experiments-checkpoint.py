@@ -38,6 +38,7 @@ class RandomKTrainTestSplit:
         #                                     valid[valid.fold != cfg.experiment.run_fold])
 
         self.train_meta, self.valid_meta, self.test_meta = (train[:], valid[:], test[:])
+        print(f'meta:{train[:]}')
 
         # print(train.head())
         if cfg.basic.debug:
@@ -106,9 +107,18 @@ class RandomKTrainTestSplit:
             }
             if self.cfg.experiment.method in method_dict:
                 print('[ √ ] Use weighted sampler, method: {}'.format(self.cfg.experiment.method))
-                cw = (1 / method_dict[self.cfg.experiment.method](train.iloc[:, 1:19].sum(0))).values
+                # HPA!!!
+                # cw = (1 / method_dict[self.cfg.experiment.method](train.iloc[:, 1:19].sum(0))).values
+                # print(train.head(2))
+                # weight = (train.iloc[:, 1:19] * cw).max(1).values
+
+                # BBBC!!!
+                # cw = (1 / method_dict[self.cfg.experiment.method](train.iloc[:, 3:695].sum(0))).values
                 print(train.head(2))
-                weight = (train.iloc[:, 1:19] * cw).max(1).values
+                weight = (train.iloc[:, 3:695] * 1).max(1).values
+                
+
+            
                 # print(weight)
                 # weight = 1 / method(train.groupby('label').transform('count').image_id.values)
             elif 'pow' in self.cfg.experiment.method:

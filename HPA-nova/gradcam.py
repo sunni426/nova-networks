@@ -27,13 +27,13 @@ class novaGradCAM:
         # Set a specific layer as trainable
         # print(self.model)
         # self.target_layers = [self.model.fc2] # for alexnet
-        # self.target_layers = [self.model.net.layer4] # for resnet50
-        self.target_layers = [self.model.model.blocks[-1]] # for tf_efficientnet_b3 (pretrained)
-        # print(f'MODEL:{self.model}')
+        self.target_layers = [self.model.net.layer4] # for resnet50
+        # self.target_layers = [self.model.model.blocks[-1]] # for tf_efficientnet_b3 (pretrained)
         # self.target_layers = [self.model.extractor[-1]] # for efficientnet2 (newly trained)
         # self.target_layers = [self.model.blocks[-1].norm1] # for vit (newly trained)
         # self.target_layers = [self.model.mlp_cells]
-       
+
+        # print(f'MODEL:{self.model}')
         # print(self.model.model.blocks[-1][1].bn3)
         # self.target_layers = [self.model.model.blocks[-1][1]] 
             

@@ -1,4 +1,4 @@
-# nova-networks/HPA-nova
+# nova-networks/HPA-nova for BBBC!!!
 from utils import *
 import tqdm
 import pandas as pd
@@ -28,11 +28,7 @@ from scipy import stats
 
 def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, save_path, scheduler, writer, tune=None):
     print(f'[ ! ] pos weight: {1 / cfg.loss.pos_weight}')
-    # pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight # commented, Mar 18
-    class_weights = torch.tensor(cfg.loss.class_weight).cuda()
-    # pos_weight = torch.ones(19).cuda() / class_weights
-    pos_weight = torch.ones(19).cuda() * class_weights
-    print(f'[ ! ] class weight: {pos_weight}')
+    pos_weight = torch.ones(693).cuda()
     # summary(model=model, input_size=(1, 3, 224, 224), col_names=['input_size', 'output_size', 'num_params', 'trainable'])
     print('[ √ ] Basic training')
     if cfg.transform.size == 512:
@@ -60,6 +56,7 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
             # native amp
             if cfg.basic.amp == 'Native':
                 scaler = torch.cuda.amp.GradScaler()
+            
             for i, (ipt, mask, lbl, cnt) in enumerate(tq):
                 model.train()
 #                 if i == 1:
@@ -68,7 +65,6 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                 mask = mask.view(-1)
                 lbl = lbl.view(-1, lbl.shape[-1])
                 exp_label = cnt.cuda()
-                # print(cnt.shape)
                 # warm up lr initial
                 if cfg.scheduler.warm_up and epoch == 0:
                     # warm up
@@ -87,8 +83,8 @@ def basic_train(cfg: Config, model, train_dl, valid_dl, loss_func, optimizer, sa
                         lam_a).cuda().float() +
                             cell_loss(cell, target_b).mean(1) * torch.tensor(
                                 lam_b).cuda().float())
-                    target_a_exp = target_a.view(-1, cfg.experiment.count, 19).mean(1)
-                    target_b_exp = target_b.view(-1, cfg.experiment.count, 19).mean(1)
+                    target_a_exp = target_a.view(-1, cfg.experiment.count, 693).mean(1)
+                    target_b_exp = target_b.view(-1, cfg.experiment.count, 693).mean(1)
                     lam_a_exp = lam_a.view(-1, cfg.experiment.count).mean(1)
                     lam_b_exp = lam_b.view(-1, cfg.experiment.count).mean(1)
                     loss_exp = (loss_func(exp, target_a_exp).mean(1) * torch.tensor(
@@ -219,15 +215,12 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
         losses_cell, predicted_cell, predicted_p_cell = [], [], []
         accuracy = 0
-        class_weights = torch.tensor(cfg.loss.class_weight).cuda()
-        # pos_weight = torch.ones(19).cuda() / class_weights
-        pos_weight = torch.ones(19).cuda() * class_weights
-        # pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
+        pos_weight = torch.ones(693).cuda()
         
         for i, (ipt, mask, lbl, cnt, n_cell) in enumerate(dl):
             ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
             lbl = lbl.view(-1, lbl.shape[-1])
-            exp_label = cnt.cuda().view(-1, 19)
+            exp_label = cnt.cuda().view(-1, 693)
             ipt, lbl = ipt.cuda(), lbl.cuda()
             if cfg.basic.amp == 'Native':
                 with torch.cuda.amp.autocast():
@@ -273,7 +266,7 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         # print(f'predicted_img: {predicted_img.shape}') # 12x1x19
         print(f'predicted_cell: {predicted_cell.shape}') # 12x10x19
 
-        predicted = np.zeros((len(dl),10,19))
+        predicted = np.zeros((len(dl),10, 693))
         # print(f'truth_img: {len(truth_img)}, {len(truth_img[0])}') # 6,19
         truth = np.array(truth_img)
         print(f'predicted: {predicted.shape}, truth: {truth.shape}')
@@ -289,7 +282,7 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
             accuracy += ((predicted[j] > 0.8) == truth_acc).sum().astype(np.float64) / truth_acc.shape[0] / truth_acc.shape[1]
             
             predicted_auc = np.mean(predicted[j], axis=0).flatten()
-            truth_auc = truth[j].flatten() # 10x19
+            truth_auc = truth[j].flatten() # 10x693
             # print(f'predicted_auc: {predicted_auc.shape}, {predicted_auc}') # 6x19
             roc_values.append(roc_auc_score(truth_auc, predicted_auc)) # Causing NaN errors for ViT
             # print(f'roc_values: {roc_values}')
@@ -303,31 +296,33 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         predicted = np.round(predicted, decimals=4)
         truth = np.round(truth, decimals=4)
         mAP = sum(mAP)/len(dl)
-        
+        print(mAP)
         # Image IDs
         path = Path(os.path.dirname(os.path.realpath(__file__)))
         csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
         # Open the CSV file and read the first column into a list
         with open(csv_file_path, 'r') as csvfile:
             csv_reader = csv.reader(csvfile)
-            row_ids = [row[0] for row in csv_reader]
+            row_ids = [[row[0], row[1]] for row in csv_reader]
         row_ids = row_ids[1:]        
         # print(f'row_ids: {row_ids}')
-        predicted = predicted.reshape((len(dl)*n_cell, 19)) # now, num_valid*num_cellsx19 
+        predicted = predicted.reshape((len(dl)*n_cell, 693)) # now, num_valid*num_cellsx19 
 
         # Add a new column with string IDs at index 0
         predicted_with_ids, truth_with_ids = [], []
         for img in range(len(dl)):
             start = img*10
             end = start + 10
-            predicted_with_ids.append(np.column_stack((np.broadcast_to(np.array(row_ids[img]), (10, 1)).tolist(), predicted[start:end, :])))
-            truth_with_ids.append(np.column_stack((row_ids[img], np.expand_dims(truth[img],0))))
+            predicted_with_ids.append(np.column_stack((np.broadcast_to(np.array(row_ids[img]), (10, 2)).tolist(), predicted[start:end, :])))
+            truth_with_ids.append(np.column_stack((np.broadcast_to(row_ids[img], (1, 2)), np.repeat(np.expand_dims(truth[img], 0), 1, axis=0))))
+            # truth_with_ids.append(np.column_stack((row_ids[img], np.expand_dims(truth[img],0))))
 
-        predicted_with_ids = np.array(predicted_with_ids).reshape((len(dl)*n_cell, 20)) # 20, because 19 labels + ID
-        truth_with_ids = np.array(truth_with_ids).reshape((len(dl), 20)) # 20, because 19 labels + ID
+        predicted_with_ids = np.array(predicted_with_ids).reshape((len(dl)*n_cell, 695)) 
+        truth_with_ids = np.array(truth_with_ids).reshape((len(dl), 695)) 
         
         # Create header with 'ID' added at the beginning
-        header = ','.join(['ID'] + [f'class{i}' for i in range(truth.shape[1])])
+        header = ','.join(['Metadata_Plate']+ ['Metadata_Well'] + [f'class{i}' for i in range(truth.shape[1])])
+        # + ['Metadata_Well'] + ['Metadata_broad_sample']
         
         # Get the directory and file paths
         base_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id
@@ -337,25 +332,6 @@ def basic_validate(mdl, dl, loss_func, cfg, epoch, tune=None):
         # Save with truncated values and the new ID column
         np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
         np.savetxt(truth_path, truth_with_ids, fmt='%s', delimiter=',', header=header, comments='')
-
-        # # GradCAM
-        # if(epoch % cfg.train.gradcam_every == 0):
-        #     print('[!] Computing Grad-CAM...')
-        #     # extract first image, first cell from validation set
-        #     csv_file_path = f'{path}/dataloaders/split/{cfg.experiment.csv_valid}'
-        #     # Open the CSV file and read the first column into a list
-        #     with open(csv_file_path, 'r') as csvfile:
-        #         csv_reader = csv.reader(csvfile)
-        #         for idx, row in enumerate(csv_reader):
-        #             row_id = row[0]
-        #             if(idx==4):
-        #                 break
-        #     print(f'row_id: {row_id}')
-        #     grad_img = f'../{cfg.data.dir}/{row_id}_cell2.png'
-        #     gradcam_instance = novaGradCAM(mdl, grad_img, 256)
-        #     image, image_prep = gradcam_instance.load()
-        #     gradcam_instance.make_gradcam(image, image_prep, cfg.basic.id)
-        #     # gradcam_instance.visualize(image, heatmap)
 
         return val_loss_img, accuracy, auc, mAP
 
@@ -368,15 +344,12 @@ def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
         losses_img, predicted_img, predicted_p_img, truth_img = [], [], [], []
         losses_cell, predicted_cell, predicted_p_cell = [], [], []
         accuracy = 0
-        class_weights = torch.tensor(cfg.loss.class_weight).cuda()
-        # pos_weight = torch.ones(19).cuda() / class_weights
-        pos_weight = torch.ones(19).cuda() * class_weights
-        # pos_weight = torch.ones(19).cuda() / cfg.loss.pos_weight
+        pos_weight = torch.ones(693).cuda()
 
         for i, (ipt, mask, lbl, cnt, n_cell) in enumerate(dl):
             ipt = ipt.view(-1, ipt.shape[-3], ipt.shape[-2], ipt.shape[-1])
             lbl = lbl.view(-1, lbl.shape[-1])
-            exp_label = cnt.cuda().view(-1, 19)
+            exp_label = cnt.cuda().view(-1, 693)
             ipt, lbl = ipt.cuda(), lbl.cuda()
             if cfg.basic.amp == 'Native':
                 with torch.cuda.amp.autocast():
@@ -416,7 +389,7 @@ def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
         predicted_img = np.array(predicted_img)
         predicted_cell = np.array(predicted_cell)
 
-        predicted = np.zeros((len(dl),10,19))
+        predicted = np.zeros((len(dl),10,693))
         truth = np.array(truth_img)
         roc_values = []
         mAP = []
@@ -447,7 +420,7 @@ def basic_test(mdl, dl, loss_func, cfg, epoch, tune=None):
         p_acc = p/len(dl)/cfg.experiment.num_cells
 
         
-        # # GradCAM
+        # GradCAM
         # print('[!] Computing Grad-CAM in test mode...')
         # # extract first image, first cell from validation set
         # path = Path(os.path.dirname(os.path.realpath(__file__)))
