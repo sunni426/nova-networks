@@ -26,9 +26,6 @@ import pandas as pd
 from torch.utils.data import Dataset
 from torchvision.io import read_image
 
-# train_ds = RANZERDataset(df=self.train_meta, tfms=train_tfms,
-#                                  cfg=self.cfg, mode='train')
-
 class AddGaussianNoise(object):
     def __init__(self, mean=0., std=1.):
         self.mean = mean
@@ -93,70 +90,40 @@ class CustomImageDataset(Dataset):
             Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
         ])
 
-    # def __len__(self):
-    #     return len(self.annotations)
-        
-    # def __init__(self, df, tfms=None, cfg=None, mode='train', file_dict=None):
-
-    #     self.df = df.reset_index(drop=True)
-    #     self.mode = mode
-    #     self.transform = tfms
-    #     self.cfg = cfg
-    #     self.tensor_tfms = Compose([
-    #         RandomRotation(degrees=(0, 180)),
-    #         RandomVerticalFlip(p=0.5),
-    #         RandomHorizontalFlip(p=0.5),
-    #         AddGaussianNoise(mean=0.0, std=0.1),
-    #         Normalize(mean=[0.0979, 0.06449, 0.062307, 0.098419], std=[0.14823, 0.0993746, 0.161757, 0.144149]),
-    #     ])
-    #     self.path = Path(os.path.dirname(os.path.realpath(__file__)))
-    #     self.file_dict = file_dict
-    #     self.cols = ['class{}'.format(i) for i in range(19)]
-    #     self.cell_path = self.cfg.data.dir
-
     def __len__(self):
         return len(self.df)
 
     def __getitem__(self, index):
         row = self.df.loc[index]
-        cnt = 1
+        cnt = 10 # 10 cells
         label = np.zeros((cnt, 19)) 
-        
-        # img = torch.zeros((cells, 4, 224, 224))
-        # Take in 1 cell per image for now
-        # for i in range(cells):
         img_path = os.path.join(self.root_dir, self.annotations.iloc[index, 0])
-        i=0
-        img_path = f'{img_path}_cell{i+9}.png'
+        img = torch.zeros((cnt, 3, 224, 224))
         
-        img_cell = imread(img_path)
-        img_cell = cv2.resize(img_cell, (224,224))
-        # print(f'img_cell: {img_cell.shape}')
-        # print(f'{type(img_cell)}')
-        # img_cell.numpy()
-        img_cell = self.transform(img_cell)
-        # img_cell = res['image']
-        
-        # img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
-        label = row[self.cols].values.astype(np.float64)
-        label = label.reshape(1, -1)
-        
-        # print(f'img: {img_cell.shape}, label: {label.shape}') # img: torch.Size([4, 228, 98]), label: (1, 19)
-
-        # merge channels here!
-        # Extracting the R and Y channels
-        r_channel = img_cell[0]  # Red channel
-        y_channel = img_cell[3]  # Yellow channel
-        
-        # Merging R and Y channels
-        ry_channel = r_channel + y_channel
-        
-        # Creating the new image tensor with merged R+Y channel
-        img_cell = torch.stack([ry_channel, img_cell[1], img_cell[2]])
-        
-        # print(f'img: {img_cell.shape}, label: {label.shape}') # img: torch.Size([3, 224, 224]), label: (1, 19)
-
-        return img_cell, 0.9*label + 0.1/19
+        for i in range(cnt):
+            cell_path = f'{img_path}_cell{i+1}.png'
+            img_cell = imread(cell_path)
+            img_cell = cv2.resize(img_cell, (224,224))
+            img_cell = self.transform(img_cell)
+            
+            # Extracting the R and Y channels --> Merge
+            r_channel = img_cell[0]  # Red channel
+            y_channel = img_cell[3]  # Yellow channel
+            
+            # Merging R and Y channels
+            ry_channel = r_channel + y_channel
+            
+            # Creating the new image tensor with merged R+Y channel
+            img_cell = torch.stack([ry_channel, img_cell[1], img_cell[2]])
+            img[i] = img_cell
+            
+            # img_cell = self.tensor_tfms(torch.tensor(img_cell).double())
+            label_cell = row[self.cols].values.astype(np.float64)
+            label[i] = torch.tensor(label_cell.reshape(1, -1))
+            
+            # print(f'img: {img_cell.shape}, label: {label.shape}') # img: torch.Size([4, 228, 98]), label: (1, 19)
+    
+        return img_cell, 0.9*label_cell + 0.1/19
 
 
 # custom, 4/2
@@ -188,7 +155,10 @@ def build_dataset(is_train, args):
     root = os.path.join(os.getcwd(), args.data_path[1:])
     # root = os.path.join(args.data_path, '') # , 'train' if is_train else 'val')
     # dataset = datasets.ImageFolder(root, transform=transform) # error, bc https://stackoverflow.com/questions/69199273/torchvision-imagefolder-could-not-find-any-class-folder
-    csv_file = '../dataloaders/split/valid_all_new.csv' # cwd: mae
+    if(is_train):
+        csv_file = '../dataloaders/split/HPA_final_train.csv' # cwd: mae
+    else:
+        csv_file = '../dataloaders/split/HPA_final_valid.csv'
     dataset = CustomImageDataset(csv_file, root, transform=transform)
     print(dataset)
 

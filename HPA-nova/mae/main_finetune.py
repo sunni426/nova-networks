@@ -123,7 +123,7 @@ def get_args_parser():
     parser.add_argument('--nb_classes', default=19, type=int,
                         help='number of the classification types')
 
-    parser.add_argument('--output_dir', default='./output_dir',
+    parser.add_argument('--output_dir', default='./output_dir_apr22_2',
                         help='path where to save, empty for no saving')
     parser.add_argument('--log_dir', default='./output_dir',
                         help='path where to tensorboard log')
@@ -139,7 +139,7 @@ def get_args_parser():
                         help='Perform evaluation only')
     parser.add_argument('--dist_eval', action='store_true', default=False,
                         help='Enabling distributed evaluation (recommended during training for faster monitor')
-    parser.add_argument('--num_workers', default=10, type=int)
+    parser.add_argument('--num_workers', default=1, type=int)
     parser.add_argument('--pin_mem', action='store_true',
                         help='Pin CPU memory in DataLoader for more efficient (sometimes) transfer to GPU.')
     parser.add_argument('--no_pin_mem', action='store_false', dest='pin_mem')
@@ -157,6 +157,8 @@ def get_args_parser():
 
 
 def main(args):
+    # os.environ["CUDA_VISIBLE_DEVICES"] = "9" # NEED TO CHANGE HERE!!
+    # print(f'IN MAIN_FINTEUNE: gpu {os.getenv("CUDA_VISIBLE_DEVICES")}')
     misc.init_distributed_mode(args)
 
     print('job dir: {}'.format(os.path.dirname(os.path.realpath(__file__))))
@@ -332,6 +334,7 @@ def main(args):
             log_writer=log_writer,
             args=args
         )
+        
         if args.output_dir:
             misc.save_model(
                 args=args, model=model, model_without_ddp=model_without_ddp, optimizer=optimizer,

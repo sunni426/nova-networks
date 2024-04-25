@@ -29,13 +29,13 @@ experiment:
   n_channels: 4
   num_train: 17717 # Total number of training images
   img_weight: 0
-  file: 'train_all_17717.csv' # training csv, put in /dataloaders/split/
-  csv_valid: 'test_all_1042.csv' # validation csv, put in /dataloaders/split/
-  csv_test: 'valid_all_2084.csv' # test csv, put in /dataloaders/split/ --> change in init
+  file: 'HPA_final_train.csv' # training csv, put in /dataloaders/split/
+  csv_valid: 'HPA_final_valid.csv' # validation csv, put in /dataloaders/split/
+  csv_test: 'HPA_final_test.csv' # test csv, put in /dataloaders/split/ --> change in init
   smoothing: 0
 
 data:
-  dir: 'preprocessing/train/cell'
+  dir: 'preprocessing/train_final/cell'
   # dir: '../kaggle_HPA/2021/data/kaggle-dataset/CAM_images/images/cellpose_segmented/6_train_240220_RGB/cropped_cells'
 
 model:
@@ -98,5 +98,5 @@ transform:
   name: 's_0220/sin_256_final' # in configs/augmentation
   val_name: 's_0220/sin_256_final'
   test_name: 's_0220/test'
-  num_preprocessor: 10
+  num_preprocessor: 8
   size: 256

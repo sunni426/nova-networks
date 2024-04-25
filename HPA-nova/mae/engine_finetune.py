@@ -61,6 +61,9 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
           0.03934447, 0.04536092, 0.03703704, 0.04307305, 0.05735393,
           0.04914732, 0.30151134, 0.0418487 , 0.0347524 , 0.03067138,
           0.10425721, 0.03305898, 0.05933908, 0.15075567]
+    # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # print(f'torch.device(cuda if torch.cuda.is_available() else cpu): {device}')
+    print(f'device in train_one_epoch: {device}, gpu: {os.getenv("CUDA_VISIBLE_DEVICES")}')
     pos_weight = torch.tensor(class_weight).to(device)
     criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction='none').to(device)
 
@@ -73,6 +76,7 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
     if log_writer is not None:
         print('log_dir: {}'.format(log_writer.log_dir))
 
+    print(f'data_loader len: {len(data_loader)}')
     for data_iter_step, (samples, targets) in enumerate(metric_logger.log_every(data_loader, print_freq, header)):
 
         # we use a per iteration (instead of per epoch) lr scheduler
@@ -95,6 +99,13 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
 
         loss_value = loss.mean()
         loss = loss.mean() # added
+
+        # added, Sunni 4/21
+        map = calc_metrics(predicted=outputs, truth=targets)
+        if (data_iter_step + 1) % 5 == 0: # every 5 steps
+            # epoch_1000x = int((data_iter_step / len(data_loader) + epoch) * 1) # og, *1000
+            epoch_log = int((data_iter_step / len(data_loader) + epoch) * 1)
+            log_writer.add_scalar('train_map', map, epoch_log)
 
         if not math.isfinite(loss_value):
             print("Loss is {}, stopping training".format(loss_value))
@@ -136,7 +147,9 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
 @torch.no_grad()
 def evaluate(data_loader, model, device):
 
-    device = 'cuda' 
+    # device = 'cuda' 
+    # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # print(f'torch.device(cuda' if torch.cuda.is_available() else 'cpu): {device}')
     
     # criterion = torch.nn.CrossEntropyLoss()
     class_weight = [0.02531037, 0.06579517, 0.04364358, 0.04229549, 0.03539962,
@@ -186,8 +199,10 @@ def evaluate(data_loader, model, device):
 
 def calc_metrics(predicted, truth):
 
-    predicted = np.array(predicted.cpu())
-    truth = np.array(truth.cpu())
+    # predicted = np.array(predicted.cpu())
+    predicted = predicted.cpu().detach().numpy()
+    # truth = np.array(truth.cpu())
+    truth = truth.cpu().detach().numpy()
     roc_values = []
     mAP = []
     data_len = len(truth)
@@ -304,8 +319,8 @@ def save_csv(predicted, truth):
     # base_path = Path(os.path.dirname(os.path.realpath(__file__))) / 'results' / cfg.basic.id
     # pred_path = base_path / 'pred.csv'
     # truth_path = base_path / 'truth.csv'
-    pred_path = 'pred.csv'
-    truth_path = 'truth.csv'
+    pred_path = 'pred_debs.csv'
+    truth_path = 'truth_debs.csv'
     
     # Save with truncated values and the new ID column
     np.savetxt(pred_path, predicted_with_ids, fmt='%s', delimiter=',', header=header, comments='')
