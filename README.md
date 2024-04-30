@@ -7,20 +7,6 @@ Our final code is developed in the ```Nova-Classifier``` directory.
 
 ### Code specifics
 We developed a model skeleton trainable on the HPA dataset and BBBC036 dataset. After preprocessing and segmentation with Cellpose, we applied data normalization and batch processing to conduct model training. We trained on EfficientNet, Resnet, ViT, MedViT, and ViT finetuning with MAE pretraining.
-To run basic training workflow, please run the following command. Input argument ```-i``` specifies directory that will store the contents of this command, in ```/results/```. Input argument ```-i``` specifies configuration file (YAML file). ```main-training.ipynb``` and ```main-testing.ipynb``` provide an example for training and testing modalities.
-```
-!python main.py train -i save_directory -j options/nova.yaml
-```
-For custom configurations:
-> configs/options/nova.yaml (For specific configurations, including ground truth and input paths, training configs)
-> 
-> configs/__init__.py (For all other default configurations)
-
-Ground truth csv files are stored as .csv files in:
-> dataloaders/split
-
-Please use the packages in the following requirements file to configure virtual environment configuration:
-> novaenv_requirements.txt
 
 ### Model Workflow
 ![alt text](https://github.com/sunni426/nova-networks/blob/main/modified_team2_pipeline.png?raw=true)
