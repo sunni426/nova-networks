@@ -1,3 +1,27 @@
+# Single-Cell Classification of Protein Labels, Mechanism of Actions (MoAs), and Other Relevant Predictors
+
+This repository contains code for single-cell classification of protein labels, mechanism of actions (MoAs), and other relevant predictors using various deep learning models.
+
+## Table of Contents
+
+1. [Hardware Configuration](#hardware-configuration)
+2. [Software Setup](#software-setup)
+3. [Data Preprocessing](#data-preprocessing)
+4. [Full Training](#full-training)
+
+## Hardware Configuration
+
+### Training Mode
+
+- **Run Training:**
+  ```bash
+  !python main.py train -i save_directory -j options/nova.yaml
+
+
+
+
+
+
 # Single-cell classification of protein labels, mechanism of actions (MoAs), and other relevant predictors
 
 ## I. HARDWARE:
