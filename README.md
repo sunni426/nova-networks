@@ -14,4 +14,4 @@ We developed a model skeleton trainable on the HPA dataset and BBBC036 dataset. 
 ### Acknowledgements
 We are deeply grateful to our advisors from Novartis for mentoring us in this project.
 
-*@Boston University, Dept of Biomedical Engineering 2024*
+*@Boston University, Department of Biomedical Engineering, 2024*
