@@ -1,6 +1,6 @@
 # Single-Cell Classification of Protein Labels, Mechanism of Actions (MoAs), and Other Relevant Predictors
 
-This repository contains code for single-cell classification of protein labels, mechanism of actions (MoAs), and other relevant predictors using various deep learning models.
+This repository contains code for single-cell classification of protein labels, mechanism of actions (MoAs), and other relevant predictors using deep learning models on different cellular datasets.
 
 ## Table of Contents
 
