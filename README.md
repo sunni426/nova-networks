@@ -3,7 +3,7 @@
 
 Phenotypic representation for microscopy images has been demonstrated as a powerful method for research in cell biology, which can also serve as a tool for profiling perturbations in drug discovery. However, achieving a single-cell level of cellular annotations is often challenging due to the vast scale of compound screening. Deep learning methods have been proposed as a solution to encode high-quality image representations that both recapitulate features of the datasets and provide explainable information, despite often being difficult to interpret. Here, we propose a framework that combines the results of weakly supervised learning (WSL) with Class Activation Mapping (CAM) to enhance explainability. We test our idea using the 2021 Human Protein Atlas Kaggle Challenges to build our testing framework for crafting a multi-channel, multi-label classifier. This framework integrates a Cellpose-based single cell segmentation, an image preprocessor, and various network architectures to provide plug-and-play finetuning. For model inspection, we leverage Gradient-weighted Class Activation Mapping (Grad-CAM) as the primary tool to visualize the focus of our model during the inference phase, thereby enhancing the explainability of model performance. We subsequently apply this framework to the Broad Bioimage Benchmark Collection (BBBC) datasets to understand the representation on Cell Painting images associated with the mechanism of action (MoA) in molecules. Our aim is to expedite drug development by providing a deep learning-based phenotypic representation that aligns closely with experimental design, while still offering sufficient explainability for scientific decision-making.
 
-Our final code is developed in the *Nova-Classifier* directory.
+Our final code is developed in the ```Nova-Classifier``` directory.
 
 ### Code specifics
 We developed a model skeleton trainable on the HPA dataset and BBBC036 dataset. After preprocessing and segmentation with Cellpose, we applied data normalization and batch processing to conduct model training. We trained on EfficientNet, Resnet, ViT, MedViT, and ViT finetuning with MAE pretraining.
@@ -27,4 +27,5 @@ Please use the packages in the following requirements file to configure virtual 
 
 ### Acknowledgements
 We are deeply grateful to our advisors from Novartis for mentoring us in this project.
+
 Boston University, Dept of Biomedical Engineering 2024
