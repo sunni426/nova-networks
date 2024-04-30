@@ -36,11 +36,11 @@ Please use the packages in the following requirements file to configure virtual 
   - Normalization values and other custom transform functions
   - Fixed number of cells to load in per image
 - Specify model class (including EfficienNet, Resnet, MedViTs) in ```\models``` folder, can implement additional model classes.
-- Note: Training utilities:
+- **Note**: Training utilities:
   - Save model weights of best epoch checkpoint
   - Keep a running log of losses and metrics: mean average precision (mAP) and area under the curve (AUC)
   - Save final predictions (weighted image-level and cell-level predictions) and corresponding ground truth as csv's in the ```results``` directory.
-- Note: MAE pretraining & subsequent ViT finetuning separately trained, not using weighted image-cell level dual head predictor skeleton. Please refer to Nova-Classifier/mae.ipynb notebook for training details.
+- **Note**: MAE pretraining & subsequent ViT finetuning separately trained, not using weighted image-cell level dual head predictor skeleton. Please refer to Nova-Classifier/mae.ipynb notebook for training details.
 
 ### Testing mode
 - **Run Testing:**
