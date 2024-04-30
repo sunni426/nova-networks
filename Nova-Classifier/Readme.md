@@ -11,6 +11,21 @@ This repository contains code for single-cell classification of protein labels, 
 
 ### Training Mode
 
+To run basic training workflow, please run the following command. Input argument ```-i``` specifies directory that will store the contents of this command, in ```/results/```. Input argument ```-i``` specifies configuration file (YAML file). ```main-training.ipynb``` and ```main-testing.ipynb``` provide an example for training and testing modalities.
+```
+!python main.py train -i save_directory -j options/nova.yaml
+```
+For custom configurations:
+> configs/options/nova.yaml (For specific configurations, including ground truth and input paths, training configs)
+> 
+> configs/__init__.py (For all other default configurations)
+
+Ground truth csv files are stored as .csv files in:
+> dataloaders/split
+
+Please use the packages in the following requirements file to configure virtual environment configuration:
+> novaenv_requirements.txt
+
 - **Run Training:**
   ```bash
   !python main.py train -i save_directory -j options/nova.yaml
