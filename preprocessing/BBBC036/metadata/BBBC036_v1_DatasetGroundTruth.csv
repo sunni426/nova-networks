@@ -1,0 +1,1554 @@
+Metadata_broad_sample,Metadata_pert_iname,Metadata_pert_iname2,Metadata_moa,Metadata_target
+BRD-A01078468-001-04-9,hexestrol,hexestrol,synthetic estrogen,"AKR1C1, ESR1, ESR2"
+BRD-A01320529-001-05-9,salmeterol,salmeterol,adrenergic receptor agonist,ADRB2
+BRD-A01593789-001-01-5,chlormadinone-acetate,chlormadinone acetate,5 alpha reductase inhibitor,PGR
+BRD-A01636364-003-04-5,bupivacaine,bupivacaine,sodium channel blocker,"KCNA5, PTGER1, SCN10A, SCN4A"
+BRD-A01787639-003-08-6,naftopidil,naftopidil,adrenergic receptor antagonist,ADRA1A
+BRD-A02006392-001-06-5,nitrendipine,nitrendipine,calcium channel blocker,"CACNA1C, CACNA1D, CACNA1H, CACNA1S, CACNA2D1, CACNA2D2, CACNB2, CACNG1, KCNN4"
+BRD-A02710418-003-03-5,meptazinol,meptazinol,opioid receptor agonist,BCHE
+BRD-A02713983-001-02-0,NA,dihydrodeoxygedunin,growth factor receptor activator,NTRK2
+BRD-A03816571-001-01-0,CP-55940,BRD-A03816571,cannabinoid receptor agonist|CC chemokine receptor antagonist,"CNR1, CNR2, CXCR4. GPR55"
+BRD-A04322457-003-03-9,isoprenaline,isoprenaline,adrenergic receptor agonist,"ADRB1, ADRB2, ADRB3, MAPK1, PIK3R1, PIK3R2, PIK3R3"
+BRD-A04438777-001-01-4,NA,SKF 82958,dopamine receptor agonist,NA
+BRD-A04553218-050-03-0,chlorphenamine,chlorphenamine,histamine receptor antagonist,"HRH1, SLC6A2, SLC6A3, SLC6A4"
+BRD-A05186015-003-04-0,bupropion,bupropion,dopamine uptake inhibitor,"CHRNA3, SLC6A2, SLC6A3"
+BRD-A06352508-001-02-9,SB-218078,SB 218078,CHK inhibitor,CHEK1
+BRD-A06935312-001-02-7,fusidic-acid,fusidic acid,bacterial 30S ribosomal subunit inhibitor,
+BRD-A07207424-001-04-1,Ro-20-1724,RO-20-1724,phosphodiesterase inhibitor,"PDE3A, PDE4A, PDE4B, PDE4C, PDE4D"
+BRD-A07824748-001-02-6,NA,flavanone,11-beta hydroxysteroid dehydrogenase inhibitor,"ADORA3, HSD11B1"
+BRD-A07875874-001-01-6,cilnidipine,BRD-A07875874,calcium channel blocker,"CACNA1B, CACNA1C"
+BRD-A07932845-001-01-1,metitepine,metitepine,anti-HCVE2,"HTR1A, HTR1B, HTR1D, HTR1E, HTR1F, HTR2A, HTR2B, HTR2C, HTR5A, HTR6, HTR7"
+BRD-A07952294-001-02-3,NA,L-744832,farnesyltransferase inhibitors,NA
+BRD-A08187463-001-03-8,racecadotril,racecadotril,enkephalinase inhibitor,MME
+BRD-A08709697-001-02-9,NA,heliotrine,pyrrolizidine alkaloid,NA
+BRD-A09094913-001-02-3,strychnine,strychnine,acetylcholine receptor antagonist,"CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, CHRNA10, CHRNA9, GLRA1, GLRA2, GLRA3, GLRB"
+BRD-A09161221-001-01-9,NA,nomilin hydrochloride,HSP inhibitor,NA
+BRD-A09349126-001-02-4,norethindrone-acetate,norethindrone acetate,progesterone receptor agonist,
+BRD-A09467419-003-04-2,mebeverine,mebeverine,acetylcholine receptor antagonist,CHRM1
+BRD-A09533288-001-02-7,verapamil,verapamil,calcium channel blocker,"CACNA1A, CACNA1B, CACNA1C, CACNA1D, CACNA1F, CACNA1G, CACNA1I, CACNA1S, CACNB1, CACNB2, CACNB3, CACNB4, CYP3A4, KCNA10, KCNA7, KCNH2, KCNJ11, NALCN, SCN5A, SLC29A4, SLC6A4"
+BRD-A10070317-003-05-1,propranolol,propranolol,adrenergic receptor antagonist,
+BRD-A10739734-003-01-5,efaroxan,efaroxan,adrenergic receptor antagonist,ADORA2A
+BRD-A11609859-303-01-2,NA,BRD-A11609859,opioid receptor agonist,"OPRD1, OPRK1, OPRM1"
+BRD-A11678676-001-02-6,wortmannin,wortmannin,PI3K inhibitor,"PI4KA, PI4KB, PIK3CA, PIK3CD, PIK3CG, PIK3R1, PLK1, PRKDC"
+BRD-A14566392-004-03-5,scopolamine,BRD-A14566392,acetylcholine receptor antagonist,"CHRM2, CHRM1, CHRM3, CHRM4, CHRM"
+BRD-A15034104-002-03-6,bergenin,bergenin,interleukin inhibitor,"IL1B, TNF"
+BRD-A15070535-323-02-1,bucladesine,bucladesine,adenosine receptor agonist|cAMP stimulant,PRKACA
+BRD-A15415227-003-01-1,GW-1929,BRD-A15415227,PPAR receptor agonist,"INS, PPARG"
+BRD-A15435692-003-01-5,BMY-14802,BRD-A15435692,sigma receptor antagonist|glutamate receptor antagonist|serotonin receptor agonist,"HTR1A, SIGMAR1"
+BRD-A15530910-001-01-3,SDZ-21009,BRD-A15530910,adrenergic receptor antagonist|serotonin receptor antagonist,NA
+BRD-A15914070-001-01-5,4-hydroxy-2-nonenal,BRD-A15914070,cytotoxic lipid peroxidation product,IKBKB
+BRD-A16694057-001-02-7,BADGE,BADGE,PPAR receptor antagonist,PPARG
+BRD-A17065207-001-06-9,brefeldin-a,BRD-A17065207,protein synthesis inhibitor,"ARF1, ARFGEF1, ARFGEF2, CYTH2, GBF1, SAR1A"
+BRD-A18043272-001-03-2,phensuximide,phensuximide,succinimide antiepileptic,"CACNA1G, CACNA1H, CACNA1I"
+BRD-A18497530-001-04-6,NA,5-iodotubercidin,adenosine kinase inhibitor|nucleoside transporter inhibitor,"MAPK3, ADK, CSNK1G2, GSG2, LRRK2"
+BRD-A18696154-003-11-9,idazoxan,idazoxan,adrenergic receptor antagonist,ADRA2A
+BRD-A20348246-001-04-2,chlormezanone,chlormezanone,GABA receptor modulator,"GABRA1, TSPO"
+BRD-A20968261-001-01-3,WAY-213613,BRD-A20968261,glutamate transporter inhibitor,SLC1A2
+BRD-A22305049-003-04-5,benfluorex,benfluorex,gluconeogenesis inhibitor,HMGCR
+BRD-A22684332-003-02-3,procaterol,procaterol,adrenergic receptor agonist,ADRB2
+BRD-A22707317-001-02-5,SB-205384,BRD-A22707317,GABA receptor modulator,"GABRA3, GABRA5, GABRA6"
+BRD-A22783572-065-01-3,vinblastine,BRD-A22783572,microtubule formation inhibitor|tubulin inhibitor|tubulin polymerisation inhibitor,"JUN, TUBA1A, TUBB, TUBD1, TUBE1, TUBG1"
+BRD-A23034328-003-03-4,clindamycin,clindamycin,protein synthesis inhibitor,
+BRD-A23226398-001-02-7,estradiol,BRD-A23226398,estrogen receptor agonist,"CYP2B6, CYP2C19, CYP2C8, CYP2E1, CYP3A5, CYP3A7, ESR1, ESR2, GPER1, KCNMA1, NR1I2"
+BRD-A23683907-334-01-0,NAS-181,BRD-A23683907,serotonin receptor antagonist,HTR1B
+BRD-A23723433-001-01-2,paclitaxel,BRD-A23723433,tubulin inhibitor|microtubule stabilizing agent|microtubule stimulant|P glycoprotein inhibitor|taxane,"ABCB1, BCL2, CYP2C8, MAP2, MAP4, MAPT, NR1I2, TLR4, TUBB, TUBB1"
+BRD-A24587114-066-03-5,NA,isoetarine,adrenergic receptor agonist,"ADRB1, ADRB2"
+BRD-A24817035-001-04-7,NA,laudanosine,central nervous system agent,NA
+BRD-A25234499-001-04-3,aminoglutethimide,aminoglutethimide,glucocorticoid receptor antagonist,"CYP11A1, CYP19A1"
+BRD-A25775766-001-03-3,securinine,securinine,GABA receptor antagonist|TP53 activator,GABRA1
+BRD-A26222320-001-02-6,puromycin,puromycin,protein synthesis inhibitor,"NHP2L1, RPL10L, RPL11, RPL13A, RPL15, RPL19, RPL23, RPL23A, RPL26L1, RPL3, RPL37, RPL8, RSL24D1"
+BRD-A26711594-001-02-7,nicardipine,nicardipine,calcium channel blocker,"ADORA3, ADRA1A, ADRA1B, ADRA1D, CACNA1C, CACNA1D, CACNA2D1, CACNB2, CALM1, CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, PDE1A, PDE1B"
+BRD-A28856712-003-04-7,NA,tetryzoline,adrenergic receptor agonist,NA
+BRD-A29260609-003-04-7,acebutolol,acebutolol,adrenergic receptor antagonist,"ADRB1, ADRB2"
+BRD-A29289453-001-02-1,PCA-4248,PCA 4248,platelet activating factor receptor antagonist,PTAFR
+BRD-A29322418-237-02-4,potassium-canrenoate,potassium canrenoate,mineralocorticoid receptor antagonist,NR3C2
+BRD-A29437505-001-01-6,RWJ-21757,BRD-A29437505,TLR agonist,TLR7
+BRD-A30717181-001-02-7,NA,triamcinolone diacetate,glucocorticoid receptor agonist,"CYP3A5, CYP3A7, NR3C1, SERPINA6"
+BRD-A31800922-003-04-6,procyclidine,procyclidine,acetylcholine receptor antagonist,"CHRM1, CHRM2, CHRM3, CHRM4"
+BRD-A32505112-001-02-8,trandolapril,trandolapril,angiotensin converting enzyme inhibitor,ACE
+BRD-A32673558-003-02-1,aceclidine,aceclidine,acetylcholine receptor agonist,"CHRM1, CHRM2, CHRM3, CHRM4, CHRM5"
+BRD-A32949107-001-01-7,MRS-1845,BRD-A32949107,calcium channel blocker,ORAI1
+BRD-A34255068-001-04-8,rolipram,rolipram,phosphodiesterase inhibitor,
+BRD-A34309505-001-08-5,NA,Zopiclone[Imovane],benzodiazepine receptor agonist,"GABRA1, GABRA2, GABRA3, GABRA5, TSPO"
+BRD-A34751532-001-03-6,homosalate,homosalate,HSP inducer,
+BRD-A34788695-003-04-5,tetracycline,tetracycline,bacterial 30S ribosomal subunit inhibitor,PRNP
+BRD-A34806832-001-02-7,NA,proscillaridin,ATPase inhibitor,ATP1A1
+BRD-A35033682-001-01-0,NA,eriodictyol,cytochrome P450 inhibitor,"CYP1B1, NFE2L2, XDH"
+BRD-A35338386-001-04-6,NECA,BRD-A35338386,adenosine receptor agonist,"ADORA1, ADORA2A, ADORA2B, ADORA3, HSP90B1"
+BRD-A35623999-001-03-2,CGP-37157,CGP-37157,mitochondrial Na+/Ca2+ exchanger antagonist|sodium/calcium exchange inhibitor,SLC8A1
+BRD-A35931254-003-02-7,NA,apomorphine,dopamine receptor agonist,"DRD1, DRD2, DRD3"
+BRD-A37347161-003-01-8,BRL-52537,BRD-A37347161,opioid receptor agonist,OPRK1
+BRD-A37432947-004-02-5,ipratropium,BRD-A37432947,acetylcholine receptor antagonist,"CHRM1, CHRM2, CHRM3, CHRM4, CHRM5"
+BRD-A37441042-003-02-2,tulobuterol,tulobuterol,adrenergic receptor agonist,ADRB2
+BRD-A37492983-001-03-8,iocetamic-acid,iocetamic acid,radiopaque medium,
+BRD-A37704979-001-02-4,SB-203580,SB-203580,p38 MAPK inhibitor,"AKT1, ALOX5, CHEK1, CYP2D6, CYP3A4, GAK, GSK3B, LCK, MAPK1, MAPK10, MAPK11, MAPK12, MAPK14, MAPK8, MAPK9, PRKCA, RAF1, RIPK2, ROCK1, RPS6KB1, SGK1, SRC, TNF"
+BRD-A37776212-003-02-5,ICI-204448,BRD-A37776212,opioid receptor agonist,OPRK1
+BRD-A39522003-001-01-0,OMDM-2,BRD-A39522003,FAAH inhibitor|FAAH reuptake inhibitor,GPR119
+BRD-A39747742-001-02-7,estradiol-valerate,estradiol valerate,estrogen receptor agonist,ESR1
+BRD-A40022950-001-02-9,NA,gitoxigenin diacetate,ATPase inhibitor,NA
+BRD-A41112154-001-02-1,NA,oleanolic acid acetate,G protein-coupled receptor agonist,NA
+BRD-A41722204-003-01-5,sulmazole,sulmazole,adenosine receptor antagonist,
+BRD-A42335949-300-04-9,alexidine,alexidine,phosphatidylglycerophosphatase inhibitor,PTPMT1
+BRD-A42346008-003-03-6,NA,metanephrine,epinephrine metabolite,NA
+BRD-A42553870-001-05-1,NA,BRD-A42553870,neuropeptide receptor antagonist,NPY5R
+BRD-A42571354-300-01-3,cetirizine,cetirizine,histamine receptor antagonist,HRH1
+BRD-A42628519-001-04-1,NA,iopanoic acid,radiopaque medium,NA
+BRD-A42831637-001-02-2,NA,BRD-A42831637,anti-inflammatory|Cannabinoid metabolite,NA
+BRD-A43076080-001-03-3,cantharidin,cantharidin,protein phosphatase inhibitor,
+BRD-A43930669-003-01-0,L-368899,BRD-A43930669,oxytocin receptor antagonist,"AVPR1A, AVPR2, OXT, OXTR"
+BRD-A43940795-001-02-8,NA,tetrahydropalmatine,serotonin release inhibitor,NA
+BRD-A44551378-001-01-9,NA,LFM-A12,EGFR inhibitor,EGFR
+BRD-A44863528-001-04-1,proglumide,proglumide,CCK receptor antagonist,"CCKAR, CCKBR"
+BRD-A44966919-001-03-1,NA,boldine,acetylcholine receptor antagonist,"CHRNA4, CHRNB2, DRD1, DRD2"
+BRD-A45140972-060-02-4,meclocycline-sulfosalicylate,meclocycline sulfosalicylate,bacterial 50S ribosomal subunit inhibitor,
+BRD-A45543382-001-02-7,metrizamide,metrizamide,radiopaque medium,
+BRD-A46066006-004-04-4,NA,clidinium bromide,muscarinic antagonist,NA
+BRD-A47144777-001-02-5,dihydro-7-desacetyldeoxygedunin,BRD-A47144777,HSP90 inhibitor,HSP90AA1
+BRD-A47513740-001-02-5,NA,calyculin A,protein phosphatase inhibitor,"PPP1CA, PPP1CC, PPP2CA"
+BRD-A47598013-004-02-0,citalopram,citalopram,selective serotonin reuptake inhibitor (SSRI),"SLC6A2, SLC6A4"
+BRD-A47633927-001-01-8,NPC-15199,BRD-A47633927,ICAM1 antagonist,"ICAM1, PPARG"
+BRD-A48257147-001-01-9,PHCCC,BRD-A48257147,glutamate receptor agonist,"GRM1, GRM4"
+BRD-A48300215-001-01-4,ajmaline,ajmaline,sodium channel blocker,SCN5A
+BRD-A48809242-001-02-9,IB-MECA,IB-MECA,adenosine receptor agonist,"ADORA1, ADORA2A, ADORA2B, ADORA3"
+BRD-A49172652-001-13-1,lansoprazole,lansoprazole,ATPase inhibitor,"ATP4A, ATP4B"
+BRD-A49225603-045-02-7,NA,trimeprazine tartrate,histamine receptor agonist,HRH1
+BRD-A49358627-001-03-9,ciprofibrate,ciprofibrate,PPAR receptor agonist,PPARA
+BRD-A49370193-051-01-7,RO-60-0175,BRD-A49370193,serotonin receptor agonist,"HTR2A, HTR2B, HTR2C"
+BRD-A49680073-001-01-9,NA,cucurbitacin I,JAK inhibitor|Lipocortin synthesis stimulant|STAT inhibitor,"JAK2, STAT3"
+BRD-A50157456-065-02-4,terbutaline,terbutaline,adrenergic receptor agonist,ADRB2
+BRD-A50311610-300-04-7,NA,meclozine,CAR agonist,"HRH1, NR1I3"
+BRD-A50675702-001-03-0,fipronil,fipronil,chloride channel blocker|GABA gated chloride channel blocker,
+BRD-A50684349-001-01-5,fenoldopam,fenoldopam,dopamine receptor agonist,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C, DRD1, DRD4, DRD5"
+BRD-A50737080-001-01-4,CGK-733,BRD-A50737080,ATR kinase inhibitor,"ATM, ATR"
+BRD-A50764878-001-01-4,MDL-73005EF,MDL 73005EF,serotonin receptor antagonist,HTR1A
+BRD-A51410489-001-01-4,NA,yohimbine hydrochloride,adrenergic receptor antagonist,"ADRA2A, ADRA2B, ADRA2C, DRD2, DRD3, HTR1A, HTR1B, HTR1D, HTR1E, HTR1F, HTR2A, HTR2B, HTR2C, HTR5A, HTR7, KCNJ1, KCNJ10, KCNJ11, KCNJ12, KCNJ14, KCNJ15, KCNJ8"
+BRD-A52922642-001-02-9,gallopamil,gallopamil,L-type calcium channel blocker,ATP2A2
+BRD-A53077924-236-01-4,tianeptine,BRD-A53077924,Selective serotonin reuptake enhancer (SSRE),SLC6A4
+BRD-A53416814-001-01-5,ceramide,BRD-A53416814,nitric oxide production inhibitor|phosphoenolpyruvate carboxylase activator|serine/threonine protein phosphatase activator,NA
+BRD-A53952395-003-04-6,prilocaine,prilocaine,local anesthetic,"SCN10A, SCN11A, SCN1A, SCN2A, SCN3A, SCN4A, SCN5A, SCN7A, SCN8A, SCN9A"
+BRD-A54029483-001-01-5,IRL-2500,BRD-A54029483,endothelin receptor antagonist,EDNRB
+BRD-A54490543-066-04-4,pirlindole,pirlindole,monoamine oxidase inhibitor,MAOA
+BRD-A54845972-066-01-5,dihydroergotamine,BRD-A54845972,serotonin receptor agonist|adrenergic receptor partial agonist|dopamine receptor agonist,"ADRA2A, DRD2, HTR1B, HTR1D, HTR1E, HTR1F, HTR2B, HTR7"
+BRD-A54927599-001-07-8,KF-38789,BRD-A54927599,P-selectin inhibitor,SELP
+BRD-A55272860-001-03-9,sulpiride,sulpiride,dopamine receptor antagonist,
+BRD-A55424491-001-04-1,methotrexate,methotrexate,dihydrofolate reductase inhibitor,DHFR
+BRD-A55756846-001-05-5,NA,H7,PKA inhibitor,"PKIA, PRKACA, PRKAR1A"
+BRD-A55913614-316-04-7,primaquine,primaquine,antimalarial agent|DNA inhibitor,"KRT7, NQO2"
+BRD-A56020723-001-02-0,NA,CA-074-Me,cathepsin inhibitor|antiamyloidogenic agent,CTSB
+BRD-A57133233-003-03-7,chlorcyclizine,chlorcyclizine,histamine receptor antagonist,HRH1
+BRD-A61154809-001-03-5,gliclazide,gliclazide,ATP channel blocker|insulin secretagogue,"ABCC8, VEGFA"
+BRD-A61392169-001-01-9,NA,BRD-A61392169,glutamate receptor antagonist,"GRIN1, GRIN2B"
+BRD-A61470182-001-02-4,NA,N-formylmethionylalanine,macrophage activator,NA
+BRD-A62021152-003-01-8,WAY-161503,BRD-A62021152,serotonin receptor agonist,HTR2C
+BRD-A62428732-096-02-6,hydroxyzine,hydroxyzine,antihistamine,HRH1
+BRD-A62505706-001-02-3,edoxudine,edoxudine,DNA directed DNA polymerase inhibitor,
+BRD-A63346720-300-01-1,rimcazole,BRD-A63346720,sigma receptor antagonist|dopamine reuptake inhibitor,SIGMAR1
+BRD-A63667919-103-01-9,methylergometrine,BRD-A63667919,dopamine receptor antagonist|partial serotonin receptor agonist,"DRD1, HTR1E, HTR1F, HTR2A, HTR2B, HTR2C"
+BRD-A63836183-362-01-1,PD-123319,BRD-A63836183,angiotensin receptor antagonist,AGTR2
+BRD-A63894585-001-03-4,clobetasol-propionate,clobetasol propionate,glucocorticoid receptor agonist,"NR3C1, PLA2G1B"
+BRD-A64485570-001-02-9,trifluridine,trifluridine,DNA directed DNA polymerase inhibitor|thymidylate synthase inhibitor,TYMS
+BRD-A64933752-001-01-0,CV-1808,BRD-A64933752,adenosine receptor agonist,"ADORA2A, ADORA2B"
+BRD-A65051990-001-03-8,acenocoumarol,acenocoumarol,vitamin K antagonist,VKORC1
+BRD-A65076780-001-01-3,dihydroergocristine,DIHYDROERGOCRISTINE,adrenergic receptor antagonist|prolactin inhibitor,"ADRA1A, ADRB1, DRD1, DRD2, DRD3, DRD4, DRD5, HTR1A, HTR2A, HTR3A, HTR4, HTR5A, HTR6, HTR7"
+BRD-A65145453-001-02-0,NA,BRD-A65145453,glutamate receptor agonist,"GRIA2, GRIK1"
+BRD-A65671304-001-02-6,candesartan-cilextil,candesartan cilextil,angiotensin receptor antagonist,"AGTR1, AGTR2"
+BRD-A66025870-237-05-1,NA,pheneticillin,bacterial cell wall synthesis inhibitor,NA
+BRD-A66199457-001-02-2,NA,asiaticoside,antineoplastic,NA
+BRD-A67552019-001-02-2,ouabain,ouabain,ATPase inhibitor,ATP1A1
+BRD-A68888262-003-02-9,azelastine,azelastine,histamine receptor antagonist,HRH1
+BRD-A68929948-001-01-9,DAPT-GSI-IX,BRD-A68929948,antiamyloidogenic agent|gamma secretase inhibitor,NA
+BRD-A69777949-001-04-4,flumequine,flumequine,topoisomerase inhibitor,
+BRD-A69786436-003-02-5,eucatropine,eucatropine,acetylcholine receptor antagonist,
+BRD-A70407468-001-01-2,PSB-36,BRD-A70407468,adenosine receptor antagonist,"ADORA1, ADORA2A, ADORA2B, ADORA3"
+BRD-A70649075-008-04-3,sulconazole,sulconazole,sterol demethylase inhibitor,
+BRD-A71774530-001-01-8,lufenuron,lufenuron,chitin inhibitor,
+BRD-A71816415-236-02-7,pravastatin,pravastatin,HMGCR inhibitor,"HMGCR, SLCO1B1"
+BRD-A72066420-001-01-1,mifobate,BRD-A72066420,PPAR receptor antagonist,"PPARG, REN"
+BRD-A72596465-001-01-3,NA,BRD-A72596465,PPAR receptor antagonist,PPARA
+BRD-A72703248-001-02-7,SKF-96365,BRD-A72703248,calcium channel blocker|cytochrome P450 inhibitor,"CYP3A4, PKD2, TRPC1, TRPC3, TRPC4, TRPC5, TRPV2"
+BRD-A72711497-236-02-0,lasalocid,lasalocid,bacterial permeability inducer,
+BRD-A75455249-001-02-0,NA,(+/-)-kavain,calcium channel modulator|mTOR inhibitor|sodium channel blocker,MTOR
+BRD-A75478957-001-01-6,PD-166793,BRD-A75478957,collagenase inhibitor|metalloproteinase inhibitor|stromelysin inhibitor,"MMP13, MMP2, MMP3"
+BRD-A75769826-003-01-3,SDM25N,BRD-A75769826,opioid receptor antagonist,OPRD1
+BRD-A75817871-001-02-6,blebbistatin-(-),blebbistatin,ATPase inhibitor,
+BRD-A75850590-003-04-9,lomefloxacin,lomefloxacin,bacterial DNA gyrase inhibitor,TOP2A
+BRD-A77291778-003-04-8,cyclopentolate,cyclopentolate,acetylcholine receptor antagonist,CHRM1
+BRD-A77349281-001-02-2,NA,RK-682,heparanase inhibitor|tyrosine phosphatase inhibitor,"HPSE, PTPN1"
+BRD-A78295502-337-03-5,NA,hydroquinine,anti-arrhythmia agent,NA
+BRD-A79226577-003-01-1,tropisetron,BRD-A79226577,serotonin receptor antagonist|polarization inhibitor|sodium channel blocker,"GLRA1, GLRA2, GLRB, HTR3A, HTR4"
+BRD-A79981887-003-04-0,midodrine,midodrine,adrenergic receptor agonist,"ADRA1A, ADRA1B, ADRA1D"
+BRD-A80594172-001-02-0,betamethasone-valerate,betamethasone valerate,glucocorticoid receptor agonist,NR3C1
+BRD-A81177136-001-03-6,KN-62,KN-62,calcium/calmodulin dependent protein kinase inhibitor|purinergic receptor antagonist,"AKT1, CAMK2A, CHEK1, LCK, MAPK1, MAPK11, MAPK12, MAPK14, MAPK8, P2RX7, PRKCA, ROCK1, RPS6KB1, SGK1"
+BRD-A81615860-001-02-9,NA,fenclonine,tryptophan hydroxylase inhibitor,NA
+BRD-A81795050-003-01-7,U-18666A,BRD-A81795050,oxidosqualene cyclase inhibitor,NA
+BRD-A82238138-001-01-7,budesonide,BRD-A82238138,glucocorticoid receptor agonist,"CYP3A5, CYP3A7, NR3C1"
+BRD-A82371568-001-01-5,clofarabine,BRD-A82371568,ribonucleoside reductase inhibitor|DNA polymerase inhibitor|DNA repair enzyme inhibitor|DNA synthesis inhibitor|ribonucleotide reductase inhibitor,"POLA1, RRM1, RRM2, SLC22A8"
+BRD-A82590476-001-01-1,SDZ-NKT-343,BRD-A82590476,tachykinin antagonist,TACR1
+BRD-A82656074-003-01-2,naltrindole,BRD-A82656074,opioid receptor antagonist,"OPRD1, OPRK1, OPRM1"
+BRD-A84174873-001-06-0,baclofen,baclofen,benzodiazepine receptor agonist,"GABBR1, GABBR2, KCTD12, KCTD16, KCTD8"
+BRD-A84389633-001-01-6,NA,"TROPANYL 3,5-DIMETHYLBENZOATE",serotonin receptor antagonist,NA
+BRD-A85137183-001-01-2,cefprozil,cefprozil,bacterial cell wall synthesis inhibitor,
+BRD-A86044036-001-04-2,NA,flurbiprofen,cyclooxygenase inhibitor,"PTGS1, PTGS2"
+BRD-A88254928-001-04-6,NA,salbutamol,adrenergic receptor agonist,"ADRB1, ADRB2"
+BRD-A88548664-001-01-5,SKF-38393,SKF-38393,dopamine receptor agonist,"CALY, DRD1, DRD5"
+BRD-A89434049-001-02-1,NA,sarmentogenin,ATPase inhibitor,ATP1A1
+BRD-A89585551-003-03-4,mefloquine,mefloquine,adenosine receptor antagonist|hemoglobin antagonist,"ADORA2A, HBA1"
+BRD-A89947015-001-01-4,cladribine,cladribine,adenosine deaminase inhibitor|ribonucleotide reductase inhibitor,"ADA, PNP, POLA1, POLE, POLE2, POLE3, POLE4, RRM1, RRM2, RRM2B"
+BRD-A90462498-003-02-1,NA,ancitabine,antineoplastic,NA
+BRD-A90490067-001-01-9,fulvestrant,BRD-A90490067,estrogen receptor antagonist|DNA directed DNA polymerase inhibitor|soluble epoxide hydrolase inhibitor,"EPHX2, ESR1, ESR2, GPER1"
+BRD-A90515964-001-05-8,guaifenesin,guaifenesin,expectorant,
+BRD-A90799790-001-04-1,isradipine,isradipine,calcium channel blocker,"CACNA1C, CACNA1D, CACNA1F, CACNA1H, CACNA1S, CACNA2D1, CACNA2D2, CACNB2"
+BRD-A91008255-001-02-8,bepridil,bepridil,calcium channel blocker,"ATP1A1, CACNA1A, CACNA1H, CACNA2D2, CALM1, KCNQ1, KCNQ4, PDE1A, PDE1B, TNNC1"
+BRD-A93206962-001-01-2,L-755507,BRD-A93206962,adrenergic receptor agonist|adrenergic receptor partial agonist,"ADRB1, ADRB2, ADRB3"
+BRD-A93477898-001-01-8,PETCM,PETCM,caspase activator,CASP3
+BRD-A93739713-065-02-7,NA,atropine sulfate,muscarinic antagonist,NA
+BRD-A94413429-003-01-6,NTNCB,BRD-A94413429,neuropeptide receptor antagonist,NPY5R
+BRD-A94624445-236-02-2,bucladesine,bucladesine,adenosine receptor agonist|cAMP stimulant,PRKACA
+BRD-A95096829-300-01-4,PNU-96415E,BRD-A95096829,dopamine receptor antagonist,NA
+BRD-A95207036-001-02-8,cyproterone-acetate,cyproterone acetate,androgen receptor antagonist,"ADORA1, AR"
+BRD-A95445494-001-02-9,NA,maackiain,interleukin synthesis inhibitor|sodium/glucose cotransporter inhibitor,SLC5A2
+BRD-A95513702-001-02-2,"androsta-1,4-dien-3,17-dione",BRD-A95513702,aromatase inhibitor,CYP19A1
+BRD-A95869247-001-03-8,indapamide,indapamide,thiazide diuretic,"KCNE1, KCNQ1, SLC12A3"
+BRD-A95939040-008-03-3,sertaconazole,sertaconazole,sterol demethylase inhibitor,
+BRD-A96897502-001-02-0,NA,U-74389F,lipid peroxidase inhibitor,NA
+BRD-A97104540-004-04-4,fenoterol,fenoterol,adrenergic receptor agonist,"ADRB1, ADRB2, ADRB3"
+BRD-A97701745-001-04-6,pindolol,pindolol,adrenergic receptor antagonist,"ADRB1, ADRB2, HTR1A, HTR1B, HTR2A, HTR2B"
+BRD-A97701745-001-04-6,pindolol-(-),pindolol,adrenergic receptor antagonist|serotonin receptor antagonist,HTR1A
+BRD-A97730597-003-03-2,hexylcaine,hexylcaine,sodium channel blocker,"SCN10A, SCN5A"
+BRD-A97739905-001-04-2,ketoprofen,ketoprofen,cyclooxygenase inhibitor,"CXCR1, PTGS1, PTGS2, SLC5A8"
+BRD-A98299281-050-03-9,NA,velnacrine,calcium channel activator,ACHE
+BRD-A98378129-001-01-4,talniflumate,BRD-A98378129,cyclooxygenase inhibitor|calcium channel blocker|calcium-activated chloride channel blocker|mucin production inhibitor,CLCA1
+BRD-A98725278-103-01-9,methysergide,BRD-A98725278,serotonin receptor antagonist,"HTR1A, HTR1B, HTR1D, HTR1E, HTR1F, HTR2A, HTR2B, HTR2C, HTR5A, HTR6, HTR7"
+BRD-A99177642-001-02-5,NA,deltaline,acetylcholine receptor antagonist,CHRNA7
+BRD-A99402294-236-02-0,nafcillin,nafcillin,bacterial cell wall synthesis inhibitor,"CYP1A2, CYP3A4, SLC22A6"
+BRD-A99411506-002-01-3,esculin,esculin,antioxidant,
+BRD-A99449986-001-01-4,NA,MT-21,adenine nucleotide translocase inhibitor|caspase activator|neurotrophic agent,"CYCS, SLC25A4"
+BRD-A99571536-001-01-0,NA,dubinidine,anti-epileptic,NA
+BRD-K00141480-001-03-0,tanshinone-iia,tanshinone IIA,anti-inflammatory agent|interleukin inhibitor,"IL1B, NR1I2, TNF"
+BRD-K00184207-001-02-4,NA,"6-FORMYLINDOLO [3,2-B] CARBAZOLE",aryl hydrocarbon receptor ligand,NA
+BRD-K00259736-001-03-2,colchicine,colchicine,microtubule inhibitor,"GLRA1, GLRA2, TUBA1A, TUBA1B, TUBA1C, TUBA3C, TUBA3D, TUBA3E, TUBA4A, TUBB, TUBB1, TUBB2A, TUBB2B, TUBB3, TUBB4A, TUBB4B, TUBB6, TUBB8"
+BRD-K00312224-001-03-8,PPT,BRD-K00312224,estrogen receptor agonist,ESR1
+BRD-K00603606-003-03-4,NA,ticlopidine hydrochloride,purinergic receptor antagonist|platelet aggregation inhibitor,"CYP2B6, CYP2C19, P2RY12"
+BRD-K00610438-003-01-7,altanserin,BRD-K00610438,serotonin receptor antagonist|collagen stimulant,"HTR2A, HTR2C"
+BRD-K00662280-001-01-1,CL-218872,BRD-K00662280,GABA receptor agonist,"GABRA1, GABRA2, GABRA3, GABRA5, GABRB2, GABRG2"
+BRD-K00673382-001-04-9,famotidine,famotidine,histamine receptor antagonist,HRH2
+BRD-K00675675-003-01-2,CL-82198,BRD-K00675675,metalloproteinase inhibitor,MMP13
+BRD-K00824317-001-03-0,fludroxycortide,fludroxycortide,glucocorticoid receptor agonist,"NR3C1, SERPINA6"
+BRD-K01095011-001-03-5,finasteride,finasteride,5 alpha reductase inhibitor,"AKR1D1, SRD5A1, SRD5A2"
+BRD-K01244426-236-04-8,cloxacillin,cloxacillin,bacterial cell wall synthesis inhibitor,
+BRD-K01292756-001-06-0,pimozide,pimozide,dopamine receptor antagonist,"CACNA1I, CALM1, DRD1, DRD2, DRD3, DRD4, DRD5, HRH1, HTR1A, HTR2A, KCNA10, KCNH2"
+BRD-K01555864-001-02-8,NA,dibenzoylmethane,antineoplastic,NA
+BRD-K01567962-001-06-5,pyrazolanthrone,pyrazolanthrone,JNK inhibitor,"MAPK10, MAPK8, MAPK8IP1, MAPK9, TTK"
+BRD-K01624546-001-02-8,NA,DOCOSATRIENOIC ACID (22:3 n-3),LTB4 inhibitor,NA
+BRD-K01663662-003-03-8,NA,difenidol,muscarinic antagonist,NA
+BRD-K01868942-001-01-3,RS-23597-190,RS-23597-190,serotonin receptor antagonist,HTR4
+BRD-K02265150-001-04-2,amoxapine,amoxapine,norepinephrine reputake inhibitor,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C, CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, DRD1, DRD2, DRD3, DRD4, DRD5, GABRA1, GABRA2, GABRA3, GABRA4, GABRA5, GABRA6, GABRB1, GABRB2, GABRB3, GABRD, GABRE, GABRG1, GABRG2, GABRG3, GABRP, GABRQ, HRH1, HRH4, HTR1A, HTR1B, HTR2A, HTR2B, HTR2C, HTR3A, HTR6, HTR7, SLC6A2, SLC6A3, SLC6A4"
+BRD-K02275692-003-03-4,cefotiam,cefotiam,bacterial cell wall synthesis inhibitor,
+BRD-K02283807-003-01-4,GR-32191,BRD-K02283807,thromboxane receptor antagonist,TBXA2R
+BRD-K02407574-001-03-0,parbendazole,parbendazole,tubulin polymerization inhibitor,TUBB
+BRD-K02590140-001-01-2,O-2050,BRD-K02590140,cannabinoid receptor antagonist,CNR1
+BRD-K02764365-001-03-7,methiazole,methiazole,anthelmintic agent,
+BRD-K02867583-300-04-8,minaprine,minaprine,serotonin reuptake inhibitor,"ACHE, CHRM1, DRD1, DRD2, HTR2A, HTR2B, HTR2C, MAOA, SLC6A4"
+BRD-K02900412-001-02-2,clofoctol,clofoctol,protein synthesis inhibitor,
+BRD-K02953697-001-01-9,naringin,naringin,cytochrome P450 inhibitor,SLCO1A2
+BRD-K03015355-003-01-5,forskolin,BRD-K03015355,adenylyl cyclase activator|Adenylate cyclase stimulant|growth hormone receptor agonist|phosphokinase stimulant,"ADCY2, ADCY5, GNAS"
+BRD-K03067624-300-02-9,emetine,emetine,protein synthesis inhibitor,RPS2
+BRD-K03109492-001-01-4,NSC-663284,BRD-K03109492,CDC inhibitor,"CDC25A, CDC25B, CDC25C"
+BRD-K03602135-236-02-1,fluvastatin,fluvastatin,HMGCR inhibitor,HMGCR
+BRD-K03642198-300-01-7,AY-9944,BRD-K03642198,hedgehog pathway inhibitor,NA
+BRD-K03842655-001-02-1,NA,penitrem A,potassium channel blocker,KCNMA1
+BRD-K04010869-001-02-6,NA,prostaglandin A1,HSP inducer|NFKB pathway inhibitor,NA
+BRD-K04414442-001-03-4,SB-222200,BRD-K04414442,tachykinin antagonist,TACR3
+BRD-K04704168-003-03-6,clemizole,clemizole,HCV inhibitor,
+BRD-K04976539-001-01-0,NA,aminogenistein,PKC inhibitor|src inhibitor,LCK
+BRD-K05151076-001-01-8,ZK-164015,BRD-K05151076,estrogen receptor antagonist,"ESR1, ESR2"
+BRD-K05181084-003-02-9,NGB-2904,BRD-K05181084,dopamine receptor antagonist,DRD3
+BRD-K05434375-001-04-0,HA-1004,HA-1004,calcium channel blocker,
+BRD-K05977355-001-02-6,fluconazole,fluconazole,sterol demethylase inhibitor,CYP51A1
+BRD-K06234293-001-01-8,LY-364947,4-(3-(Pyridin-2-yl)-(1H)-pyrazol-4-yl]quinoline,TGF beta receptor inhibitor|p38 MAPK inhibitor,TGFBR1
+BRD-K06426971-001-01-9,ryuvidine,BRD-K06426971,histone lyinse methyltransferase inhibitor,"CDK2, CDK4"
+BRD-K06543683-001-03-6,NA,RO 31-8220,PKC inhibitor|glycogen synthase kinase inhibitor|leucine rich repeat kinase inhibitor|SIRT inhibitor,"AKT1, GSK3B, LCK, LRRK2, MAPK1, MAPK11, MAPK12, MAPK14, MAPK8, PRKCA, ROCK1, RPS6KB1, SIRT1, SIRT2"
+BRD-K06593056-001-01-4,LE-135,LE-135,retinoid receptor agonist,RARB
+BRD-K06854232-001-03-3,AM-580,AM-580,retinoid receptor agonist,RARA
+BRD-K07507905-236-01-8,BRL-37344,BRD-K07507905,adrenergic receptor agonist,"ADRB1, ADRB2, ADRB3"
+BRD-K07691486-001-05-6,roscovitine,roscovitine,CDK inhibitor,"CDK2, CDK9"
+BRD-K07762753-001-03-6,aminopurvalanol-a,aminopurvalanol A,CDK inhibitor|tyrosine kinase inhibitor,"CDK1, CDK2, CDK5, CDK6"
+BRD-K08078237-001-04-0,tetrandrine,tetrandrine,calcium channel blocker,SLC6A3
+BRD-K08109516-001-01-1,NA,"L-701,324",glutamate receptor antagonist,"GRIN1, GRIN2A, GRIN2B, GRIN2C, GRIN2D"
+BRD-K08115555-001-02-8,NA,tyrphostin AG-1288,catechol O methyltransferase inhibitor|tumor necrosis factor inhibitor,COMT
+BRD-K08316444-001-02-7,NA,rotenone,inhibitor of mitochondrial electron transport,NA
+BRD-K08438429-001-01-0,NA,BRD-K08438429,glucosylceramidase inhibitor|somatostatin receptor agonist,"GBA, SSTR4"
+BRD-K08996725-313-01-7,zolantidine,BRD-K08996725,histamine receptor antagonist,NA
+BRD-K08998509-001-01-6,fananserin,BRD-K08998509,dopamine receptor antagonist|serotonin receptor antagonist,"DRD4, HTR2A"
+BRD-K09132007-001-01-8,D-4476,BRD-K09132007,casein kinase inhibitor|TGF beta receptor inhibitor,"CSNK1A1, CSNK1D, TGFB1"
+BRD-K09255212-001-03-4,clioquinol,clioquinol,chelating agent,OPRK1
+BRD-K09416995-001-16-7,lovastatin,lovastatin,HMGCR inhibitor,"HDAC2, HMGCR, ITGAL, NR1I2"
+BRD-K09471561-001-02-6,levofloxacin,levofloxacin,bacterial DNA gyrase inhibitor,TOP2A
+BRD-K09497549-001-03-6,NA,kawain,calcium channel modulator|mTOR inhibitor|sodium channel blocker,MTOR
+BRD-K09537769-001-01-6,NU-7026,NU7026,DNA dependent protein kinase inhibitor|mTOR inhibitor|PI3K inhibitor,PRKDC
+BRD-K09549677-300-01-8,mibefradil,BRD-K09549677,T-type calcium channel blocker|angiogenesis inhibitor|calcium channel blocker|calcium channel inhibitor|L-type calcium channel blocker|sodium channel blocker,"ANO1, CACNA1C, CACNA1D, CACNA1F, CACNA1G, CACNA1H, CACNA1I, CACNA1S, CACNB1, CACNB2, CACNB3, CACNB4, CATSPER1, CATSPER2, CATSPER3, CATSPER4, CYP3A5, CYP3A7, SCN2A, SCN4A, SCN5A, SCN9A"
+BRD-K09598619-065-01-5,vincristine,vincristine,tubulin polymerization inhibitor,"TUBA4A, TUBB"
+BRD-K09631521-001-02-4,thiotepa,thiotepa,cytochrome P450 inhibitor,"CYP2B6, CYP3A4"
+BRD-K09778810-001-01-5,FGIN-1-27,FGIN-1-27,inositol monophosphatase inhibitor,TSPO
+BRD-K09963420-066-03-4,saquinavir,saquinavir,HIV protease inhibitor,CYP3A4
+BRD-K09991945-001-02-0,NA,GSK-3 inhibitor II,glycogen synthase kinase inhibitor|PKC inhibitor|superoxide dismutase expression inhibitor,GSK3B
+BRD-K10042277-001-02-7,NA,N-DESMETHYLCLOZAPINE,cetylcholine receptor agonist|dopamine receptor agonist|dopamine receptor antagonist|dopamine receptor partial agonist|serotonin receptor antagonist|serotonin receptor inverse agonist,"CHRM1, DRD2, DRD3, HTR2A"
+BRD-K10065684-001-02-5,dantron,dantron,laxative,
+BRD-K10176267-001-01-7,NA,"L-701,252",glutamate receptor antagonist,GRIN1
+BRD-K10207760-236-03-0,lasalocid,lasalocid,bacterial permeability inducer,
+BRD-K10314788-003-04-4,meclofenoxate,meclofenoxate,nootropic agent,
+BRD-K10870738-001-02-4,NA,CDC,lipoxygenase inhibitor,"ALOX12, ALOX5"
+BRD-K11107424-001-01-1,tiotidine,BRD-K11107424,histamine receptor antagonist,HRH2
+BRD-K11158509-001-02-0,NA,tyrphostin B44,EGFR inhibitor,NA
+BRD-K11298197-001-03-9,florfenicol,florfenicol,protein synthesis inhibitor,
+BRD-K11399644-003-03-0,phenformin,phenformin,AMPK activator,"KCNJ8, PRKAA1"
+BRD-K11634954-300-01-8,GBR-13069,BRD-K11634954,dopamine uptake inhibitor,SLC6A3
+BRD-K11717138-001-03-0,benzbromarone,benzbromarone,chloride channel blocker,ABCC1
+BRD-K11742128-003-04-4,triprolidine,triprolidine,histamine receptor antagonist,HRH1
+BRD-K11911061-003-02-8,GR-127935,BRD-K11911061,serotonin receptor antagonist,"HTR1A, HTR1B, HTR1D, HTR1E, HTR1F, HTR2A, HTR2B, HTR2C, HTR6"
+BRD-K11927976-050-01-1,ER-27319,BRD-K11927976,mediator release inhibitor|syk inhibitor,SYK
+BRD-K12184470-300-01-8,flunarizine,BRD-K12184470,calcium channel blocker|T-type calcium channel blocker,"CACNA1G, CACNA1H, CACNA1I, CALM1, CYP2J2, HRH1"
+BRD-K12357156-001-01-5,AG-490,BRD-K12357156,EGFR inhibitor|ErbB2 inhibitor|JAK2 inhibitor,"EGFR, JAK2, JAK3, STAT3"
+BRD-K12513978-001-04-3,fenbufen,fenbufen,cyclooxygenase inhibitor,"PTGS1, PTGS2"
+BRD-K12539581-001-06-2,nocodazole,nocodazole,tubulin polymerization inhibitor,HPGDS
+BRD-K13169950-001-04-5,NSC-3852,5-nitroso-8-cinnolinol,HDAC inhibitor,HDAC1
+BRD-K13211965-001-01-4,NA,"L-741,742",dopamine receptor antagonist,"DRD3, DRD4, SCN1A, SCN3A"
+BRD-K13356952-001-11-1,methazolamide,methazolamide,carbonic anhydrase inhibitor,"CA1, CA12, CA14, CA2, CA4, CA7"
+BRD-K13533483-001-03-0,NA,ciclosporin,calcineurin inhibitor|cyclophilin inhibitor|immunosuppressant|insulin expression inhibitor|T cell inhibitor,"ABCB11, CAMLG, CYP3A5, CYP3A7, FPR1, PPIA, PPID, PPIF, PPP3CA, PPP3R2, SLC10A1, SLCO1B1, SLCO1B3"
+BRD-K13544237-001-01-0,NA,R(-)-propylnorapomorphine,dopamine receptor agonist|antiamyloidogenic agent,"DRD1, DRD2, DRD3"
+BRD-K13642330-001-02-6,NA,cosmosiin,cytochrome P450 inhibitor,NA
+BRD-K13994703-001-02-0,propranolol,propranolol,adrenergic receptor antagonist,
+BRD-K14282469-001-01-5,LY-165163,PAPP,serotonin receptor antagonist,"HTR1A, HTR1D"
+BRD-K14496212-001-01-1,bromocriptine,bromocriptine,dopamine receptor agonist,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C, DRD1, DRD2, DRD3, DRD4, DRD5, HTR1A, HTR1B, HTR1D, HTR2A, HTR2B, HTR2C, HTR6, HTR7"
+BRD-K14765469-003-02-3,vesamicol,vesamicol,acetylcholinesterase inhibitor,SLC18A3
+BRD-K14767410-001-01-5,SC-560,BRD-K14767410,cyclooxygenase inhibitor,PTGS1
+BRD-K14807180-001-01-7,SB-221284,BRD-K14807180,serotonin receptor antagonist,"HTR2A, HTR2B, HTR2C"
+BRD-K14821540-001-02-1,NA,FCCP,mitochondrial oxidative phosphorylation uncoupler,NA
+BRD-K15025317-001-04-5,BAY-11-7082,BAY 11-7082,NFkB pathway inhibitor,RELA
+BRD-K15086322-103-01-0,JNJ-10191584,BRD-K15086322,histamine receptor antagonist|histamine receptor silent antagonist,HRH4
+BRD-K15164005-001-01-5,apoptosis-activator-II,apoptosis activator II,carboxylesterase inhibitor,"BCHE, CES1"
+BRD-K15519488-001-01-6,CS-110266,BTCP hydrochloride,dopamine receptor agonist,SLC6A3
+BRD-K15567136-001-01-1,NA,papaverine hydrochloride,phosphodiesterase inhibitor,"PDE10A, PDE4B, PDE5A"
+BRD-K15588452-003-01-9,R-96544,BRD-K15588452,serotonin receptor antagonist,HTR2A
+BRD-K15616905-001-01-5,CCCP,BRD-K15616905,mitochondrial oxidative phosphorylation uncoupler,NA
+BRD-K15715913-001-01-5,NA,FLUPERLAPINE,dopamine receptor antagonist|serotonin receptor antagonist,"DRD2, HTR2A, HTR6, HTR7"
+BRD-K15766189-001-02-3,cefdinir,cefdinir,bacterial cell wall synthesis inhibitor,MPO
+BRD-K15791587-003-01-7,L-733060,BRD-K15791587,tachykinin antagonist,TACR1
+BRD-K15916496-001-04-8,clotrimazole,clotrimazole,cytochrome P450 inhibitor|imidazoline receptor ligand,"CYP3A4, KCNN4, NR1I2, NR1I3, TRPM2, TRPM4, TRPM8"
+BRD-K15933101-003-01-2,ropinirole,BRD-K15933101,dopamine receptor agonist|dopamine receptor modulator,"ADRA2A, ADRA2B, ADRA2C, DRD1, DRD2, DRD3, DRD4, DRD5, HTR1A, HTR1B, HTR1D, HTR2A, HTR2B, HTR2C"
+BRD-K15935639-001-02-0,NA,ZL3VS,PGPH inhibitor|proteasome inhibitor,NA
+BRD-K15957397-001-02-6,anthraquinone,anthraquinone,CDC inhibitor,CDC25B
+BRD-K16444452-001-03-4,ibudilast,BRD-K16444452,phosphodiesterase inhibitor|leukotriene receptor antagonist|toll-like receptor antagonist|macrophage migration inhibiting factor inhibitor|macrophage migration inhibiting factor modulator|mediator release inhibitor|nitric oxide synthase inhibitor,"CYSLTR1, IL1B, IL6, MIF, PDE10A, PDE11A, PDE3A, PDE4A, PDE4B, PDE4C, PDE4D, PDE5A, TLR4"
+BRD-K16485616-001-01-4,NA,MCG-D0103,HDAC inhibitor|cell cycle inhibitor,"HDAC1, HDAC11, HDAC2, HDAC3"
+BRD-K16508793-001-01-8,diazepam,diazepam,benzodiazepine receptor agonist,"ADRA1A, GABRA1, GABRA2, GABRA3, GABRA4, GABRA5, GABRA6, GABRB1, GABRB2, GABRB3, GABRD, GABRE, GABRG1, GABRG2, GABRG3, GABRP, GABRQ, GABRR1, GABRR2, GABRR3, TSPO"
+BRD-K16542329-001-05-1,zaprinast,zaprinast,phosphodiesterase inhibitor,"GPR35, PDE1A, PDE4D, PDE5A, PDE9A"
+BRD-K16551401-003-01-8,PNU-22394,BRD-K16551401,serotonin receptor agonist,"MAOA, MAOB"
+BRD-K16604360-001-01-8,NA,"R(-)-2,10,11-trihydroxy-N-propyl-noraporphine",antiamyloidogenic agent|dopamine receptor agonist,NA
+BRD-K16664969-001-01-7,GTP-14564,GTP-14564,FLT3 inhibitor|tyrosine kinase inhibitor,"CSF1R, FLT3, KIT, PDGFRB"
+BRD-K17016787-001-03-5,estriol,estriol,estrogen receptor agonist,"ESR1, ESR2"
+BRD-K17294426-050-04-0,clebopride,clebopride,dopamine receptor antagonist,"ACHE, DRD2"
+BRD-K17368287-001-03-5,adrenosterone,adrenosterone,11-beta hydroxysteroid dehydrogenase inhibitor,"HSD11B1, HSD11B2"
+BRD-K17415526-001-02-7,tyrphostin-AG-835,tyrphostin AG 835,protein tyrosine kinase inhibitor,EGFR
+BRD-K17497770-001-01-0,butein,butein,EGFR inhibitor|src inhibitor,ACE
+BRD-K17565903-066-04-1,pridinol,pridinol,muscle relaxant,
+BRD-K17693482-001-03-9,NA,BRD-K17693482,potassium channel activator,NA
+BRD-K17705806-003-01-0,NA,BRD-K17705806,opioid receptor antagonist,OPRL1
+BRD-K17743125-001-01-9,belinostat,PXD101,HDAC inhibitor|cell cycle inhibitor,"HDAC1, HDAC2, HDAC3, HDAC4, HDAC5, HDAC6, HDAC7, HDAC8, HDAC9"
+BRD-K17743697-066-01-0,KB-R7943,KB-R7943,sodium/calcium exchange inhibitor,"SLC8A1, TRPC3, TRPC5, TRPC6"
+BRD-K17796732-001-02-0,JWH-015,BRD-K17796732,cannabinoid receptor agonist,"CNR2, GPR55"
+BRD-K17894950-001-04-4,indirubin,indirubin,CDK inhibitor|glycogen synthase kinase inhibitor,"CDK1, CDK5, GSK3A"
+BRD-K17896185-001-01-2,FIT,BRD-K17896185,opioid receptor agonist,OPRD1
+BRD-K18059238-001-02-1,NA,gamolenic acid,cyclooxygenase inhibitor|prostanoid receptor stimulant|thromboxane synthase stimulant,TBXAS1
+BRD-K18194590-065-02-3,mephentermine,mephentermine,adrenergic receptor agonist,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C, ADRB1, ADRB2, ADRB3"
+BRD-K18250272-003-03-7,propoxycaine,propoxycaine,local anesthetic,
+BRD-K18316707-001-01-9,O-1918,BRD-K18316707,cannabinoid receptor antagonist,NA
+BRD-K18550767-001-02-8,bergenin,bergenin,interleukin inhibitor,"IL1B, TNF"
+BRD-K18574842-323-03-3,nafcillin,nafcillin,bacterial cell wall synthesis inhibitor,"CYP1A2, CYP3A4, SLC22A6"
+BRD-K18619710-001-03-7,digoxigenin,digoxigenin,steroid,
+BRD-K18742343-001-03-2,NA,H-8,PKA inhibitor,"PKIA, PRKACA"
+BRD-K18757346-001-02-9,NA,U-46619,thromboxane receptor agonist,"PTGDR, PTGDR2, PTGER1, PTGER2, PTGER3, PTGER4, PTGFR, PTGIR, TBXA2R"
+BRD-K18779551-003-03-7,bifemelane,BRD-K18779551,acetylcholine release stimulant|adrenergic transmitter uptake inhibitor|reducing agent,SLC6A2
+BRD-K18787491-001-05-2,U-0126,U0126,MEK inhibitor,"AKT1, CHEK1, GSK3B, LCK, MAP2K1, MAP2K2, MAP2K7, MAPK1, MAPK11, MAPK12, MAPK14, MAPK8, PRKCA, RAF1, ROCK1, RPS6KB1, SGK1"
+BRD-K18799075-001-01-0,BAY-59-3074,BRD-K18799075,cannabinoid receptor partial agonist,"CNR1, CNR2"
+BRD-K18909381-001-01-4,NA,CGS-12066A,serotonin receptor agonist,"HTR1B, HTR1A, HTR1D, HTR2A, HTR2B, HTR2C"
+BRD-K18910433-001-04-4,estradiol,estradiol,estrogen receptor agonist,"ESR1, ESR2, GPER1, KCNMA1, NR1I2"
+BRD-K19295594-001-04-4,gossypol,gossypol,BCL inhibitor|MCL1 inhibitor,BCL2
+BRD-K19309090-300-03-0,SR-95639A,SR-95639A,acetylcholine receptor agonist,CHRM1
+BRD-K19352500-332-03-7,prochlorperazine,prochlorperazine,dopamine receptor antagonist,"DRD1, DRD2, DRD3, DRD4"
+BRD-K19462402-003-03-0,buflomedil,buflomedil,adrenergic receptor antagonist|calcium channel blocker,ADRA1A
+BRD-K19554809-001-01-1,NA,MK 212,serotonin receptor agonist,"HTR2A, HTR2B, HTR2C"
+BRD-K19605405-001-01-9,ZM-241385,BRD-K19605405,adenosine receptor antagonist,"ADORA2A, ADORA2B, ADORA1, ADORA3"
+BRD-K20141153-003-03-8,atomoxetine,BRD-K20141153,norepinephrine transporter inhibitor|adrenergic transmitter uptake inhibitor,"SLC6A2, SLC6A3, SLC6A4, GRIN1, GRIN2A, GRIN2B, GRIN2C, GRIN2D, GRIN3A, GRIN3B"
+BRD-K20620780-001-01-0,butaclamol,butaclamol,dopamine receptor antagonist,"DRD1, DRD2, DRD3, DRD4, DRD5, HTR1A, HTR2A"
+BRD-K20655524-003-04-7,mefexamide,mefexamide,psychoactive drug,
+BRD-K20742498-001-01-5,RS-39604,RS 39604,serotonin receptor antagonist,HTR4
+BRD-K20755323-001-01-8,SKI-II,SKI-II,sphingosine kinase inhibitor,SPHK1
+BRD-K21283037-001-02-5,riluzole,riluzole,glutamate inhibitor,"KCNK10, KCNK2, KCNK4, KCNN4, SCN10A, SCN11A, SCN1A, SCN2A, SCN3A, SCN4A, SCN5A, SCN7A, SCN8A, SCN9A, SLC7A11"
+BRD-K21350491-001-02-1,NA,phenamil,acid sensing ion channel blocker|sodium channel blockers|TRPP3 channel inhibitor|TRPV modulator,PKD2L1
+BRD-K21450440-001-04-7,benzthiazide,benzthiazide,carbonic anhydrase inhibitor,"CA1, CA12, CA2, CA4, CA9, SLC12A3"
+BRD-K21548250-001-01-3,moracizine,moracizine,sodium channel blocker,SCN5A
+BRD-K21565985-001-04-3,xylazine,xylazine,adrenergic receptor agonist,"ADRA2A, ADRA2B, ADRA2C"
+BRD-K21667562-001-01-4,AM-404,BRD-K21667562,FAAH transport inhibitor|anandamide transport inhibitor|nucelar factor of activated T-cells inhibitor|TRPV agonist,"TRPV1, CNR1, CNR2, FAAH"
+BRD-K21680192-300-05-2,mitoxantrone,mitoxantrone,topoisomerase inhibitor,TOP2A
+BRD-K21733600-001-02-6,rofecoxib,rofecoxib,cyclooxygenase inhibitor,"ELN, PTGS2"
+BRD-K21853356-001-04-4,NA,RG-14620,EGFR inhibitor,EGFR
+BRD-K22134346-001-04-1,simvastatin,simvastatin,HMGCR inhibitor,"HMGCR, ITGB2"
+BRD-K22385716-001-01-7,LY-303511,BRD-K22385716,casein kinase inhibitor|mTOR inhibitor|PI3K inhibitor,"CSNK2A1, CSNK2A2, CSNK2B, MTOR"
+BRD-K22861715-001-03-4,chrysin,chrysin,breast cancer resistance protein inhibitor,"AKR1B1, CDK6, CYP19A1, CYP1B1"
+BRD-K22969690-001-02-6,chloramphenicol,chloramphenicol,bacterial 50S ribosomal subunit inhibitor,CD55
+BRD-K23301018-001-02-6,broxyquinoline,broxyquinoline,antiprotozoal agent,
+BRD-K23335153-300-01-7,AMN-082,BRD-K23335153,glutamate receptor positive allosteric modulator,GRM7
+BRD-K23383398-001-01-6,T-0901317,BRD-K23383398,LXR agonist|ABC transporter expression enhancer|ROR inverse agonist,"NR1H3, NR1H2, ABCA1, NCOA1, NCOA2, NR1I2, RORA, RORC, RXRB"
+BRD-K23478508-001-03-7,digoxin,digoxin,ATPase inhibitor,ATP1A1
+BRD-K23541596-300-04-9,dimaprit,dimaprit,histamine receptor agonist,"HRH2, HRH3, HRH4"
+BRD-K23566484-001-04-5,nilutamide,nilutamide,androgen receptor antagonist,AR
+BRD-K23583188-001-05-6,NA,lavendustin A,EGFR inhibitor|tyrosine kinase inhibitor,"EGFR, LCK"
+BRD-K23623876-001-01-6,decafluorobutane,BRD-K23623876,ultrasound contrast agent,GRM5
+BRD-K23704908-001-03-2,NA,"3,4-dichloroisocoumarin",serine protease inhibitor,NA
+BRD-K23922020-075-01-1,arecaidine,BRD-K23922020,acetylcholine receptor agonist,"CHRM1, CHRM2, CHRM3, CHRM4"
+BRD-K24084088-001-02-2,paraxanthine,paraxanthine,adenosine receptor antagonist,
+BRD-K24132293-001-02-0,NA,piperlongumine,glutathione transferase inhibitor,NA
+BRD-K24396733-001-01-1,A77636,A-77636,dopamine receptor agonist,CALY
+BRD-K25224017-001-04-5,pirenperone,pirenperone,serotonin receptor antagonist,"HTR2A, HTR7"
+BRD-K25433859-003-11-4,maprotiline,maprotiline,norepinephrine reputake inhibitor|tricyclic antidepressant,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C, CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, DRD2, HRH1, HTR2A, HTR2C, HTR7, SLC6A2"
+BRD-K25741894-001-03-8,NA,skimmianine,acetylcholinesterase inhibitor,NA
+BRD-K25906698-303-01-9,immepip,BRD-K25906698,histamine receptor agonist,"HRH3, HRH4"
+BRD-K26429091-051-01-9,J-104129,BRD-K26429091,acetylcholine receptor antagonist,CHRM3
+BRD-K26521938-001-04-9,dinoprostone,dinoprostone,prostanoid receptor agonist,"CATSPER1, CATSPER2, CATSPER3, CATSPER4, PTGDR, PTGDR2, PTGER1, PTGER2, PTGER3, PTGER4, PTGFR, TBXA2R"
+BRD-K26997899-001-01-4,SA-792574,BRD-K26997899,microtubule inhibitor|tubulin inhibitor,TUBB
+BRD-K27305650-001-04-2,LY294002,LY-294002,mTOR inhibitor|PI3K inhibitor|DNA dependent protein kinase inhibitor|phosphodiesterase inhibitor|PLK inhibitor,"AKT1, CHEK1, LCK, MAPK1, MAPK11, MAPK12, MAPK8, MTOR, PIK3CA, PIK3CB, PIK3CD, PIK3CG, PLK1, PRKCA, PRKDC, ROCK1, RPS6KB1, SGK1"
+BRD-K27316855-001-02-6,calcitriol,calcitriol,vitamin D receptor agonist,VDR
+BRD-K27351809-001-02-0,nomegestrol-acetate,nomegestrol acetate,progesterone receptor agonist,PGR
+BRD-K27737647-001-03-4,H-89,H-89,PKA inhibitor,"GSG2, PKIA, PRKACA"
+BRD-K28143534-001-01-4,cyproheptadine,cyproheptadine,histamine receptor antagonist,"ADRA1A, ADRA1B, ADRA1D, CHRM1, CHRM2, CHRM3, HRH1, HTR2A, HTR2C, HTR6, HTR7"
+BRD-K28307902-001-04-3,flutamide,flutamide,androgen receptor antagonist,"AHR, AR"
+BRD-K28578425-001-01-3,cilostamide,cilostamide,phosphodiesterase inhibitor,"PDE3A, PDE3B"
+BRD-K28680267-001-01-8,NA,METHYL-beta-CARBOLINE-3-CARBOXYLATE,CCK receptor antagonist,"CCKAR, GABRA1, GABRB2, GABRG2"
+BRD-K28761384-003-03-6,zuclopenthixol,zuclopenthixol,dopamine receptor antagonist,"ADRA1A, ADRA2A, DRD1, DRD2, DRD5, HRH1, HTR2A"
+BRD-K28761891-001-01-0,ramelteon,ramelteon,melatonin receptor agonist,"MTNR1A, MTNR1B"
+BRD-K28806945-001-01-9,NA,"L-750,667 trihydrochloride[(?)-3-[4-Iodophenyl)-1-piperazyl] methylpyrrolo [2,3-b] pyrimidine]",dopamine receptor antagonist,DRD4
+BRD-K28907958-001-01-9,CD-437,CD-437,retinoid receptor agonist,RARG
+BRD-K28936863-051-04-1,ketotifen,ketotifen,histamine receptor agonist|leukotriene receptor antagonist|phosphodiesterase inhibitor,"HRH1, PDE4A, PDE4B, PDE4C, PDE4D, PDE7A, PDE7B, PDE8A, PDE8B, PGD"
+BRD-K29668683-300-01-4,BD-1063,BRD-K29668683,sigma receptor antagonist,SIGMAR1
+BRD-K29673530-001-03-9,hypericin,hypericin,tyrosine kinase inhibitor,
+BRD-K29950728-048-02-6,clomifene,clomifene,estrogen receptor antagonist,ESR1
+BRD-K30240666-051-05-0,clemastine,clemastine,histamine receptor antagonist,HRH1
+BRD-K30421593-050-02-3,timolol,timolol,adrenergic receptor antagonist,"ADRB1, ADRB2"
+BRD-K30685142-001-04-8,levothyroxine,levothyroxine,thyroid hormone stimulant,"THRA, THRB"
+BRD-K30867024-001-01-1,SB-216641,SB 216641,serotonin receptor antagonist,"HTR1A, HTR1B, HTR1D, HTR2A, HTR2B, HTR2C"
+BRD-K31238592-001-01-6,devazepide,BRD-K31238592,CCK receptor antagonist|gastrin inhibitor,"CCKAR, CCKBR, GAST"
+BRD-K31342827-001-05-4,GF109203X,GF-109203X,PKC inhibitor,"PDPK1, PIM1, PRKCI, PRKCZ"
+BRD-K31491153-001-01-2,1-phenylbiguanide,1-phenylbiguanide,serotonin receptor agonist,"HTR3A, HTR3B"
+BRD-K31542390-001-01-5,mycophenolic-acid,mycophenolic acid,dehydrogenase inhibitor|inositol monophosphatase inhibitor,"IMPDH1, IMPDH2"
+BRD-K31627533-001-03-8,rimexolone,rimexolone,glucocorticoid receptor agonist,"NR3C1, SERPINA6"
+BRD-K31792052-004-01-9,pifithrin,cyclic PFT-alpha,interleukin receptor antagonist,NA
+BRD-K31843556-001-01-7,T-0070907,BRD-K31843556,PPAR receptor anatagonist|PPAR receptor antagonist,PPARG
+BRD-K31912990-003-01-0,CGP-71683,BRD-K31912990,neuropeptide receptor antagonist,NPY5R
+BRD-K32501161-001-01-7,vanoxerine,vanoxerine,dopamine uptake inhibitor,SLC6A3
+BRD-K32584078-001-02-3,NA,BML-257,AKT inhibitor|HCV NS5B RdRp inhibitor,AKT1
+BRD-K32645441-001-01-4,NA,"N,N-Dipropyl-5-carboxamidotryptamine maleate",serotonin receptor agonist,"HTR1B, HTR1D, HTR1F, HTR7"
+BRD-K32744045-001-04-9,disulfiram,disulfiram,aldehyde dehydrogenase inhibitor|DNA methyltransferase inhibitor|TRPV agonist,"ALDH2, DBH"
+BRD-K32821942-001-04-9,azathioprine,azathioprine,dehydrogenase inhibitor,"HPRT1, IMPDH1, PPAT"
+BRD-K32828673-001-01-5,NA,chelidonine,tubulin polymerization inhibitor,NA
+BRD-K32830106-003-11-3,guanfacine,guanfacine,adrenergic receptor agonist,"ADRA2A, ADRA2B, ADRA2C"
+BRD-K33211335-337-03-7,dextromethorphan,dextromethorphan,glutamate receptor antagonist|sigma receptor agonist,"CHRNA2, CHRNA3, CHRNA4, CHRNA7, CHRNB2, CHRNB4, CYBA, CYBB, GRIN3A, NCF1, NCF2, NCF4, OPRD1, OPRK1, OPRM1, PGRMC1, RAC1, RAC2, SIGMAR1, SLC6A2, SLC6A4"
+BRD-K33308633-001-01-6,INCA-6,INCA-6,calcineurin inhibitor,NFATC1
+BRD-K33459542-001-02-5,ditolylguanidine,BRD-K33459542,sigma receptor agonist,"GRIN1, GRIN2A, GRIN2B, SIGMAR1"
+BRD-K33583600-001-03-9,isoliquiritigenin,isoliquiritigenin,guanylate cyclase activator,GABBR1
+BRD-K33710385-001-05-4,ethionamide,ethionamide,mycolic synthesis inhibitor,
+BRD-K33818169-003-01-2,GW-3965,BRD-K33818169,LXR agonist|ABC transporter expression enhancer,"NR1H2, NR1H3, ABCA1"
+BRD-K33882852-003-01-0,ZK-93423,BRD-K33882852,benzodiazepine receptor agonist,"GABRA1, GABRA2, GABRA3, GABRA5, GABRB2"
+BRD-K34034388-300-01-0,GBR-12783,BRD-K34034388,dopamine uptake inhibitor,NA
+BRD-K34092021-001-02-3,NA,arvanil,TRPV agonist|cannabinoid receptor agonist,"CNR1, TRPV1"
+BRD-K34415467-003-04-9,trimethobenzamide,trimethobenzamide,histamine receptor antagonist,DRD2
+BRD-K34568562-001-02-7,tilorone,tilorone,interferon inducer,
+BRD-K34685430-001-01-1,methylergometrine,methylergometrine,dopamine receptor antagonist|serotonin receptor antagonist,"DRD1, HTR1E, HTR1F, HTR2A, HTR2B, HTR2C"
+BRD-K34995470-001-02-3,NA,SU1498,receptor tyrosine protein kinase inhibitor|vascular endothelial growth factor receptor 2 (VEGFR2) inhibitor|VEGFR inhibitor,"ERBB2, KDR"
+BRD-K35240538-001-03-1,methylprednisolone,methylprednisolone,glucocorticoid receptor agonist,NR3C1
+BRD-K35708212-331-03-1,ouabain,ouabain,ATPase inhibitor,ATP1A1
+BRD-K35960502-001-04-4,niclosamide,niclosamide,DNA replication inhibitor|STAT inhibitor,STAT3
+BRD-K36007650-300-02-3,puromycin,puromycin,protein synthesis inhibitor,"NHP2L1, RPL10L, RPL11, RPL13A, RPL15, RPL19, RPL23, RPL23A, RPL26L1, RPL3, RPL37, RPL8, RSL24D1"
+BRD-K36021395-300-01-6,ABT-702,ABT-702,adenosine kinase inhibitor,ADK
+BRD-K36055864-001-04-4,NA,cicloheximide,protein synthesis inhibitor,NA
+BRD-K36116267-001-05-4,pyrithyldione,pyrithyldione,psychoactive drug,
+BRD-K36198571-001-01-2,WAY-170523,BRD-K36198571,metalloproteinase inhibitor,MMP13
+BRD-K36258877-001-01-5,AZ-10417808,BRD-K36258877,caspase inhibitor,CASP3
+BRD-K36377456-001-02-0,NA,marmesin,angiogenesis inhibitor,NA
+BRD-K36395411-003-01-4,SB-206553,BRD-K36395411,serotonin receptor antagonist|serotonin receptor partial agonist,"HTR2B, HTR2C, HTR1A, HTR2A"
+BRD-K36638830-001-02-2,anabasine,anabasine,acetylcholine receptor agonist,
+BRD-K36756879-003-04-6,ethaverine,ethaverine,calcium channel blocker,
+BRD-K36862742-001-04-1,hydroflumethiazide,hydroflumethiazide,sodium/potassium/chloride transporter inhibitor,"ATP1A1, CA1, CA12, CA2, CA4, CA9, KCNMA1, SLC12A1, SLC12A3"
+BRD-K36965586-001-01-7,m-Chlorophenylbiguanide,m-chlorophenylbiguanide,serotonin receptor agonist,"HTR3A, HTR3B"
+BRD-K37249724-001-04-2,astemizole,astemizole,histamine receptor antagonist,"HRH1, KCNH1, KCNH2"
+BRD-K37270826-001-03-7,mifepristone,mifepristone,glucocorticoid receptor antagonist|progesterone receptor antagonist,"AR, NR1I2, NR3C1, PGR"
+BRD-K37312348-001-05-1,kenpaullone,kenpaullone,CDK inhibitor|glycogen synthase kinase inhibitor,"CCNB1, CDK1, CDK5, GSK3B"
+BRD-K37392901-003-01-7,NSC-632839,BRD-K37392901,ubiquitin hydrolase inhibitor|ubiquitin isopeptidase inhibitor,"USP2, USP7, SENP2, USP1"
+BRD-K37561857-001-04-9,zardaverine,zardaverine,phosphodiesterase inhibitor,PDE4D
+BRD-K37618799-001-01-4,MRS-1220,BRD-K37618799,adenosine receptor antagonist,"ADORA2B, ADORA3"
+BRD-K37682401-001-05-1,piromidic-acid,piromidic acid,bacterial DNA gyrase inhibitor,
+BRD-K37688416-003-04-0,fipexide,fipexide,psychoactive drug,
+BRD-K37691127-001-02-2,NA,hinokitiol,tyrosinase inhibitor,TYR
+BRD-K37798499-001-02-5,etoposide,etoposide,topoisomerase inhibitor,"TOP2A, TOP2B"
+BRD-K37848908-001-03-1,ceforanide,ceforanide,penicillin binding protein inhibitor,
+BRD-K37865504-001-01-7,LY2183240,LY-2183240,FAAH inhibitor|FAAH reuptake inhibitor,FAAH
+BRD-K37991163-050-05-1,paroxetine,paroxetine,selective serotonin reuptake inhibitor (SSRI),"CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, HTR2A, SLC6A2, SLC6A4"
+BRD-K38003476-001-03-4,clocortolone-pivalate,clocortolone pivalate,steroid,"NR3C1, PLA2G1B"
+BRD-K38055836-001-03-9,NA,etamivan,respiratory stimulant,NA
+BRD-K38197229-001-06-7,bumetanide,bumetanide,solute carrier family member inhibitor,"CFTR, GPR35, SLC12A1, SLC12A2, SLC12A4, SLC12A5"
+BRD-K38251852-001-02-5,NA,paxilline,ABC transporter expression enhancer|high conductance calcium activated potassium blocker|LXR agonist|potassium channel blocker,"ABCA1, KCNMA1, NR1H3"
+BRD-K38305202-001-01-8,domperidone,domperidone,dopamine receptor antagonist,"DRD2, DRD3"
+BRD-K38323065-001-05-8,phenacetin,phenacetin,cyclooxygenase inhibitor,PTGS1
+BRD-K38347298-001-02-3,NA,8-CYCLOPENTYLTHEOPHYLLINE,adenosine receptor antagonist,NA
+BRD-K38436528-003-04-8,imipramine,imipramine,norepinephrine reputake inhibitor|serotonin reuptake inhibitor,"ADRA1A, ADRA1B, ADRA1D, CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, DRD1, DRD2, DRD5, HRH1, HTR1A, HTR2A, HTR2C, HTR6, HTR7, KCND2, KCND3, KCNH1, KCNH2, SLC6A2, SLC6A3, SLC6A4"
+BRD-K38449220-001-03-8,NA,seneciphylline,cytochrome P450 inhibitor,NA
+BRD-K38477985-001-01-8,malonoben,BRD-K38477985,protein tyrosine kinase inhibitor|tyrosine kinase inhibitor,EGFR
+BRD-K38684403-001-02-1,roxithromycin,roxithromycin,bacterial 50S ribosomal subunit inhibitor,"ABCB1, MLNR"
+BRD-K38775274-001-02-3,dexamethasone,dexamethasone,glucocorticoid receptor agonist,"ANXA1, NOS2, NR0B1, NR3C1, NR3C2"
+BRD-K38903228-001-02-8,hesperidin,hesperidin,flavanone glycoside,CACNA1B
+BRD-K39120595-304-02-1,bithionol,bithionol,autotaxin inhibitor,"ESR1, ESR2, MCL1"
+BRD-K39187410-001-01-7,NA,"R(-)-2,10,11-trihydroxyaporphine",antiamyloidogenic agent,NA
+BRD-K39188321-001-03-9,betamethasone,betamethasone,glucocorticoid receptor agonist,NR3C1
+BRD-K39339537-001-03-8,epirizole,epirizole,cyclooxygenase inhibitor,"PTGS1, PTGS2"
+BRD-K39356024-001-02-4,NA,pregnenolone-16(alpha)-carbonitrile,acetylcholine release enhancer|dopamine release enhancer|GABA receptor negative allosteric modulator|glutamate receptor modulator|progesterone receptor agonist|steroid hormone inhibitor of CYP17A1 and SULT2B1,"CYP17A1, PGR, SULT2B1"
+BRD-K39484304-001-02-5,triptolide,triptolide,RNA polymerase inhibitor,RELA
+BRD-K39670393-303-01-3,amthamine,BRD-K39670393,histamine receptor agonist,HRH2
+BRD-K39733634-001-01-8,L-161982,BRD-K39733634,prostanoid receptor antagonist|angiotensin receptor antagonist,PTGER4
+BRD-K39746403-084-02-3,NA,erythromycin propionate,NFkB pathway inhibitor|50S ribosomal subunit inhibitor|motilin receptor agonist|RPLV inhibitor,"CYP3A4, MLNR"
+BRD-K39915878-036-04-6,loxapine,loxapine,dopamine receptor antagonist|serotonin receptor antagonist,"ADRA1A, ADRA1B, ADRA2A, ADRA2B, ADRA2C, ADRB1, CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, DRD1, DRD2, DRD3, DRD4, DRD5, HRH1, HRH2, HRH4, HTR1A, HTR1B, HTR1D, HTR1E, HTR2A, HTR2C, HTR3A, HTR5A, HTR6, HTR7, SLC6A2, SLC6A3, SLC6A4"
+BRD-K39965020-001-02-6,doconexent,doconexent,PPAR receptor agonist,"FFAR1, PTGS1, PTGS2"
+BRD-K39987650-001-04-3,bisacodyl,bisacodyl,laxative,
+BRD-K40255344-001-05-1,tyrphostin-A9,tyrphostin A9,protein tyrosine kinase inhibitor|tyrosine kinase inhibitor,
+BRD-K40530731-001-02-5,NA,L-hyoscyamine,acetylcholine receptor inhibitor,"CHRM1, CHRM2, CHRM3, CHRM4"
+BRD-K40578143-001-01-8,GR-79236,BRD-K40578143,adenosine receptor agonist,"ADORA1, ADORA2A"
+BRD-K40656405-001-01-5,L-165041,BRD-K40656405,PPAR receptor agonist,PPARD
+BRD-K40742111-001-02-6,NA,baeomycesic acid,lipoxygenase inhibitor,NA
+BRD-K40782193-003-01-1,QX-222,BRD-K40782193,sodium channel blocker,NA
+BRD-K40887525-001-02-9,ritanserin,ritanserin,serotonin receptor antagonist,"ADRA1A, ADRA1B, ADRA1D, HTR1A, HTR1B, HTR1D, HTR2A, HTR2B, HTR2C, HTR5A, HTR6, HTR7"
+BRD-K40901640-001-01-0,cinanserin,CINANSERIN,serotonin receptor antagonist,HTR2A
+BRD-K40905133-001-02-3,phenacemide,phenacemide,sodium channel blocker,"SCN10A, SCN11A, SCN1A, SCN2A, SCN3A, SCN4A, SCN5A, SCN7A, SCN8A, SCN9A"
+BRD-K40990712-001-02-4,NA,hexamethyleneamiloride,gonadotropin releasing factor hormone receptor antagonist|sodium/hydrogen antiport inhibitor|sodium/hydrogen exchanger inhibitor|urokinase inhibitor,"GNRHR, ADRA2A, GNRH1, PLAU, SLC9A1"
+BRD-K41143549-003-01-6,NA,BRD-K41143549,glutamate receptor antagonist,NA
+BRD-K41337261-001-01-4,ZM-306416,BRD-K41337261,Src and Abl inhibitor|vascular endothelial growth factor receptor 1 (VEGFR1) inhibitor,"FLT1, KDR, EGFR, FLT4"
+BRD-K41406082-001-04-8,sulfapyridine,sulfapyridine,PABA antagonist,
+BRD-K41524689-001-05-2,paracetamol,paracetamol,cyclooxygenase inhibitor,"FAAH, PTGS1, PTGS2, TRPV1"
+BRD-K41564320-001-01-2,purvalanol-b,BRD-K41564320,tyrosine kinase inhibitor,"CDK2, CDK4, MAPK1, MAPK3, CDK5, SRPK2"
+BRD-K41567364-001-01-2,SB-334867,BRD-K41567364,orexin receptor antagonist,"HCRTR1, HCRTR2"
+BRD-K41713976-001-02-0,E-4031,E-4031,potassium channel blocker,"KCNH1, KCNH2"
+BRD-K41868777-003-02-9,NA,W-5,calmodulin antagonist,NA
+BRD-K41876534-001-02-0,tioxolone,tioxolone,carbonic anhydrase inhibitor,CA2
+BRD-K42095107-001-02-3,daidzein,daidzein,estrogen receptor agonist,"ESRRA, ESRRB, ESRRG, TRPC5"
+BRD-K42098891-003-03-1,protriptyline,protriptyline,tricyclic antidepressant,"SLC6A2, SLC6A4"
+BRD-K42221274-001-01-4,NA,NO 711,GAT inhibitor,"SLC6A1, SIGMAR1"
+BRD-K42348709-003-04-0,cyclobenzaprine,cyclobenzaprine,adrenergic receptor agonist|serotonin receptor agonist,HTR2A
+BRD-K42452249-001-01-7,EO-1428,BRD-K42452249,p38 MAPK inhibitor,"MAPK11, MAPK14"
+BRD-K42500029-001-01-9,CGP-57380,BRD-K42500029,"MAP kinase inhibitor|MAPK-interacting kinase inhibitor,","AURKB, LCK, MKNK1, MKNK2, SGK1"
+BRD-K42635745-001-02-4,suloctidil,suloctidil,adrenergic receptor antagonist,
+BRD-K42679050-001-01-3,Y-27152,BRD-K42679050,potassium channel activator|potassium channel agonist,"ABCC9, KCNJ8"
+BRD-K42748308-300-01-2,XE-991,BRD-K42748308,acetylcholine release enhancer|potassium channel blocker|voltage-gated potassium channel blocker,"KCNQ1, KCNQ2, KCNQ3, KCNQ4, KCNQ5"
+BRD-K43068349-001-01-9,AMG-9810,BRD-K43068349,TRPV antagonist,TRPV1
+BRD-K43245338-001-02-4,NA,MDL-28170,calpain inhibitor|cathepsin inhibitor,"CAPN1, CTSB, CTSL"
+BRD-K43330982-001-01-5,"S1PR2, P2RY10",BRD-K43330982,lysophospholipid receptor antagonist,NA
+BRD-K43389675-003-02-7,daunorubicin,daunorubicin,RNA synthesis inhibitor|topoisomerase inhibitor,"TOP2A, TOP2B"
+BRD-K43405658-001-01-8,NA,tyrphostin AG 527,protein tyrosine kinase inhibitor,EGFR
+BRD-K43457670-001-04-7,acetazolamide,acetazolamide,carbonic anhydrase inhibitor,"AQP1, CA1, CA12, CA14, CA2, CA3, CA4, CA7"
+BRD-K43736954-001-03-3,cortisone,cortisone,glucocorticoid receptor agonist,NR3C1
+BRD-K43744935-048-01-6,tamoxifen,BRD-K43744935,estrogen receptor antagonist|selective estrogen receptor modulator (SERM)|estrogen receptor agonist|estrogen receptor modulator|PKC inhibitor,"ESR1, ESR2, CYP3A5, EBP, GPER1, PRKCA, PRKCB, PRKCD, PRKCE, PRKCG, PRKCI, PRKCQ, PRKCZ"
+BRD-K43796186-001-01-1,benzyl-quinazolin-4-yl-amine,BRD-K43796186,EGFR inhibitor,EGFR
+BRD-K43797669-001-02-3,genistein,genistein,tyrosine kinase inhibitor,"CFTR, ESR1, ESR2, ESRRA, ESRRB, ESRRG, NCOA1, NCOA2, PPARG, PTK2B, TOP2A, TRPC5"
+BRD-K43860855-065-03-6,iobenguane,iobenguane,antineoplastic agent,
+BRD-K44067360-001-06-3,flufenamic-acid,flufenamic acid,chloride channel blocker,"AKR1C3, ANO1, AR, GJA1, GJA10, GJA3, GJA4, GJA5, GJA8, GJA9, GJB1, GJB2, GJB3, GJB4, GJB5, GJB6, GJB7, GJC1, GJC2, GJC3, GJD2, GJD3, GJD4, GJE1, PANX1, PANX2, PANX3, PKD2L1, PTGS1, PTGS2, TRPC5, TRPM2, TRPM5"
+BRD-K44084986-001-03-9,Y-27632,Y27632,rho associated kinase inhibitor,"PKIA, PKN2, PRKACA, PRKCE, ROCK1, ROCK2"
+BRD-K44849676-001-03-0,capsazepine,capsazepine,TRPV agonist,"TRPV1, TRPV4"
+BRD-K45117373-001-01-1,Y-26763,BRD-K45117373,potassium channel activator|potassium channel agonist,"ABCC9, KCNJ8"
+BRD-K45158365-001-02-3,valsartan,valsartan,angiotensin receptor antagonist,AGTR1
+BRD-K45330754-001-04-3,diethylstilbestrol,diethylstilbestrol,estrogen receptor agonist,"ESR1, ESR2, ESRRB, ESRRG"
+BRD-K45662124-001-01-8,3'-fluorobenzylspiperone,3'-FLUOROBENZYLSPIPERONE,dopamine receptor ligand,DRD2
+BRD-K45988865-001-01-0,NA,BRD-K45988865,organosilicon compound used as an internal standard in NMR spectroscopy,NA
+BRD-K46137903-001-03-3,prednicarbate,prednicarbate,phospholipase activator,"NR3C1, PLA2G1B"
+BRD-K46142322-003-01-6,RS-67333,RS 67333,serotonin receptor partial agonist,HTR4
+BRD-K46441700-001-01-8,NA,GR 55562,serotonin receptor antagonist,"HTR1B, HTR1D"
+BRD-K46469693-001-01-8,SCH-442416,BRD-K46469693,adenosine receptor antagonist,"ADORA1, ADORA2A, ADORA2B, ADORA3"
+BRD-K46678324-001-03-7,NA,RHO-kinase inhibitor II,rho associated kinase inhibitor,NA
+BRD-K46862739-001-03-6,metyrapone,metyrapone,cytochrome P450 inhibitor,CYP11B1
+BRD-K47105409-001-05-3,NA,tyrphostin B42,JAK inhibitor,NA
+BRD-K47150025-001-01-2,KI-8751,BRD-K47150025,PDGFR alpha and c-Kit inhibitor|vascular endothelial growth factor receptor 2 (VEGFR2) inhibitor|VEGFR inhibitor,KDR
+BRD-K47328134-001-02-0,lysylphenylalanyl-tyrosine,BRD-K47328134,heparin activation inhibitor,NA
+BRD-K47598052-001-04-2,PP-1,PP1,src inhibitor,"HCK, RET"
+BRD-K47608922-001-02-1,dipyrocetyl,dipyrocetyl,chelating agent,
+BRD-K47635719-001-03-9,dexamethasone-acetate,dexamethasone acetate,glucocorticoid receptor agonist,
+BRD-K47659338-003-01-0,EMD-386088,BRD-K47659338,serotonin receptor agonist,HTR6
+BRD-K47869605-001-04-9,podophyllotoxin,podophyllotoxin,microtubule inhibitor|tubulin polymerization inhibitor,"IGF1R, TOP2A, TUBA4A, TUBB"
+BRD-K47936004-001-01-9,piribedil,piribedil,dopamine receptor agonist,"ADRA1A, ADRA2A, ADRA2C, DRD2, DRD3, DRD4, HTR1A, HTR2B"
+BRD-K48722258-300-04-5,dilazep,dilazep,adenosine reuptake inhibitor,SLC29A1
+BRD-K48735772-001-01-4,PD-158780,BRD-K48735772,EGFR inhibitor|epidermal growth factor receptor (EGFR) inhibitor,EGFR
+BRD-K49049886-001-03-8,CGS-15943,BRD-K49049886,adenosine receptor antagonist,"ADORA1, ADORA2A, ADORA2B, ADORA3"
+BRD-K49061529-001-01-0,NA,ETHYL-beta-CARBOLINE-3-CARBOXYLATE,GABA benzodiazepine site receptor inverse agonist,"GABRA1, GABRG2"
+BRD-K49294207-300-01-2,BIBU-1361,BRD-K49294207,EGFR inhibitor,EGFR
+BRD-K49577446-001-03-1,flunisolide,flunisolide,cytochrome P450 inhibitor,NR3C1
+BRD-K49657628-001-02-3,tyrphostin-AG-18,tyrphostin AG 18,EGFR inhibitor|tyrosine kinase inhibitor,EGFR
+BRD-K50135270-001-01-9,GBR-12935,GBR 12935,dopamine uptake inhibitor,"AGTR1, SLC6A3"
+BRD-K50325075-001-01-3,UCL-2077,BRD-K50325075,potassium channel blocker|slow afterhyperpolarization channel blocker,NA
+BRD-K50388907-001-04-9,fenofibrate,fenofibrate,PPAR receptor agonist,"MMP25, PPARA"
+BRD-K50464341-001-02-6,NA,E6 berbamine,calmodulin antagonist,CALM1
+BRD-K50495309-001-01-2,SRC-kinase-inhibitor-I,Src kinase inhibitor I,src inhibitor,"CSK, LCK, RIPK2"
+BRD-K50836978-001-01-7,purvalanol-a,purvalanol A,CDK inhibitor,"CDK1, CDK2, CDK4, CDK5, CSNK1G3, RPS6KA1, SRC"
+BRD-K50841342-001-01-6,PAC-1,BRD-K50841342,caspase activator,CASP3
+BRD-K50859149-001-04-7,sulfafurazole,sulfafurazole,bacterial antifolate,
+BRD-K50891186-001-01-0,GR-103691,GR 103691,dopamine receptor antagonist,DRD3
+BRD-K51276371-001-01-8,NA,aloisine,CDK inhibitor|CFTR channel activator|glycogen synthase kinase inhibitor|JNK inhibitor,"CDK2, CDK5, CDK1, CDK5R1, CFTR, PTK2B, ZAP70"
+BRD-K51318897-001-04-7,fenbendazole,fenbendazole,tubulin polymerization inhibitor,TUBB
+BRD-K51465424-003-03-6,ritodrine,ritodrine,adrenergic receptor agonist,ADRB2
+BRD-K51476772-001-01-9,NA,ST638,tyrosine kinase inhibitor,NA
+BRD-K51575138-001-01-7,TPCA-1,BRD-K51575138,IKK inhibitor,IKBKB
+BRD-K51751936-001-03-4,alfadolone-acetate,alfadolone acetate,benzodiazepine receptor agonist,
+BRD-K51918615-303-01-1,iodophenpropit,BRD-K51918615,histamine receptor antagonist|histamine receptor inhibitor|ionotropic glutamate receptor antagonist,"HRH3, HRH4, GRIN2B"
+BRD-K52075040-001-02-2,cerulenin,cerulenin,fatty acid synthase inhibitor,FASN
+BRD-K52313696-001-01-6,tacedinaline,tacedinaline,HDAC inhibitor,HDAC1
+BRD-K52394958-001-01-9,GR-159897,BRD-K52394958,tachykinin antagonist,"TACR2, TAC1"
+BRD-K52397688-001-01-9,amperozide,BRD-K52397688,dopamine receptor antagonist|FAAH inhibitor|serotonin receptor antagonist,"HTR2A, DRD2, FAAH"
+BRD-K52620403-001-01-8,NA,STO 609,calcium/calmodulin dependent protein kinase inhibitor|calmodulin inhibitor,"CAMKK1, CAMKK2"
+BRD-K52662033-001-02-6,lidocaine,lidocaine,histamine receptor agonist,"EGFR, SCN10A, SCN11A, SCN1A, SCN2A, SCN3A, SCN4A, SCN5A, SCN7A, SCN8A, SCN9A"
+BRD-K52721684-001-02-2,PCO-400,PCO-400,potassium channel activator,KCNJ8
+BRD-K52850071-001-01-2,WHI-P154,WHI-P154,JAK inhibitor,"EGFR, JAK1, JAK2, JAK3"
+BRD-K52989797-001-01-1,clomipramine,clomipramine,serotonin transporter (SERT) inhibitor,"GSTP1, HTR2A, HTR2B, HTR2C, SLC6A2, SLC6A3, SLC6A4"
+BRD-K53263234-001-02-9,CITCO,CITCO,constitutive androstane receptor (CAR) agonist,NR1I3
+BRD-K53523901-001-01-0,arctigenin,BRD-K53523901,adiponectin receptor agonist|AP inhibitor|aryl hydrocarbon receptor antagonist|HIV integrase inhibitor|MEK inhibitor|NFkB pathway inhibitor|topoisomerase inhibitor,"ADIPOR1, AHR, CHUK, MAP2K1"
+BRD-K53878242-001-02-4,MMPX,BRD-K53878242,phosphodiesterase inhibitor,NA
+BRD-K53979406-003-01-0,ALX-5407,BRD-K53979406,glycine transporter inhibitor|GlyT-1 inhibitor,SLC6A9
+BRD-K54094468-001-01-6,remoxipride,remoxipride,dopamine receptor antagonist,"DRD2, DRD3, DRD4, HTR2A, SIGMAR1"
+BRD-K54095730-001-01-5,CMPD-1,BRD-K54095730,p38 MAPK inhibitor,"GNRHR, MAPK14"
+BRD-K54210043-001-02-0,NA,NS-1619,calcium channel activator|large conductance potassium channel activator,"KCNMA1, KCNT1, KCNT2, KCNU1"
+BRD-K54233340-300-01-0,dorsomorphin,BRD-K54233340,AMPK inhibitor|DNA damaging|TGF beta receptor inhibitor,"ACVR1, BMPR1A, BMPR1B, EPHA2, FKBP1A, FLT1, FLT3, KDR, LCK, MKNK1, PRKAA1, RPS6KA1, SRC"
+BRD-K54330070-001-05-5,SB-202190,SB-202190,p38 MAPK inhibitor,"AKT1, ALOX5, CHEK1, GSK3B, LCK, MAPK1, MAPK11, MAPK12, MAPK14, MAPK8, PRKCA, ROCK1, RPS6KB1, SGK1"
+BRD-K54411430-001-02-5,NA,robustic acid,cAMP inhibitor,NA
+BRD-K54704028-001-01-3,BAY-36-7620,BRD-K54704028,glutamate receptor antagonist,GRM1
+BRD-K55034111-066-02-3,pefloxacin,pefloxacin,bacterial DNA gyrase inhibitor,TOP2A
+BRD-K55454768-001-01-8,NA,TAS 301,voltage-independent calcium influx blocker,CAMK2A
+BRD-K55468218-001-04-8,spiperone,spiperone,dopamine receptor antagonist,"ADRA1A, ADRA1B, ADRA1D, DRD1, DRD2, DRD3, DRD4, DRD5, HTR1A, HTR1D, HTR2A, HTR2B, HTR2C, HTR6, HTR7"
+BRD-K55529781-236-02-0,furegrelate,furegrelate,thromboxane synthase inhibitor,TBXAS1
+BRD-K55567017-001-02-4,formononetin,formononetin,alcohol dehydrogenase inhibitor,"ADH1C, SLC5A2"
+BRD-K55677650-003-01-1,CO-101244,BRD-K55677650,ionotropic glutamate receptor antagonist,GRIN2B
+BRD-K55748775-001-01-4,SCH-28080,BRD-K55748775,ATPase inhibitor|potassium-competitive acid antagonist,ATP4A
+BRD-K56064827-001-04-7,NA,HHBPDDE,PKC inhibitor,"PRKCA, PRKCG"
+BRD-K56429665-001-03-9,calcipotriol,BRD-K56429665,vitamin D receptor agonist,VDR
+BRD-K56699285-001-03-7,metergoline,metergoline,dopamine receptor agonist|serotonin receptor antagonist,"HTR1A, HTR1B, HTR1D, HTR1E, HTR1F, HTR2A, HTR2B, HTR2C, HTR5A, HTR6, HTR7"
+BRD-K57222227-001-06-1,NA,indometacin,cyclooxygenase inhibitor,"PTGS1, PTGS2, PPARG, PTGDR2, GLO1, PLA2G2"
+BRD-K57545991-050-03-3,enalapril,enalapril,angiotensin converting enzyme inhibitor,ACE
+BRD-K57886322-001-03-4,fluocinonide,fluocinonide,glucocorticoid receptor agonist,"NR3C1, SERPINA6, SMO"
+BRD-K58220566-001-02-2,NA,TMB 8,PKC inhibitor|sodium channel blocker|calcium channel blocker,NA
+BRD-K58265391-001-03-6,meticrane,meticrane,diuretic,
+BRD-K58299615-001-02-7,RO-90-7501,BRD-K58299615,amyloid precursor protein inhibitor|beta amyloid aggregation inhibitor,APP
+BRD-K58466253-003-04-1,NA,palmatine,serotonin release inhibitor,NA
+BRD-K58685305-001-02-2,emodin,emodin,11-beta hydroxysteroid dehydrogenase inhibitor,CSNK2A1
+BRD-K58930050-001-01-1,NA,dicozilpine,glutamate receptor antagonist,NA
+BRD-K58938839-001-03-8,NA,cyclopamine,smoothened receptor antagonist|hedgehog pathway inhibitor,"SMO, DHH, IHH, PTCH1"
+BRD-K59037100-001-04-8,oxybenzone,oxybenzone,lipase inhibitor,LIPE
+BRD-K59058766-003-03-7,chlorprothixene,chlorprothixene,dopamine receptor antagonist,"CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, DRD1, DRD2, DRD3, HRH1, HTR2A, HTR2B, HTR2C"
+BRD-K59184148-001-04-2,SB-216763,BRD-K59184148,glycogen synthase kinase inhibitor,"GSK3B, CCNA2, CDK2, GSK3A"
+BRD-K59273480-001-01-5,propentofylline,propentofylline,adenosine reuptake inhibitor|phosphodiesterase inhibitor,PDE1A
+BRD-K59331372-001-01-2,SB-366791,BRD-K59331372,TRPV antagonist,TRPV1
+BRD-K59332007-300-01-9,linopirdine,BRD-K59332007,acetylcholine release enhancer|acetylcholine release stimulant|neurotransmitter agonist|voltage-gated potassium channel blocker,"KCNQ2, KCNQ3, KCNQ4, KCNQ5"
+BRD-K59419204-001-01-9,AM-281,BRD-K59419204,cannabinoid receptor antagonist|cannabinoid receptor inhibitor,"CNR1, CNR2, GPR55"
+BRD-K59522102-001-04-7,piperine,PIPERINE,monoamine oxidase inhibitor,"MAOA, MAOB, TRPV1"
+BRD-K59574735-001-02-7,ubenimex,ubenimex,leukotriene synthesis inhibitor,"LTA4H, RNPEP"
+BRD-K59637651-001-01-4,NSC-119889,BRD-K59637651,protein synthesis inhibitor|botulin neurotoxin inhibitor|mur synthetase inhibitor,NA
+BRD-K59650319-003-01-7,YM-298198,BRD-K59650319,glutamate receptor antagonist,GRM1
+BRD-K59753853-001-01-5,MDL-29951,MDL 29951,glutamate receptor antagonist,FBP1
+BRD-K59851896-001-02-4,NA,calycanthine,GABA release inhibitor,NA
+BRD-K59983611-001-05-2,sulfabenzamide,sulfabenzamide,bacterial antifolate,
+BRD-K60174629-001-02-2,NA,Z-prolyl-prolinal,prolyl endopeptidase inhibitor,PREP
+BRD-K60184833-001-02-3,NA,tyrphostin 46,tyrosine kinase inhibitor,EGFR
+BRD-K60230970-001-04-3,MG-132,MG-132,proteasome inhibitor,PSMB1
+BRD-K60274257-001-01-1,NA,dephostatin,tyrosine phosphatase inhibitor,"PTPN1, PTPN6"
+BRD-K60298136-001-01-7,ITE,BRD-K60298136,aryl hydrocarbon receptor agonist|aryl hydrocarbon receptor ligand,AHR
+BRD-K60476892-001-02-1,NA,YC-1,activator of soluble guanylyl cyclase|guanylate cyclase activator|hypoxia inducible factor inhibitor,"HIF1A, GUCY1A2, GUCY1A3, GUCY1B3"
+BRD-K60511616-236-01-4,pravastatin,BRD-K60511616,HMGCR inhibitor,"HMGCR, SLCO1B1"
+BRD-K60640630-001-03-7,mometasone-furoate,mometasone furoate,glucocorticoid receptor agonist,NR3C1
+BRD-K60690191-003-02-1,MPEP,MPEP,glutamate receptor antagonist,"GRM1, GRM4, GRM5"
+BRD-K60923938-001-02-8,NA,VERATRIDINE,sodium channel activator,"SCN1A, SCN3A, SCN8A, SCN9A"
+BRD-K60932973-001-01-7,NA,R(+)-6-bromo-APB,dopamine receptor agonist,NA
+BRD-K61097567-001-03-6,SB-218795,BRD-K61097567,tachykinin antagonist,TACR3
+BRD-K61177364-003-01-1,NBI-27914,BRD-K61177364,CRF receptor antagonist,CRHR1
+BRD-K61250553-001-02-9,loperamide,loperamide,opioid receptor agonist,"CACNA1A, CALM1, OPRD1, OPRK1, OPRM1, POMC"
+BRD-K61271364-001-02-4,NA,"(1S,9R)-beta-hydrastine",GABA receptor antagonist,NA
+BRD-K61323504-001-02-4,SB-225002,SB-225002,CC chemokine receptor antagonist,CXCR2
+BRD-K61496577-001-03-8,flumetasone,flumetasone,glucocorticoid receptor agonist,NR3C1
+BRD-K61590534-001-01-4,NA,tyrphostin 63,EGFR inhibitor,NA
+BRD-K61951118-001-01-2,FG-7142,FG 7142,GABA benzodiazepine site receptor inverse agonist,
+BRD-K62008436-001-03-1,paclitaxel,paclitaxel,tubulin polymerization inhibitor,"BCL2, MAP2, MAP4, MAPT, NR1I2, TLR4, TUBB, TUBB1"
+BRD-K62206109-303-01-1,VUF-5681,BRD-K62206109,histamine receptor antagonist,HRH3
+BRD-K62221994-001-01-8,T-98475,BRD-K62221994,gonadotropin releasing factor hormone receptor antagonist,"GNRH1, GNRHR"
+BRD-K62310379-001-03-0,fluticasone-propionate,fluticasone propionate,glucocorticoid receptor agonist,"NR3C1, NR3C2, PGR, PLA2G4A"
+BRD-K62353524-001-01-8,DY-131,BRD-K62353524,estrogen receptor agonist,"ESR2, ESRRB, ESRRG"
+BRD-K62363391-001-04-1,dapsone,dapsone,bacterial antifolate,DHFR
+BRD-K62607865-001-03-0,aztreonam,aztreonam,bacterial cell wall synthesis inhibitor,
+BRD-K62609077-001-02-2,NA,scoulerine,adrenergic receptor antagonist|GABA receptor antagonist|serotonin receptor antagonist,"ADRA1D, ADRA2A, GABRA1"
+BRD-K62810658-001-05-6,PD-98059,PD 98059,MEK inhibitor,"AKT1, CHEK1, GSK3B, LCK, MAP2K1, MAPK1, MAPK11, MAPK12, MAPK14, MAPK8, PRKCA, RAF1, ROCK1, RPS6KB1, SGK1"
+BRD-K62996583-001-03-8,lidoflazine,lidoflazine,calcium channel blocker,"SCN1A, SCN3A, SLC29A1"
+BRD-K63150726-001-01-3,NA,BRD-K63150726,cannabinoid receptor inverse agonist,CNR2
+BRD-K63504947-001-05-5,semaxanib,semaxanib,VEGFR inhibitor,"FGFR1, FLT1, KDR, KIT, PDGFRA, PDGFRB, RET"
+BRD-K63533170-001-01-1,AM-630,BRD-K63533170,cannabinoid receptor antagonist|cannabinoid receptor inverse agonist,"CNR2, CNR1"
+BRD-K63606607-001-01-8,NA,bufalin,ATPase inhibitor|chloride channel activator,ATP1A1
+BRD-K63630713-001-04-3,etacrynic-acid,etacrynic acid,sodium/potassium/chloride transporter inhibitor,"ATP1A1, SLC12A1"
+BRD-K63750851-001-03-3,mycophenolic-acid,mycophenolic acid,dehydrogenase inhibitor|inositol monophosphatase inhibitor,"IMPDH1, IMPDH2"
+BRD-K63792901-075-01-3,arecaidine,BRD-K63792901,acetylcholine receptor agonist,"CHRM1, CHRM2, CHRM3, CHRM4"
+BRD-K63828191-003-07-3,raloxifene,raloxifene,estrogen receptor antagonist|selective estrogen receptor modulator (SERM),"ESR1, ESR2"
+BRD-K63874012-103-01-5,thioperamide,BRD-K63874012,histamine receptor antagonist|histamine receptor inverse agonist,"HRH3, HRH4"
+BRD-K63913457-001-02-7,NA,EICOSATRIENOIC ACID (20:3 n-3),vasodilator,NA
+BRD-K64341947-003-01-6,CFM-1571,BRD-K64341947,guanylate cyclase activator,NA
+BRD-K64670467-001-01-2,JNJ-16259685,BRD-K64670467,glutamate receptor antagonist,GRM1
+BRD-K64755930-003-01-6,etazolate,etazolate,phosphodiesterase inhibitor,"GABRB3, PDE4A"
+BRD-K64862097-001-03-9,fluorometholone,fluorometholone,glucocorticoid receptor agonist,NR3C1
+BRD-K65285700-001-01-5,NA,BRD-K65285700,cannabinoid receptor agonist,CNR2
+BRD-K65503129-001-01-4,HSP90-inhibitor,BRD-K65503129,HSP inhibitor|HSP antagonist,"HSP90AA1, HSP90AB1"
+BRD-K65639003-001-02-5,icariin,ICARIIN,phosphodiesterase inhibitor,PDE5A
+BRD-K65667145-001-04-1,kinetin,kinetin,cell division inducer,
+BRD-K65814004-001-02-3,NA,Diphenyleneiodonium Cl,nitric oxide synthase inhibitor|aldehyde dehydrogenase inhibitor|cytochrome P450 inhibitor|NADPH oxidase inhibitor|xanthine oxidase inhibitor,"ALDH1A2, ALDH2, ALDH5A1, ALDH7A1, NOX3, XDH"
+BRD-K66353228-001-05-4,zoxazolamine,zoxazolamine,myorelaxant,
+BRD-K66404838-003-03-8,nalbuphine,nalbuphine,opioid receptor agonist|opioid receptor antagonist,"OPRD1, OPRK1, OPRM1"
+BRD-K66715657-001-01-3,UH-232-(+),(+)-UH 232,dopamine receptor antagonist,"DRD2, DRD3, DRD4, HTR1A"
+BRD-K66874953-001-02-7,pifithrin-alpha,pifithrin-alpha,TP53 inhibitor,TP53
+BRD-K66898851-001-03-7,sanguinarium-chloride,sanguinarium chloride,apoptosis stimulant,CASP3
+BRD-K67013324-001-01-5,luzindole,BRD-K67013324,melatonin receptor antagonist,"MTNR1B, MTNR1A"
+BRD-K67043667-001-04-1,altretamine,altretamine,DNA synthesis inhibitor,
+BRD-K67080878-001-05-5,milrinone,milrinone,phosphodiesterase inhibitor,"PDE2A, PDE3A, PDE3B, PDE5A"
+BRD-K67277431-002-03-0,picotamide,picotamide,thromboxane receptor antagonist|thromboxane synthase inhibitor,TBXA2R
+BRD-K67298865-001-02-5,SB-431542,SB-431542,TGF beta receptor inhibitor,"ACVR1C, TGFBR1"
+BRD-K67439147-001-01-7,SIB-1893,BRD-K67439147,glutamate receptor antagonist,"GRM5, GRM4"
+BRD-K67537649-001-01-1,PQ-401,BRD-K67537649,insulin growth factor receptor inhibitor,IGF1R
+BRD-K67831364-003-01-7,ZM-323881,BRD-K67831364,vascular endothelial growth factor receptor 2 (VEGFR2) inhibitor|VEGFR inhibitor,KDR
+BRD-K67860401-001-02-3,NA,GSK-3beta inhibitor VIII,glycogen synthase kinase inhibitor,GSK3B
+BRD-K68103045-001-01-1,CGS-20625,BRD-K68103045,benzodiazepine receptor agonist|GABA benzodiazepine site receptor partial agonist,"GABRA1, GABRA2, GABRA3, GABRA5"
+BRD-K68143200-001-04-2,NSC-95397,NSC95397,CDC inhibitor,"CDC25A, CDC25B"
+BRD-K68332390-001-03-3,ponalrestat,ponalrestat,aldose reductase inhibitor|reductase inhibitor,AKR1B1
+BRD-K68336408-001-03-4,tyrphostin-AG-1478,tyrphostin AG-1478,EGFR inhibitor,"EGFR, MAPK14"
+BRD-K68341547-003-01-6,W-9,BRD-K68341547,calmodulin antagonist,CALM2
+BRD-K68402494-001-04-7,ML-9,ML-9,myosin light chain kinase inhibitor,TRPC6
+BRD-K68507560-003-04-8,dicycloverine,dicycloverine,acetylcholine receptor antagonist,"CHRM1, CHRM2, CHRM3"
+BRD-K68552125-001-03-8,NA,phorbol myristate acetate,PKC activator|CD antagonist,"CD4, KCNT2, PRKCA, TRPV4"
+BRD-K68553471-003-04-0,todralazine,todralazine,antihypertensive agent,
+BRD-K68620903-001-03-1,dydrogesterone,dydrogesterone,progesterone receptor agonist,PGR
+BRD-K68873215-001-01-3,NA,phosphodiesterase V inhibitor II,phosphodiesterase inhibitor,PDE5A
+BRD-K69023402-001-02-5,NA,thapsigargin,ATPase inhibitor|calcium channel blocker|PKC activator,ATP2A1
+BRD-K70246307-001-02-5,riboflavin,riboflavin,vitamin B2,"BLVRB, RFK"
+BRD-K70487031-001-01-0,flupentixol,flupentixol,dopamine receptor antagonist,"ADRA1A, CHRM1, DRD1, DRD2, DRD3, DRD5, HTR2A"
+BRD-K70778732-003-04-4,trazodone,trazodone,adrenergic receptor antagonist|serotonin receptor antagonist|serotonin reuptake inhibitor,"ADRA1A, ADRA2A, HRH1, HTR1A, HTR2A, HTR2B, HTR2C, SLC6A4"
+BRD-K70792160-003-01-2,10-DEBC,10-DEBC,AKT inhibitor,PIM1
+BRD-K70914287-300-01-0,BIBX-1382,BRD-K70914287,EGFR inhibitor|tyrosine kinase inhibitor,"EGFR, ERBB2"
+BRD-K71266197-236-01-9,PSB-06126,BRD-K71266197,NTPDase inhibitor,ENTPD3
+BRD-K71430621-303-01-5,clobenpropit,BRD-K71430621,histamine receptor antagonist|histamine receptor inverse agonist,"HRH3, HRH4, HRH1, HRH2"
+BRD-K71726959-001-05-9,NA,N9-isopropylolomoucine,CDK inhibitor,"CDK1, CDK5"
+BRD-K71799778-001-02-2,NA,BML-259,CDK inhibitor,NA
+BRD-K71860425-001-01-1,NA,Cdk2/5 inhibitor,CDK inhibitor,"CDK2, CDK5"
+BRD-K72024482-001-01-3,MRS-1754,BRD-K72024482,adenosine receptor antagonist,"ADORA2B, ADORA1, ADORA2A, ADORA3"
+BRD-K72034655-001-02-1,NA,peucedanin,apoptosis inducer|antileukemic,NA
+BRD-K72676686-103-01-8,fluvoxamine,BRD-K72676686,selective serotonin reuptake inhibitor (SSRI)|serotonin reuptake inhibitor|serotonin uptake inhibitor,"SLC6A4, CYP2C19"
+BRD-K72703948-001-01-0,ZM-447439,BRD-K72703948,Aurora kinase inhibitor,"AURKA, AURKB"
+BRD-K72726508-001-01-3,arcyriaflavin-a,BRD-K72726508,CDK inhibitor,"CCND1, CCNE1, CDK2, CDK4"
+BRD-K72783841-001-01-0,tyrphostin-AG-555,BRD-K72783841,CDK inhibitor|epidermal growth factor receptor (EGFR) inhibitor|tyrosine kinase inhibitor|EGFR inhibitor,"CDK2, EGFR"
+BRD-K72895815-001-01-4,SSR-69071,BRD-K72895815,leukocyte elastase inhibitor,ELANE
+BRD-K73196317-003-06-4,urapidil,urapidil,adrenergic receptor antagonist,HTR1A
+BRD-K73290745-003-01-8,ICI-199441,BRD-K73290745,opioid receptor agonist,"OPRK1, CYP2D6, OPRD1, OPRM1, UTS2R"
+BRD-K73323637-003-03-4,levobunolol,levobunolol,adrenergic receptor antagonist,"ADRB1, ADRB2, ADRB3"
+BRD-K73323637-003-03-4,levobunolol-(+),levobunolol,adrenergic receptor antagonist,
+BRD-K73397362-001-01-7,purmorphamine,purmorphamine,smoothened receptor agonist,SMO
+BRD-K73789395-001-04-0,ZM-336372,ZM336372,RAF inhibitor,"BRAF, LCK, MAPK14, RAF1"
+BRD-K73991644-001-01-7,isoquercetin,BRD-K73991644,aldose reductase inhibitor|falcipain inhibitor,"AKR1B1, ACE"
+BRD-K74305673-001-01-3,IKK-2-inhibitor-V,BRD-K74305673,IKK inhibitor|NFkB pathway inhibitor|protein kinase inhibitor,IKBKB
+BRD-K74430258-001-01-2,NA,BRD-K74430258,hepatotoxicant,NA
+BRD-K75089421-001-02-5,procainamide,procainamide,sodium channel blocker,"DNMT1, SCN5A"
+BRD-K75181824-001-02-3,NA,N-AGGC,inhibitor of methyl esterification of geranylgeranylated proteins,NA
+BRD-K75478907-001-01-5,GS-39783,BRD-K75478907,GABA receptor modulator|GABA receptor positive allosteric modulator,GABBR1
+BRD-K75958195-001-01-7,pizotifen,pizotifen,serotonin receptor antagonist,"HTR1A, HTR2A, HTR2C"
+BRD-K76064317-001-04-0,tyrphostin-AG-1296,tyrphostin AG 1296,FLT3 inhibitor,FLT3
+BRD-K76304753-003-04-7,NA,BRD-K76304753,local anesthetic,SCN1A
+BRD-K76568384-001-01-4,PHTPP,BRD-K76568384,estrogen receptor antagonist,ESR2
+BRD-K76617868-001-02-2,fasudil,fasudil,rho associated kinase inhibitor,"PKIA, PRKACA, ROCK1, ROCK2"
+BRD-K76634210-001-02-2,idoxuridine,idoxuridine,DNA directed DNA polymerase inhibitor,
+BRD-K76674262-001-01-7,homoharringtonine,BRD-K76674262,apoptosis stimulant|protein synthesis inhibitor,RPL3
+BRD-K76723084-001-05-9,isotretinoin,isotretinoin,retinoid receptor agonist,"RARA, RARB, RARG"
+BRD-K76805682-001-05-0,SB-415286,SB-415286,glycogen synthase kinase inhibitor,"GSK3A, GSK3B, RPS6KB1"
+BRD-K76810206-001-05-7,nicergoline,nicergoline,adrenergic receptor antagonist,ADRA1A
+BRD-K76840893-003-01-7,RS-17053,BRD-K76840893,adrenergic receptor antagonist,"ADRA1A, ADRA1D"
+BRD-K76927775-001-04-3,nitrofurantoin,nitrofurantoin,DNA inhibitor,
+BRD-K77133231-001-01-1,NA,PD169316,p38 MAPK inhibitor,ALOX5
+BRD-K77171813-050-01-4,proxyfan,BRD-K77171813,histamine receptor modulator,HRH3
+BRD-K77554836-001-03-3,triamcinolone,triamcinolone,glucocorticoid receptor agonist,"NR3C1, SERPINA6"
+BRD-K77641333-003-04-0,naphazoline,naphazoline,adrenergic receptor agonist,"ADRA1A, ADRA2A"
+BRD-K77677632-003-01-8,SB-200646,BRD-K77677632,serotonin receptor antagonist,"HTR2B, HTR2C"
+BRD-K77695569-001-04-5,tiabendazole,tiabendazole,angiogenesis inhibitor,
+BRD-K77771411-003-03-2,moxonidine,moxonidine,imidazoline receptor agonist,"ADRA2A, ADRA2B, ADRA2C"
+BRD-K77793136-003-01-4,hydroxyfasudil,hydroxyfasudil,rho associated kinase inhibitor,"PKIA, PRKACA, ROCK1"
+BRD-K77925998-001-01-3,quipazine,quipazine,serotonin receptor agonist,
+BRD-K77947974-001-04-9,fluspirilene,fluspirilene,dopamine receptor antagonist,"CACNG1, DRD2, HRH1, HTR1A, HTR1D, HTR1E, HTR2A"
+BRD-K77987382-001-05-8,mebendazole,BRD-K77987382,acetylcholinesterase inhibitor|microtubule inhibitor|tubulin inhibitor,"TUBA1A, TUBB, TUBB4B"
+BRD-K78010432-001-04-1,furosemide,furosemide,diuretic,"CA2, GPR35, SLC12A1, SLC12A2"
+BRD-K78084463-003-01-0,NA,W-12,calmodulin antagonist,NA
+BRD-K78113049-001-04-8,enoxacin,enoxacin,topoisomerase inhibitor,TOP2A
+BRD-K78122587-300-01-9,NNC-55-0396,BRD-K78122587,T-type calcium channel blocker,"CATSPER1, CATSPER2, CATSPER3, CATSPER4"
+BRD-K78280988-001-02-2,anandamide,"anandamide(20:3,n-6)",cannabinoid receptor agonist|potassium channel blocker|TRPV agonist,"CNR1, CNR2, TRPV1, CACNA1G, CACNA1H, CACNA1I, GLRA1, GPR119, GPR18, GPR55, KCNA2, KCND3, KCNK3, KCNK9, TRPM8"
+BRD-K78364995-236-03-5,cefotaxime,cefotaxime,bacterial cell wall synthesis inhibitor,
+BRD-K78485176-001-02-9,olmesartan-medoxomil,olmesartan medoxomil,angiotensin receptor antagonist,AGTR1
+BRD-K78599730-001-02-6,NA,manumycin A,farnesyltransferase inhibitor|NFkB pathway inhibitor|ras farnesyltransferase inhibitor,"FNTA, IKBKB"
+BRD-K78633253-001-01-2,EXO-1,exo1,ARF inhibitor,
+BRD-K78637815-001-01-4,LY-320135,BRD-K78637815,cannabinoid receptor antagonist,CNR1
+BRD-K78643075-001-03-3,bromperidol,bromperidol,dopamine receptor antagonist,DRD2
+BRD-K78692225-001-11-2,leflunomide,leflunomide,dihydroorotate dehydrogenase inhibitor|PDGFR tyrosine kinase receptor inhibitor,"AHR, DHODH, PTK2B"
+BRD-K78815826-001-04-7,suxibuzone,suxibuzone,cyclooxygenase inhibitor,
+BRD-K78838262-001-02-4,NA,austricine,hypolipidemic,NA
+BRD-K78959463-001-02-5,FPL-64176,FPL-64176,calcium channel activator,"CACNA1C, CACNA1S"
+BRD-K79092138-001-04-5,NA,nitrofural,POXB inhibitor|bacterial DNA inhibitor,NA
+BRD-K79116891-003-03-7,proxymetacaine,proxymetacaine,sodium channel blocker,"SCN10A, SCN5A"
+BRD-K79124250-001-03-0,ioxaglic-acid,ioxaglic acid,radiopaque medium,
+BRD-K79131256-001-03-9,albendazole,albendazole,tubulin polymerization inhibitor,"TUBA1A, TUBB, TUBB4B"
+BRD-K79145749-001-01-8,dibenzepine,DIBENZEPINE,norepinephrine reputake inhibitor,
+BRD-K79366068-236-01-5,PSB-069,BRD-K79366068,NTPDase inhibitor,"ENTPD1, ENTPD2, ENTPD3"
+BRD-K79425933-001-03-6,benperidol,benperidol,dopamine receptor antagonist,DRD2
+BRD-K79501723-003-03-4,cyclizine,cyclizine,histamine receptor modulator,"HRH1, SULT1E1"
+BRD-K79684402-300-01-0,RO-10-5824,BRD-K79684402,dopamine receptor partial agonist,DRD4
+BRD-K79711234-001-04-3,thiamphenicol,thiamphenicol,bacterial 50S ribosomal subunit inhibitor,
+BRD-K79759585-001-02-1,sildenafil,sildenafil,phosphodiesterase inhibitor,"PDE5A, PDE6G, PDE6H, SLCO1B1, SLCO1B3"
+BRD-K79930101-300-01-1,GW-583340,BRD-K79930101,EGFR inhibitor|epidermal growth factor receptor (EGFR) inhibitor|ErbB2 tyrosine kinase inhibitor|receptor tyrosine protein kinase inhibitor,"EGFR, ERBB2"
+BRD-K80315159-051-01-2,DPPE,BRD-K80315159,histamine receptor antagonist,"ABCB1, HRH1"
+BRD-K80334323-001-03-5,noretynodrel,noretynodrel,progestogen hormone,PGR
+BRD-K80353807-001-03-0,khellin,khellin,vasodilator,
+BRD-K80451230-051-01-8,zamifenacin,BRD-K80451230,acetylcholine receptor antagonist,CHRM3
+BRD-K80639402-003-01-1,SB-258585,BRD-K80639402,serotonin receptor antagonist,HTR6
+BRD-K80725821-300-01-1,RS-16566,RS 16566,serotonin receptor antagonist,
+BRD-K80738081-001-06-2,resveratrol,resveratrol,cytochrome P450 inhibitor|SIRT activator,"CSNK2A1, NQO2, PTGS1, PTGS2"
+BRD-K80778372-001-01-7,RO-19-4605,BRD-K80778372,GABA benzodiazepine site receptor inverse agonist,"GABRA1, GABRA2, GABRA3, GABRA5"
+BRD-K80946661-001-02-8,NA,triacetylresveratrol,p53 activator,NA
+BRD-K80970344-201-02-9,NA,pyrrolidine dithiocarbamic acid,NFkB pathway inhibitor,"HSD11B1, RELA"
+BRD-K81029756-001-02-8,NA,L-cis-DILTIAZEM,L-type calcium channel blocker|calcium channel antagonist|calcium channel blocker,"CACNA1C, CACNA1S, CACNA2D1, CACNG1, CYP3A5, CYP3A7, HTR3A, KCNA5"
+BRD-K81209512-001-01-3,AG-494,BRD-K81209512,EGFR inhibitor|epidermal growth factor receptor (EGFR) inhibitor|tyrosine kinase inhibitor,EGFR
+BRD-K81225797-001-01-5,SCH-58261,BRD-K81225797,adenosine receptor antagonist,"ADORA2A, ADORA1, ADORA2B, ADORA3"
+BRD-K81272440-001-02-6,dantrolene,dantrolene,calcium channel blocker,"RYR1, RYR3"
+BRD-K81709173-001-03-8,halcinonide,halcinonide,glucocorticoid receptor agonist,NR3C1
+BRD-K81729199-001-01-0,AQ-RA741,BRD-K81729199,acetylcholine receptor antagonist,NA
+BRD-K82103381-003-03-7,hydralazine,hydralazine,vasodilator,"AOC3, P4HA1"
+BRD-K82484965-003-02-7,carmoxirole,BRD-K82484965,dopamine receptor agonist,DRD2
+BRD-K82561139-001-01-9,NA,ricinine,casein kinase inhibitor,NA
+BRD-K83063356-003-01-7,RS-102895,BRD-K83063356,CC chemokine receptor antagonist|CCR antagonist,CCR2
+BRD-K83322645-103-01-6,L-693403,BRD-K83322645,sigma receptor antagonist|sigma receptor ligand,"DRD2, SIGMAR1"
+BRD-K83459933-001-02-1,sinomenine,sinomenine,angiogenesis inhibitor,
+BRD-K83508485-001-01-9,FK-888,BRD-K83508485,tachykinin antagonist,"TACR1, TACR2"
+BRD-K84266862-001-01-6,BRL-50481,BRD-K84266862,phosphodiesterase inhibitor,"PDE7A, PDE7B"
+BRD-K84421793-001-01-1,NA,R(+)-SKF-81297,dopamine receptor agonist,DRD1
+BRD-K84595254-001-03-0,NA,strophanthidin,ATPase inhibitor,"ATP1A1, ATP1A2, ATP1A3, ATP1A4, ATP1B1"
+BRD-K84663978-001-02-3,trequinsin,Trequinsin hydrochloride[HL 725],phosphodiesterase inhibitor|platelet aggregation inhibitor|potassium channel blocker,"PDE4A, PDE4B, PDE4C, PDE4D, PDE5A, PTGIR"
+BRD-K84663978-001-03-1,trequinsin,Trequinsin hydrochloride[HL 725],phosphodiesterase inhibitor|platelet aggregation inhibitor|potassium channel blocker,"PDE4A, PDE4B, PDE4C, PDE4D, PDE5A, PTGIR"
+BRD-K84709232-001-02-6,caffeic-acid,BRD-K84709232,lipoxygenase inhibitor|HIV integrase inhibitor|NFkB pathway inhibitor|nitric oxide production inhibitor|PPAR receptor modulator|tumor necrosis factor production inhibitor,"ALOX5, MIF, RELA, TNF"
+BRD-K85015012-003-01-1,NNC-05-2090,BRD-K85015012,GABA uptake inhibitor|GAT inhibitor,"SLC6A11, SLC6A12, SLC6A13"
+BRD-K85242180-001-01-1,beta-CCP,PROPYL-beta-CARBOLINE-3-CARBOXYLATE,"indoleamine 2,3-dioxygenase inhibitor","GABRA1, GABRG2, IDO1"
+BRD-K85266041-304-01-7,DNQX,BRD-K85266041,glutamate receptor antagonist,"GRIA1, GRIA2, GRIK1, GRIN1, GRIN2A, GRIN2B"
+BRD-K85383046-001-02-5,IAA-94,R-(+)-methylindazone,chloride channel blocker,NA
+BRD-K85871428-001-01-9,NA,SC 68376,p38 MAPK inhibitor,MAPK14
+BRD-K85883481-001-02-6,prednisone,prednisone,glucocorticoid receptor agonist,"HSD11B1, NR3C1"
+BRD-K86204871-001-02-2,terconazole,terconazole,sterol demethylase inhibitor,
+BRD-K86301799-001-14-0,dipyridamole,dipyridamole,phosphodiesterase inhibitor,"ADA, PDE10A, PDE1A, PDE1B, PDE1C, PDE2A, PDE3A, PDE3B, PDE4A, PDE4B, PDE4C, PDE4D, PDE5A, PDE6A, PDE6B, PDE6C, PDE6D, PDE6G, PDE6H, PDE7A, PDE7B, PDE8A, PDE8B, PDE9A, SLC29A1"
+BRD-K86727142-001-06-6,embelin,embelin,HCV inhibitor|XIAP inhibitor,XIAP
+BRD-K86882815-001-01-6,cabergoline,BRD-K86882815,dopamine receptor agonist|prolactin inhibitor|prolactin secretion inhibitor,"DRD2, ADRA1A, ADRA2A, ADRA2B, ADRA2C, DRD1, DRD3, DRD4, DRD5, HTR1A, HTR1B, HTR1D, HTR2A, HTR2B, HTR2C, ADRA1B, ADRA1D, ADRB1, ADRB2, HTR7, PRL"
+BRD-K86958018-001-01-9,olvanil,BRD-K86958018,TRPV agonist,"TRPV1, CNR1, GPR119"
+BRD-K87049188-001-03-6,NA,fusaric acid,chelating agent|dopamine beta hydroxylase inhibitor,DBH
+BRD-K87510569-001-01-0,RS-504393,BRD-K87510569,CC chemokine receptor antagonist,"CCR2, CCL2"
+BRD-K87696786-003-01-0,LY-456236,BRD-K87696786,glutamate receptor antagonist,GRM1
+BRD-K87991767-001-02-0,NA,umbelliferone,carbonic anhydrase inhibitor|cyclooxygenase inhibitor,"CA9, CA12, PTGS2"
+BRD-K88090157-050-03-3,pimethixene,pimethixene,antihistamine,
+BRD-K88282786-066-04-9,NA,"WIN 55,212-2",cannabinoid receptor agonist,NA
+BRD-K88358234-003-01-4,xaliproden,BRD-K88358234,serotonin receptor agonist|nerve growth factor agonist|neurotrophic factor enhancer,HTR1A
+BRD-K88366685-300-03-7,trimetazidine,trimetazidine,3-ketoacyl CoA thiolase inhibitor,ACAA2
+BRD-K88405679-003-01-5,thonzylamine,thonzylamine,antihistamine,
+BRD-K88429204-001-04-7,pyrimethamine,pyrimethamine,dihydrofolate reductase inhibitor,"DHFR, SLC47A1"
+BRD-K88544581-001-01-2,CI-976,CI-976,ACAT inhibitor,"ACAT1, CES1"
+BRD-K88568253-065-02-1,iproniazid,iproniazid,monoamine oxidase inhibitor,"MAOA, MAOB"
+BRD-K88677950-001-01-3,PD-198306,BRD-K88677950,MAP kinase inhibitor|MEK inhibitor,"MAP2K1, MAP2K2, MAPK1, MAPK3"
+BRD-K88741031-001-01-0,"methyl-2,5-dihydroxycinnamate",BRD-K88741031,EGFR inhibitor|tyrosine kinase inhibitor,EGFR
+BRD-K88743730-001-01-0,tegaserod,tegaserod,serotonin receptor partial agonist,"HTR2A, HTR2B, HTR2C, HTR4"
+BRD-K88789588-001-03-2,letrozole,letrozole,aromatase inhibitor,CYP19A1
+BRD-K88809146-003-02-1,tranylcypromine,tranylcypromine,monoamine oxidase inhibitor,"KDM1A, MAOA, MAOB"
+BRD-K89046952-001-03-4,NA,ciclacillin,bacterial cell wall synthesis inhibitor,NA
+BRD-K89055274-048-03-7,alverine,alverine,muscle relaxant,HTR1A
+BRD-K89085489-001-02-6,fenretinide,fenretinide,apoptosis stimulant|retinoid receptor agonist,RARA
+BRD-K89125793-001-05-4,tinidazole,tinidazole,antiprotozoal agent,
+BRD-K89152108-001-03-3,liothyronine,liothyronine,thyroid hormone stimulant,"THRA, THRB"
+BRD-K89210380-001-03-8,biotin,biotin,vitamin B,"ACACA, ACACB, HLCS, MCCC1, MCCC2, PC, PCCA, PCCB, SLC5A6"
+BRD-K89272762-001-04-4,NPPB,NPPB,chloride channel blocker,"ANO1, CLCN2, CLCN7, TRPA1"
+BRD-K89274813-001-01-5,DMP-543,BRD-K89274813,acetylcholine release enhancer,NA
+BRD-K89732114-001-02-6,trifluoperazine,trifluoperazine,dopamine receptor antagonist,"ADRA1A, CALM1, CALY, DRD2, DRD4, HRH1, HTR2A, HTR2C, S100A4, TNNC1"
+BRD-K89923877-003-02-4,scopolamine,scopolamine,acetylcholine receptor antagonist,
+BRD-K89930444-001-01-9,NA,AG 592,tyrosine kinase inhibitor,NA
+BRD-K89997465-001-02-0,chlorpromazine,chlorpromazine,dopamine receptor antagonist,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C, CALM1, CHRM1, CHRM3, DRD1, DRD2, DRD3, DRD4, DRD5, HRH1, HRH4, HTR1A, HTR2A, HTR2B, HTR2C, HTR6, HTR7, KCNH2, ORM1, ORM2, SMPD1, TRPC5"
+BRD-K90027355-001-03-4,spironolactone,spironolactone,mineralocorticoid receptor antagonist,"AR, CACNA1A, CACNA1B, CACNA1C, CACNA1D, CACNA1F, CACNA1G, CACNA1H, CACNA1I, CACNA1S, CACNA2D1, CACNA2D2, CACNA2D3, CACNB1, CACNB2, CACNB3, CACNB4, CACNG1, CYP11B2, NR3C1, NR3C2, PGR, SHBG"
+BRD-K90259198-003-04-8,NA,W-7,calmodulin antagonist|potassium channel blocker|squalene monooxygenase channel blocker,"CALM1, CALM2, KCNA5, KCNH2, TNNC1, TNNI3"
+BRD-K90333595-001-02-8,phentolamine,phentolamine,adrenergic receptor antagonist,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C"
+BRD-K90382497-001-01-6,GW-843682X,GW-843682X,PLK inhibitor,"PLK1, PLK3"
+BRD-K90524085-001-05-2,MY-5445,MY-5445,phosphodiesterase inhibitor|platelet aggregation inhibitor,PDE5A
+BRD-K91263825-001-02-8,nortriptyline,nortriptyline,tricyclic antidepressant,"ADRA1A, ADRA1B, ADRA1D, ADRA2A, ADRA2B, ADRA2C, ADRB1, ADRB2, ADRB3, CHRM1, CHRM2, CHRM3, CHRM4, CHRM5, DRD2, HRH1, HTR1A, HTR2A, HTR2C, HTR6, KCNJ10, PGRMC1, SIGMAR1, SLC6A2, SLC6A4"
+BRD-K91370081-001-04-6,anisomycin,anisomycin,DNA synthesis inhibitor,"NHP2L1, RPL10L, RPL11, RPL13A, RPL15, RPL19, RPL23, RPL23A, RPL26L1, RPL3, RPL37, RPL8, RSL24D1"
+BRD-K92000912-001-06-8,AM-251,AM251,cannabinoid receptor antagonist,"CNR1, GPR18, GPR55"
+BRD-K92015269-001-01-6,GBR-12783,GBR 12783,dopamine uptake inhibitor,
+BRD-K92049597-001-04-2,triamterene,triamterene,sodium channel blocker,"SCNN1A, SCNN1B, SCNN1D, SCNN1G"
+BRD-K92093830-003-05-0,doxorubicin,doxorubicin,topoisomerase inhibitor,TOP2A
+BRD-K92723993-066-02-9,imatinib,BRD-K92723993,PDGFR tyrosine kinase receptor inhibitor|Bcr-Abl kinase inhibitor|KIT inhibitor|Abl kinase inhibitor|apoptosis stimulant|breast cancer resistance protein inhibitor|colony stimulating factor receptor inhibitor,"ABL1, KIT, PDGFRA, BCR, CSF1R, PDGFRB, ABCG2, CYP2C19, CYP2C8, CYP3A5, DDR1, NTRK1, RET"
+BRD-K92830582-003-04-8,propranolol,propranolol,adrenergic receptor antagonist,
+BRD-K93080877-001-02-1,NA,Ala-Ala-Phe-CMK,tripeptidyl peptidase inhibitor,TPP2
+BRD-K93176058-001-01-0,AC-55649,AC55649,retinoid receptor agonist,"RARA, RARB"
+BRD-K93188295-300-01-4,ARC-239,BRD-K93188295,adrenergic receptor antagonist,"ADRA2B, ADRA2A, ADRA2C"
+BRD-K93201660-001-05-7,NA,ML-7,myosin light chain kinase inhibitor,MYLK
+BRD-K93258693-001-02-5,GW-9662,GW-9662,PPAR receptor antagonist,"NCOA2, PPARG, RXRA"
+BRD-K93480852-001-02-2,KN-93,KN-93,calcium/calmodulin dependent protein kinase inhibitor,CAMK2A
+BRD-K93568044-001-03-1,hydrocortisone,hydrocortisone,glucocorticoid receptor agonist,
+BRD-K93658967-001-01-7,NA,aloisine A,CDK inhibitor|CFTR channel activator|glycogen synthase kinase inhibitor|JNK inhibitor,"CDK2, CDK5, CDK1, CDK5R1, CFTR, PTK2B, ZAP70"
+BRD-K93754473-001-02-9,tamoxifen,tamoxifen,estrogen receptor antagonist|selective estrogen receptor modulator (SERM),"EBP, ESR1, ESR2, GPER1, PRKCA, PRKCB, PRKCD, PRKCE, PRKCG, PRKCI, PRKCQ, PRKCZ"
+BRD-K94144010-001-05-5,cotinine,cotinine,nicotine metabolite,
+BRD-K94270326-004-01-0,ecopipam,BRD-K94270326,dopamine receptor antagonist,"DRD1, DRD5, DRD2"
+BRD-K94379058-001-03-5,BML-190,BML-190,cannabinoid receptor inverse agonist,CNR2
+BRD-K94512704-001-01-3,NA,AMI-193,dopamine receptor antagonist,NA
+BRD-K94832621-001-01-5,Y-134,BRD-K94832621,estrogen receptor antagonist|selective estrogen receptor modulator (SERM),"ESR1, ESR2"
+BRD-K94841585-001-02-8,NA,emodic acid,laxative|free radical generator,NA
+BRD-K95202259-001-01-9,NA,ML 3163,p38 MAPK inhibitor,"CYP2D6, CYP3A4, MAPK11, MAPK12, MAPK14"
+BRD-K95309561-001-04-9,dienestrol,dienestrol,estrogen receptor agonist,ESR1
+BRD-K95435023-001-01-0,PHA-665752,BRD-K95435023,c-Met inhibitor|hepatocyte growth factor receptor inhibitor,MET
+BRD-K95603879-001-03-4,BHQ,BHQ,ATPase inhibitor,ATP2A1
+BRD-K95609758-001-01-1,BMS-191011,BMS-191011,potassium channel activator,KCNMA1
+BRD-K95655893-001-01-0,NA,MAZ51,VEGFR kinase inhibitor,NA
+BRD-K95676198-001-02-6,NA,ZM 449829,JAK inhibitor,NA
+BRD-K95785537-001-04-1,PP-2,PP2,src inhibitor,"ABL1, LCK, LYN, RIPK2, SRC"
+BRD-K95851186-001-02-9,CGP-13501,BRD-K95851186,GABA receptor modulator,GABBR1
+BRD-K96144918-001-02-3,NA,mead acid,KPL-1 tumor suppressor,NA
+BRD-K96271548-001-02-2,coumaric-acid,BRD-K96271548,antioxidant,NA
+BRD-K96799727-001-01-7,pifithrin-mu,pifithrin-mu,HSP inhibitor,"HSPA1A, TP53"
+BRD-K96809896-001-01-9,SKF-86002,SKF-86002,p38 MAPK inhibitor,"ALOX5, MAPK14"
+BRD-K97181089-001-02-7,amiloride,amiloride,sodium channel blocker,"AOC1, ASIC1, ASIC2, ASIC3, PKD2, PKD2L1, PLAU, SCNN1A, SCNN1B, SCNN1D, SCNN1G, SLC9A1, TRPC7, TRPV2"
+BRD-K97330509-001-01-4,NA,SRC kinase inhibitor II,src inhibitor,NA
+BRD-K97354755-001-01-5,NA,SU-6656,src inhibitor,"LYN, AURKB, AURKC, BRSK2, CALM1, CAMK2D"
+BRD-K97365803-001-01-3,PI-828,BRD-K97365803,PI3K inhibitor,NA
+BRD-K97399794-001-07-0,quercetin,quercetin,polar auxin transport inhibitor,"ATP5A1, ATP5B, ATP5C1, HCK, HIBCH, PIK3CG, PIM1, STK17B, UGT3A1"
+BRD-K97440753-066-03-3,dihydroergocristine,dihydroergocristine,adrenergic receptor antagonist|prolactin inhibitor,"ADRA1A, ADRB1, DRD1, DRD2, DRD3, DRD4, DRD5, HTR1A, HTR2A, HTR3A, HTR4, HTR5A, HTR6, HTR7"
+BRD-K97509413-001-01-8,NA,coumestrol,AGE inhibitor|estrogen receptor agonist|estrogen receptor ligand,"ESR1, ESR2"
+BRD-K97521363-001-03-9,clorsulon,clorsulon,glycolysis inhibitor,
+BRD-K97530723-001-04-3,melatonin,melatonin,melatonin receptor agonist|nitric oxide synthase inhibitor,"ASMT, CALM1, CALR, EPX, ESR1, HTR2B, MPO, MTNR1A, MTNR1B, NQO2, RORB"
+BRD-K97564742-103-01-9,mepyramine,mepyramine,histamine receptor antagonist,HRH1
+BRD-K97688263-001-02-9,benzamil,benzamil,sodium channel blocker,"ASIC1, PKD2L1, SCNN1A, SCNN1B, SCNN1D, SCNN1G, SLC8A1"
+BRD-K97746869-001-04-9,chlorpropamide,chlorpropamide,ATP channel blocker,"ABCC8, KCNJ10, KCNJ11"
+BRD-K97752965-001-01-6,nicorandil,BRD-K97752965,ATP channel activator|nitric oxide donor|potassium channel agonist,"ABCC9, KCNJ11, KCNJ8"
+BRD-K97810537-001-03-7,beclomethasone-dipropionate,beclomethasone dipropionate,glucocorticoid receptor agonist,"GPR97, NR3C1"
+BRD-K98039984-001-03-0,prednisolone,prednisolone,glucocorticoid receptor agonist,"NR3C1, NR3C2, SERPINA6"
+BRD-K98143437-001-01-7,SB-239063,BRD-K98143437,p38 MAPK inhibitor|interleukin inhibitor|tumor necrosis factor production inhibitor,"MAPK11, MAPK14, PTGS2, TNF"
+BRD-K98157055-001-04-2,SIB-1757,BRD-K98157055,glutamate receptor antagonist,GRM5
+BRD-K98174813-001-05-7,chlorzoxazone,chlorzoxazone,bacterial 30S ribosomal subunit inhibitor,"KCNMA1, KCNN4"
+BRD-K98297262-001-01-1,NA,N-ethylmaleimide,"1,3-beta-glucan synthase inhibitor",CLC
+BRD-K98521173-001-03-8,desoxycortone,desoxycortone,mineralocorticoid receptor agonist,"NR3C1, NR3C2"
+BRD-K18816859-001-01-4,,,Serotonin receptor agonist,
+BRD-K19111024-001-04-3,,,PPAR receptor agonist,
+BRD-K19360254-001-01-3,,,Dopamine receptor agonist,
+BRD-K19533706-001-01-9,,,Angiogenesis inhibitor,
+BRD-K20152659-001-02-0,,,Cholesterol inhibitor,
+BRD-K20714604-001-01-5,,,Serotonin receptor partial agonist,
+BRD-K20995441-001-01-7,,,Opioid receptor agonist,
+BRD-K21520694-001-02-4,,,PABA antagonist,
+BRD-K22031190-001-04-6,,,Prostanoid receptor antagonist,
+BRD-K22193694-001-04-5,,,Topical sunscreen agent,
+BRD-K23913458-001-02-5,,,Vitamin K antagonist,
+BRD-K24201553-003-02-4,,,Serotonin receptor antagonist,
+BRD-K24240364-003-02-1,,,Glutamate receptor antagonist,
+BRD-K24526313-001-08-6,,,Potassium channel activator,
+BRD-K25394294-001-04-0,,,Cyclooxygenase inhibitor,
+BRD-K25875056-001-01-2,,,Protein tyrosine kinase activator,
+BRD-K26160755-003-01-8,,,Imidazoline receptor agonist,
+BRD-K26373640-001-02-8,,,IKK inhibitor,
+BRD-K26548821-001-01-8,,,Dopamine receptor agonist,
+BRD-K26573499-300-01-3,,,Adrenergic receptor agonist,
+BRD-K26979635-001-01-1,,,Glutamate receptor antagonist,
+BRD-K27141178-001-01-0,,,Serotonin receptor antagonist,
+BRD-K27450477-001-03-9,,,Adenosine deaminase inhibitor,
+BRD-K27499107-001-02-6,,,IP receptor activator,
+BRD-K27710560-001-02-6,,,SIRT inhibitor,
+BRD-K27871032-001-02-6,,,Ergoline alkaloid,
+BRD-K28115081-001-01-9,,,Platelet activating factor receptor antagonist,
+BRD-K28137194-003-01-3,,,GABA receptor agonist,
+BRD-K28183345-003-05-6,,,Dihydrofolate reductase inhibitor,
+BRD-K28453807-003-05-4,,,Cholinergic receptor antagonist,
+BRD-K28667196-001-02-9,,,Increases arterial blood pressure,
+BRD-K28863208-001-01-2,,,Cholinergic receptor agonist,
+BRD-K29113274-001-03-6,,,Sterol demethylase inhibitor,
+BRD-K29178788-001-02-0,,,Furoquinoline alkaloid,
+BRD-K29359156-001-04-6,,,H+/K+-ATPase inhibitor,
+BRD-K29555132-001-02-2,,,Cannabinoid receptor agonist,
+BRD-K29582677-001-02-7,,,Calcium channel blocker,
+BRD-K30197592-001-01-5,,,Serotonin receptor agonist,
+BRD-K30480208-001-04-5,,,Electrolyte reabsorption inhibitor,
+BRD-K30990140-003-01-6,,,Cyclooxygenase inhibitor,
+BRD-K31054881-300-01-3,,,Adrenergic receptor antagonist,
+BRD-K31611373-001-02-7,,,Prostanoid receptor agonist,
+BRD-K31633810-003-01-0,,,Acetylcholine receptor antagonist,
+BRD-K31699485-001-01-9,,,glutamate receptor modulator,
+BRD-K31987754-001-01-2,,,Cannabinoid receptor agonist,
+BRD-K32164935-001-06-8,,,ATP channel blocker,
+BRD-K32247306-001-04-7,,,GABA receptor antagonist,
+BRD-K32292990-001-01-0,,,EGFR inhibitor,
+BRD-K32412559-001-01-7,,,Adrenergic receptor antagonist,
+BRD-K32526544-001-01-2,,,Potassium channel activator,
+BRD-K32696739-001-02-6,,,Monoamine oxidase inhibitor,
+BRD-K32755366-003-03-4,,,Norepinephrine transporter inhibitor,
+BRD-K33204703-001-04-6,,,PDGFR receptor inhibitor,
+BRD-K33396764-001-02-0,,,Omega 3 fatty acid stimulant,
+BRD-K33453211-003-03-2,,,Histamine receptor antagonist,
+BRD-K33864865-001-01-7,,,CCK receptor antagonist,
+BRD-K34014345-001-02-6,,,Anti-inflammatory,
+BRD-K34154330-003-04-9,,,GABA receptor modulator,
+BRD-K34170797-001-01-1,,,FXR agonist,
+BRD-K34608650-001-01-6,,,Cannabinoid receptor agonist,
+BRD-K35430135-003-01-5,,,Adrenergic receptor antagonist,
+BRD-K35458079-001-04-2,,,Nootropic agent,
+BRD-K35498378-001-03-8,,,Aldose reductase inhibitor,
+BRD-K35629949-001-01-2,,,CCK receptor antagonist,
+BRD-K35941380-001-01-7,,,Serotonin receptor antagonist,
+BRD-K36009368-001-01-8,,,Opioid receptor agonist,
+BRD-K36864847-303-01-7,,,Adrenergic receptor antagonist,
+BRD-K36927236-001-06-0,,,Sulfonylurea,
+BRD-K37289225-001-07-5,,,Dopamine receptor antagonist,
+BRD-K37447567-001-01-8,,,Opioid receptor antagonist,
+BRD-K37792168-001-01-0,,,Phosphodiesterase inhibitor,
+BRD-K79437791-001-02-4,,,Inhibitor of methylation of endogenous isoprenylated proteins,
+BRD-K80396088-001-03-9,,,Sulfonylurea,
+BRD-K81209159-001-02-9,,,Acetylcholinesterase inhibitor,
+BRD-K81376179-001-01-4,,,FLT3 inhibitor,
+BRD-K81839095-001-02-0,,,Estrogen receptor agonist,
+BRD-K81876028-300-01-2,,,Serotonin receptor agonist,
+BRD-K82255054-001-04-3,,,GABA receptor agonist,
+BRD-K82562631-236-02-0,,,Cyclooxygenase inhibitor,
+BRD-K82577285-001-01-7,,,Dopamine receptor agonist,
+BRD-K82731415-001-04-7,,,CDK inhibitor,
+BRD-K82795137-001-02-3,,,Histamine receptor antagonist,
+BRD-K82823076-001-01-8,,,GABA benzodiazepine site receptor inverse agonist,
+BRD-K82846253-001-03-0,,,Insulin secretagogue,
+BRD-K82865713-001-02-6,,,cAMP inhibitor,
+BRD-K83023055-001-01-9,,,Melatonin receptor agonist,
+BRD-K83302049-001-01-6,,,Histamine receptor antagonist,
+BRD-K83597974-003-05-7,,,Monoamine oxidase inhibitor,
+BRD-K83637872-001-01-7,,,Smoothened receptor antagonist,
+BRD-K84175871-003-02-2,,,Adrenergic receptor agonist,
+BRD-K85090592-003-08-7,,,Acetylcholine receptor agonist,
+BRD-K85119730-001-06-5,,,ATP channel blocker,
+BRD-K86434416-001-02-7,,,Monoamine oxidase inhibitor,
+BRD-K86509404-001-02-0,,,CDK inhibitor,
+BRD-K86600316-003-01-2,,,Adrenergic receptor antagonist,
+BRD-K86873305-236-03-0,,,Bacterial cell wall synthesis inhibitor,
+BRD-K87048468-003-01-9,,,Serotonin receptor antagonist,
+BRD-K87990216-001-03-7,,,Glucocorticoid receptor agonist,
+BRD-K88611939-001-01-8,,,Glutamate receptor agonist,
+BRD-K88759641-003-01-0,,,Angiotensin receptor antagonist,
+BRD-K88849294-001-02-1,,,Tyrosine phosphatase inhibitor,
+BRD-K88871508-001-01-9,,,Dopamine receptor agonist,
+BRD-K89375097-300-04-7,,,Acetylcholine receptor antagonist,
+BRD-K89402695-001-01-5,,,Thromboxane receptor antagonist,
+BRD-K90574421-001-01-9,,,Serotonin receptor agonist,
+BRD-K90789829-003-03-3,,,Adrenergic inhibitor,
+BRD-K90976994-001-02-1,,,Bile acid,
+BRD-K91243525-001-01-5,,,Neurotensin receptor antagonist,
+BRD-K91315211-334-02-3,,,Histamine receptor agonist,
+BRD-K91336023-001-01-4,,,Dopamine receptor agonist,
+BRD-K91904471-001-01-6,,,p38 MAPK inhibitor,
+BRD-K92138166-001-01-0,,,other antibiotic,
+BRD-K92492521-001-01-1,,,Leukotriene receptor antagonist,
+BRD-K92678294-001-01-0,,,Isoflavone,
+BRD-K92726801-003-02-7,,,Haemostatic agent,
+BRD-K92731339-227-02-3,,,ACE inhibitor,
+BRD-K92758126-001-06-3,,,NFkB pathway inhibitor,
+BRD-K92778217-001-04-6,,,Cyclooxygenase inhibitor,
+BRD-K92984783-003-02-4,,,Serotonin receptor antagonist,
+BRD-K93280214-004-02-3,,,GABA receptor antagonist,
+BRD-K93325701-001-03-0,,,SRC inhibitor,
+BRD-K93332168-001-03-2,,,Monoamine oxidase inhibitor,
+BRD-K93441486-067-03-7,,,Acetylcholine receptor antagonist,
+BRD-K93460210-001-01-3,,,Serotonin receptor antagonist,
+BRD-K93461745-001-01-5,,,Serotonin receptor agonist,
+BRD-K94441233-001-03-1,,,HMGCR inhibitor,
+BRD-K94689771-001-02-5,,,CYP1B1 inhibitor,
+BRD-K94887716-001-01-5,,,Serotonin receptor agonist,
+BRD-K94920105-001-01-3,,,PARP inhibitor,
+BRD-K95237249-001-04-2,,,Uricosuric blocker,
+BRD-K95739795-001-01-1,,,Vesicular monoamine transporter inhibitor,
+BRD-K95763993-001-03-7,,,PDGFR receptor inhibitor,
+BRD-K95899059-003-01-0,,,Serotonin receptor agonist,
+BRD-K95992530-001-02-4,,,integrin antagonist,
+BRD-K96119599-001-04-7,,,Melanin inhibitor,
+BRD-K96263742-001-02-3,,,PPAR receptor agonist,
+BRD-K96402602-001-01-8,,,PPMTase inhibitor,
+BRD-K96527333-001-03-4,,,GABA receptor modulator,
+BRD-K96670504-001-01-9,,,Glucokinase inhibitor,
+BRD-K96720755-001-01-8,,,Vasopressin receptor antagonist,
+BRD-K96862998-001-03-1,,,TGF beta receptor inhibitor,
+BRD-K97061094-001-03-2,,,Histamine receptor antagonist,
+BRD-K97118047-001-01-2,,,Casein kinase inhibitor,
+BRD-K97158071-001-04-1,,,Dopamine receptor antagonist,
+BRD-K97799481-002-03-6,,,Adenosine receptor antagonist,
+BRD-A00100033-001-04-8,,,DNA inhibitor,
+BRD-A00267231-001-01-1,,,Adenosine receptor agonist,
+BRD-A00520476-001-03-3,,,Acetylcholine receptor antagonist,
+BRD-A00993607-003-04-8,,,Adrenergic receptor antagonist,
+BRD-A01295252-001-01-5,,,Dopamine receptor ligand,
+BRD-A02176148-001-02-2,,,Mitochondrial complex I inhibitor,
+BRD-A02759312-003-11-2,,,Adrenergic receptor antagonist,
+BRD-A03216249-003-02-9,,,Potassium channel blocker,
+BRD-A03359064-001-01-5,,,Adrenergic receptor antagonist,
+BRD-A03623303-045-02-0,,,Adrenergic receptor antagonist,
+BRD-A04668240-001-01-5,,,GABA receptor antagonist,
+BRD-A04706586-236-01-7,,,Adenosine receptor agonist,
+BRD-A06352418-001-03-6,,,Histamine receptor antagonist,
+BRD-A06390036-001-02-0,,,Antiarrhythmic,
+BRD-A06726973-001-02-0,,,cGMP analog,
+BRD-A07440155-003-04-9,,,Adrenergic receptor antagonist,
+BRD-A07780951-001-02-2,,,Adrenergic receptor agonist,
+BRD-A08877921-001-02-2,,,Protein synthesis inhibitor,
+BRD-A09056319-003-03-6,,,Adrenergic receptor antagonist,
+BRD-A09062839-003-03-5,,,Local anesthetic,
+BRD-A09472452-001-02-8,,,Sodium channel blocker,
+BRD-A09539288-004-02-8,,,Acetylcholine receptor antagonist,
+BRD-A09828896-004-04-5,,,Dopamine receptor agonist,
+BRD-A09925278-003-03-1,,,Adrenergic receptor agonist,
+BRD-A10355991-003-01-8,,,Glutamate receptor antagonist,
+BRD-A10715913-001-02-0,,,Dopamine receptor antagonist,
+BRD-A10903566-003-02-8,,,Adrenergic receptor antagonist,
+BRD-A10969569-001-02-0,,,Plant alkaloid,
+BRD-A10977446-001-04-8,,,Adrenergic receptor antagonist,
+BRD-A11605036-001-03-2,,,GABA receptor antagonist,
+BRD-A11813248-001-02-8,,,Potassium channel blocker,
+BRD-A12016240-001-01-7,,,Serotonin receptor antagonist,
+BRD-A13188892-066-03-3,,,Adrenergic receptor antagonist,
+BRD-A13650332-236-03-9,,,Bacterial cell wall synthesis inhibitor,
+BRD-A13946108-001-03-1,,,Cyclooxygenase inhibitor,
+BRD-A14395271-001-01-5,,,Dopamine receptor antagonist,
+BRD-A14574269-051-01-4,,,Acetylcholine receptor agonist,
+BRD-A16332958-001-02-4,,,Adrenergic receptor agonist,
+BRD-A16665823-008-03-3,,,Bacterial cell wall synthesis inhibitor,
+BRD-A17428743-001-01-1,,,Serotonin receptor agonist,
+BRD-A17453586-001-01-9,,,Serotonin receptor agonist,
+BRD-A17535965-001-02-2,,,Acetylcholine receptor antagonist,
+BRD-A17655518-001-02-0,,,Cyclooxygenase inhibitor,
+BRD-A18202423-001-01-6,,,Glutamate receptor antagonist,
+BRD-A18579359-001-03-1,,,Neural Wiskott-Aldrich syndrome protein inhibitor,
+BRD-A18763547-019-01-0,,,Cytochrome C release inhibitor,
+BRD-A19053259-003-03-3,,,Anthelmintic,
+BRD-A19195498-050-04-2,,,Norepinephrine reuptake inhibitor,
+BRD-A19736161-310-01-3,,,Serotonin receptor antagonist,
+BRD-A20239487-001-02-5,,,Adrenergic receptor antagonist,
+BRD-A21723284-066-01-7,,,Opioid receptor antagonist,
+BRD-A21858158-001-04-5,,,Anthelmintic,
+BRD-A22380646-001-01-5,,,ATPase inhibitor,
+BRD-A22769835-300-03-2,,,Antihistamine,
+BRD-A22844106-001-04-7,,,Cyclooxygenase inhibitor,
+BRD-A23072235-050-04-5,,,Histamine receptor antagonist,
+BRD-A24122750-001-01-1,,,GABA receptor antagonist,
+BRD-A24191444-045-03-1,,,Adrenergic receptor antagonist,
+BRD-A24228527-001-04-2,,,Bacterial DNA gyrase inhibitor,
+BRD-A24514565-236-01-6,,,Vitamin K antagonist,
+BRD-A26032986-050-01-3,,,Calmodulin antagonist,
+BRD-A26334849-001-02-1,,,Antiarrhythmic,
+BRD-A26384407-001-04-6,,,Carbonic anhydrase inhibitor,
+BRD-A26845397-001-01-4,,,Adrenergic receptor antagonist,
+BRD-A27143604-001-01-2,,,Estrogen receptor agonist,
+BRD-A28318179-003-03-6,,,Nitric oxide synthase inhibitor,
+BRD-A29426959-050-04-1,,,Histamine receptor antagonist,
+BRD-A29644307-050-04-8,,,Dopamine uptake inhibitor,
+BRD-A29734509-011-02-9,,,Sodium channel blocker,
+BRD-A30590053-003-01-1,,,Acetylcholine release enhancer,
+BRD-A30655177-001-04-1,,,BTK inhibitor,
+BRD-A30815329-001-03-0,,,Calcium channel blocker,
+BRD-A31007383-001-01-0,,,Adenosine receptor agonist,
+BRD-A31159102-001-01-9,,,Selective serotonin reuptake inhibitor (SSRI),
+BRD-A31195449-004-01-9,,,Serotonin receptor agonist,
+BRD-A31521121-001-04-1,,,Muscle relaxant,
+BRD-A31575449-300-01-4,,,Adrenergic receptor antagonist,
+BRD-A32164164-048-01-4,,,Acetylcholine receptor antagonist,
+BRD-A33168282-003-06-5,,,Adrenergic receptor antagonist,
+BRD-A33447119-001-02-5,,,Anthelmintic,
+BRD-A33711280-311-02-0,,,Acetylcholine receptor antagonist,
+BRD-A34706053-003-01-9,,,Adrenergic receptor agonist,
+BRD-A35511923-019-01-6,,,Somatostatin receptor agonist,
+BRD-A36066264-001-02-3,,,Estrogen receptor agonist,
+BRD-A36074203-003-03-5,,,Glutamate receptor antagonist,
+BRD-A36217750-001-04-9,,,Uricosuric blocker,
+BRD-A36267905-003-02-8,,,Adrenergic receptor agonist,
+BRD-A36318220-001-01-3,,,RIPK inhibitor,
+BRD-A36471396-003-02-2,,,Acetylcholine receptor antagonist,
+BRD-A38747044-001-01-5,,,Imidazoline receptor ligand,
+BRD-A38898897-003-01-0,,,Leukocyte elastase inhibitor,
+BRD-A38913120-001-01-0,,,BCL inhibitor,
+BRD-A39230911-001-03-7,,,Muscle relaxant,
+BRD-A39255369-001-01-5,,,Chloride channel blocker,
+BRD-A39268308-001-02-0,,,Acetylcholine receptor agonist,
+BRD-A39969961-001-01-3,,,Cytochrome P450 inhibitor,
+BRD-A40639672-234-04-0,,,Cyclooxygenase inhibitor,
+BRD-A41145729-001-02-7,,,Retinoid receptor agonist,
+BRD-A41250306-001-03-4,,,Thiazide diuretic,
+BRD-A41301928-001-02-5,,,"Mitochondrial ADP, ATP translocase inhibitor",
+BRD-A41304429-001-04-9,,,Adrenergic receptor antagonist,
+BRD-A41451487-001-01-3,,,Benzodiazepine receptor antagonist,
+BRD-A41519720-001-02-2,,,Niemann-Pick C1-like 1 protein antagonist,
+BRD-A41833852-001-01-9,,,Opioid receptor antagonist,
+BRD-A41941932-001-03-0,,,Antioxidant,
+BRD-A42167015-003-03-7,,,Adrenergic receptor antagonist,
+BRD-A42759514-001-03-1,,,Antiprotozoal,
+BRD-A43150328-001-02-0,,,other antibiotic,
+BRD-A43671941-003-03-6,,,Adrenergic receptor antagonist,
+BRD-A43849199-001-02-3,,,Phytotoxin,
+BRD-A43974499-066-01-1,,,Adrenergic receptor antagonist,
+BRD-A44008656-036-04-3,,,Histamine receptor antagonist,
+BRD-A44090213-001-04-1,,,Cyclooxygenase inhibitor,
+BRD-A44133049-001-01-5,,,Serotonin receptor antagonist,
+BRD-A44448661-001-02-2,,,Barbiturate antiepileptic,
+BRD-A45499626-001-01-0,,,Glutamate receptor antagonist,
+BRD-A47494775-003-03-0,,,Adrenergic receptor agonist,
+BRD-A49046702-001-01-2,,,GABA uptake inhibitor,
+BRD-A49734948-001-03-3,,,Plant alkaloid,
+BRD-A49906757-004-03-1,,,Acetylcholine receptor antagonist,
+BRD-A51714012-001-02-3,,,Adrenergic inhibitor,
+BRD-A51820102-008-04-0,,,Bacterial cell wall synthesis inhibitor,
+BRD-A51829654-001-01-4,,,Serotonin receptor antagonist,
+BRD-A52588987-004-04-1,,,Dopamine receptor antagonist,
+BRD-A52660433-066-01-3,,,Monoamine oxidase inhibitor,
+BRD-A53576514-003-03-1,,,Acetylcholine receptor antagonist,
+BRD-A54236247-003-02-7,,,Adrenergic receptor agonist,
+BRD-A55369275-001-01-6,,,GABA receptor antagonist,
+BRD-A55393291-001-02-4,,,Androgen receptor agonist,
+BRD-A56675431-001-04-0,,,Thiazide diuretic,
+BRD-A56987319-001-03-8,,,Adenylyl cyclase inhibitor,
+BRD-A57382968-001-06-8,,,Cyclooxygenase inhibitor,
+BRD-A58048407-001-06-3,,,Calcium channel blocker,
+BRD-A59215453-003-03-3,,,Acetylcholine receptor antagonist,
+BRD-A59303141-001-03-9,,,Thiazide diuretic,
+BRD-A60197193-001-05-4,,,Dopamine receptor antagonist,
+BRD-A61793559-001-04-0,,,Carbonic anhydrase inhibitor,
+BRD-A61856038-001-01-2,,,Lipoxygenase inhibitor,
+BRD-A62057054-001-01-5,,,Serotonin receptor antagonist,
+BRD-A62525898-001-02-9,,,Glucocorticoid receptor agonist,
+BRD-A63546914-003-01-2,,,Glutamate receptor antagonist,
+BRD-A64092382-003-03-5,,,Sodium channel blocker,
+BRD-A64125466-236-02-0,,,choleretic agent,
+BRD-A64227845-004-02-8,,,Dopamine receptor agonist,
+BRD-A64228451-001-03-5,,,BTK inhibitor,
+BRD-A64977602-001-01-9,,,Adrenergic receptor antagonist,
+BRD-A65013509-003-03-8,,,Acetylcholine receptor antagonist,
+BRD-A65280694-003-03-8,,,Dopamine receptor antagonist,
+BRD-A65440446-001-02-5,,,Adrenergic receptor agonist,
+BRD-A65597028-003-02-4,,,Adrenergic receptor antagonist,
+BRD-A65615053-003-01-4,,,Serotonin receptor antagonist,
+BRD-A66435872-313-01-8,,,Histamine receptor agonist,
+BRD-A66563878-003-01-8,,,Adrenergic receptor agonist,
+BRD-A66927094-001-01-7,,,Dopamine receptor antagonist,
+BRD-A67862938-034-04-0,,,Adrenergic receptor antagonist,
+BRD-A68281735-001-02-0,,,Leukotriene receptor antagonist,
+BRD-A68723818-050-04-4,,,Histamine receptor antagonist,
+BRD-A69636825-003-02-1,,,Calcium channel blocker,
+BRD-A70083328-001-02-9,,,Acetylcholinesterase inhibitor,
+BRD-A70268693-103-01-9,,,Acetylcholine receptor agonist,
+BRD-A70514680-003-03-9,,,Local anesthetic,
+BRD-A71157293-003-03-5,,,Vitamin B,
+BRD-A71203467-001-01-5,,,Dopamine receptor antagonist,
+BRD-A72483914-001-01-1,,,Serotonin receptor antagonist,
+BRD-A72988804-001-03-8,,,Cyclooxygenase inhibitor,
+BRD-A73368467-003-02-8,,,Histamine receptor antagonist,
+BRD-A73859745-236-01-8,,,Apoptosis stimulant,
+BRD-A74667430-001-04-6,,,Cyclooxygenase inhibitor,
+BRD-A74904029-001-04-0,,,Casein kinase inhibitor,
+BRD-A74980173-001-02-8,,,Bacterial DNA gyrase inhibitor,
+BRD-A75552914-001-04-4,,,Cyclooxygenase inhibitor,
+BRD-A76093993-001-01-8,,,Potassium channel activator,
+BRD-A77299732-001-01-6,,,Eukaryotic translation initiation factor inhibitor,
+BRD-A78377521-001-02-2,,,Kinesin-like spindle protein inhibitor,
+BRD-A78877355-003-03-6,,,Cyclooxygenase inhibitor,
+BRD-A78942461-003-01-3,,,Adrenergic receptor antagonist,
+BRD-A79672927-001-04-1,,,Acetylcholine receptor antagonist,
+BRD-A80017228-001-04-2,,,Sodium/potassium/chloride transporter inhibitor,
+BRD-A80213327-305-01-8,,,Ras GTPase inhibitor,
+BRD-A80641450-001-01-4,,,Endothelin receptor antagonist,
+BRD-A81866333-003-01-5,,,Adenosine receptor agonist,
+BRD-A83326220-001-02-6,,,Nitric oxide production inhibitor,
+BRD-A83431637-001-01-3,,,Cytochrome P450 inhibitor,
+BRD-A83695761-001-01-1,,,Potassium channel blocker,
+BRD-A83855350-003-01-4,,,Opioid receptor antagonist,
+BRD-A83937277-001-03-0,,,Hydantoin antiepileptic,
+BRD-A84174393-001-02-0,,,Cyclooxygenase inhibitor,
+BRD-A84389091-001-01-1,,,GABA receptor inverse agonist,
+BRD-A85234536-001-04-5,,,Adenosine receptor agonist,
+BRD-A85280935-003-01-7,,,Dopamine receptor agonist,
+BRD-A85472596-001-01-4,,,Prostanoid receptor antagonist,
+BRD-A85587465-001-01-7,,,Serotonin receptor antagonist,
+BRD-A87479750-001-01-9,,,Cyclooxygenase inhibitor,
+BRD-A87719232-001-02-4,,,Cyclooxygenase inhibitor,
+BRD-A88282067-001-02-2,,,Antiarrhythmic,
+BRD-A89672324-001-02-2,,,GABA receptor antagonist,
+BRD-A90311807-236-01-4,,,Dehydropeptidase inhibitor,
+BRD-A91699651-316-04-2,,,Antimalarial,
+BRD-A91866971-001-02-2,,,Thromboxane receptor antagonist,
+BRD-A92161634-001-02-6,,,Acetylcholine receptor antagonist,
+BRD-A92585442-237-01-0,,,Cytochrome P450 inhibitor,
+BRD-A92670106-003-03-9,,,Sodium channel blocker,
+BRD-A92826379-009-02-6,,,Sodium channel blocker,
+BRD-A93000692-001-03-2,,,PPAR receptor agonist,
+BRD-A93255169-001-06-9,,,TNF production inhibitor,
+BRD-A93659613-051-03-6,,,Opioid receptor agonist,
+BRD-A94543220-001-02-3,,,Sterol demethylase inhibitor,
+BRD-A94669766-001-02-6,,,Aromatase inhibitor,
+BRD-A94709349-001-02-6,,,Muscle relaxant,
+BRD-A95696066-003-06-2,,,Norepinephrine reuptake inhibitor,
+BRD-A96456596-001-01-4,,,Leukotriene receptor antagonist,
+BRD-A96485169-001-02-8,,,Aldose reductase inhibitor,
+BRD-A96882008-001-01-3,,,Tachykinin antagonist,
+BRD-A97479839-003-04-2,,,Acetylcholine receptor antagonist,
+BRD-A98702003-304-02-2,,,11-beta-HSD1 inhibitor,
+BRD-K00206590-001-01-2,,,ATP channel activator,
+BRD-K01648091-001-04-2,,,Dopamine receptor antagonist,
+BRD-K01815685-001-02-3,,,aryl hydrocarbon receptor agonist,
+BRD-K01902415-001-03-4,,,PPAR receptor agonist,
+BRD-K02404261-001-02-7,,,Adenosine receptor antagonist,
+BRD-K02581333-001-01-8,,,Tyrosine phosphatase inhibitor,
+BRD-K02607075-333-03-6,,,Acetylcholine receptor antagonist,
+BRD-K02637541-001-02-4,,,Cyclooxygenase inhibitor,
+BRD-K03384561-001-01-9,,,Angiogenesis inhibitor,
+BRD-K03440695-001-02-6,,,Acetylcholine receptor antagonist,
+BRD-K03600606-001-02-3,,,Beta secretase inhibitor,
+BRD-K03670461-001-02-0,,,EGFR inhibitor,
+BRD-K03981224-001-02-9,,,Progestogen hormone,
+BRD-K04046242-001-03-6,,,Estrogen receptor agonist,
+BRD-K04111260-001-01-9,,,Dopamine receptor antagonist,
+BRD-K04170657-001-02-4,,,Ras GTPase inhibitor,
+BRD-K04185004-003-03-6,,,Local anesthetic,
+BRD-K04430056-001-02-9,,,nitric oxide synthase inhibitor,
+BRD-K05181463-001-01-6,,,Dopamine receptor antagonist,
+BRD-K05464208-001-01-6,,,p38 MAPK inhibitor,
+BRD-K05653692-001-02-5,,,Glucosyltransferase inhibitor,
+BRD-K05673000-323-02-8,,,Bacterial cell wall synthesis inhibitor,
+BRD-K05901394-001-01-1,,,Dopamine receptor agonist,
+BRD-K05906022-001-02-8,,,HIV protease inhibitor,
+BRD-K06014311-001-01-2,,,Melatonin receptor antagonist,
+BRD-K06024458-001-01-4,,,cannabinoid receptor agonist,
+BRD-K06147391-003-01-9,,,Acetylcholine receptor antagonist,
+BRD-K06159959-001-01-2,,,Inhibitor of the binding of homoquinolinic acid to non-NMDA sensitive sites,
+BRD-K06208435-001-02-9,,,Calcium channel blocker,
+BRD-K06221026-001-03-5,,,Cyclooxygenase inhibitor,
+BRD-K06467078-001-01-5,,,Adrenergic receptor antagonist,
+BRD-K06753942-001-02-0,,,MEK inhibitor,
+BRD-K06980535-003-04-4,,,Dopamine receptor antagonist,
+BRD-K07117950-001-02-6,,,CDK inhibitor,
+BRD-K07212038-001-02-1,,,Mast cell stabilizer,
+BRD-K07220430-001-03-6,,,Calcium channel blocker,
+BRD-K07325606-001-02-3,,,PKC inhibitor,
+BRD-K07888196-001-01-8,,,IGF-1 inhibitor,
+BRD-K08132273-001-01-6,,,EGFR inhibitor,
+BRD-K08219523-001-01-9,,,Serotonin receptor agonist,
+BRD-K08252256-236-04-9,,,Cyclooxygenase inhibitor,
+BRD-K08287586-001-03-6,,,DNA synthesis inhibitor,
+BRD-K08554278-001-02-4,,,DNA binding agent,
+BRD-K08619574-334-03-9,,,Dopamine receptor antagonist,
+BRD-K08619838-300-03-2,,,Acetylcholine receptor agonist,
+BRD-K08640512-003-01-5,,,Adrenergic receptor antagonist,
+BRD-K08806317-050-03-6,,,Adrenergic receptor antagonist,
+BRD-K08890269-001-01-5,,,Sodium channel blocker,
+BRD-K08973992-001-01-3,,,Oxidative stress inducer,
+BRD-K09397065-001-01-6,,,Serotonin receptor agonist,
+BRD-K09635134-001-02-4,,,negative control for D-erythro-MAPP,
+BRD-K09635314-001-01-8,,,phospholipase activator,
+BRD-K09668667-001-02-0,,,Carcinogen,
+BRD-K09764130-001-02-6,,,Cannabinoid receptor agonist,
+BRD-K10177585-003-01-6,,,Adenosine receptor antagonist,
+BRD-K10670311-001-04-9,,,Antirheumatic,
+BRD-K10705233-001-01-4,,,Cannabinoid receptor agonist,
+BRD-K10843433-001-02-9,,,Cyclooxygenase inhibitor,
+BRD-K10974103-001-03-9,,,Protein synthesis inhibitor,
+BRD-K10995081-001-05-5,,,Dopamine receptor antagonist,
+BRD-K11129031-001-04-4,,,Lipoprotein lipase activator,
+BRD-K11163873-001-02-8,,,PARP inhibitor,
+BRD-K11373525-003-01-3,,,Angiotensin receptor antagonist,
+BRD-K11696279-003-01-5,,,Imidazoline receptor agonist,
+BRD-K12102668-001-04-0,,,Monoamine oxidase inhibitor,
+BRD-K12120659-305-01-4,,,Integrin antagonist,
+BRD-K12219985-001-04-8,,,Sulfonylurea,
+BRD-K12244279-001-01-7,,,MEK inhibitor,
+BRD-K12932420-001-01-5,,,Phosphodiesterase inhibitor,
+BRD-K12994359-001-02-8,,,Cyclooxygenase inhibitor,
+BRD-K13261168-001-01-4,,,Dopamine receptor agonist,
+BRD-K13571841-001-03-7,,,Aspartic protease inhibitor,
+BRD-K13819402-003-02-9,,,Acetylcholinesterase inhibitor,
+BRD-K14200658-001-02-6,,,Vesicular monoamine transporter inhibitor,
+BRD-K14221570-236-01-1,,,HIV entry inhibitor,
+BRD-K14441456-001-01-2,,,EGFR inhibitor,
+BRD-K14618467-003-01-8,,,IKK inhibitor,
+BRD-K14888893-001-02-3,,,KATP activator,
+BRD-K14965640-001-03-3,,,Cyclooxygenase inhibitor,
+BRD-K14993104-001-03-4,,,Chemoreceptor agonist,
+BRD-K15196155-001-01-5,,,Hydroxycarboxylic acid receptor agonist,
+BRD-K15601958-001-01-3,,,Lysophospholipid receptor agonist,
+BRD-K15868788-001-01-4,,,Serotonin receptor antagonist,
+BRD-K16195444-001-01-7,,,Adrenergic receptor agonist,
+BRD-K16977723-001-01-0,,,EGFR inhibitor,
+BRD-K17140735-300-01-6,,,Proteasome inhibitor,
+BRD-K17378184-300-03-4,,,Dopamine receptor agonist,
+BRD-K17674993-001-03-1,,,Corticosteroid agonist,
+BRD-K40965114-001-01-2,,,Adrenergic receptor antagonist,
+BRD-K41445866-001-03-0,,,Chloride channel agonist,
+BRD-K41707108-001-02-3,,,Phosphoenolpyruvate carboxylase activator,
+BRD-K41996876-001-05-5,,,EGFR inhibitor,
+BRD-K43149758-001-04-5,,,Androgen receptor agonist,
+BRD-K43290182-001-01-9,,,Serotonin receptor antagonist,
+BRD-K43468059-001-02-9,,,Mycotoxin,
+BRD-K44876623-001-01-1,,,Benzodiazepine receptor agonist,
+BRD-K44899736-003-02-1,,,Monoamine oxidase inhibitor,
+BRD-K45033733-001-02-3,,,DNA polymerase inhibitor,
+BRD-K45068323-003-01-3,,,Calmodulin antagonist,
+BRD-K45296539-003-01-0,,,Adrenergic receptor agonist,
+BRD-K45401373-001-05-0,,,Apoptosis stimulant,
+BRD-K45435259-001-01-6,,,Dopamine receptor antagonist,
+BRD-K45479396-001-01-8,,,Serotonin receptor agonist,
+BRD-K45542189-048-04-9,,,Lipoxygenase inhibitor,
+BRD-K45861246-001-04-3,,,Dopamine receptor antagonist,
+BRD-K46018455-001-06-0,,,PPAR receptor agonist,
+BRD-K46211610-003-05-1,,,Adrenergic receptor antagonist,
+BRD-K46317332-003-04-6,,,Nitric oxide synthase inhibitor,
+BRD-K46384212-001-01-1,,,phospholipase activator,
+BRD-K46424862-001-04-2,,,Monoamine oxidase inhibitor,
+BRD-K46435977-003-01-2,,,DNA polymerase inhibitor,
+BRD-K46556543-237-03-0,,,Mineralocorticoid receptor antagonist,
+BRD-K46766488-003-01-2,,,Serotonin receptor agonist,
+BRD-K46937689-001-05-1,,,Cyclooxygenase inhibitor,
+BRD-K47192521-001-02-1,,,Platelet aggregation inhibitor,
+BRD-K47207162-312-02-2,,,Serotonin reuptake inhibitor,
+BRD-K47278471-003-04-0,,,Histamine receptor antagonist,
+BRD-K47323024-003-04-6,,,Histamine receptor antagonist,
+BRD-K47631482-003-02-1,,,Mucolytic agent,
+BRD-K47639036-003-03-3,,,Acetylcholine receptor antagonist,
+BRD-K47693913-001-02-4,,,Furoquinoline alkaloid,
+BRD-K47717570-304-01-5,,,Glutamate receptor antagonist,
+BRD-K47943470-001-02-8,,,EGFR inhibitor,
+BRD-K48168960-001-05-1,,,Thyroid peroxidase inhibitor,
+BRD-K48300629-001-03-8,,,Sodium channel blocker,
+BRD-K48692744-001-01-2,,,PARP inhibitor,
+BRD-K49027941-237-01-1,,,Adenosine receptor antagonist,
+BRD-K49111258-001-02-8,,,Adrenergic receptor antagonist,
+BRD-K49448285-001-01-3,,,CDK inhibitor,
+BRD-K49481516-004-03-5,,,Acetylcholinesterase inhibitor,
+BRD-K49519092-303-01-4,,,Histamine receptor agonist,
+BRD-K49671696-001-02-1,,,Serotonin receptor antagonist,
+BRD-K49890030-236-01-6,,,Glutamate receptor antagonist,
+BRD-K49945136-001-03-5,,,Serotonin receptor antagonist,
+BRD-K50018155-003-01-3,,,Serotonin receptor partial agonist,
+BRD-K50214219-001-02-4,,,PARP inhibitor,
+BRD-K50398167-236-02-9,,,Cyclooxygenase inhibitor,
+BRD-K50417881-003-05-9,,,Dopamine receptor antagonist,
+BRD-K50422030-001-01-2,,,GABA receptor antagonist,
+BRD-K50660797-001-02-8,,,Bacterial DNA gyrase inhibitor,
+BRD-K51541829-001-01-3,,,Ionotropic glutamate receptor antagonist,
+BRD-K51671335-001-01-5,,,Dopamine receptor antagonist,
+BRD-K52020312-001-04-5,,,DNA inhibitor,
+BRD-K52219182-001-01-6,,,Phosphodiesterase inhibitor,
+BRD-K52459643-001-10-2,,,Prostanoid receptor agonist,
+BRD-K52512893-001-03-0,,,Prostanoid receptor antagonist,
+BRD-K52930707-001-04-8,,,ACE inhibitor,
+BRD-K53123955-001-03-0,,,Phosphofructokinase inhibitor,
+BRD-K53318339-001-04-1,,,Phosphodiesterase inhibitor,
+BRD-K53545112-304-01-6,,,Glutamate receptor antagonist,
+BRD-K53737926-003-04-7,,,Norepinephrine inhibitor,
+BRD-K53857191-001-04-5,,,Dopamine receptor antagonist,
+BRD-K54142781-001-02-1,,,Adrenergic receptor agonist,
+BRD-K54529596-001-04-0,,,ACE inhibitor,
+BRD-K54665485-001-01-2,,,Diacylglycerol kinase inhibitor,
+BRD-K54708045-001-01-3,,,PPAR receptor agonist,
+BRD-K54759182-003-02-3,,,Norepinephrine reuptake inhibitor,
+BRD-K54771420-001-03-2,,,Cholesterol inhibitor,
+BRD-K54790157-001-03-1,,,DNA synthesis inhibitor,
+BRD-K55191674-236-03-7,,,Penicillin binding protein inhibitor,
+BRD-K55344148-003-01-8,,,Imidazoline receptor ligand,
+BRD-K55424922-001-01-4,,,Serotonin receptor agonist,
+BRD-K55430733-003-01-6,,,Serotonin receptor agonist,
+BRD-K55930204-001-02-7,,,Hydantoin antiepileptic,
+BRD-K56047318-001-02-2,,,Triacylglycerol lipase inhibitor,
+BRD-K56115039-003-01-3,,,Imidazoline receptor ligand,
+BRD-K56403959-300-01-9,,,CC chemokine receptor ligand,
+BRD-K56509348-003-01-3,,,Endothelin receptor antagonist,
+BRD-K56558538-003-02-8,,,Sodium channel blocker,
+BRD-K56596464-004-02-4,,,Sodium channel blocker,
+BRD-K57033106-048-02-8,,,Histamine receptor antagonist,
+BRD-K57179821-001-04-8,,,Antipruritic,
+BRD-K57304726-003-03-6,,,Sigma receptor agonist,
+BRD-K57569181-001-04-4,,,Phosphodiesterase inhibitor,
+BRD-K57718010-001-06-9,,,GABA receptor antagonist,
+BRD-K57926513-001-02-9,,,PDGFR receptor inhibitor,
+BRD-K59469039-001-04-9,,,Angiogenesis inhibitor,
+BRD-K60060639-005-01-4,,,antiarrhythmic medication,
+BRD-A68039575-001-02-5,,,Aromatase inhibitor,
+BRD-K14536225-001-02-7,,,Glucosidase inhibitor,
+BRD-K41160163-001-01-9,,,Glutamate receptor antagonist,
+BRD-K61269089-001-01-4,,,Protein kinase inhibitor,
+BRD-K61737877-001-01-6,,,VEGFR inhibitor,
+BRD-K62056274-001-01-9,,,Serotonin receptor agonist,
+BRD-K62289640-003-01-9,,,Cannabinoid receptor agonist,
+BRD-K62929068-001-01-7,,,Purinergic receptor activator,
+BRD-K63089472-001-02-7,,,Inhibitor of methyl esterification of farnesylated proteins,
+BRD-K63151507-001-01-6,,,Lymphocyte inhibitor,
+BRD-K63165456-001-03-3,,,Adrenergic receptor agonist,
+BRD-K63430059-001-03-2,,,DNA synthesis inhibitor,
+BRD-K63516691-001-01-6,,,Phosphodiesterase inhibitor,
+BRD-K63784565-001-02-1,,,Topoisomerase inhibitor,
+BRD-K63945320-001-02-4,,,Phospholipase inhibitor,
+BRD-K63979671-001-03-6,,,Compound used in hepatobiliary scans of the liver,
+BRD-K64044582-001-02-8,,,ACAT inhibitor,
+BRD-K64157027-003-01-9,,,Adrenergic receptor agonist,
+BRD-K64245000-001-01-7,,,FXR agonist,
+BRD-K64402243-001-01-1,,,Caspase inhibitor,
+BRD-K64994968-001-03-6,,,Progesterone receptor agonist,
+BRD-K65146499-001-04-8,,,Cyclooxygenase inhibitor,
+BRD-K65417056-003-03-6,,,Local anesthetic,
+BRD-K65786282-001-02-6,,,GABA receptor modulator,
+BRD-K66093087-001-01-5,,,Benzodiazepine receptor agonist,
+BRD-K66206289-003-03-1,,,Acetylcholine receptor antagonist,
+BRD-K66707493-001-02-6,,,Coloring agent,
+BRD-K66782112-001-01-2,,,Histamine receptor antagonist,
+BRD-K66944906-001-02-6,,,Carbonic anhydrase inhibitor,
+BRD-K67017579-001-13-3,,,Phosphodiesterase inhibitor,
+BRD-K67102207-236-01-0,,,HDAC inhibitor,
+BRD-K67261995-001-03-4,,,Contrast agent,
+BRD-K67352070-364-01-5,,,Acetylcholine receptor agonist,
+BRD-K67445247-001-01-3,,,Urease inhibitor,
+BRD-K67680372-003-01-8,,,GAT inhibitor,
+BRD-K67783091-001-05-5,,,Dopamine receptor antagonist,
+BRD-K68095457-001-04-4,,,Cannabinoid receptor agonist,
+BRD-K68190965-001-01-4,,,Serotonin receptor agonist,
+BRD-K68246049-001-01-4,,,Retinoid receptor agonist,
+BRD-K68264559-001-07-6,,,Adrenergic receptor agonist,
+BRD-K68392338-003-01-2,,,Benzodiazepine receptor antagonist,
+BRD-K68558722-001-02-4,,,Cyclooxygenase inhibitor,
+BRD-K69032158-001-02-2,,,Dipeptidyl peptidase inhibitor,
+BRD-K69195780-001-01-5,,,Serotonin receptor agonist,
+BRD-K69556541-001-02-6,,,Calcium channel blocker,
+BRD-K69763916-001-01-7,,,Glutamate receptor antagonist,
+BRD-K69837166-003-01-2,,,Nociceptin/orphanin FQ (NOP) receptor antagonist,
+BRD-K70241288-001-01-1,,,Growth hormone releasing peptide ligand agonist,
+BRD-K70281171-001-01-7,,,Dopamine receptor antagonist,
+BRD-K70330367-001-02-4,,,Glutamate receptor antagonist,
+BRD-K70881766-001-02-3,,,Acetylcholinesterase inhibitor,
+BRD-K70976396-236-04-7,,,Bacterial cell wall synthesis inhibitor,
+BRD-K71003802-001-02-9,,,Plant alkaloid,
+BRD-K71499074-001-03-8,,,Carbonic anhydrase inhibitor,
+BRD-K71534238-001-03-5,,,Free fatty acid receptor agonist,
+BRD-K71731651-001-01-9,,,Acetylcholine receptor agonist,
+BRD-K71799949-001-04-2,,,Carboxamide antiepileptic,
+BRD-K72222507-003-02-8,,,ACE inhibitor,
+BRD-K72903603-001-03-8,,,Reverse transcriptase inhibitor,
+BRD-K73109821-001-05-2,,,Potassium channel activator,
+BRD-K73391359-003-03-7,,,Local anesthetic,
+BRD-K73589401-001-03-8,,,mineralocorticoid receptor agonist,
+BRD-K74112339-001-02-7,,,Urease inhibitor,
+BRD-K74141488-003-03-9,,,Fungal squalene epoxidase inhibitor,
+BRD-K74195153-050-03-0,,,Phosphodiesterase inhibitor,
+BRD-K74212935-001-03-1,,,Dopamine agonist,
+BRD-K74765201-001-01-9,,,Leukotriene receptor antagonist,
+BRD-K74913225-001-03-3,,,Carbonic anhydrase inhibitor,
+BRD-K75615183-001-01-7,,,Adrenergic receptor agonist,
+BRD-K75641298-001-01-5,,,Dopamine receptor antagonist,
+BRD-K76133116-001-01-2,,,Membrane integrity inhibitor,
+BRD-K76274772-001-02-7,,,Ceramidase inhibitor,
+BRD-K76587808-001-02-0,,,Antioxidant,
+BRD-K76775527-001-06-2,,,Cyclooxygenase inhibitor,
+BRD-K76872913-001-02-8,,,Aromatic hydrocarbon derivative,
