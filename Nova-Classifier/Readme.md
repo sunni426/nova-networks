@@ -62,4 +62,4 @@ Please use the packages in the following requirements file to configure virtual 
 ## Data Preprocessing
 
 To run preprocessing for the HPA and BBBC datasets, please follow the instructions provided in the ```preproc_bbbc.ipynb``` and ```preproc_HPA.ipyn``` in the ```preprocessing``` folder.
-
+![alt text](https://github.com/sunni426/nova-networks/blob/main/Nova-Classifier/preprocessing.png?raw=true)
