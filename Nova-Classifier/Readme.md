@@ -61,7 +61,5 @@ Please use the packages in the following requirements file to configure virtual 
 
 ## Data Preprocessing
 
-1. []
-
-2. []
+To run preprocessing for the HPA and BBBC datasets, please follow the instructions provided in the ```preproc_bbbc.ipynb``` and ```preproc_HPA.ipyn```` in the ```preprocessing``` folder.
 
