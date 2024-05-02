@@ -76,6 +76,6 @@ To run preprocessing for the HPA and BBBC datasets, please follow the instructio
 ![alt text](https://github.com/sunni426/nova-networks/blob/main/Nova-Classifier/preprocessing.png?raw=true)
 
 ### Acknowledgements
-We are deeply grateful to our advisors from Novartis for mentoring us in this project.
+We are deeply grateful to our advisors from Novartis Discovery Sciences Data Science Biomedical Research for mentoring us in this project.
 
 *@Boston University, Department of Biomedical Engineering, 2024*
