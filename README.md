@@ -78,4 +78,4 @@ To run preprocessing for the HPA and BBBC datasets, please follow the instructio
 ### Acknowledgements
 We are deeply grateful to our advisors from Novartis Discovery Sciences Data Science Biomedical Research for mentoring us in this project.
 
-*@Boston University, Department of Biomedical Engineering, 2024*
+*@ Boston University, Department of Biomedical Engineering, 2024*
